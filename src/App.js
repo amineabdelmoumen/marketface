@@ -1,5 +1,5 @@
 import Signup from './views/signup'; // load view
-
+import './assets/scss/main.scss'
 function App() {
 
   return (

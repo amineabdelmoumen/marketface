@@ -4,8 +4,6 @@ import App from './App';
 import { Provider } from "react-redux";
 import { store } from './store'
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
-import './assets/scss/main.scss';
-import './assets/css/normalize.css';
 
 ReactDOM.render(
   <React.StrictMode>
