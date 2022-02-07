@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 const Signup = () => {
-  const [genre, setGenre] = useState('')
+  const [titre, setTitre] = useState('')
   const [poste, setPoste] = useState('')
   const [nom, setNom] = useState('')
   const [prenom, setPrenom] = useState('')
@@ -22,9 +22,11 @@ const Signup = () => {
       </div>
       <div className="col-md-6">
         <div className="form-group mb-4">
-          <select name="genre" className="form-control rounded-pill border-0" placeholder="Genre" value={genre} onChange={(e) => setGenre(e.target.value)}>
+          <select name="titre" className="form-control rounded-pill border-0" placeholder="Titre" value={titre} onChange={(e) => setTitre(e.target.value)}>
             <option value="m">M</option>
             <option value="mme">Mme</option>
+            <option value="dr">Dr</option>
+            <option value="pr">Pr</option>
           </select>
         </div>
         <div className="row mb-4">
