@@ -37,11 +37,11 @@ function Indentite() {
   };
   return (
     <>
-      <section className="company-steps-icons">
+      {/* <section className="company-steps-icons">
         <h2>Création de votre profil</h2>
 
         <div className="steps-icons">
-          {/* <p className="line"></p> */}
+          <p className="line"></p>
           <div className="step">
             <p className="step-icon">
               <Icon id="icon-ingerprint" icon="bi:fingerprint" />
@@ -70,7 +70,7 @@ function Indentite() {
             <p className="title">Cible</p>
           </div>
         </div>
-      </section>
+      </section> */}
       <form
         className="container"
         name="form-identite"
@@ -83,7 +83,7 @@ function Indentite() {
           <p className="icon-img">
             <Icon id="icon-ingerprint" icon="bi:fingerprint" />
           </p>
-          <button>Choisir un fichier</button>
+          <button className="pointer">Choisir un fichier</button>
         </div>
         <div className="form-identite-info">
           {/*Information legal */}
@@ -154,7 +154,7 @@ function Indentite() {
               *Les informations obligatoire pour accéder à la plateforme
             </p>
           </section>
-          {/*Information financier */}
+          {/*Line */}
           <p className="line"></p>
           {/*Information financier */}
           <section>
@@ -209,8 +209,12 @@ function Indentite() {
             </p>
 
             <div className="buttons">
-              <button className="register">Enregistrer</button>
-              <input className="submit" type="submit" />
+              <button className="btn pointer btn-outline-success rounded-pill px-4">
+                Enregistrer
+              </button>
+              <button className="btn pointer ml-4 btn-success text-white rounded-pill px-4">
+                Suivant
+              </button>
             </div>
           </section>
         </div>

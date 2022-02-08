@@ -50,7 +50,7 @@ const Signup = () => {
           </LazyLoad>
 
           <div className="page-wrapper">
-            {pageStage === 2 && (
+            {pageStage === 1 && (
               // Signup Page
               <LazyLoad once>
                 <div className="wrap">
@@ -63,7 +63,7 @@ const Signup = () => {
               </LazyLoad>
             )}
 
-            {pageStage === 1 && (
+            {pageStage === 2 && (
               // Privacy Page
               <LazyLoad once>
                 <div className="wrap">

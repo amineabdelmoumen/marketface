@@ -1,12 +1,13 @@
 import Signup from "./views/signup"; // load view
-import Identite from "./components/form-company/Indentite"; // load view
-import Indentite from "./components/form-company/Indentite";
+import Identite from "./components/form-company/Indentite";
+import Profil from "./views/profil";
 
 function App() {
   return (
     <div className="App">
       {/* <Signup /> */}
-      <Indentite />
+      <Profil />
+      {/* <Indentite /> */}
     </div>
   );
 }
