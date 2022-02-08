@@ -1,1 +1,10 @@
-@use './base';
+$primary: #1578A2;
+$success: #0ABC8A;
+$secondary: #00B6FF;
+
+@import '~bootstrap/scss/bootstrap.scss';
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
+body {
+  background-color: #EBF9FF;
+  font-family: 'Comfortaa', sans-serif;
+}
