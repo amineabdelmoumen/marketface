@@ -1,0 +1,61 @@
+.company-steps-icons {
+  padding: 1em 0;
+  text-align: center;
+
+  h2 {
+    color: #00b6ff;
+    font-weight: 200;
+  }
+
+  .steps-icons {
+    display: flex;
+    justify-content: center;
+
+    .line {
+      border: 1px solid #00b6ff;
+      height: 1px;
+      width: 250px;
+    }
+    .step {
+      margin: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .title {
+        font-size: 10px;
+        font-weight: 200;
+        color: grey;
+        margin-top: 2px;
+      }
+      #icon {
+        font-size: 28px;
+        color: #00b6ff;
+      }
+      .step-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #dcdcdc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+    .step-active {
+      .title {
+        color: #00b6ff;
+      }
+      #icon {
+        font-size: 28px;
+        color: white;
+      }
+      .step-icon {
+        background-color: #00b6ff;
+      }
+    }
+
+    p {
+      font-size: 12px;
+    }
+  }
+}

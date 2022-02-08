@@ -1,15 +1,15 @@
-import Signup from './views/signup'; // load view
-import './assets/scss/main.scss'
-function App() {
+import Signup from "./views/signup"; // load view
+import Identite from "./components/form-company/Indentite";
+import Profil from "./views/profil";
 
+function App() {
   return (
     <div className="App">
-
-      <Signup />
-
+      {/* <Signup /> */}
+      <Profil />
+      {/* <Indentite /> */}
     </div>
   );
-  
 }
 
 export default App;
