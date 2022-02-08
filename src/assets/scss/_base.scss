@@ -24,30 +24,30 @@ body {
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  monospace;
 }
 
 h1 {
   @include font-template(
-    $font-size-large,
-    $font-weight-heavy,
-    $spacing-xlarge !important
+                  $font-size-large,
+                  $font-weight-heavy,
+                  $spacing-xlarge !important
   );
 }
 
 h2 {
   @include font-template(
-    $font-size-medium,
-    $font-weight-heavy,
-    $spacing-medium !important
+                  $font-size-medium,
+                  $font-weight-heavy,
+                  $spacing-medium !important
   );
 }
 
 h3 {
   @include font-template(
-    $font-size-medium,
-    $font-weight-medium,
-    $spacing-medium !important
+                  $font-size-medium,
+                  $font-weight-medium,
+                  $spacing-medium !important
   );
 }
 
