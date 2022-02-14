@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import { Provider } from "react-redux";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { store } from "./store";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
@@ -10,9 +11,11 @@ import "./assets/css/normalize.css";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <BrowserRouter>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );

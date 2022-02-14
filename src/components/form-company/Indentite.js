@@ -35,42 +35,18 @@ function Indentite() {
   const handleSubmit = (e) => {
     e.preventDefault(); // stop form submission
   };
+  const handleChooseFile = () => {
+    console.log("Hello");
+    const inputElement = document.getElementById("logo-input");
+    inputElement.click();
+  };
+  const uploadLogo = (event) => {
+    const file = event.files[0];
+    console.log("File: ", file);
+  };
+
   return (
     <>
-      {/* <section className="company-steps-icons">
-        <h2>Création de votre profil</h2>
-
-        <div className="steps-icons">
-          <p className="line"></p>
-          <div className="step">
-            <p className="step-icon">
-              <Icon id="icon-ingerprint" icon="bi:fingerprint" />
-            </p>
-            <p className="title">Identité</p>
-          </div>
-
-          <div className="step">
-            <p className="step-icon">
-              <Icon id="icon-ingerprint" icon="fa-solid:bullhorn" />
-            </p>
-            <p className="title">Image de marque</p>
-          </div>
-
-          <div className="step">
-            <p className="step-icon">
-              <Icon id="icon-ingerprint" icon="iconoir:open-in-browser" />
-            </p>
-            <p className="title">E-Catalogue</p>
-          </div>
-
-          <div className="step">
-            <p className="step-icon">
-              <Icon id="icon-ingerprint" icon="fluent:target-arrow-16-filled" />
-            </p>
-            <p className="title">Cible</p>
-          </div>
-        </div>
-      </section> */}
       <form
         className="container"
         name="form-identite"
@@ -83,7 +59,15 @@ function Indentite() {
           <p className="icon-img">
             <Icon id="icon-ingerprint" icon="bi:fingerprint" />
           </p>
-          <button className="pointer">Choisir un fichier</button>
+          <input
+            onChange={(e) => uploadLogo(e.target)}
+            hidden
+            id="logo-input"
+            type="file"
+          />
+          <button onClick={handleChooseFile} className="pointer">
+            Choisir un fichier
+          </button>
         </div>
         <div className="form-identite-info">
           {/*Information legal */}
