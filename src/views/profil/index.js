@@ -1,8 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import LazyLoad from "react-lazyload"; // use lazyload for components and image
 import { Icon } from "@iconify/react";
 import Indentite from "../../components/form-company/Indentite";
+import Marque from "../../components/form-company/marque";
+import Catalogue from "../../components/form-company/catalogue";
+import Cible from "../../components/form-company/cible";
 import "./styles.scss";
 
 function Profil() {
@@ -45,7 +47,14 @@ function Profil() {
 
       {/* ---  Profil Creation Steps---- */}
       <div className="">
-        <Indentite />
+        {
+          {
+            1: <Indentite />,
+            2: <Marque />,
+            3: <Catalogue />,
+            4: <Cible />
+          }[pageStage]
+        }
       </div>
     </div>
   );

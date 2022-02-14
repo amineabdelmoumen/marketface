@@ -8,3 +8,12 @@ body {
   background-color: #EBF9FF;
   font-family: 'Comfortaa', sans-serif;
 }
+
+input[type="file"]::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+input[type="file"] {
+  content: "";
+  color: white;
+}

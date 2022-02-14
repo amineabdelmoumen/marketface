@@ -3,6 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { formStage, formCompany } from "../../store/rootSlice";
 import Indentite from "./Indentite";
 import "./styles.scss";
+import Marque from "./marque";
+import Catalogue from "./catalogue";
+import Cible from "./cible";
 
 function FormUserCompany({ pageTitle, submitButtonText, previousButton }) {
   // redux
@@ -58,51 +61,7 @@ function FormUserCompany({ pageTitle, submitButtonText, previousButton }) {
   return (
     <>
       <Indentite />
-      {/* <h2>{pageTitle || "Company"}</h2>
 
-      <form name="form-Company" id="form-Company" onSubmit={handleSubmit}>
-        <p className="form-boxes">
-          <input
-            type="checkbox"
-            id="signup1"
-            name="signup1"
-            onChange={handleChange1}
-            checked={isChecked1}
-          />
-          <label htmlFor="signup1">
-            Recieve updates about Tray.io product by email
-          </label>
-        </p>
-
-        <p className="form-boxes">
-          <input
-            type="checkbox"
-            id="signup2"
-            name="signup2"
-            onChange={handleChange2}
-            checked={isChecked2}
-          />
-          <label htmlFor="signup2">
-            Recieve communication by email for other products created by the
-            Tray.io team
-          </label>
-        </p>
-
-        <div className="btn-array">
-          {previousButton && (
-            <p>
-              <input
-                type="submit"
-                value={`Back`}
-                onClick={() => dispatch(formStage(currentStage - 1))}
-              />
-            </p>
-          )}
-          <p>
-            <input type="submit" value={submitButtonText || "Submit"} />
-          </p>
-        </div>
-      </form> */}
     </>
   );
 }

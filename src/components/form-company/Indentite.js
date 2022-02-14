@@ -1,8 +1,11 @@
 import React from "react";
 import { Icon } from "@iconify/react";
+import {setFormStage} from "../../store/rootSlice";
 import "./styles.scss";
+import {useDispatch} from "react-redux";
 
 function Indentite() {
+  const dispatch = useDispatch()
   const statutsList = [
     "SARL",
     "SA",
@@ -36,13 +39,11 @@ function Indentite() {
     e.preventDefault(); // stop form submission
   };
   const handleChooseFile = () => {
-    console.log("Hello");
     const inputElement = document.getElementById("logo-input");
     inputElement.click();
   };
   const uploadLogo = (event) => {
     const file = event.files[0];
-    console.log("File: ", file);
   };
 
   return (
@@ -193,10 +194,10 @@ function Indentite() {
             </p>
 
             <div className="buttons">
-              <button className="btn pointer btn-outline-success rounded-pill px-4">
+              <button type="button" className="btn pointer btn-outline-success rounded-pill px-4">
                 Enregistrer
               </button>
-              <button className="btn pointer ml-4 btn-success text-white rounded-pill px-4">
+              <button type="button" className="btn pointer ml-4 btn-success text-white rounded-pill px-4" onClick={() => dispatch(setFormStage(2))}>
                 Suivant
               </button>
             </div>
