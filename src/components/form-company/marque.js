@@ -96,9 +96,7 @@ function Marque() {
               </p>
               <p className="form-boxes">
                 <label htmlFor="annee">Année</label>
-                <select name="annee" id="annee" onChange={(e) => setAnnee(e.target.value)}>
-
-                </select>
+                <input type="text" name="annee" id="annee" onChange={(e) => setAnnee(e.target.value)} />
               </p>
               <p className="form-boxes">
                 <label htmlFor="description">Description</label>
