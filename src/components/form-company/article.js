@@ -59,12 +59,12 @@ function Article(props) {
                 <label htmlFor="category">Prix</label>
                 <input type="text" onChange={(e) => setPrix(e.target.value)}/>
               </p>
-              <p className="form-boxes">
-                <label htmlFor="nom_client">
-                  Catégorie:
-                </label>
-                <input type="text" id="nom_client" onChange={(e) => setCategorie(e.target.value)} />
-              </p>
+              {/*<p className="form-boxes">*/}
+              {/*  <label htmlFor="nom_client">*/}
+              {/*    Catégorie:*/}
+              {/*  </label>*/}
+              {/*  <input type="text" id="nom_client" onChange={(e) => setCategorie(e.target.value)} />*/}
+              {/*</p>*/}
               <p className="form-boxes">
                 <label htmlFor="nom_client">
                   Quantité:
@@ -90,7 +90,7 @@ function Article(props) {
               <div className="row">
                 <div className="col-6">
                   <h4 className="text-secondary">{nom}</h4>
-                  <p>Categorie: {categorie}</p>
+                  {/*<p>Categorie: {categorie}</p>*/}
                   <p>Quantite: {quantite}</p>
                   <p>{type}</p>
                   <p>{prix}dh/{quantite}</p>
@@ -114,7 +114,7 @@ function Article(props) {
             </section>
           </div>
           <div className="d-flex justify-content-end">
-            <button type="button" className="btn pointer btn-outline-secondary rounded-pill px-4" onClick={() => dispatch(setFormStage(4))}>
+            <button type="button" className="btn pointer btn-outline-secondary rounded-pill px-4" onClick={() => dispatch(setFormStage(3))}>
               Précédent
             </button>
             <button type="button" className="btn pointer btn-outline-success rounded-pill px-4 ms-4">
