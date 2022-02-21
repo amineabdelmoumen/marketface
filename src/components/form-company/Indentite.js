@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Icon } from "@iconify/react";
 import {setFormStage} from "../../store/rootSlice";
 import "./styles.scss";
@@ -59,6 +59,8 @@ function Indentite() {
   const organismeSize = ["Start-up", "TPE", "PME", "PMI", "GE"];
   const nombreEmployes = ["De 1 à 10", "De 10 à 250", "Plus de 250"];
   const chaiffreDafaireList = ["< 10 MDhs", "< 75 MDhs", "> 75 MDhs"];
+
+  const [logo, setLogo] = useState('')
   const handleSubmit = (e) => {
     e.preventDefault(); // stop form submission
   };
@@ -68,6 +70,8 @@ function Indentite() {
   };
   const uploadLogo = (event) => {
     const file = event.files[0];
+    const photo = URL.createObjectURL(file)
+    setLogo(photo)
   };
 
   function save() {
@@ -86,7 +90,12 @@ function Indentite() {
         <div className="logo">
           <p>*Insere votre logo</p>
           <p className="icon-img">
-            <Icon id="icon-ingerprint" icon="bi:fingerprint" />
+            {
+              logo ?
+                <img src={logo} width={40} />
+                :
+                <Icon id="icon-ingerprint" icon="bi:fingerprint" />
+            }
           </p>
           <input
             onChange={(e) => uploadLogo(e.target)}
