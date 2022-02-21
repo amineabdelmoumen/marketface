@@ -40,7 +40,7 @@ function Profil() {
           </div>
 
           <div className={pageStage === 5 ? `step step-active` : `step`}>
-            <p className="step-icon" onClick={() => dispatch(setFormStage(4))}>
+            <p className="step-icon" onClick={() => dispatch(setFormStage(5))}>
               <Icon id="icon" icon="fluent:target-arrow-16-filled" />
             </p>
             <p className="title">Cible</p>
