@@ -18,7 +18,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="container mt-5">
+    <div className="container pt-5">
       <div className="text-center">
         <h1 className="text-secondary">Accédez au marché en temps réel!</h1>
         <p className="text-primary">
@@ -26,9 +26,10 @@ const Signup = () => {
           aujourd'hui!
         </p>
       </div>
-      <div className="row">
+      <div className="row mt-4">
         <div className="col-md-6 d-flex justify-content-center align-items-start">
-          <img src="https://via.placeholder.com/300" alt="" />
+          {/*<img src="https://via.placeholder.com/300" alt="" />*/}
+          <img src="/imgs/business-bag.png" alt="" width={400}/>
         </div>
         <div className="col-md-6">
           <div className="form-group mb-4">
