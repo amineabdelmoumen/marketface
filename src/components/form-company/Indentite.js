@@ -8,6 +8,28 @@ import {setIdentite} from "../../store/profileSlice";
 function Indentite() {
   const dispatch = useDispatch()
   const identite = useSelector((state) => state.profile.identite)
+  const activites = [
+    "Agriculture, Sylviculture Et Pêche",
+    "Industries Extractives",
+    "Industrie Manufacturière",
+    "Production Et Distribution D'électricité, De Gaz, De Vapeur Et D'air Conditionné",
+    "Production Et Distribution D'eau ; Assainissement, Gestion Des Déchets Et Dépollution ",
+    "Construction",
+    "Commerce ; Réparation D'automobiles Et De Motocycles",
+    "Transports Et Entreposage",
+    "Hébergement Et Restauration",
+    "Information Et Communication",
+    "Activités Financières Et D'assurance",
+    "Activités Immobilières",
+    "Activités Spécialisées, Scientifiques Et Techniques",
+    "Activités De Services Administratifs Et De Soutien",
+    "Administration Publique",
+    "Enseignement",
+    "Santé Humaine Et Action Sociale",
+    "Arts, Spectacles Et Activités Récréatives",
+    "Autres Activités De Services",
+    "Activités Extra-Territoriales",
+];
   const statutsList = [
     "SARL",
     "SA",
@@ -88,12 +110,15 @@ function Indentite() {
             </p>
             <p className="form-boxes">
               <label htmlFor="prenom_nome">*Activité:</label>
-              <input
-                type="text"
-                id="prenom_nome"
-                name="prenom_nome"
-                placeholder="Section"
-              />
+              <select name="" id="">
+                {
+                  activites.map((activite) => {
+                    return (
+                      <option value={activite}>{activite}</option>
+                    )
+                  })
+                }
+              </select>
             </p>
             <p className="form-boxes">
               <label htmlFor="prenom_nome">*Statut:</label>
@@ -177,7 +202,6 @@ function Indentite() {
                 type="text"
                 id="prenom_nome"
                 name="prenom_nome"
-                placeholder="Casablanca"
               />
             </p>
             <p className="form-boxes">
@@ -186,7 +210,6 @@ function Indentite() {
                 type="text"
                 id="prenom_nome"
                 name="prenom_nome"
-                placeholder="MAROC"
               />
             </p>
             <p className="form-boxes">
@@ -195,7 +218,6 @@ function Indentite() {
                 type="text"
                 id="prenom_nome"
                 name="prenom_nome"
-                placeholder="+212"
               />
             </p>
 
