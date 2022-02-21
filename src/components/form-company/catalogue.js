@@ -217,9 +217,6 @@ function Catalogue() {
             <button type="button" className="btn pointer btn-outline-secondary rounded-pill px-4" onClick={() => dispatch(setFormStage(2))}>
               Précédent
             </button>
-            <button type="button" className="btn pointer btn-outline-success rounded-pill px-4 ms-4">
-              Enregistrer et ajouter
-            </button>
             <button type="button" className="btn pointer ml-4 btn-success text-white rounded-pill px-4 ms-5" onClick={() => dispatch(setFormStage(4))}>
               Suivant
             </button>
