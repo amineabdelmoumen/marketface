@@ -21,4 +21,4 @@ const rootSlice = createSlice({
 
 // Actions
 export const { setFormStage, setFormSignup, setFormCompany } = rootSlice.actions
-export const reducer = rootSlice.reducer;
+export const rootReducer = rootSlice.reducer;

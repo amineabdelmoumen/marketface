@@ -108,7 +108,7 @@ form#form-identite {
         width: 170px;
       }
 
-      input {
+      input, textarea {
         border-radius: 16px;
         border: 1px solid silver;
         color: grey;
@@ -116,6 +116,9 @@ form#form-identite {
         padding: 0 6px;
         font-size: 14px;
         width: 170px;
+      }
+      textarea {
+        resize: unset;
       }
     }
     section {
@@ -127,4 +130,8 @@ form#form-identite {
       margin: 0 2%;
     }
   }
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }

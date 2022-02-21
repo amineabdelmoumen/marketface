@@ -5,8 +5,19 @@ $secondary: #00B6FF;
 @import '~bootstrap/scss/bootstrap.scss';
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
 body {
-  background-color: #EBF9FF;
+  //background-color: #EBF9FF;
   font-family: 'Comfortaa', sans-serif;
+}
+
+.background {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  z-index: -10;
+  background-image: url("/assets/imgs/bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-x: center;
 }
 
 input[type="file"]::-webkit-file-upload-button {
@@ -15,5 +26,5 @@ input[type="file"]::-webkit-file-upload-button {
 
 input[type="file"] {
   content: "";
-  color: white;
+  color: white !important;
 }

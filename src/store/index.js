@@ -1,6 +1,10 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { reducer } from './rootSlice'
+import {configureStore} from '@reduxjs/toolkit'
+import { rootReducer } from './rootSlice'
+import { profileReducer } from './profileSlice'
 
 export const store = configureStore({
-  reducer
+  reducer: {
+    root: rootReducer,
+    profile: profileReducer
+  }
 })

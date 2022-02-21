@@ -1,6 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {setFormStage} from "../../store/rootSlice";
+import {useDispatch} from "react-redux";
 
 function Cible() {
+  const dispatch = useDispatch()
+  const [taille, setTaille] = useState('')
+  const [activite, setActivite] = useState('')
   return (
     <>
       <form
@@ -53,31 +58,94 @@ function Cible() {
                 <label htmlFor="organisme_type">
                   Taille d'entreprise:
                 </label>
-                <span className="border rounded px-2 text-black-50">Start-up</span>
-                <span className="border rounded px-2 text-black-50">TPE</span>
-                <span className="border rounded px-2 text-black-50">PMI</span>
-                <span className="border rounded px-2 text-black-50">PME</span>
-                <span className="border rounded px-2 text-black-50">GE</span>
+                <div>
+                  <label htmlFor="startup"
+                         className={`border rounded px-2 cursor-pointer ${taille == 'Start-up' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                    Start-up
+                    <input type="checkbox" name="moyen" id="startup" value="Start-up" className="d-none"
+                           onChange={(e) => setTaille(e.target.value)}/>
+                  </label>
+                </div>
+                <div>
+                  <label htmlFor="tpe"
+                         className={`border rounded px-2 cursor-pointer ${taille == 'TPE' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                    TPE
+                    <input type="checkbox" name="moyen" id="tpe" value="TPE" className="d-none"
+                           onChange={(e) => setTaille(e.target.value)}/>
+                  </label>
+                </div>
+                <div>
+                  <label htmlFor="pmi"
+                         className={`border rounded px-2 cursor-pointer ${taille == 'PMI' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                    PMI
+                    <input type="checkbox" name="moyen" id="pmi" value="PMI" className="d-none"
+                           onChange={(e) => setTaille(e.target.value)}/>
+                  </label>
+                </div>
+                <div>
+                  <label htmlFor="pme"
+                         className={`border rounded px-2 cursor-pointer ${taille == 'PME' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                    PME
+                    <input type="checkbox" name="moyen" id="pme" value="PME" className="d-none"
+                           onChange={(e) => setTaille(e.target.value)}/>
+                  </label>
+                </div>
+                <div>
+                  <label htmlFor="ge"
+                         className={`border rounded px-2 cursor-pointer ${taille == 'GE' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                    GE
+                    <input type="checkbox" name="moyen" id="ge" value="GE" className="d-none"
+                           onChange={(e) => setTaille(e.target.value)}/>
+                  </label>
+                </div>
               </p>
               <p className="form-boxes">
                 <label htmlFor="organisme_taille">
                   Activité opérationnelle:
                 </label>
-                <span className="border rounded px-2 text-black-50">Matière première</span>
-                <span className="border rounded px-2 text-black-50">Transformation</span>
-                <span className="border rounded px-2 text-black-50">Distribution</span>
-                <span className="border rounded px-2 text-black-50">Revendeur</span>
+                <div>
+                  <label htmlFor="matiere_premiere"
+                         className={`border rounded px-2 cursor-pointer ${activite == 'Matière première' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                    Matière première
+                    <input type="checkbox" name="moyen" id="matiere_premiere" value="Matière première" className="d-none"
+                           onChange={(e) => setActivite(e.target.value)}/>
+                  </label>
+                </div>
+                <div>
+                  <label htmlFor="transformation"
+                         className={`border rounded px-2 cursor-pointer ${activite == 'Transformation' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                    Transformation
+                    <input type="checkbox" name="moyen" id="transformation" value="Transformation" className="d-none"
+                           onChange={(e) => setActivite(e.target.value)}/>
+                  </label>
+                </div>
+                <div>
+                  <label htmlFor="distribution"
+                         className={`border rounded px-2 cursor-pointer ${activite == 'Distribution' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                    Distribution
+                    <input type="checkbox" name="moyen" id="distribution" value="Distribution" className="d-none"
+                           onChange={(e) => setActivite(e.target.value)}/>
+                  </label>
+                </div>
+                <div>
+                  <label htmlFor="revendeur"
+                         className={`border rounded px-2 cursor-pointer ${activite == 'Revendeur' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                    Revendeur
+                    <input type="checkbox" name="moyen" id="revendeur" value="Revendeur" className="d-none"
+                           onChange={(e) => setActivite(e.target.value)}/>
+                  </label>
+                </div>
               </p>
             </div>
           </div>
 
           {/*Line */}
           <div className="d-flex justify-content-end">
-            <button type="button" className="btn pointer btn-outline-success rounded-pill px-4">
-              Enregistrer et ajouter
+            <button type="button" className="btn pointer btn-outline-secondary rounded-pill px-4" onClick={() => dispatch(setFormStage(3))}>
+              Précédent
             </button>
-            <button type="button" className="btn pointer ml-4 btn-success text-white rounded-pill px-4 ms-5">
-              Suivant
+            <button type="button" className="btn pointer btn-outline-success rounded-pill px-4 ms-4">
+              Enregistrer et ajouter
             </button>
           </div>
         </div>

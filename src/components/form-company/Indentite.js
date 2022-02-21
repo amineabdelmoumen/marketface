@@ -2,10 +2,12 @@ import React from "react";
 import { Icon } from "@iconify/react";
 import {setFormStage} from "../../store/rootSlice";
 import "./styles.scss";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {setIdentite} from "../../store/profileSlice";
 
 function Indentite() {
   const dispatch = useDispatch()
+  const identite = useSelector((state) => state.profile.identite)
   const statutsList = [
     "SARL",
     "SA",
@@ -45,6 +47,10 @@ function Indentite() {
   const uploadLogo = (event) => {
     const file = event.files[0];
   };
+
+  function save() {
+    dispatch(setIdentite({}))
+  }
 
   return (
     <>
@@ -194,7 +200,7 @@ function Indentite() {
             </p>
 
             <div className="buttons">
-              <button type="button" className="btn pointer btn-outline-success rounded-pill px-4">
+              <button type="button" className="btn pointer btn-outline-success rounded-pill px-4" onClick={() => save()}>
                 Enregistrer
               </button>
               <button type="button" className="btn pointer ml-4 btn-success text-white rounded-pill px-4" onClick={() => dispatch(setFormStage(2))}>

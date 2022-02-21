@@ -100,12 +100,8 @@ function Marque() {
               </p>
               <p className="form-boxes">
                 <label htmlFor="description">Description</label>
-                <input
-                  type="text"
-                  id="description"
-                  name="description"
-                  onChange={(e) => setDescription(e.target.value)}
-                />
+                <textarea name="description" id="description" cols="30" rows="10"
+                          onChange={(e) => setDescription(e.target.value)}></textarea>
               </p>
 
               <p className="form-boxes">
@@ -114,7 +110,7 @@ function Marque() {
                   {
                     categories.map((category) => {
                       return (
-                        <option value={category}>{category}</option>
+                        <option value={category} >{category}</option>
                       )
                     })
                   }
@@ -144,29 +140,36 @@ function Marque() {
             <section>
               <div className="row">
                 <div className="col-6">
-                  <h4>{title} | {annee}</h4>
-                  <p>{description}</p>
-                  <p>{category}</p>
-                  <p>
+                  <h4 className="text-secondary">{title} | {annee}</h4>
+                  <p className="text-black-50 h6 mt-4">{description}</p>
+                  <p className="text-secondary h6 mt-4">{category}</p>
+                  <p className="d-flex gap-2 mt-5">
                     <img src={logo} width={80} />
-                    <span>{client}</span>
+                    <span className="text-secondary">{client}</span>
                   </p>
                 </div>
                 <div className="col-6">
-                  {
-                    photos.length ?
-                      photos.map((photo) => {
-                        return (
-                          <img src={photo} width={120} />
-                        )
-                      }) : ''
-                  }
+                  <div className="row">
+                    {
+                      photos.length ?
+                        photos.map((photo) => {
+                          return (
+                            <div className="col-6">
+                              <img src={photo} width={100} />
+                            </div>
+                          )
+                        }) : ''
+                    }
+                  </div>
                 </div>
               </div>
             </section>
           </div>
           <div className="d-flex justify-content-end">
-            <button type="button" className="btn pointer btn-outline-success rounded-pill px-4">
+            <button type="button" className="btn pointer btn-outline-secondary rounded-pill px-4" onClick={() => dispatch(setFormStage(1))}>
+              Précédent
+            </button>
+            <button type="button" className="btn pointer btn-outline-success rounded-pill px-4 ms-4">
               Enregistrer et ajouter
             </button>
             <button type="button" className="btn pointer ml-4 btn-success text-white rounded-pill px-4 ms-5" onClick={() => dispatch(setFormStage(3))}>
