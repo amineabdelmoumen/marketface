@@ -159,7 +159,7 @@ function Cible() {
                 <label htmlFor="cherche">
                   Que cherchez vous?
                 </label>
-                <select name="cherche" id="cherche">
+                <select name="cherche" id="cherche" className="w-50 py-1">
                   <option value="Clients">Clients</option>
                   <option value="Fournisseurs">Fournisseurs</option>
                   <option value="Prestataire">Prestataire</option>
@@ -167,11 +167,15 @@ function Cible() {
               </p>
               <p className="form-boxes">
                 <label htmlFor="zone">Zone géographique</label>
-                <Select isMulti options={regions}></Select>
+                <div className="w-50">
+                  <Select isMulti options={regions}></Select>
+                </div>
               </p>
               <p className="form-boxes">
                 <label htmlFor="activite">Activité:</label>
-                <Select isMulti options={activites}></Select>
+                <div className="w-50">
+                  <Select isMulti options={activites}></Select>
+                </div>
               </p>
               <p className="form-boxes">
                 <label htmlFor="organisme_type">
