@@ -123,16 +123,18 @@ function Marque() {
                 <input type="text" id="nom_client" name="nom_client" onChange={(e) => setClient(e.target.value)} />
               </p>
               <p className="form-boxes">
-                <label htmlFor="logo">
-                  Joindre logo de client
+                <label htmlFor="">Joindre logo de client</label>
+                <label htmlFor="logo" className="text-center upload">
+                  upload
+                  <input type="file" id="logo" name="logo" className="d-none" onChange={(e) => handleLogoUpload(e)} />
                 </label>
-                <input type="file" id="logo" name="logo" onChange={(e) => handleLogoUpload(e)} />
               </p>
               <p className="form-boxes">
-                <label htmlFor="photos">
-                  Joindre photos des réalisations
+                <label htmlFor="">Joindre photos des réalisations</label>
+                <label htmlFor="photos" className="text-center upload">
+                  upload
+                  <input type="file" id="photos" name="photos" className="d-none" multiple onChange={(e) => handlePhotosUpload(e)} />
                 </label>
-                <input type="file" id="photos" name="photos" multiple onChange={(e) => handlePhotosUpload(e)} />
               </p>
             </section>
 
