@@ -54,6 +54,89 @@ const regions = [
   },
 ];
 
+const activites = [
+  {
+    value: "Agriculture, Sylviculture Et Pêche",
+    label: "Agriculture, Sylviculture Et Pêche"
+  },
+  {
+    value: "Industries Extractives",
+    label: "Industries Extractives"
+  },
+  {
+    value: "Industrie Manufacturière",
+    label: "Industrie Manufacturière"
+  },
+  {
+    value: "Production Et Distribution D'électricité, De Gaz, De Vapeur Et D'air Conditionné",
+    label: "Production Et Distribution D'électricité, De Gaz, De Vapeur Et D'air Conditionné"
+  },
+  {
+    value: "Production Et Distribution D'eau ; Assainissement, Gestion Des Déchets Et Dépollution ",
+    label: "Production Et Distribution D'eau ; Assainissement, Gestion Des Déchets Et Dépollution "
+  },
+  {
+    value: "Construction",
+    label: "Construction"
+  },
+  {
+    value: "Commerce ; Réparation D'automobiles Et De Motocycles",
+    label: "Commerce ; Réparation D'automobiles Et De Motocycles"
+  },
+  {
+    value: "Transports Et Entreposage",
+    label: "Transports Et Entreposage"
+  },
+  {
+    value: "Hébergement Et Restauration",
+    label: "Hébergement Et Restauration"
+  },
+  {
+    value: "Information Et Communication",
+    label: "Information Et Communication"
+  },
+  {
+    value: "Activités Financières Et D'assurance",
+    label: "Activités Financières Et D'assurance"
+  },
+  {
+    value: "Activités Immobilières",
+    label: "Activités Immobilières"
+  },
+  {
+    value: "Activités Spécialisées, Scientifiques Et Techniques",
+    label: "Activités Spécialisées, Scientifiques Et Techniques"
+  },
+  {
+    value: "Activités De Services Administratifs Et De Soutien",
+    label: "Activités De Services Administratifs Et De Soutien"
+  },
+  {
+    value: "Administration Publique",
+    label: "Administration Publique"
+  },
+  {
+    value: "Enseignement",
+    label: "Enseignement"
+  },
+  {
+    value: "Santé Humaine Et Action Sociale",
+    label: "Santé Humaine Et Action Sociale"
+  },
+  {
+    value: "Arts, Spectacles Et Activités Récréatives",
+    label: "Arts, Spectacles Et Activités Récréatives"
+  },
+  {
+    value: "Autres Activités De Services",
+    label: "Autres Activités De Services"
+  },
+  {
+    value: "Activités Extra-Territoriales",
+    label: "Activités Extra-Territoriales"
+  },
+];
+
 function Cible() {
   const dispatch = useDispatch()
   const [taille, setTaille] = useState('')
@@ -85,27 +168,10 @@ function Cible() {
               <p className="form-boxes">
                 <label htmlFor="zone">Zone géographique</label>
                 <Select isMulti options={regions}></Select>
-                {/*<input*/}
-                {/*  type="text"*/}
-                {/*  id="zone"*/}
-                {/*  name="zone"*/}
-                {/*/>*/}
-              </p>
-              <p className="form-boxes">
-                <label htmlFor="selected_zone">Mes sélections:</label>
-                <select name="selected_zone" id="selected_zone">
-
-                </select>
               </p>
               <p className="form-boxes">
                 <label htmlFor="activite">Activité:</label>
-                <input type="text" id="activite" name="activite" />
-              </p>
-              <p className="form-boxes">
-                <label htmlFor="selected_activity">
-                  Mes sélections
-                </label>
-                <input type="text" id="selected_activity" name="selected_activity" />
+                <Select isMulti options={activites}></Select>
               </p>
               <p className="form-boxes">
                 <label htmlFor="organisme_type">
