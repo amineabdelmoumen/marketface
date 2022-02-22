@@ -18,6 +18,9 @@ const Signup = () => {
   };
 
   return (
+    <>
+      <div className="background"></div>
+
     <div className="container pt-5">
       <div className="text-center">
         <h1 className="text-secondary">Accédez au marché en temps réel!</h1>
@@ -146,6 +149,7 @@ const Signup = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

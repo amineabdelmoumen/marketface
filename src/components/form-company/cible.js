@@ -1,6 +1,58 @@
 import React, {useState} from 'react';
 import {setFormStage} from "../../store/rootSlice";
 import {useDispatch} from "react-redux";
+import Select from 'react-select';
+
+const regions = [
+  {
+    value: 'Tangier-Tétouan-Al Houceima',
+    label: 'Tangier-Tétouan-Al Houceima',
+  },
+  {
+    value: 'Oriental',
+    label: 'Oriental',
+  },
+  {
+    value: 'Fez-Meknès',
+    label: 'Fez-Meknès',
+  },
+  {
+    value: 'Rabat-Salé-Kénitra',
+    label: 'Rabat-Salé-Kénitra',
+  },
+  {
+    value: 'Beni Mellal-Khenifra',
+    label: 'Beni Mellal-Khenifra',
+  },
+  {
+    value: 'Settat-Casablanca',
+    label: 'Settat-Casablanca',
+  },
+  {
+    value: 'Marrakech-Safi',
+    label: 'Marrakech-Safi',
+  },
+  {
+    value: 'Drâa-Tafilalt',
+    label: 'Drâa-Tafilalt',
+  },
+  {
+    value: 'Souss-Massa',
+    label: 'Souss-Massa',
+  },
+  {
+    value: 'Guelmim-Oued Noun',
+    label: 'Guelmim-Oued Noun',
+  },
+  {
+    value: 'Lâayoune-Sakia El Hamra',
+    label: 'Lâayoune-Sakia El Hamra',
+  },
+  {
+    value: 'Dakhla-Oued Eddahab',
+    label: 'Dakhla-Oued Eddahab',
+  },
+];
 
 function Cible() {
   const dispatch = useDispatch()
@@ -32,11 +84,12 @@ function Cible() {
               </p>
               <p className="form-boxes">
                 <label htmlFor="zone">Zone géographique</label>
-                <input
-                  type="text"
-                  id="zone"
-                  name="zone"
-                />
+                <Select isMulti options={regions}></Select>
+                {/*<input*/}
+                {/*  type="text"*/}
+                {/*  id="zone"*/}
+                {/*  name="zone"*/}
+                {/*/>*/}
               </p>
               <p className="form-boxes">
                 <label htmlFor="selected_zone">Mes sélections:</label>
@@ -147,6 +200,9 @@ function Cible() {
             <button type="button" className="btn pointer btn-outline-success rounded-pill px-4 ms-4">
               Enregistrer et ajouter
             </button>
+            <a href="/profil/save" className="btn pointer ml-4 btn-success text-white rounded-pill px-4 ms-5">
+              Suivant
+            </a>
           </div>
         </div>
       </form>

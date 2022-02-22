@@ -14,6 +14,7 @@ function Profil() {
   const dispatch = useDispatch()
   return (
     <div>
+      <div className="background"></div>
       <section className="company-steps-icons">
         <h2>Création de votre profil</h2>
         <div className="steps-icons">
