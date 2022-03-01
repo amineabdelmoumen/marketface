@@ -172,7 +172,7 @@ function Cible() {
           <div className="row">
             <div className="col-10">
 
-              <p className="form-boxes">
+              <div className="form-boxes">
                 <label htmlFor="cherche">
                   Que cherchez vous?
                 </label>
@@ -186,26 +186,26 @@ function Cible() {
                   <option value="Fournisseurs">Fournisseurs</option>
                   <option value="Prestataire">Prestataire</option>
                 </select>
-              </p>
-              <p className="form-boxes">
+              </div>
+              <div className="form-boxes">
                 <label htmlFor="zone">Zone géographique</label>
                 <div className="w-50">
-                  <Select isMulti options={regions} onChange={(vals) => handleMultiSelect('regions', vals)}></Select>
+                  <Select isMulti options={regions} onChange={(vals) => handleMultiSelect('regions', vals)}/>
                 </div>
-              </p>
-              <p className="form-boxes">
+              </div>
+              <div className="form-boxes">
                 <label htmlFor="activite">Activité:</label>
                 <div className="w-50">
-                  <Select isMulti options={activites} onChange={(vals) => handleMultiSelect('activites', vals)}></Select>
+                  <Select isMulti options={activites} onChange={(vals) => handleMultiSelect('activites', vals)}/>
                 </div>
-              </p>
-              <p className="form-boxes">
+              </div>
+              <div className="form-boxes">
                 <label htmlFor="taille_organisme">
                   Taille d'entreprise:
                 </label>
                 <div>
                   <label htmlFor="startup"
-                         className={`border rounded px-2 cursor-pointer ${cible.taille_organisme == 'Start-up' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                         className={`border rounded px-2 cursor-pointer ${cible.taille_organisme === 'Start-up' ? 'bg-secondary text-white': 'text-black-50'}`}>
                     Start-up
                     <input type="checkbox" name="moyen" id="startup" value="Start-up" className="d-none"
                            onChange={(e) => handleInputUpdate('taille_organisme', e)}/>
@@ -213,7 +213,7 @@ function Cible() {
                 </div>
                 <div>
                   <label htmlFor="tpe"
-                         className={`border rounded px-2 cursor-pointer ${cible.taille_organisme == 'TPE' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                         className={`border rounded px-2 cursor-pointer ${cible.taille_organisme === 'TPE' ? 'bg-secondary text-white': 'text-black-50'}`}>
                     TPE
                     <input type="checkbox" name="moyen" id="tpe" value="TPE" className="d-none"
                            onChange={(e) => handleInputUpdate('taille_organisme', e)}/>
@@ -221,7 +221,7 @@ function Cible() {
                 </div>
                 <div>
                   <label htmlFor="pmi"
-                         className={`border rounded px-2 cursor-pointer ${cible.taille_organisme == 'PMI' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                         className={`border rounded px-2 cursor-pointer ${cible.taille_organisme === 'PMI' ? 'bg-secondary text-white': 'text-black-50'}`}>
                     PMI
                     <input type="checkbox" name="moyen" id="pmi" value="PMI" className="d-none"
                            onChange={(e) => handleInputUpdate('taille_organisme', e)}/>
@@ -229,7 +229,7 @@ function Cible() {
                 </div>
                 <div>
                   <label htmlFor="pme"
-                         className={`border rounded px-2 cursor-pointer ${cible.taille_organisme == 'PME' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                         className={`border rounded px-2 cursor-pointer ${cible.taille_organisme === 'PME' ? 'bg-secondary text-white': 'text-black-50'}`}>
                     PME
                     <input type="checkbox" name="moyen" id="pme" value="PME" className="d-none"
                            onChange={(e) => handleInputUpdate('taille_organisme', e)}/>
@@ -237,20 +237,20 @@ function Cible() {
                 </div>
                 <div>
                   <label htmlFor="ge"
-                         className={`border rounded px-2 cursor-pointer ${cible.taille_organisme == 'GE' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                         className={`border rounded px-2 cursor-pointer ${cible.taille_organisme === 'GE' ? 'bg-secondary text-white': 'text-black-50'}`}>
                     GE
                     <input type="checkbox" name="moyen" id="ge" value="GE" className="d-none"
                            onChange={(e) => handleInputUpdate('taille_organisme', e)}/>
                   </label>
                 </div>
-              </p>
-              <p className="form-boxes">
+              </div>
+              <div className="form-boxes">
                 <label htmlFor="organisme_taille">
                   Activité opérationnelle:
                 </label>
                 <div>
                   <label htmlFor="matiere_premiere"
-                         className={`border rounded px-2 cursor-pointer ${cible.activite == 'Matière première' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                         className={`border rounded px-2 cursor-pointer ${cible.activite === 'Matière première' ? 'bg-secondary text-white': 'text-black-50'}`}>
                     Matière première
                     <input type="checkbox" name="moyen" id="matiere_premiere" value="Matière première" className="d-none"
                            onChange={(e) => handleInputUpdate('activite', e)}/>
@@ -258,7 +258,7 @@ function Cible() {
                 </div>
                 <div>
                   <label htmlFor="transformation"
-                         className={`border rounded px-2 cursor-pointer ${cible.activite == 'Transformation' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                         className={`border rounded px-2 cursor-pointer ${cible.activite === 'Transformation' ? 'bg-secondary text-white': 'text-black-50'}`}>
                     Transformation
                     <input type="checkbox" name="moyen" id="transformation" value="Transformation" className="d-none"
                            onChange={(e) => handleInputUpdate('activite', e)}/>
@@ -266,7 +266,7 @@ function Cible() {
                 </div>
                 <div>
                   <label htmlFor="distribution"
-                         className={`border rounded px-2 cursor-pointer ${cible.activite == 'Distribution' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                         className={`border rounded px-2 cursor-pointer ${cible.activite === 'Distribution' ? 'bg-secondary text-white': 'text-black-50'}`}>
                     Distribution
                     <input type="checkbox" name="moyen" id="distribution" value="Distribution" className="d-none"
                            onChange={(e) => handleInputUpdate('activite', e)}/>
@@ -274,13 +274,13 @@ function Cible() {
                 </div>
                 <div>
                   <label htmlFor="revendeur"
-                         className={`border rounded px-2 cursor-pointer ${cible.activite == 'Revendeur' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                         className={`border rounded px-2 cursor-pointer ${cible.activite === 'Revendeur' ? 'bg-secondary text-white': 'text-black-50'}`}>
                     Revendeur
                     <input type="checkbox" name="moyen" id="revendeur" value="Revendeur" className="d-none"
                            onChange={(e) => handleInputUpdate('activite', e)}/>
                   </label>
                 </div>
-              </p>
+              </div>
             </div>
           </div>
 

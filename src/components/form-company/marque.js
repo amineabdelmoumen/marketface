@@ -91,7 +91,7 @@ function Marque() {
             {/*Information legal */}
             <section>
               <p className="section-title">Référence</p>
-              <p className="form-boxes">
+              <div className="form-boxes">
                 <label htmlFor="titre">
                   Titre
                 </label>
@@ -101,8 +101,8 @@ function Marque() {
                   name="titre"
                   defaultValue={marque.titre}
                   onChange={(e) => handleInputUpdate('titre', e)} />
-              </p>
-              <p className="form-boxes">
+              </div>
+              <div className="form-boxes">
                 <label htmlFor="annee">Année</label>
                 <input
                   type="text"
@@ -110,20 +110,20 @@ function Marque() {
                   id="annee"
                   defaultValue={marque.annee}
                   onChange={(e) => handleInputUpdate('annee', e)} />
-              </p>
-              <p className="form-boxes">
+              </div>
+              <div className="form-boxes">
                 <label htmlFor="description">Description</label>
                 <textarea
-                  name="description"
-                  id="description"
-                  cols="30"
-                  rows="10"
-                  defaultValue={marque.description}
-                  onChange={(e) => handleInputUpdate('description', e)}
-                ></textarea>
-              </p>
+  name="description"
+  id="description"
+  cols="30"
+  rows="10"
+  defaultValue={marque.description}
+  onChange={(e) => handleInputUpdate('description', e)}
+  />
+              </div>
 
-              <p className="form-boxes">
+              <div className="form-boxes">
                 <label htmlFor="categorie">Catégorie</label>
                 <select
                   name="categorie"
@@ -138,8 +138,8 @@ function Marque() {
                     })
                   }
                 </select>
-              </p>
-              <p className="form-boxes">
+              </div>
+              <div className="form-boxes">
                 <label htmlFor="nom_client">
                   Nom de client
                 </label>
@@ -149,21 +149,21 @@ function Marque() {
                   name="nom_client"
                   defaultValue={marque.nom_client}
                   onChange={(e) => handleInputUpdate('nom_client', e)} />
-              </p>
-              <p className="form-boxes">
+              </div>
+              <div className="form-boxes">
                 <label htmlFor="">Joindre logo de client</label>
                 <label htmlFor="logo" className="text-center upload">
                   upload
                   <input type="file" id="logo" name="logo" className="d-none" onChange={(e) => handleLogoUpload(e)} />
                 </label>
-              </p>
-              <p className="form-boxes">
+              </div>
+              <div className="form-boxes">
                 <label htmlFor="">Joindre photos des réalisations</label>
                 <label htmlFor="photos" className="text-center upload">
                   upload
                   <input type="file" id="photos" name="photos" className="d-none" multiple onChange={(e) => handlePhotosUpload(e)} />
                 </label>
-              </p>
+              </div>
             </section>
 
             <p className="line"></p>
@@ -175,7 +175,7 @@ function Marque() {
                   <p className="text-secondary h6 mt-4">{marque.categorie}</p>
                   <p className="d-flex gap-2 mt-5">
                     {
-                      logo ? <img src={logo} width={80} />
+                      logo ? <img src={logo} width={80} alt="logo" />
                         : ''
                     }
                     <span className="text-secondary">{marque.nom_client}</span>
@@ -188,7 +188,7 @@ function Marque() {
                         photos.map((photo) => {
                           return (
                             <div className="col-6">
-                              <img src={photo} width={100} />
+                              <img src={photo} width={100} alt="" />
                             </div>
                           )
                         }) : ''

@@ -98,7 +98,7 @@ function Identite() {
           <p className="icon-img">
             {
               logo ?
-                <img src={logo} width={40} />
+                <img src={logo} width={40} alt="" />
                 :
                 <Icon id="icon-ingerprint" icon="bi:fingerprint" />
             }

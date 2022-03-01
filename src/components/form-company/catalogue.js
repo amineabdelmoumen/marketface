@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {setFormStage} from "../../store/rootSlice";
 import {useDispatch, useSelector} from "react-redux";
-import {setCatalogue, setCatalogues} from "../../store/profileSlice";
+import {setCatalogue} from "../../store/profileSlice";
 
 function Catalogue() {
   const dispatch = useDispatch()
@@ -35,7 +35,7 @@ function Catalogue() {
                   <option value="aucun">aucun</option>
                 </select>
               </div>
-              <p className="form-boxes">
+              <div className="form-boxes">
                 <label htmlFor="activite">Quelle est votre activité opérationnelle?</label>
                 <div>
                   <label htmlFor="matiere"
@@ -69,7 +69,7 @@ function Catalogue() {
                            onChange={(e) => handleInputUpdate('matiere', e)}/>
                   </label>
                 </div>
-              </p>
+              </div>
 
               <div className="form-boxes">
                 <label htmlFor="prenom_nome">Quel est le type de business que vous entreprenez?</label>

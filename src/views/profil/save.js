@@ -13,7 +13,7 @@ function Save(props) {
           <p className="my-4 text-primary">Votre demande de vérification de votre compte à Marketface est gratuite.</p>
           <img src="/imgs/stepper.png" alt="" height={140}/>
           <div className="border border-success w-50 py-3 mx-auto mt-5 d-flex justify-content-center gap-5" style={{'borderRadius': '14px'}}>
-            <img src="/imgs/clip.png" width={30}/>
+            <img src="/imgs/clip.png" width={30} alt="clip" />
 
             <p className="text-primary">Joindre votre demande</p>
           </div>

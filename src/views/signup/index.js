@@ -16,9 +16,12 @@ const Signup = () => {
     dispatch(setRegister(data))
   }
   const handleClick = async () => {
-    const data = await register(registerForm)
-    console.log(data);
-    // navigate("/profil");
+    try {
+      await register(registerForm)
+      navigate('/login')
+    }catch(e) {
+
+    }
   };
 
   return (

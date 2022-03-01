@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Navigate} from "react-router-dom";
 import {isAuthenticated} from "../lib/hooks";
 
@@ -15,7 +15,7 @@ function Private({children}) {
   return authenticated ?
     children
     :
-    (<Navigate to="/" />)
+    (<Navigate to="/login" />)
 }
 
 export default Private;

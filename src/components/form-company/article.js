@@ -53,7 +53,7 @@ function Article(props) {
           <div className="d-flex">
             {/*Information legal */}
             <section>
-              <p className="form-boxes">
+              <div className="form-boxes">
                 <label htmlFor="titre">
                   Il s'agit d'un
                 </label>
@@ -62,45 +62,45 @@ function Article(props) {
                   <option value="service">Service</option>
                   <option value="immobilier">Immobilier</option>
                 </select>
-              </p>
-              <p className="form-boxes">
+              </div>
+              <div className="form-boxes">
                 <label htmlFor="nom">Nom d'article</label>
                 <input type="text" name="nom" id="nom" onChange={(e) => handleInputUpdate('nom', e)} />
-              </p>
-              <p className="form-boxes">
+              </div>
+              <div className="form-boxes">
                 <label htmlFor="description">Description</label>
                 <textarea name="description" id="description" cols="30" rows="10"
-                          onChange={(e) => handleInputUpdate('description', e)}></textarea>
-              </p>
+  onChange={(e) => handleInputUpdate('description', e)}/>
+              </div>
 
-              <p className="form-boxes">
+              <div className="form-boxes">
                 <label htmlFor="category">Prix</label>
                 <input type="text" onChange={(e) => handleInputUpdate('prix', e)}/>
-              </p>
+              </div>
               {/*<p className="form-boxes">*/}
               {/*  <label htmlFor="nom_client">*/}
               {/*    Catégorie:*/}
               {/*  </label>*/}
               {/*  <input type="text" id="nom_client" onChange={(e) => setCategorie(e.target.value)} />*/}
               {/*</p>*/}
-              <p className="form-boxes">
+              <div className="form-boxes">
                 <label htmlFor="nom_client">
                   Quantité:
                 </label>
                 <input type="text" id="nom_client" onChange={(e) => handleInputUpdate('quantite', e)} />
-              </p>
-              <p className="form-boxes">
+              </div>
+              <div className="form-boxes">
                 <label htmlFor="type">
                   Type:
                 </label>
                 <input type="text" id="type" onChange={(e) => handleInputUpdate('type', e)} />
-              </p>
-              <p className="form-boxes">
+              </div>
+              <div className="form-boxes">
                 <label htmlFor="photos">
                   Joindre des photos d'article
                 </label>
                 <input type="file" id="photos" name="photos[]" multiple onChange={(e) => handlePhotosUpload(e)} />
-              </p>
+              </div>
             </section>
 
             <p className="line"></p>
@@ -121,7 +121,7 @@ function Article(props) {
                         photos.map((photo) => {
                           return (
                             <div className="col-6">
-                              <img src={photo} width={100} />
+                              <img src={photo} width={100} alt="" />
                             </div>
                           )
                         }) : ''
