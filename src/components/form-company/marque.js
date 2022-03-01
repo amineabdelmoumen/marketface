@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {setFormStage} from "../../store/rootSlice";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {setMarque} from "../../store/profileSlice";
 
 const categories = [
   'Produits chimiques',
@@ -52,27 +53,29 @@ const categories = [
 ]
 function Marque() {
   const dispatch = useDispatch()
-  const [title, setTitle] = useState('')
-  const [annee, setAnnee] = useState('')
-  const [description, setDescription] = useState('')
-  const [category, setCategory] = useState('')
-  const [client, setClient] = useState('')
+  const marque = useSelector((state) => state.profile.marque)
   const [logo, setLogo] = useState(null)
   const [photos, setPhotos] = useState([])
 
-  function handleLogoUpload(e) {
+  const handleLogoUpload = (e) => {
     let file = e.target.files[0]
     let blob = URL.createObjectURL(file)
     setLogo(blob)
   }
 
-  function handlePhotosUpload(e) {
+  const handlePhotosUpload = (e) => {
     let files = e.target.files;
     let photos = []
     for (let i = 0; i < files.length; i++) {
       photos.push(URL.createObjectURL(files[i]))
     }
     setPhotos(photos)
+  }
+
+  const handleInputUpdate = (field, e) => {
+    let data = { ...marque }
+    data[field] = e.target.value
+    dispatch(setMarque(data))
   }
   return (
     <>
@@ -92,21 +95,41 @@ function Marque() {
                 <label htmlFor="titre">
                   Titre
                 </label>
-                <input type="text" id="titre" name="titre" onChange={(e) => setTitle(e.target.value)} />
+                <input
+                  type="text"
+                  id="titre"
+                  name="titre"
+                  defaultValue={marque.titre}
+                  onChange={(e) => handleInputUpdate('titre', e)} />
               </p>
               <p className="form-boxes">
                 <label htmlFor="annee">Année</label>
-                <input type="text" name="annee" id="annee" onChange={(e) => setAnnee(e.target.value)} />
+                <input
+                  type="text"
+                  name="annee"
+                  id="annee"
+                  defaultValue={marque.annee}
+                  onChange={(e) => handleInputUpdate('annee', e)} />
               </p>
               <p className="form-boxes">
                 <label htmlFor="description">Description</label>
-                <textarea name="description" id="description" cols="30" rows="10"
-                          onChange={(e) => setDescription(e.target.value)}></textarea>
+                <textarea
+                  name="description"
+                  id="description"
+                  cols="30"
+                  rows="10"
+                  defaultValue={marque.description}
+                  onChange={(e) => handleInputUpdate('description', e)}
+                ></textarea>
               </p>
 
               <p className="form-boxes">
-                <label htmlFor="category">Catégorie</label>
-                <select name="category" id="category" onChange={(e) => setCategory(e.target.value)}>
+                <label htmlFor="categorie">Catégorie</label>
+                <select
+                  name="categorie"
+                  id="categorie"
+                  defaultValue={marque.categorie}
+                  onChange={(e) => handleInputUpdate('categorie', e)}>
                   {
                     categories.map((category) => {
                       return (
@@ -120,7 +143,12 @@ function Marque() {
                 <label htmlFor="nom_client">
                   Nom de client
                 </label>
-                <input type="text" id="nom_client" name="nom_client" onChange={(e) => setClient(e.target.value)} />
+                <input
+                  type="text"
+                  id="nom_client"
+                  name="nom_client"
+                  defaultValue={marque.nom_client}
+                  onChange={(e) => handleInputUpdate('nom_client', e)} />
               </p>
               <p className="form-boxes">
                 <label htmlFor="">Joindre logo de client</label>
@@ -142,12 +170,15 @@ function Marque() {
             <section>
               <div className="row">
                 <div className="col-6">
-                  <h4 className="text-secondary">{title} | {annee}</h4>
-                  <p className="text-black-50 h6 mt-4">{description}</p>
-                  <p className="text-secondary h6 mt-4">{category}</p>
+                  <h4 className="text-secondary">{marque.titre} | {marque.annee}</h4>
+                  <p className="text-black-50 h6 mt-4">{marque.description}</p>
+                  <p className="text-secondary h6 mt-4">{marque.categorie}</p>
                   <p className="d-flex gap-2 mt-5">
-                    <img src={logo} width={80} />
-                    <span className="text-secondary">{client}</span>
+                    {
+                      logo ? <img src={logo} width={80} />
+                        : ''
+                    }
+                    <span className="text-secondary">{marque.nom_client}</span>
                   </p>
                 </div>
                 <div className="col-6">

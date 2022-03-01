@@ -1,20 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {setRegister} from "../../store/profileSlice";
+import {register} from "../../lib/auth";
 
 const Signup = () => {
-  const [titre, setTitre] = useState("");
-  const [poste, setPoste] = useState("");
-  const [nom, setNom] = useState("");
-  const [prenom, setPrenom] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [phone, setPhone] = useState("");
+  const dispatch = useDispatch()
+  const registerForm = useSelector((state) => state.profile.register)
 
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    navigate("/profil");
+  const handleInputUpdate = (field, e) => {
+    let data = { ...registerForm }
+    data[field] = e.target.value
+    dispatch(setRegister(data))
+  }
+  const handleClick = async () => {
+    const data = await register(registerForm)
+    console.log(data);
+    // navigate("/profil");
   };
 
   return (
@@ -40,8 +44,8 @@ const Signup = () => {
               name="titre"
               className="form-control rounded-pill border-0"
               placeholder="Titre"
-              value={titre}
-              onChange={(e) => setTitre(e.target.value)}
+              defaultValue={registerForm.titre}
+              onChange={(e) => handleInputUpdate('titre', e)}
             >
               <option value="m">M</option>
               <option value="mme">Mme</option>
@@ -56,8 +60,8 @@ const Signup = () => {
                   type="text"
                   className="form-control rounded-pill border-0"
                   placeholder="Prénom"
-                  value={prenom}
-                  onChange={(e) => setPrenom(e.target.value)}
+                  defaultValue={registerForm.prenom}
+                  onChange={(e) => handleInputUpdate('prenom', e)}
                 />
               </div>
             </div>
@@ -67,8 +71,8 @@ const Signup = () => {
                   type="text"
                   className="form-control rounded-pill border-0"
                   placeholder="Nom"
-                  value={nom}
-                  onChange={(e) => setNom(e.target.value)}
+                  defaultValue={registerForm.nom}
+                  onChange={(e) => handleInputUpdate('nom', e)}
                 />
               </div>
             </div>
@@ -78,8 +82,8 @@ const Signup = () => {
               name="poste"
               className="form-control rounded-pill border-0"
               placeholder="Poste Occupé"
-              value={poste}
-              onChange={(e) => setPoste(e.target.value)}
+              defaultValue={registerForm.poste}
+              onChange={(e) => handleInputUpdate('poste', e)}
             >
               <option value="directeur_general">Directeur général</option>
               <option value="directeur_commercial">Directeur Commercial</option>
@@ -103,8 +107,8 @@ const Signup = () => {
               type="text"
               className="form-control rounded-pill border-0"
               placeholder="E-mail"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              defaultValue={registerForm.email}
+              onChange={(e) => handleInputUpdate('email', e)}
             />
           </div>
           <div className="form-group mb-4">
@@ -112,8 +116,8 @@ const Signup = () => {
               type="text"
               className="form-control rounded-pill border-0"
               placeholder="Téléphone"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              defaultValue={registerForm.phone}
+              onChange={(e) => handleInputUpdate('phone', e)}
             />
           </div>
           <div className="form-group mb-4">
@@ -121,8 +125,8 @@ const Signup = () => {
               type="password"
               className="form-control rounded-pill border-0"
               placeholder="Mot de passe"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              defaultValue={registerForm.password}
+              onChange={(e) => handleInputUpdate('password', e)}
             />
           </div>
           <div className="form-group mb-4">
@@ -130,8 +134,8 @@ const Signup = () => {
               type="password"
               className="form-control rounded-pill border-0"
               placeholder="Confirmer votre mot de passe"
-              value={passwordConfirm}
-              onChange={(e) => setPasswordConfirm(e.target.value)}
+              defaultValue={registerForm.password_confirmation}
+              onChange={(e) => handleInputUpdate('password_confirmation', e)}
             />
           </div>
           <div className="d-flex flex-column align-items-end mb-5">

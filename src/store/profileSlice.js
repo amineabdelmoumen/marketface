@@ -3,28 +3,38 @@ import { createSlice } from "@reduxjs/toolkit";
 const profileSlice = createSlice({
   name: "profile",
   initialState: {
-    profile: {
-      identite: {},
-      marque: {},
-      catalogue: {},
-      cible: {}
-    }
+    identite: {},
+    marque: {},
+    catalogue: {},
+    articles: [],
+    article: {},
+    cible: {},
+    register: {}
   },
   reducers: {
     setIdentite: (state, action) => {
-      state.profile.identite = action.payload
+      state.identite = action.payload
     },
     setMarque: (state, action) => {
-      state.profile.marque = action.payload
+      state.marque = action.payload
     },
     setCatalogue: (state, action) => {
-      state.profile.catalogue = action.payload
+      state.catalogue = action.payload
+    },
+    setArticles: (state, action) => {
+      state.articles = action.payload
+    },
+    setArticle: (state, action) => {
+      state.article = action.payload
     },
     setCible: (state, action) => {
-      state.profile.cible = action.payload
+      state.cible = action.payload
     },
+    setRegister: (state, action) => {
+      state.register = action.payload
+    }
   }
 })
 
-export const { setIdentite, setMarque, setCatalogue, setCible } = profileSlice.actions
+export const { setIdentite, setMarque, setCatalogue, setCible, setRegister, setArticle, setArticles } = profileSlice.actions
 export const profileReducer = profileSlice.reducer

@@ -5,7 +5,7 @@ import "./styles.scss";
 import {useDispatch, useSelector} from "react-redux";
 import {setIdentite} from "../../store/profileSlice";
 
-function Indentite() {
+function Identite() {
   const dispatch = useDispatch()
   const identite = useSelector((state) => state.profile.identite)
   const activites = [
@@ -64,6 +64,12 @@ function Indentite() {
   const handleSubmit = (e) => {
     e.preventDefault(); // stop form submission
   };
+
+  const handleInputChange = (field, e) => {
+    let data = { ...identite }
+    data[field] = e.target.value
+    dispatch(setIdentite(data))
+  }
   const handleChooseFile = () => {
     const inputElement = document.getElementById("logo-input");
     inputElement.click();
@@ -111,15 +117,26 @@ function Indentite() {
           {/*Information legal */}
           <section>
             <p className="section-title">Informations légales</p>
-            <p className="form-boxes">
-              <label htmlFor="prenom_nome">
+            <div className="form-boxes">
+              <label htmlFor="prenom_nom">
                 *Raison social / prenom et nom:
               </label>
-              <input type="text" id="prenom_nome" name="prenom_nome" />
-            </p>
-            <p className="form-boxes">
-              <label htmlFor="prenom_nome">*Activité:</label>
-              <select name="" id="">
+              <input
+                type="text"
+                id="prenom_nom"
+                name="prenom_nom"
+                onChange={(e) => handleInputChange('fullname', e)}
+                defaultValue={identite.fullname}
+              />
+            </div>
+            <div className="form-boxes">
+              <label htmlFor="activite">*Activité:</label>
+              <select
+                name="activite"
+                id="activite"
+                onChange={(e) => handleInputChange('activite', e)}
+                defaultValue={identite.activite}
+              >
                 {
                   activites.map((activite) => {
                     return (
@@ -128,53 +145,85 @@ function Indentite() {
                   })
                 }
               </select>
-            </p>
-            <p className="form-boxes">
-              <label htmlFor="prenom_nome">*Statut:</label>
-              <select name="statut" id="statu">
+            </div>
+            <div className="form-boxes">
+              <label htmlFor="statut">*Statut:</label>
+              <select
+                name="statut"
+                id="statut"
+                onChange={(e) => handleInputChange('statut', e)}
+                defaultValue={identite.statut}
+              >
                 {statutsList.map((opt) => (
                   <option value={opt}>{opt}</option>
                 ))}
               </select>
-            </p>
-            <p className="form-boxes">
-              <label htmlFor="prenom_nome">*ICE:</label>
-              <input type="text" id="prenom_nome" name="prenom_nome" />
-            </p>
-            <p className="form-boxes">
-              <label htmlFor="prenom_nome">
+            </div>
+            <div className="form-boxes">
+              <label htmlFor="ice">*ICE:</label>
+              <input
+                type="text"
+                id="ice"
+                name="ice"
+                onChange={(e) => handleInputChange('ice', e)}
+                defaultValue={identite.ice}
+              />
+            </div>
+            <div className="form-boxes">
+              <label htmlFor="annee">
                 L'année de création de votre organisme:
               </label>
-              <input type="annee" id="annee" name="annee" />
-            </p>
-            <p className="form-boxes">
+              <input
+                type="text"
+                id="annee"
+                name="annee"
+                onChange={(e) => handleInputChange('annee', e)}
+                defaultValue={identite.annee}
+              />
+            </div>
+            <div className="form-boxes">
               <label htmlFor="organisme_type">
                 *Le type de votre organisme:
               </label>
-              <select name="organisme_type" id="organisme_type">
+              <select
+                name="organisme_type"
+                id="organisme_type"
+                onChange={(e) => handleInputChange('type_organisme', e)}
+                defaultValue={identite.type_organisme}
+              >
                 {organismeType.map((opt) => (
                   <option value={opt}>{opt}</option>
                 ))}
               </select>
-            </p>
-            <p className="form-boxes">
+            </div>
+            <div className="form-boxes">
               <label htmlFor="organisme_taille">
                 *La taille de votre organisme:
               </label>
-              <select name="organisme_taille" id="organisme_taille">
+              <select
+                name="organisme_taille"
+                id="organisme_taille"
+                onChange={(e) => handleInputChange('taille_organisme', e)}
+                defaultValue={identite.taille_organisme}
+              >
                 {organismeSize.map((opt) => (
                   <option value={opt}>{opt}</option>
                 ))}
               </select>
-            </p>
-            <p className="form-boxes">
+            </div>
+            <div className="form-boxes">
               <label htmlFor="nombre_employés">*Le nombre d'employés:</label>
-              <select name="organisme_taille" id="organisme_taille">
+              <select
+                name="nombre_employés"
+                id="nombre_employés"
+                onChange={(e) => handleInputChange('nombre_employes', e)}
+                defaultValue={identite.nombre_employes}
+              >
                 {nombreEmployes.map((opt) => (
                   <option value={opt}>{opt}</option>
                 ))}
               </select>
-            </p>
+            </div>
             <p className="info-obg">
               *Les informations obligatoire pour accéder à la plateforme
             </p>
@@ -185,12 +234,23 @@ function Indentite() {
           <section>
             <p className="section-title">Informations financières</p>
             <p className="form-boxes">
-              <label htmlFor="prenom_nome">*Capital:</label>
-              <input type="text" id="prenom_nome" name="prenom_nome" />
+              <label htmlFor="capital">*Capital:</label>
+              <input
+                type="text"
+                id="capital"
+                name="capital"
+                defaultValue={identite.capital}
+                onChange={(e) => handleInputChange('capital', e)}
+              />
             </p>
             <p className="form-boxes">
               <label htmlFor="chiffre_affaire">Chiffre d'affaires:</label>
-              <select name="organisme_taille" id="organisme_taille">
+              <select
+                name="chiffre_affaire"
+                id="chiffre_affaire"
+                defaultValue={identite.chiffre_affaire}
+                onChange={(e) => handleInputChange('chiffre_affaire', e)}
+              >
                 {chaiffreDafaireList.map((opt) => (
                   <option value={opt}>{opt}</option>
                 ))}
@@ -198,35 +258,53 @@ function Indentite() {
             </p>
             <p className="section-title">Contact:</p>
             <p className="form-boxes">
-              <label htmlFor="prenom_nome">*Siège social:</label>
-              <input type="text" id="prenom_nome" name="prenom_nome" />
-            </p>
-            <p className="form-boxes">
-              <label htmlFor="prenom_nome">*Région:</label>
-              <input type="text" id="prenom_nome" name="prenom_nome" />
-            </p>
-            <p className="form-boxes">
-              <label htmlFor="prenom_nome">*Ville:</label>
+              <label htmlFor="siege">*Siège social:</label>
               <input
                 type="text"
-                id="prenom_nome"
-                name="prenom_nome"
+                id="siege"
+                name="siege"
+                defaultValue={identite.siege}
+                onChange={(e) => handleInputChange('siege', e)}
               />
             </p>
             <p className="form-boxes">
-              <label htmlFor="prenom_nome">*Pays:</label>
+              <label htmlFor="region">*Région:</label>
               <input
                 type="text"
-                id="prenom_nome"
-                name="prenom_nome"
+                id="region"
+                name="region"
+                defaultValue={identite.region}
+                onChange={(e) => handleInputChange('region', e)}
               />
             </p>
             <p className="form-boxes">
-              <label htmlFor="prenom_nome">*Numéro de téléphone:</label>
+              <label htmlFor="ville">*Ville:</label>
               <input
                 type="text"
-                id="prenom_nome"
-                name="prenom_nome"
+                id="ville"
+                name="ville"
+                defaultValue={identite.ville}
+                onChange={(e) => handleInputChange('ville', e)}
+              />
+            </p>
+            <p className="form-boxes">
+              <label htmlFor="pays">*Pays:</label>
+              <input
+                type="text"
+                id="pays"
+                name="pays"
+                defaultValue={identite.pays}
+                onChange={(e) => handleInputChange('pays', e)}
+              />
+            </p>
+            <p className="form-boxes">
+              <label htmlFor="telephone">*Numéro de téléphone:</label>
+              <input
+                type="text"
+                id="telephone"
+                name="telephone"
+                defaultValue={identite.telephone}
+                onChange={(e) => handleInputChange('telephone', e)}
               />
             </p>
 
@@ -245,4 +323,4 @@ function Indentite() {
   );
 }
 
-export default Indentite;
+export default Identite;

@@ -1,7 +1,7 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import { Icon } from "@iconify/react";
-import Indentite from "../../components/form-company/Indentite";
+import Identite from "../../components/form-company/Identite";
 import Marque from "../../components/form-company/marque";
 import Catalogue from "../../components/form-company/catalogue";
 import {setFormStage} from "../../store/rootSlice";
@@ -53,7 +53,7 @@ function Profil() {
       <div className="">
         {
           {
-            1: <Indentite />,
+            1: <Identite />,
             2: <Marque />,
             3: <Catalogue />,
             4: <Article />,

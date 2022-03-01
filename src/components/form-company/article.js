@@ -1,16 +1,12 @@
 import React, {useState} from 'react';
 import {setFormStage} from "../../store/rootSlice";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {setArticle, setArticles} from "../../store/profileSlice";
 
 function Article(props) {
   const dispatch = useDispatch()
-  const [article, setArticle] = useState('')
-  const [nom, setNom] = useState('')
-  const [description, setDescription] = useState('')
-  const [prix, setPrix] = useState('')
-  const [categorie, setCategorie] = useState('')
-  const [quantite, setQuantite] = useState('')
-  const [type, setType] = useState('')
+  const article = useSelector((state) => state.profile.article)
+  const articles = useSelector((state) => state.profile.articles)
   const [photos, setPhotos] = useState([])
 
   function handlePhotosUpload(e) {
@@ -21,6 +17,19 @@ function Article(props) {
     }
     setPhotos(photos)
   }
+
+  const handleInputUpdate = (field, e) => {
+    let data = {...article}
+    data[field] = e.target.value
+    dispatch(setArticle(data))
+  }
+
+  const appendArticle = () => {
+    let data = [...articles]
+    data.push(article)
+    dispatch(setArticles(data))
+  }
+
   return (
     <>
       <form
@@ -30,6 +39,15 @@ function Article(props) {
       >
         <div className="page_number">2/2</div>
         <h4 className="ms-5 text-primary">Créez votre E-catalogue</h4>
+        {
+          articles.length ?
+            articles.map((el) => {
+              return (
+                <span className="badge bg-primary">{el.nom}</span>
+              )
+            })
+            : ''
+        }
         <h5 className="text-center text-secondary">Ajouter un article</h5>
         <div className="form-identite-info d-block">
           <div className="d-flex">
@@ -39,25 +57,25 @@ function Article(props) {
                 <label htmlFor="titre">
                   Il s'agit d'un
                 </label>
-                <select name="article_type" onChange={(e) => setArticle(e.target.value)}>
+                <select name="article_type" onChange={(e) => handleInputUpdate('type_article', e)}>
                   <option value="produit">Produit</option>
                   <option value="service">Service</option>
                   <option value="immobilier">Immobilier</option>
                 </select>
               </p>
               <p className="form-boxes">
-                <label htmlFor="annee">Nom d'article</label>
-                <input type="text" name="annee" id="annee" onChange={(e) => setNom(e.target.value)} />
+                <label htmlFor="nom">Nom d'article</label>
+                <input type="text" name="nom" id="nom" onChange={(e) => handleInputUpdate('nom', e)} />
               </p>
               <p className="form-boxes">
                 <label htmlFor="description">Description</label>
                 <textarea name="description" id="description" cols="30" rows="10"
-                  onChange={(e) => setDescription(e.target.value)}></textarea>
+                          onChange={(e) => handleInputUpdate('description', e)}></textarea>
               </p>
 
               <p className="form-boxes">
                 <label htmlFor="category">Prix</label>
-                <input type="text" onChange={(e) => setPrix(e.target.value)}/>
+                <input type="text" onChange={(e) => handleInputUpdate('prix', e)}/>
               </p>
               {/*<p className="form-boxes">*/}
               {/*  <label htmlFor="nom_client">*/}
@@ -69,13 +87,13 @@ function Article(props) {
                 <label htmlFor="nom_client">
                   Quantité:
                 </label>
-                <input type="text" id="nom_client" onChange={(e) => setQuantite(e.target.value)} />
+                <input type="text" id="nom_client" onChange={(e) => handleInputUpdate('quantite', e)} />
               </p>
               <p className="form-boxes">
-                <label htmlFor="nom_client">
+                <label htmlFor="type">
                   Type:
                 </label>
-                <input type="text" id="nom_client" onChange={(e) => setType(e.target.value)} />
+                <input type="text" id="type" onChange={(e) => handleInputUpdate('type', e)} />
               </p>
               <p className="form-boxes">
                 <label htmlFor="photos">
@@ -89,12 +107,12 @@ function Article(props) {
             <section>
               <div className="row">
                 <div className="col-6">
-                  <h4 className="text-secondary">{nom}</h4>
+                  <h4 className="text-secondary">{article.nom}</h4>
                   {/*<p>Categorie: {categorie}</p>*/}
-                  <p>Quantite: {quantite}</p>
-                  <p>{type}</p>
-                  <p>{prix}dh/{quantite}</p>
-                  <p>{description}</p>
+                  <p>Quantite: {article.quantite}</p>
+                  <p>{article.type}</p>
+                  <p>{article.prix}dh/{article.quantite}</p>
+                  <p>{article.description}</p>
                 </div>
                 <div className="col-6">
                   <div className="row">
@@ -117,7 +135,7 @@ function Article(props) {
             <button type="button" className="btn pointer btn-outline-secondary rounded-pill px-4" onClick={() => dispatch(setFormStage(3))}>
               Précédent
             </button>
-            <button type="button" className="btn pointer btn-outline-success rounded-pill px-4 ms-4">
+            <button type="button" className="btn pointer btn-outline-success rounded-pill px-4 ms-4" onClick={() => appendArticle()}>
               Enregistrer et ajouter
             </button>
             <button type="button" className="btn pointer ml-4 btn-success text-white rounded-pill px-4 ms-5" onClick={() => dispatch(setFormStage(5))}>
