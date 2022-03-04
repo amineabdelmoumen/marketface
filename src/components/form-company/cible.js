@@ -3,6 +3,8 @@ import {setFormStage} from "../../store/rootSlice";
 import {useDispatch, useSelector} from "react-redux";
 import Select from 'react-select';
 import {setCible} from "../../store/profileSlice";
+import {useNavigate} from "react-router-dom";
+import {saveCibles} from "../../lib/crud";
 
 const regions = [
   {
@@ -139,6 +141,7 @@ const activites = [
 ];
 
 function Cible() {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const cible = useSelector((state) => state.profile.cible)
 
@@ -157,6 +160,14 @@ function Cible() {
     })
     data[field] = elements
     dispatch(setCible(data))
+  }
+
+  const handleSubmit = () => {
+    const token = localStorage.getItem('token')
+    saveCibles(cible, token)
+      .then(() => {
+        navigate('/profil/save')
+      })
   }
   return (
     <>
@@ -292,9 +303,9 @@ function Cible() {
             <button type="button" className="btn pointer btn-outline-success rounded-pill px-4 ms-4">
               Enregistrer et ajouter
             </button>
-            <a href="/profil/save" className="btn pointer ml-4 btn-success text-white rounded-pill px-4 ms-5">
+            <button type="button" className="btn pointer ml-4 btn-success text-white rounded-pill px-4 ms-5" onClick={() => handleSubmit()}>
               Suivant
-            </a>
+            </button>
           </div>
         </div>
       </form>

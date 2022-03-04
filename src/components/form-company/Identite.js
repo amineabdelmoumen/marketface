@@ -4,57 +4,18 @@ import {setFormStage} from "../../store/rootSlice";
 import "./styles.scss";
 import {useDispatch, useSelector} from "react-redux";
 import {setIdentite} from "../../store/profileSlice";
+import {saveCompany} from "../../lib/crud";
+import types from "../../lib/constants/types";
+import statusList from "../../lib/constants/status";
+import activites from '../../lib/constants/activites';
+import regions from '../../lib/constants/regions';
+
+const form = new FormData()
 
 function Identite() {
   const dispatch = useDispatch()
   const identite = useSelector((state) => state.profile.identite)
-  const activites = [
-    "Agriculture, Sylviculture Et Pêche",
-    "Industries Extractives",
-    "Industrie Manufacturière",
-    "Production Et Distribution D'électricité, De Gaz, De Vapeur Et D'air Conditionné",
-    "Production Et Distribution D'eau ; Assainissement, Gestion Des Déchets Et Dépollution ",
-    "Construction",
-    "Commerce ; Réparation D'automobiles Et De Motocycles",
-    "Transports Et Entreposage",
-    "Hébergement Et Restauration",
-    "Information Et Communication",
-    "Activités Financières Et D'assurance",
-    "Activités Immobilières",
-    "Activités Spécialisées, Scientifiques Et Techniques",
-    "Activités De Services Administratifs Et De Soutien",
-    "Administration Publique",
-    "Enseignement",
-    "Santé Humaine Et Action Sociale",
-    "Arts, Spectacles Et Activités Récréatives",
-    "Autres Activités De Services",
-    "Activités Extra-Territoriales",
-];
-  const statutsList = [
-    "SARL",
-    "SA",
-    "SARLAU",
-    "SNC",
-    "SAS",
-    "SCS",
-    "SCA",
-    "SP",
-    "GIE",
-    "SCOP",
-    "SCIC",
-  ];
-  const organismeType = [
-    "Entreprise",
-    "Auto-entrepreneur",
-    "Coopérative",
-    "Activité Libérale",
-    "Etablissement public",
-    "Association",
-    "Fondation",
-    "Fédération",
-    "ONG",
-    "Autorité/Gouvernement",
-  ];
+
 
   const organismeSize = ["Start-up", "TPE", "PME", "PMI", "GE"];
   const nombreEmployes = ["De 1 à 10", "De 10 à 250", "Plus de 250"];
@@ -64,10 +25,10 @@ function Identite() {
   const handleSubmit = (e) => {
     e.preventDefault(); // stop form submission
   };
-
   const handleInputChange = (field, e) => {
     let data = { ...identite }
     data[field] = e.target.value
+    form.set(field, e.target.value)
     dispatch(setIdentite(data))
   }
   const handleChooseFile = () => {
@@ -76,12 +37,21 @@ function Identite() {
   };
   const uploadLogo = (event) => {
     const file = event.files[0];
+    form.set('logo', event.files[0])
     const photo = URL.createObjectURL(file)
     setLogo(photo)
   };
 
   function save() {
     dispatch(setIdentite({}))
+  }
+
+  function nextPage() {
+    const token = localStorage.getItem('token')
+    saveCompany(form, token)
+      .then(() => {
+        dispatch(setFormStage(2))
+      })
   }
 
   return (
@@ -125,8 +95,8 @@ function Identite() {
                 type="text"
                 id="prenom_nom"
                 name="prenom_nom"
-                onChange={(e) => handleInputChange('fullname', e)}
-                defaultValue={identite.fullname}
+                onChange={(e) => handleInputChange('raison_ou_nom', e)}
+                defaultValue={identite.raison_ou_nom}
               />
             </div>
             <div className="form-boxes">
@@ -154,7 +124,7 @@ function Identite() {
                 onChange={(e) => handleInputChange('statut', e)}
                 defaultValue={identite.statut}
               >
-                {statutsList.map((opt) => (
+                {statusList.map((opt) => (
                   <option value={opt}>{opt}</option>
                 ))}
               </select>
@@ -177,8 +147,8 @@ function Identite() {
                 type="text"
                 id="annee"
                 name="annee"
-                onChange={(e) => handleInputChange('annee', e)}
-                defaultValue={identite.annee}
+                onChange={(e) => handleInputChange('annee_creation', e)}
+                defaultValue={identite.annee_creation}
               />
             </div>
             <div className="form-boxes">
@@ -188,10 +158,10 @@ function Identite() {
               <select
                 name="organisme_type"
                 id="organisme_type"
-                onChange={(e) => handleInputChange('type_organisme', e)}
-                defaultValue={identite.type_organisme}
+                onChange={(e) => handleInputChange('type', e)}
+                defaultValue={identite.type}
               >
-                {organismeType.map((opt) => (
+                {types.map((opt) => (
                   <option value={opt}>{opt}</option>
                 ))}
               </select>
@@ -203,8 +173,8 @@ function Identite() {
               <select
                 name="organisme_taille"
                 id="organisme_taille"
-                onChange={(e) => handleInputChange('taille_organisme', e)}
-                defaultValue={identite.taille_organisme}
+                onChange={(e) => handleInputChange('taille', e)}
+                defaultValue={identite.taille}
               >
                 {organismeSize.map((opt) => (
                   <option value={opt}>{opt}</option>
@@ -257,27 +227,31 @@ function Identite() {
               </select>
             </p>
             <p className="section-title">Contact:</p>
-            <p className="form-boxes">
+            <div className="form-boxes">
               <label htmlFor="siege">*Siège social:</label>
               <input
                 type="text"
                 id="siege"
                 name="siege"
-                defaultValue={identite.siege}
-                onChange={(e) => handleInputChange('siege', e)}
+                defaultValue={identite.siege_social}
+                onChange={(e) => handleInputChange('siege_social', e)}
               />
-            </p>
-            <p className="form-boxes">
+            </div>
+            <div className="form-boxes">
               <label htmlFor="region">*Région:</label>
-              <input
-                type="text"
-                id="region"
-                name="region"
-                defaultValue={identite.region}
-                onChange={(e) => handleInputChange('region', e)}
-              />
-            </p>
-            <p className="form-boxes">
+              <select name="region" id="region" defaultValue={identite.region}
+                      onChange={(e) => handleInputChange('region', e)}
+              >
+                {
+                  regions.map((region) => {
+                    return (
+                      <option value={region}>{region}</option>
+                    )
+                  })
+                }
+              </select>
+            </div>
+            <div className="form-boxes">
               <label htmlFor="ville">*Ville:</label>
               <input
                 type="text"
@@ -286,7 +260,7 @@ function Identite() {
                 defaultValue={identite.ville}
                 onChange={(e) => handleInputChange('ville', e)}
               />
-            </p>
+            </div>
             <p className="form-boxes">
               <label htmlFor="pays">*Pays:</label>
               <input
@@ -312,7 +286,7 @@ function Identite() {
               <button type="button" className="btn pointer btn-outline-success rounded-pill px-4" onClick={() => save()}>
                 Enregistrer
               </button>
-              <button type="button" className="btn pointer ml-4 btn-success text-white rounded-pill px-4" onClick={() => dispatch(setFormStage(2))}>
+              <button type="button" className="btn pointer ml-4 btn-success text-white rounded-pill px-4" onClick={() => nextPage()}>
                 Suivant
               </button>
             </div>

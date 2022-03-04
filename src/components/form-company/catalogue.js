@@ -2,6 +2,7 @@ import React from 'react';
 import {setFormStage} from "../../store/rootSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {setCatalogue} from "../../store/profileSlice";
+import {saveCatalogue} from "../../lib/crud";
 
 function Catalogue() {
   const dispatch = useDispatch()
@@ -10,6 +11,13 @@ function Catalogue() {
     let data = {...catalogue}
     data[field] = e.target.value
     dispatch(setCatalogue(data))
+  }
+  const handleSubmit = () => {
+    const token = localStorage.getItem('token')
+    saveCatalogue(catalogue, token)
+      .then(() => {
+        dispatch(setFormStage(4))
+      })
   }
   return (
     <>
@@ -221,7 +229,7 @@ function Catalogue() {
             <button type="button" className="btn pointer btn-outline-secondary rounded-pill px-4" onClick={() => dispatch(setFormStage(2))}>
               Précédent
             </button>
-            <button type="button" className="btn pointer ml-4 btn-success text-white rounded-pill px-4 ms-5" onClick={() => dispatch(setFormStage(4))}>
+            <button type="button" className="btn pointer ml-4 btn-success text-white rounded-pill px-4 ms-5" onClick={() => handleSubmit()}>
               Suivant
             </button>
           </div>
