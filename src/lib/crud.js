@@ -20,23 +20,22 @@ export const saveCatalogue = async (data, token) => {
 export const saveArticles = async (data, token) => {
   return await apiClient.post('/articles', data, {
     headers: {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'multipart/form-data;charset=utf-8;boundary='+Math.random().toString()
+      'Authorization': `Bearer ${token}`
     }
   })
 }
 
-export const saveMarques = async (data, token) => {
-  return await apiClient.post('/marques', data, {
+export const saveReferences = async (data, token) => {
+  return await apiClient.post('/reference', data, {
     headers: {
       'Authorization': `Bearer ${token}`,
-      'Content-Type': 'multipart/form-data;charset=utf-8;boundary='+Math.random().toString()
+      'Content-Type': 'multipart/form-data'
     }
   })
 }
 
 export const saveCibles = async (data, token) => {
-  return await apiClient.post('/cibles', data, {
+  return await apiClient.post('/cible', data, {
     headers: {
       'Authorization': `Bearer ${token}`
     }

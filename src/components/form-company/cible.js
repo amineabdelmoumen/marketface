@@ -211,84 +211,84 @@ function Cible() {
                 </div>
               </div>
               <div className="form-boxes">
-                <label htmlFor="taille_organisme">
+                <label htmlFor="taille_entreprise">
                   Taille d'entreprise:
                 </label>
                 <div>
                   <label htmlFor="startup"
-                         className={`border rounded px-2 cursor-pointer ${cible.taille_organisme === 'Start-up' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                         className={`border rounded px-2 cursor-pointer ${cible.taille_entreprise === 'Start-up' ? 'bg-secondary text-white': 'text-black-50'}`}>
                     Start-up
                     <input type="checkbox" name="moyen" id="startup" value="Start-up" className="d-none"
-                           onChange={(e) => handleInputUpdate('taille_organisme', e)}/>
+                           onChange={(e) => handleInputUpdate('taille_entreprise', e)}/>
                   </label>
                 </div>
                 <div>
                   <label htmlFor="tpe"
-                         className={`border rounded px-2 cursor-pointer ${cible.taille_organisme === 'TPE' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                         className={`border rounded px-2 cursor-pointer ${cible.taille_entreprise === 'TPE' ? 'bg-secondary text-white': 'text-black-50'}`}>
                     TPE
                     <input type="checkbox" name="moyen" id="tpe" value="TPE" className="d-none"
-                           onChange={(e) => handleInputUpdate('taille_organisme', e)}/>
+                           onChange={(e) => handleInputUpdate('taille_entreprise', e)}/>
                   </label>
                 </div>
                 <div>
                   <label htmlFor="pmi"
-                         className={`border rounded px-2 cursor-pointer ${cible.taille_organisme === 'PMI' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                         className={`border rounded px-2 cursor-pointer ${cible.taille_entreprise === 'PMI' ? 'bg-secondary text-white': 'text-black-50'}`}>
                     PMI
                     <input type="checkbox" name="moyen" id="pmi" value="PMI" className="d-none"
-                           onChange={(e) => handleInputUpdate('taille_organisme', e)}/>
+                           onChange={(e) => handleInputUpdate('taille_entreprise', e)}/>
                   </label>
                 </div>
                 <div>
                   <label htmlFor="pme"
-                         className={`border rounded px-2 cursor-pointer ${cible.taille_organisme === 'PME' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                         className={`border rounded px-2 cursor-pointer ${cible.taille_entreprise === 'PME' ? 'bg-secondary text-white': 'text-black-50'}`}>
                     PME
                     <input type="checkbox" name="moyen" id="pme" value="PME" className="d-none"
-                           onChange={(e) => handleInputUpdate('taille_organisme', e)}/>
+                           onChange={(e) => handleInputUpdate('taille_entreprise', e)}/>
                   </label>
                 </div>
                 <div>
                   <label htmlFor="ge"
-                         className={`border rounded px-2 cursor-pointer ${cible.taille_organisme === 'GE' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                         className={`border rounded px-2 cursor-pointer ${cible.taille_entreprise === 'GE' ? 'bg-secondary text-white': 'text-black-50'}`}>
                     GE
                     <input type="checkbox" name="moyen" id="ge" value="GE" className="d-none"
-                           onChange={(e) => handleInputUpdate('taille_organisme', e)}/>
+                           onChange={(e) => handleInputUpdate('taille_entreprise', e)}/>
                   </label>
                 </div>
               </div>
               <div className="form-boxes">
-                <label htmlFor="organisme_taille">
+                <label htmlFor="activite_oprationnelle">
                   Activité opérationnelle:
                 </label>
                 <div>
                   <label htmlFor="matiere_premiere"
-                         className={`border rounded px-2 cursor-pointer ${cible.activite === 'Matière première' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                         className={`border rounded px-2 cursor-pointer ${cible.activite_oprationnelle === 'Matière première' ? 'bg-secondary text-white': 'text-black-50'}`}>
                     Matière première
                     <input type="checkbox" name="moyen" id="matiere_premiere" value="Matière première" className="d-none"
-                           onChange={(e) => handleInputUpdate('activite', e)}/>
+                           onChange={(e) => handleInputUpdate('activite_oprationnelle', e)}/>
                   </label>
                 </div>
                 <div>
                   <label htmlFor="transformation"
-                         className={`border rounded px-2 cursor-pointer ${cible.activite === 'Transformation' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                         className={`border rounded px-2 cursor-pointer ${cible.activite_oprationnelle === 'Transformation' ? 'bg-secondary text-white': 'text-black-50'}`}>
                     Transformation
                     <input type="checkbox" name="moyen" id="transformation" value="Transformation" className="d-none"
-                           onChange={(e) => handleInputUpdate('activite', e)}/>
+                           onChange={(e) => handleInputUpdate('activite_oprationnelle', e)}/>
                   </label>
                 </div>
                 <div>
                   <label htmlFor="distribution"
-                         className={`border rounded px-2 cursor-pointer ${cible.activite === 'Distribution' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                         className={`border rounded px-2 cursor-pointer ${cible.activite_oprationnelle === 'Distribution' ? 'bg-secondary text-white': 'text-black-50'}`}>
                     Distribution
                     <input type="checkbox" name="moyen" id="distribution" value="Distribution" className="d-none"
-                           onChange={(e) => handleInputUpdate('activite', e)}/>
+                           onChange={(e) => handleInputUpdate('activite_oprationnelle', e)}/>
                   </label>
                 </div>
                 <div>
                   <label htmlFor="revendeur"
-                         className={`border rounded px-2 cursor-pointer ${cible.activite === 'Revendeur' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                         className={`border rounded px-2 cursor-pointer ${cible.activite_oprationnelle === 'Revendeur' ? 'bg-secondary text-white': 'text-black-50'}`}>
                     Revendeur
                     <input type="checkbox" name="moyen" id="revendeur" value="Revendeur" className="d-none"
-                           onChange={(e) => handleInputUpdate('activite', e)}/>
+                           onChange={(e) => handleInputUpdate('activite_oprationnelle', e)}/>
                   </label>
                 </div>
               </div>

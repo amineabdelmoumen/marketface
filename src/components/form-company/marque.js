@@ -1,26 +1,33 @@
 import React, {useState} from 'react';
 import {setFormStage} from "../../store/rootSlice";
 import {useDispatch, useSelector} from "react-redux";
-import {setMarque} from "../../store/profileSlice";
+import {setMarque, setReferences} from "../../store/profileSlice";
 import categories from "../../lib/constants/categories";
+import {saveReferences} from "../../lib/crud";
 
 const form = new FormData()
 
 function Marque() {
   const dispatch = useDispatch()
   const marque = useSelector((state) => state.profile.marque)
+  const references = useSelector((state) => state.profile.references)
   const [logo, setLogo] = useState(null)
   const [photos, setPhotos] = useState([])
 
   const handleLogoUpload = (e) => {
     let file = e.target.files[0]
-    form.set('logo', file)
+    let data = {...marque}
+    data.logo = e.target.files[0];
+    setMarque(data)
     let blob = URL.createObjectURL(file)
     setLogo(blob)
   }
 
   const handlePhotosUpload = (e) => {
     let files = e.target.files;
+    let data = {...marque}
+    data.images = e.target.files;
+    setMarque(data)
     let photos = []
     for (let i = 0; i < files.length; i++) {
       photos.push(URL.createObjectURL(files[i]))
@@ -31,8 +38,20 @@ function Marque() {
   const handleInputUpdate = (field, e) => {
     let data = { ...marque }
     data[field] = e.target.value
-    form.set(field, e.target.value)
     dispatch(setMarque(data))
+  }
+  const save = () => {
+    let data = [...references]
+    data.push(marque)
+    setReferences(data)
+  }
+  const handleSave = () => {
+    form.set('references', references)
+    const token = localStorage.getItem('token')
+    saveReferences(form, token)
+      .then(() => {
+        dispatch(setFormStage(3))
+      })
   }
   return (
     <>
@@ -159,10 +178,10 @@ function Marque() {
             <button type="button" className="btn pointer btn-outline-secondary rounded-pill px-4" onClick={() => dispatch(setFormStage(1))}>
               Précédent
             </button>
-            <button type="button" className="btn pointer btn-outline-success rounded-pill px-4 ms-4">
+            <button type="button" className="btn pointer btn-outline-success rounded-pill px-4 ms-4" onClick={() => save()}>
               Enregistrer et ajouter
             </button>
-            <button type="button" className="btn pointer ml-4 btn-success text-white rounded-pill px-4 ms-5" onClick={() => dispatch(setFormStage(3))}>
+            <button type="button" className="btn pointer ml-4 btn-success text-white rounded-pill px-4 ms-5" onClick={() => handleSave()}>
               Suivant
             </button>
           </div>

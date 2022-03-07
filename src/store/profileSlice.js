@@ -5,6 +5,7 @@ const profileSlice = createSlice({
   initialState: {
     identite: {},
     marque: {},
+    references: [],
     catalogue: {},
     articles: [],
     article: {},
@@ -32,9 +33,12 @@ const profileSlice = createSlice({
     },
     setRegister: (state, action) => {
       state.register = action.payload
+    },
+    setReferences: (state, action) => {
+      state.references = action.payload
     }
   }
 })
 
-export const { setIdentite, setMarque, setCatalogue, setCible, setRegister, setArticle, setArticles } = profileSlice.actions
+export const { setIdentite, setMarque, setCatalogue, setCible, setRegister, setArticle, setArticles, setReferences } = profileSlice.actions
 export const profileReducer = profileSlice.reducer
