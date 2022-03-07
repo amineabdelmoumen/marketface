@@ -29,7 +29,6 @@ export const saveReferences = async (data, token) => {
   return await apiClient.post('/reference', data, {
     headers: {
       'Authorization': `Bearer ${token}`,
-      'Content-Type': 'multipart/form-data'
     }
   })
 }
@@ -38,6 +37,15 @@ export const saveCibles = async (data, token) => {
   return await apiClient.post('/cible', data, {
     headers: {
       'Authorization': `Bearer ${token}`
+    }
+  })
+}
+
+export const saveImages = async (data, token) => {
+  return await apiClient.post('/upload', data, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data'
     }
   })
 }

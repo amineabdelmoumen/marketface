@@ -3,10 +3,10 @@ import {setFormStage} from "../../store/rootSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {setMarque, setReferences} from "../../store/profileSlice";
 import categories from "../../lib/constants/categories";
-import {saveReferences} from "../../lib/crud";
+import {saveImages, saveReferences} from "../../lib/crud";
 
 const form = new FormData()
-
+let uploadForm = new FormData()
 function Marque() {
   const dispatch = useDispatch()
   const marque = useSelector((state) => state.profile.marque)
@@ -15,23 +15,38 @@ function Marque() {
   const [photos, setPhotos] = useState([])
 
   const handleLogoUpload = (e) => {
+    const token = localStorage.getItem('token')
     let file = e.target.files[0]
     let data = {...marque}
-    data.logo = e.target.files[0];
-    setMarque(data)
+    uploadForm.set('logo', file)
+    saveImages(uploadForm, token)
+      .then((res) => {
+        const response = res.data
+        uploadForm = new FormData()
+        data['logo'] = response.path;
+        dispatch(setMarque(data))
+      })
+
     let blob = URL.createObjectURL(file)
     setLogo(blob)
   }
 
   const handlePhotosUpload = (e) => {
+    const token = localStorage.getItem('token')
     let files = e.target.files;
     let data = {...marque}
-    data.images = e.target.files;
-    setMarque(data)
     let photos = []
     for (let i = 0; i < files.length; i++) {
       photos.push(URL.createObjectURL(files[i]))
+      uploadForm.append(`images[${i}]`, files[i])
     }
+    saveImages(uploadForm, token)
+      .then((res) => {
+        const response = res.data
+        uploadForm = new FormData()
+        data['images'] = response.paths;
+        dispatch(setMarque(data))
+      })
     setPhotos(photos)
   }
 
@@ -43,15 +58,14 @@ function Marque() {
   const save = () => {
     let data = [...references]
     data.push(marque)
-    setReferences(data)
+    dispatch(setReferences(data))
   }
   const handleSave = () => {
-    form.set('references', references)
     const token = localStorage.getItem('token')
-    saveReferences(form, token)
-      .then(() => {
-        dispatch(setFormStage(3))
-      })
+    references.forEach(async (reference) => {
+      await saveReferences(reference, token)
+    })
+
   }
   return (
     <>
