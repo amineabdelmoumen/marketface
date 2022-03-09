@@ -4,7 +4,15 @@ const profileSlice = createSlice({
   name: "profile",
   initialState: {
     identite: {},
-    marque: {},
+    marque: {
+      titre: '',
+      annee: '',
+      description: '',
+      categorie: '',
+      nom_client: '',
+      images: [],
+      logo: null
+    },
     references: [],
     catalogue: {},
     articles: [],

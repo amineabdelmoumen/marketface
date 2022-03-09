@@ -1,18 +1,15 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {setFormStage} from "../../store/rootSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {setMarque, setReferences} from "../../store/profileSlice";
 import categories from "../../lib/constants/categories";
 import {saveImages, saveReferences} from "../../lib/crud";
 
-const form = new FormData()
 let uploadForm = new FormData()
 function Marque() {
   const dispatch = useDispatch()
   const marque = useSelector((state) => state.profile.marque)
   const references = useSelector((state) => state.profile.references)
-  const [logo, setLogo] = useState(null)
-  const [photos, setPhotos] = useState([])
 
   const handleLogoUpload = (e) => {
     const token = localStorage.getItem('token')
@@ -26,18 +23,13 @@ function Marque() {
         data['logo'] = response.path;
         dispatch(setMarque(data))
       })
-
-    let blob = URL.createObjectURL(file)
-    setLogo(blob)
   }
 
   const handlePhotosUpload = (e) => {
     const token = localStorage.getItem('token')
     let files = e.target.files;
     let data = {...marque}
-    let photos = []
     for (let i = 0; i < files.length; i++) {
-      photos.push(URL.createObjectURL(files[i]))
       uploadForm.append(`images[${i}]`, files[i])
     }
     saveImages(uploadForm, token)
@@ -47,7 +39,17 @@ function Marque() {
         data['images'] = response.paths;
         dispatch(setMarque(data))
       })
-    setPhotos(photos)
+  }
+
+  const changeReference = (i) => {
+    const ref = {...references[i]}
+    dispatch(setMarque(ref))
+  }
+
+  const deleteReference = (i) => {
+    let elements = [...references]
+    elements.splice(i, 1)
+    dispatch(setReferences(elements))
   }
 
   const handleInputUpdate = (field, e) => {
@@ -76,6 +78,18 @@ function Marque() {
       >
         <h3>Mettez en avant votre image marque</h3>
         <p>Démarquez-vous grâce aux projets que vous avez réalisés</p>
+        {
+          references.length ?
+            references.map((el, i) => {
+              return (
+                <span className="badge bg-primary cursor-pointer">
+                  <span onClick={() => changeReference(i)}>{el.titre}</span>
+                  <i className="fas fa-close ms-3" onClick={() => deleteReference(i)}></i>
+                </span>
+              )
+            })
+            : ''
+        }
         <div className="form-identite-info d-block">
           <div className="d-flex">
             {/*Information legal */}
@@ -89,7 +103,7 @@ function Marque() {
                   type="text"
                   id="titre"
                   name="titre"
-                  defaultValue={marque.titre}
+                  value={marque.titre}
                   onChange={(e) => handleInputUpdate('titre', e)} />
               </div>
               <div className="form-boxes">
@@ -98,7 +112,7 @@ function Marque() {
                   type="text"
                   name="annee"
                   id="annee"
-                  defaultValue={marque.annee}
+                  value={marque.annee}
                   onChange={(e) => handleInputUpdate('annee', e)} />
               </div>
               <div className="form-boxes">
@@ -108,7 +122,7 @@ function Marque() {
   id="description"
   cols="30"
   rows="10"
-  defaultValue={marque.description}
+  value={marque.description}
   onChange={(e) => handleInputUpdate('description', e)}
   />
               </div>
@@ -118,7 +132,7 @@ function Marque() {
                 <select
                   name="categorie"
                   id="categorie"
-                  defaultValue={marque.categorie}
+                  value={marque.categorie}
                   onChange={(e) => handleInputUpdate('categorie', e)}>
                   {
                     categories.map((category) => {
@@ -137,7 +151,7 @@ function Marque() {
                   type="text"
                   id="nom_client"
                   name="nom_client"
-                  defaultValue={marque.nom_client}
+                  value={marque.nom_client}
                   onChange={(e) => handleInputUpdate('nom_client', e)} />
               </div>
               <div className="form-boxes">
@@ -165,7 +179,7 @@ function Marque() {
                   <p className="text-secondary h6 mt-4">{marque.categorie}</p>
                   <p className="d-flex gap-2 mt-5">
                     {
-                      logo ? <img src={logo} width={80} alt="logo" />
+                      marque.logo ? <img src={`${process.env.REACT_APP_HOST_URL}/${marque.logo}`} width={80} alt="logo" />
                         : ''
                     }
                     <span className="text-secondary">{marque.nom_client}</span>
@@ -174,11 +188,11 @@ function Marque() {
                 <div className="col-6">
                   <div className="row">
                     {
-                      photos.length ?
-                        photos.map((photo) => {
+                      marque.images && marque.images.length ?
+                        marque.images.map((photo) => {
                           return (
                             <div className="col-6">
-                              <img src={photo} width={100} alt="" />
+                              <img src={`${process.env.REACT_APP_HOST_URL}/${photo}`} width={100} alt="" />
                             </div>
                           )
                         }) : ''

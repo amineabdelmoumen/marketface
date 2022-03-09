@@ -2,7 +2,9 @@ import React, {useState} from 'react';
 import {setFormStage} from "../../store/rootSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {setArticle, setArticles} from "../../store/profileSlice";
+import {saveImages} from "../../lib/crud";
 
+let uploadForm = new FormData()
 function Article(props) {
   const dispatch = useDispatch()
   const article = useSelector((state) => state.profile.article)
@@ -10,11 +12,19 @@ function Article(props) {
   const [photos, setPhotos] = useState([])
 
   function handlePhotosUpload(e) {
+    const token = localStorage.getItem('token')
+    let data = {...article}
     let files = e.target.files;
-    let photos = []
     for (let i = 0; i < files.length; i++) {
-      photos.push(URL.createObjectURL(files[i]))
+      uploadForm.append(`images[${i}]`, files[i])
     }
+    saveImages(uploadForm, token)
+      .then((res) => {
+        const response = res.data
+        uploadForm = new FormData()
+        data['images'] = response.paths;
+        dispatch(setArticle(data))
+      })
     setPhotos(photos)
   }
 
@@ -43,7 +53,10 @@ function Article(props) {
           articles.length ?
             articles.map((el) => {
               return (
-                <span className="badge bg-primary">{el.nom}</span>
+                <span className="badge bg-primary cursor-pointer">
+                  <span>{el.nom}</span>
+                  <i className="fas fa-close ms-3"></i>
+                </span>
               )
             })
             : ''
@@ -117,8 +130,8 @@ function Article(props) {
                 <div className="col-6">
                   <div className="row">
                     {
-                      photos.length ?
-                        photos.map((photo) => {
+                      article.images && article.images.length ?
+                        article.images.map((photo) => {
                           return (
                             <div className="col-6">
                               <img src={photo} width={100} alt="" />

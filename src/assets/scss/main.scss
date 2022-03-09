@@ -3,6 +3,10 @@ $success: #0ABC8A;
 $secondary: #00B6FF;
 
 @import '~bootstrap/scss/bootstrap.scss';
+@import '@fortawesome/fontawesome-free/scss/fontawesome';
+@import '@fortawesome/fontawesome-free/scss/brands';
+@import '@fortawesome/fontawesome-free/scss/regular';
+@import '@fortawesome/fontawesome-free/scss/solid';
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
 body {
   //background-color: #EBF9FF;
