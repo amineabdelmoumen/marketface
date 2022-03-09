@@ -14,7 +14,15 @@ const profileSlice = createSlice({
       logo: null
     },
     references: [],
-    catalogue: {},
+    catalogue: {
+      matiere: [],
+      business: [],
+      location: [],
+      moyen: [],
+      type_vente: [],
+      produit_achete: [],
+      distribution: []
+    },
     articles: [],
     article: {},
     cible: {},
