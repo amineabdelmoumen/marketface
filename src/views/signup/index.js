@@ -50,6 +50,7 @@ const Signup = () => {
               defaultValue={registerForm.titre}
               onChange={(e) => handleInputUpdate('titre', e)}
             >
+              <option value="" disabled></option>
               <option value="m">M</option>
               <option value="mme">Mme</option>
               <option value="dr">Dr</option>
@@ -88,6 +89,7 @@ const Signup = () => {
               defaultValue={registerForm.poste}
               onChange={(e) => handleInputUpdate('poste', e)}
             >
+              <option value="" disabled></option>
               <option value="directeur_general">Directeur général</option>
               <option value="directeur_commercial">Directeur Commercial</option>
               <option value="directeur_marketing">Directeur Marketing</option>
