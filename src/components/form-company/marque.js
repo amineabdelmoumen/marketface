@@ -73,6 +73,9 @@ function Marque() {
   }
   const handleSave = () => {
     const token = localStorage.getItem('token')
+    if(!references.length) {
+      save()
+    }
     references.forEach(async (reference) => {
       await saveReferences(reference, token)
     })

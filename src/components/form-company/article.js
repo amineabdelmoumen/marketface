@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {setFormStage} from "../../store/rootSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {setArticle, setArticles} from "../../store/profileSlice";
-import {saveImages} from "../../lib/crud";
+import {saveArticles, saveImages} from "../../lib/crud";
 
 let uploadForm = new FormData()
 function Article(props) {
@@ -40,7 +40,16 @@ function Article(props) {
     dispatch(setArticles(data))
     dispatch(setArticle({}))
   }
-
+  const save = () => {
+    const token = localStorage.getItem('token')
+    if(!articles.length) {
+      appendArticle()
+    }
+    saveArticles(articles, token)
+      .then(() => {
+        dispatch(setFormStage(5))
+      })
+  }
   const setArticleData = (i) => {
     const data = {...articles[i]}
     dispatch(setArticle(data))
@@ -163,7 +172,7 @@ function Article(props) {
             <button type="button" className="btn pointer btn-outline-success rounded-pill px-4 ms-4" onClick={() => appendArticle()}>
               Enregistrer et ajouter
             </button>
-            <button type="button" className="btn pointer ml-4 btn-success text-white rounded-pill px-4 ms-5" onClick={() => dispatch(setFormStage(5))}>
+            <button type="button" className="btn pointer ml-4 btn-success text-white rounded-pill px-4 ms-5" onClick={() => save()}>
               Suivant
             </button>
           </div>
