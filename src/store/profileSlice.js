@@ -15,6 +15,7 @@ const profileSlice = createSlice({
     },
     references: [],
     catalogue: {
+      vous_etes: 'franchisé',
       matiere: [],
       business: [],
       location: [],

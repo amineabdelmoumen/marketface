@@ -55,6 +55,7 @@ function Catalogue() {
                 <select
                   name="vous_etes"
                   id="vous_etes"
+                  value={catalogue.vous_etes}
                   onChange={(e) => handleInputUpdate('vous_etes', e)}
                 >
                   <option value="franchisé">franchisé</option>
