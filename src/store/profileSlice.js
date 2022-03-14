@@ -26,7 +26,10 @@ const profileSlice = createSlice({
     articles: [],
     article: {},
     cible: {},
-    register: {}
+    register: {
+      titre: 'm',
+      poste: 'directeur_general'
+    }
   },
   reducers: {
     setProfil: (state, action) => {
