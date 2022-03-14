@@ -76,7 +76,7 @@ function Marque() {
     references.forEach(async (reference) => {
       await saveReferences(reference, token)
     })
-
+    dispatch(setFormStage(3))
   }
   return (
     <>
