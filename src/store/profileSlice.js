@@ -45,8 +45,8 @@ const profileSlice = createSlice({
         state.article = action.payload.articles[0]
       }
       state.references = [...action.payload.references]
-      state.marque = action.payload.references[0]
-      const catalogue = action.payload.catalogues[0]
+      state.marque = {...action.payload.references[0]}
+      const catalogue = {...action.payload.catalogues[0]}
       if(Object.keys(catalogue).length) {
         state.catalogue = {
           vous_etes: catalogue.vous_etes,
