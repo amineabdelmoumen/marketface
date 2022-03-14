@@ -50,6 +50,7 @@ const profileSlice = createSlice({
       const catalogue = {...action.payload.catalogues[0]}
       if(Object.keys(catalogue).length) {
         state.catalogue = {
+          id: catalogue.id,
           vous_etes: catalogue.vous_etes,
           matiere: catalogue.matiere.split(','),
           business: catalogue.business.split(','),
