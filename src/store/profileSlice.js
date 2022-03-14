@@ -35,9 +35,11 @@ const profileSlice = createSlice({
     setProfil: (state, action) => {
       state.identite = {...action.payload}
       const cible = {...action.payload.cibles[0]}
-      state.cible = {...cible}
-      state.cible.regions = cible.regions.split(', ')
-      state.cible.activites = cible.activites.split(', ')
+      if(Object.keys(cible).length) {
+        state.cible = {...cible}
+        state.cible.regions = cible.regions.split(', ')
+        state.cible.activites = cible.activites.split(', ')
+      }
       state.articles = [...action.payload.articles]
       if(state.articles.length) {
         state.article = action.payload.articles[0]
@@ -45,15 +47,17 @@ const profileSlice = createSlice({
       state.references = [...action.payload.references]
       state.marque = action.payload.references[0]
       const catalogue = action.payload.catalogues[0]
-      state.catalogue = {
-        vous_etes: catalogue.vous_etes,
-        matiere: catalogue.matiere.split(','),
-        business: catalogue.business.split(','),
-        location: catalogue.location.split(','),
-        moyen: catalogue.moyen.split(','),
-        type_vente: catalogue.type_vente.split(','),
-        produit_achete: catalogue.produit_achete.split(','),
-        distribution: catalogue.distribution.split(',')
+      if(Object.keys(catalogue).length) {
+        state.catalogue = {
+          vous_etes: catalogue.vous_etes,
+          matiere: catalogue.matiere.split(','),
+          business: catalogue.business.split(','),
+          location: catalogue.location.split(','),
+          moyen: catalogue.moyen.split(','),
+          type_vente: catalogue.type_vente.split(','),
+          produit_achete: catalogue.produit_achete.split(','),
+          distribution: catalogue.distribution.split(',')
+        }
       }
     },
     setIdentite: (state, action) => {
