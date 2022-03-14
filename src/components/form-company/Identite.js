@@ -4,13 +4,15 @@ import {setFormStage} from "../../store/rootSlice";
 import "./styles.scss";
 import {useDispatch, useSelector} from "react-redux";
 import {setIdentite} from "../../store/profileSlice";
-import {saveCompany} from "../../lib/crud";
+import {saveCompany, saveImages} from "../../lib/crud";
 import types from "../../lib/constants/types";
 import statusList from "../../lib/constants/status";
 import activites from '../../lib/constants/activites';
 import regions from '../../lib/constants/regions';
+import villes from '../../lib/constants/villes';
 
 const form = new FormData()
+let uploadForm = new FormData()
 
 function Identite() {
   const dispatch = useDispatch()
@@ -36,19 +38,27 @@ function Identite() {
     inputElement.click();
   };
   const uploadLogo = (event) => {
+    const token = localStorage.getItem('token')
     const file = event.files[0];
-    form.set('logo', event.files[0])
-    const photo = URL.createObjectURL(file)
-    setLogo(photo)
+    let data = {...identite}
+    uploadForm.set('logo', file)
+    saveImages(uploadForm, token)
+      .then((res) => {
+        const response = res.data
+        uploadForm = new FormData()
+        data['logo'] = response.path;
+        dispatch(setIdentite(data))
+      })
   };
 
-  function save() {
-    dispatch(setIdentite({}))
+  async function save() {
+    const token = localStorage.getItem('token')
+    await saveCompany(identite, token);
   }
 
   function nextPage() {
     const token = localStorage.getItem('token')
-    saveCompany(form, token)
+    saveCompany(identite, token)
       .then(() => {
         dispatch(setFormStage(2))
       })
@@ -67,8 +77,8 @@ function Identite() {
           <p>*Insere votre logo</p>
           <p className="icon-img">
             {
-              logo ?
-                <img src={logo} width={40} alt="" />
+              identite.logo ?
+                <img src={`${process.env.REACT_APP_HOST_URL}/${identite.logo}`} width={40} alt="" />
                 :
                 <Icon id="icon-ingerprint" icon="bi:fingerprint" />
             }
@@ -253,13 +263,20 @@ function Identite() {
             </div>
             <div className="form-boxes">
               <label htmlFor="ville">*Ville:</label>
-              <input
-                type="text"
-                id="ville"
+              <select
                 name="ville"
+                id="ville"
                 defaultValue={identite.ville}
                 onChange={(e) => handleInputChange('ville', e)}
-              />
+              >
+                {
+                  villes.map((ville) => {
+                    return (
+                      <option value={ville}>{ville}</option>
+                    )
+                  })
+                }
+              </select>
             </div>
             <p className="form-boxes">
               <label htmlFor="pays">*Pays:</label>

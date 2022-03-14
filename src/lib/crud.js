@@ -4,7 +4,6 @@ export const saveCompany = async(data, token) => {
   return await apiClient.post('/company', data, {
     headers: {
       'Authorization': `Bearer ${token}`,
-      'Content-Type': 'multipart/form-data'
     }
   })
 }
@@ -46,6 +45,23 @@ export const saveImages = async (data, token) => {
     headers: {
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'multipart/form-data'
+    }
+  })
+}
+
+export const saveDocs = async (data, token) => {
+  return await apiClient.post('/document', data, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data'
+    }
+  })
+}
+
+export const getProfile = async (token) => {
+  return await apiClient.get('/profile', {
+    headers: {
+      'Authorization': `Bearer ${token}`,
     }
   })
 }

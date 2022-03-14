@@ -1,6 +1,23 @@
 import React from 'react';
+import {saveImages} from "../../lib/crud";
+
+let form = new FormData()
 
 function Save(props) {
+
+  function handleDocsUpload(e) {
+    const token = localStorage.getItem('token')
+    let files = e.target.files;
+    for (let i = 0; i < files.length; i++) {
+      form.append(`documents[${i}]`, files[i])
+    }
+    saveImages(form, token)
+      .then((res) => {
+        const response = res.data
+        form = new FormData()
+      })
+  }
+
   return (
     <div
       className="container mt-5"
@@ -12,11 +29,12 @@ function Save(props) {
           <p>Le document ci-après nous permet de vérifier l’identité de votre entreprise et garantir votre sécurité. Vous pourrez alors accéder à un réseau de confiance et de fiabilité !</p>
           <p className="my-4 text-primary">Votre demande de vérification de votre compte à Marketface est gratuite.</p>
           <img src="/imgs/stepper.png" alt="" height={140}/>
-          <div className="border border-success w-50 py-3 mx-auto mt-5 d-flex justify-content-center gap-5" style={{'borderRadius': '14px'}}>
+          <label htmlFor="docs" className="border border-success w-50 py-3 mx-auto mt-5 d-flex justify-content-center gap-5" style={{'borderRadius': '14px'}}>
             <img src="/imgs/clip.png" width={30} alt="clip" />
 
             <p className="text-primary">Joindre votre demande</p>
-          </div>
+            <input id="docs" type="file" name="documents[]" multiple className="d-none" onChange={(e) => handleDocsUpload(e)}/>
+          </label>
           <div className="row">
             <div className="col-6 offset-3">
               <div className="d-flex justify-content-center gap-5 my-5">

@@ -61,6 +61,15 @@ function Marque() {
     let data = [...references]
     data.push(marque)
     dispatch(setReferences(data))
+    dispatch(setMarque({
+      titre: '',
+      annee: '',
+      description: '',
+      categorie: '',
+      nom_client: '',
+      images: [],
+      logo: null
+    }))
   }
   const handleSave = () => {
     const token = localStorage.getItem('token')

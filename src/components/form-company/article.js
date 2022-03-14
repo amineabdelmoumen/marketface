@@ -38,6 +38,18 @@ function Article(props) {
     let data = [...articles]
     data.push(article)
     dispatch(setArticles(data))
+    dispatch(setArticle({}))
+  }
+
+  const setArticleData = (i) => {
+    const data = {...articles[i]}
+    dispatch(setArticle(data))
+  }
+
+  const deleteArticle = (i) => {
+    let elements = [...articles]
+    elements.splice(i, 1)
+    dispatch(setArticles(elements))
   }
 
   return (
@@ -51,11 +63,11 @@ function Article(props) {
         <h4 className="ms-5 text-primary">Créez votre E-catalogue</h4>
         {
           articles.length ?
-            articles.map((el) => {
+            articles.map((el, i) => {
               return (
                 <span className="badge bg-primary cursor-pointer">
-                  <span>{el.nom}</span>
-                  <i className="fas fa-close ms-3"></i>
+                  <span onClick={() => setArticleData(i)}>{el.nom}</span>
+                  <i className="fas fa-close ms-3" onClick={() => deleteArticle(i)}></i>
                 </span>
               )
             })
@@ -134,7 +146,7 @@ function Article(props) {
                         article.images.map((photo) => {
                           return (
                             <div className="col-6">
-                              <img src={photo} width={100} alt="" />
+                              <img src={`${process.env.REACT_APP_HOST_URL}/${photo}`} width={100} alt="" />
                             </div>
                           )
                         }) : ''

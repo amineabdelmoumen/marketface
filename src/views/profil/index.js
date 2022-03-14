@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import { Icon } from "@iconify/react";
 import Identite from "../../components/form-company/Identite";
@@ -8,10 +8,20 @@ import {setFormStage} from "../../store/rootSlice";
 import Cible from "../../components/form-company/cible";
 import Article from '../../components/form-company/article';
 import "./styles.scss";
+import {getProfile} from "../../lib/crud";
+import {setProfil} from "../../store/profileSlice";
 
 function Profil() {
   const pageStage = useSelector((state) => state.root.FormStage);
   const dispatch = useDispatch()
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    getProfile(token)
+      .then((res) => res.data)
+      .then((data) => {
+        dispatch(setProfil(data))
+      })
+  }, [])
   return (
     <div>
       <div className="background"></div>
