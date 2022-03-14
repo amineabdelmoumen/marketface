@@ -12,7 +12,7 @@ const Login = () => {
       const response = await login(email, password)
       const user = response.data.data
       localStorage.setItem('token', user.token)
-      if(user.verified_at) {
+      if(user.email_verified_at) {
         navigate("/profil")
       }
     }catch (e) {
