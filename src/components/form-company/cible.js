@@ -191,6 +191,7 @@ function Cible() {
                   name="cherche"
                   id="cherche"
                   className="w-50 py-1"
+                  value={cible.cherche}
                   onChange={(e) => handleInputUpdate('cherche', e)}
                 >
                   <option value="Clients">Clients</option>
@@ -299,9 +300,6 @@ function Cible() {
           <div className="d-flex justify-content-end">
             <button type="button" className="btn pointer btn-outline-secondary rounded-pill px-4" onClick={() => dispatch(setFormStage(4))}>
               Précédent
-            </button>
-            <button type="button" className="btn pointer btn-outline-success rounded-pill px-4 ms-4">
-              Enregistrer et ajouter
             </button>
             <button type="button" className="btn pointer ml-4 btn-success text-white rounded-pill px-4 ms-5" onClick={() => handleSubmit()}>
               Suivant
