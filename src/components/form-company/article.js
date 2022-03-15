@@ -93,7 +93,7 @@ function Article(props) {
                 <label htmlFor="titre">
                   Il s'agit d'un
                 </label>
-                <select name="article_type" onChange={(e) => handleInputUpdate('type_article', e)}>
+                <select name="article_type" value={article.type_article} onChange={(e) => handleInputUpdate('type_article', e)}>
                   <option value="produit">Produit</option>
                   <option value="service">Service</option>
                   <option value="immobilier">Immobilier</option>
@@ -101,17 +101,17 @@ function Article(props) {
               </div>
               <div className="form-boxes">
                 <label htmlFor="nom">Nom d'article</label>
-                <input type="text" name="nom" id="nom" onChange={(e) => handleInputUpdate('nom', e)} />
+                <input type="text" name="nom" id="nom" value={article.nom} onChange={(e) => handleInputUpdate('nom', e)} />
               </div>
               <div className="form-boxes">
                 <label htmlFor="description">Description</label>
-                <textarea name="description" id="description" cols="30" rows="10"
+                <textarea name="description" id="description" cols="30" rows="10" value={article.description}
   onChange={(e) => handleInputUpdate('description', e)}/>
               </div>
 
               <div className="form-boxes">
                 <label htmlFor="category">Prix</label>
-                <input type="text" onChange={(e) => handleInputUpdate('prix', e)}/>
+                <input type="text" value={article.prix} onChange={(e) => handleInputUpdate('prix', e)}/>
               </div>
               {/*<p className="form-boxes">*/}
               {/*  <label htmlFor="nom_client">*/}
@@ -120,16 +120,16 @@ function Article(props) {
               {/*  <input type="text" id="nom_client" onChange={(e) => setCategorie(e.target.value)} />*/}
               {/*</p>*/}
               <div className="form-boxes">
-                <label htmlFor="nom_client">
+                <label htmlFor="quantite">
                   Quantité:
                 </label>
-                <input type="text" id="nom_client" onChange={(e) => handleInputUpdate('quantite', e)} />
+                <input type="text" id="quantite" value={article.quantite} onChange={(e) => handleInputUpdate('quantite', e)} />
               </div>
               <div className="form-boxes">
                 <label htmlFor="type">
                   Type:
                 </label>
-                <input type="text" id="type" onChange={(e) => handleInputUpdate('type', e)} />
+                <input type="text" id="type" value={article.type} onChange={(e) => handleInputUpdate('type', e)} />
               </div>
               <div className="form-boxes">
                 <label htmlFor="photos">
