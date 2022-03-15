@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {setFormStage} from "../../store/rootSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {setArticle, setArticles} from "../../store/profileSlice";
-import {saveArticles, saveImages} from "../../lib/crud";
+import {deleteArticle, saveArticles, saveImages} from "../../lib/crud";
 
 let uploadForm = new FormData()
 function Article(props) {
@@ -59,8 +59,12 @@ function Article(props) {
     dispatch(setArticle(data))
   }
 
-  const deleteArticle = (i) => {
+  const removeArticle = async (i) => {
+    const token = localStorage.getItem('token')
     let elements = [...articles]
+    if(elements[i] && elements[i].id) {
+      await deleteArticle(elements[i].id, token)
+    }
     elements.splice(i, 1)
     dispatch(setArticles(elements))
   }
@@ -80,7 +84,7 @@ function Article(props) {
               return (
                 <span className="badge bg-primary cursor-pointer">
                   <span onClick={() => setArticleData(i)}>{el.nom}</span>
-                  <i className="fas fa-close ms-3" onClick={() => deleteArticle(i)}></i>
+                  <i className="fas fa-close ms-3" onClick={() => removeArticle(i)}></i>
                 </span>
               )
             })

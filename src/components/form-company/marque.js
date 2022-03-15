@@ -3,7 +3,7 @@ import {setFormStage} from "../../store/rootSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {setMarque, setReferences} from "../../store/profileSlice";
 import categories from "../../lib/constants/categories";
-import {saveImages, saveReferences} from "../../lib/crud";
+import {deleteReference, saveImages, saveReferences} from "../../lib/crud";
 
 let uploadForm = new FormData()
 function Marque() {
@@ -46,8 +46,12 @@ function Marque() {
     dispatch(setMarque(ref))
   }
 
-  const deleteReference = (i) => {
+  const removeReference = async (i) => {
+    const token = localStorage.getItem('token')
     let elements = [...references]
+    if(elements[i] && elements[i].id) {
+      await deleteReference(elements[i].id, token)
+    }
     elements.splice(i, 1)
     dispatch(setReferences(elements))
   }
@@ -82,7 +86,6 @@ function Marque() {
         dispatch(setReferences(data))
         dispatch(setFormStage(3))
       })
-
   }
   return (
     <>
@@ -99,7 +102,7 @@ function Marque() {
               return (
                 <span className="badge bg-primary cursor-pointer">
                   <span onClick={() => changeReference(i)}>{el.titre}</span>
-                  <i className="fas fa-close ms-3" onClick={() => deleteReference(i)}></i>
+                  <i className="fas fa-close ms-3" onClick={() => removeReference(i)}></i>
                 </span>
               )
             })

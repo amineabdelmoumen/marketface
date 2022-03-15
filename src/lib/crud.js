@@ -24,8 +24,24 @@ export const saveArticles = async (data, token) => {
   })
 }
 
+export const deleteArticle = async (id, token) => {
+  return await apiClient.delete(`/article/${id}`, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    }
+  })
+}
+
 export const saveReferences = async (data, token) => {
   return await apiClient.post('/reference', data, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    }
+  })
+}
+
+export const deleteReference = async (id, token) => {
+  return await apiClient.delete(`/reference/${id}`, {
     headers: {
       'Authorization': `Bearer ${token}`,
     }
