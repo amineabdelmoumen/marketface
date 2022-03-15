@@ -53,12 +53,16 @@ function Article(props) {
     if(!articles.length || index > -1 || Object.keys(article).length > 1) {
       appendArticle()
     }
-    saveArticles({articles: articles}, token)
-      .then((res) => res.data)
-      .then((data) => {
-        dispatch(setArticles(data))
-        dispatch(setFormStage(5))
-      })
+    if(articles.length) {
+      saveArticles({articles: articles}, token)
+        .then((res) => res.data)
+        .then((data) => {
+          dispatch(setArticles(data))
+          dispatch(setFormStage(5))
+        })
+    }else {
+      dispatch(setFormStage(5))
+    }
   }
   const setArticleData = (i) => {
     const data = {...articles[i]}

@@ -297,7 +297,7 @@ function Cible() {
 
           {/*Line */}
           <div className="d-flex justify-content-end">
-            <button type="button" className="btn pointer btn-outline-secondary rounded-pill px-4" onClick={() => dispatch(setFormStage(3))}>
+            <button type="button" className="btn pointer btn-outline-secondary rounded-pill px-4" onClick={() => dispatch(setFormStage(4))}>
               Précédent
             </button>
             <button type="button" className="btn pointer btn-outline-success rounded-pill px-4 ms-4">

@@ -88,12 +88,16 @@ function Marque() {
     if(!references.length || index > -1 || Object.keys(marque).length > 1) {
       save()
     }
-    saveReferences({references: references}, token)
-      .then(res => res.data)
-      .then(data => {
-        dispatch(setReferences(data))
-        dispatch(setFormStage(3))
-      })
+    if(references.length) {
+      saveReferences({references: references}, token)
+        .then(res => res.data)
+        .then(data => {
+          dispatch(setReferences(data))
+          dispatch(setFormStage(3))
+        })
+    }else {
+      dispatch(setFormStage(3))
+    }
   }
   return (
     <>
