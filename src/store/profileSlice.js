@@ -60,13 +60,13 @@ const profileSlice = createSlice({
         state.catalogue = {
           id: catalogue.id,
           vous_etes: catalogue.vous_etes,
-          matiere: catalogue.matiere.split(','),
-          business: catalogue.business.split(','),
-          location: catalogue.location.split(','),
-          moyen: catalogue.moyen.split(','),
-          type_vente: catalogue.type_vente.split(','),
-          produit_achete: catalogue.produit_achete.split(','),
-          distribution: catalogue.distribution.split(',')
+          matiere: catalogue.matiere.length ? catalogue.matiere.split(',') : [],
+          business: catalogue.business.length ? catalogue.business.split(',') : [],
+          location: catalogue.location.length ? catalogue.location.split(',') : [],
+          moyen: catalogue.moyen.length ? catalogue.moyen.split(',') : [],
+          type_vente: catalogue.type_vente.length ? catalogue.type_vente.split(',') : [],
+          produit_achete: catalogue.produit_achete.length ? catalogue.produit_achete.split(',') : [],
+          distribution: catalogue.distribution.length ? catalogue.distribution.split(',') : []
         }
       }
     },
