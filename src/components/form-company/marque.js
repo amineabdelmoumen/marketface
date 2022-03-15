@@ -71,6 +71,7 @@ function Marque() {
     }else {
       data.push(marque)
     }
+    setIndex(-1)
     dispatch(setReferences(data))
     dispatch(setMarque({
       titre: '',
@@ -84,7 +85,7 @@ function Marque() {
   }
   const handleSave = () => {
     const token = localStorage.getItem('token')
-    if(!references.length) {
+    if(!references.length || index > -1 || Object.keys(marque).length > 1) {
       save()
     }
     saveReferences({references: references}, token)

@@ -42,6 +42,7 @@ function Article(props) {
     }else {
       data.push(article)
     }
+    setIndex(-1)
     dispatch(setArticles(data))
     dispatch(setArticle({
       type_article: "Produit"
@@ -49,7 +50,7 @@ function Article(props) {
   }
   const save = () => {
     const token = localStorage.getItem('token')
-    if(!articles.length) {
+    if(!articles.length || index > -1 || Object.keys(article).length > 1) {
       appendArticle()
     }
     saveArticles(articles, token)
