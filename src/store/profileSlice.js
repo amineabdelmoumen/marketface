@@ -55,6 +55,20 @@ const profileSlice = createSlice({
       }
       state.articles = [...action.payload.articles]
       state.references = [...action.payload.references]
+      const catalogue = {...action.payload.catalogues[0]}
+      if(Object.keys(catalogue).length) {
+        state.catalogue = {
+          id: catalogue.id,
+          vous_etes: catalogue.vous_etes,
+          matiere: catalogue.matiere.split(','),
+          business: catalogue.business.split(','),
+          location: catalogue.location.split(','),
+          moyen: catalogue.moyen.split(','),
+          type_vente: catalogue.type_vente.split(','),
+          produit_achete: catalogue.produit_achete.split(','),
+          distribution: catalogue.distribution.split(',')
+        }
+      }
     },
     setIdentite: (state, action) => {
       state.identite = action.payload

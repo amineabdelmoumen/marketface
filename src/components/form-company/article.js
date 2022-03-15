@@ -10,6 +10,7 @@ function Article(props) {
   const article = useSelector((state) => state.profile.article)
   const articles = useSelector((state) => state.profile.articles)
   const [photos, setPhotos] = useState([])
+  const [index, setIndex] = useState(-1)
 
   function handlePhotosUpload(e) {
     const token = localStorage.getItem('token')
@@ -36,7 +37,11 @@ function Article(props) {
 
   const appendArticle = () => {
     let data = [...articles]
-    data.push(article)
+    if(index > -1) {
+      data[index] = article
+    }else {
+      data.push(article)
+    }
     dispatch(setArticles(data))
     dispatch(setArticle({
       type_article: "Produit"
@@ -56,11 +61,13 @@ function Article(props) {
   }
   const setArticleData = (i) => {
     const data = {...articles[i]}
+    setIndex(i)
     dispatch(setArticle(data))
   }
 
   const removeArticle = async (i) => {
     const token = localStorage.getItem('token')
+    setIndex(-1)
     let elements = [...articles]
     if(elements[i] && elements[i].id) {
       await deleteArticle(elements[i].id, token)

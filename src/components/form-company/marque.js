@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {setFormStage} from "../../store/rootSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {setMarque, setReferences} from "../../store/profileSlice";
@@ -10,6 +10,7 @@ function Marque() {
   const dispatch = useDispatch()
   const marque = useSelector((state) => state.profile.marque)
   const references = useSelector((state) => state.profile.references)
+  const [index, setIndex] = useState(-1)
 
   const handleLogoUpload = (e) => {
     const token = localStorage.getItem('token')
@@ -42,12 +43,14 @@ function Marque() {
   }
 
   const changeReference = (i) => {
+    setIndex(i)
     const ref = {...references[i]}
     dispatch(setMarque(ref))
   }
 
   const removeReference = async (i) => {
     const token = localStorage.getItem('token')
+    setIndex(-1)
     let elements = [...references]
     if(elements[i] && elements[i].id) {
       await deleteReference(elements[i].id, token)
@@ -63,7 +66,11 @@ function Marque() {
   }
   const save = () => {
     let data = [...references]
-    data.push(marque)
+    if(index > -1) {
+      data[index] = marque;
+    }else {
+      data.push(marque)
+    }
     dispatch(setReferences(data))
     dispatch(setMarque({
       titre: '',
@@ -80,7 +87,7 @@ function Marque() {
     if(!references.length) {
       save()
     }
-    saveReferences(references, token)
+    saveReferences({references: references}, token)
       .then(res => res.data)
       .then(data => {
         dispatch(setReferences(data))
