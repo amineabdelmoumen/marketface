@@ -3,7 +3,15 @@ import { createSlice } from "@reduxjs/toolkit";
 const profileSlice = createSlice({
   name: "profile",
   initialState: {
-    identite: {},
+    identite: {
+      activite: "Agriculture, Sylviculture Et Pêche",
+      statut: "SARL",
+      type: "Entreprise",
+      taille: "De 1 à 10",
+      nombre_employes: "De 1 à 10",
+      region: "Casablanca-Settat",
+      ville: "Tanger-Assilah"
+    },
     marque: {
       titre: '',
       annee: '',
