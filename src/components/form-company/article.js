@@ -170,7 +170,7 @@ function Article(props) {
                         article.images.map((photo) => {
                           return (
                             <div className="col-6">
-                              <img src={`${process.env.REACT_APP_HOST_URL}/${photo}`} width={100} alt="" />
+                              <img src={`${process.env.REACT_APP_HOST_URL}/${photo.path}`} width={100} alt="" />
                             </div>
                           )
                         }) : ''
