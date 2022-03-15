@@ -65,7 +65,7 @@ function Marque() {
       titre: '',
       annee: '',
       description: '',
-      categorie: '',
+      categorie: 'Produits chimiques',
       nom_client: '',
       images: [],
       logo: null

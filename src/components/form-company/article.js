@@ -38,7 +38,9 @@ function Article(props) {
     let data = [...articles]
     data.push(article)
     dispatch(setArticles(data))
-    dispatch(setArticle({}))
+    dispatch(setArticle({
+      type_article: "Produit"
+    }))
   }
   const save = () => {
     const token = localStorage.getItem('token')

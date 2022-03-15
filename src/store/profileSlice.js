@@ -16,7 +16,7 @@ const profileSlice = createSlice({
       titre: '',
       annee: '',
       description: '',
-      categorie: '',
+      categorie: 'Produits chimiques',
       nom_client: '',
       images: [],
       logo: null
@@ -33,8 +33,12 @@ const profileSlice = createSlice({
       distribution: []
     },
     articles: [],
-    article: {},
-    cible: {},
+    article: {
+      type_article: "Produit"
+    },
+    cible: {
+      cherche: "Clients"
+    },
     register: {
       titre: 'm',
       poste: 'directeur_general'
