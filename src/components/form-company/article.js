@@ -48,7 +48,9 @@ function Article(props) {
       appendArticle()
     }
     saveArticles(articles, token)
-      .then(() => {
+      .then((res) => res.data)
+      .then((data) => {
+        dispatch(setArticles(data))
         dispatch(setFormStage(5))
       })
   }

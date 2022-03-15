@@ -76,10 +76,13 @@ function Marque() {
     if(!references.length) {
       save()
     }
-    references.forEach(async (reference) => {
-      await saveReferences(reference, token)
-    })
-    dispatch(setFormStage(3))
+    saveReferences(references, token)
+      .then(res => res.data)
+      .then(data => {
+        dispatch(setReferences(data))
+        dispatch(setFormStage(3))
+      })
+
   }
   return (
     <>
