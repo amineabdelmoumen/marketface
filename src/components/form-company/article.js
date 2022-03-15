@@ -192,9 +192,13 @@ function Article(props) {
             <button type="button" className="btn pointer btn-outline-success rounded-pill px-4 ms-4" onClick={() => appendArticle()}>
               Enregistrer et ajouter
             </button>
-            <button type="button" className="btn pointer ml-4 btn-success text-white rounded-pill px-4 ms-5" onClick={() => save()}>
-              Suivant
-            </button>
+            {
+              articles.length ?
+                <button type="button" className="btn pointer ml-4 btn-success text-white rounded-pill px-4 ms-5" onClick={() => save()}>
+                  Suivant
+                </button>
+                : ''
+            }
           </div>
         </div>
 
