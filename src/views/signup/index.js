@@ -1,8 +1,8 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {setRegister} from "../../store/profileSlice";
-import {register} from "../../lib/auth";
+import {checkAuth, register} from "../../lib/auth";
 
 const Signup = () => {
   const dispatch = useDispatch()
@@ -10,6 +10,13 @@ const Signup = () => {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    checkAuth(token)
+      .then(() => {
+        navigate('/profil')
+      })
+  }, [])
   const handleInputUpdate = (field, e) => {
     let data = { ...registerForm }
     data[field] = e.target.value
