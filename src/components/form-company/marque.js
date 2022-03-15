@@ -85,7 +85,7 @@ function Marque() {
   }
   const handleSave = () => {
     const token = localStorage.getItem('token')
-    if(!references.length || index > -1 || Object.keys(marque).length > 1) {
+    if(!references.length || index > -1 || Object.values(marque).find(el => el === '' || el === null || el === []) == undefined) {
       save()
     }
     if(references.length) {

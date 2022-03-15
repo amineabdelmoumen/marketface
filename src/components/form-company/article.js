@@ -50,7 +50,7 @@ function Article(props) {
   }
   const save = () => {
     const token = localStorage.getItem('token')
-    if(!articles.length || index > -1 || Object.keys(article).length > 1) {
+    if(!articles.length || index > -1 || Object.values(article).find(el => el === '' || el === null || el === []) == undefined) {
       appendArticle()
     }
     if(articles.length) {
