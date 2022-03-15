@@ -10,7 +10,8 @@ const profileSlice = createSlice({
       taille: "De 1 à 10",
       nombre_employes: "De 1 à 10",
       region: "Casablanca-Settat",
-      ville: "Tanger-Assilah"
+      ville: "Tanger-Assilah",
+      chiffre_affaire: "< 10 MDhs"
     },
     marque: {
       titre: '',

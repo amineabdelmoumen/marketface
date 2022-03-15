@@ -53,7 +53,7 @@ function Article(props) {
     if(!articles.length || index > -1 || Object.keys(article).length > 1) {
       appendArticle()
     }
-    saveArticles(articles, token)
+    saveArticles({articles: articles}, token)
       .then((res) => res.data)
       .then((data) => {
         dispatch(setArticles(data))
