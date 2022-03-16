@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {setFormStage} from "../../store/rootSlice";
 import {useDispatch, useSelector} from "react-redux";
-import {setMarque, setReferences} from "../../store/profileSlice";
+import {setMarque, setReferences,} from "../../store/profileSlice";
 import categories from "../../lib/constants/categories";
 import {deleteReference, saveImages, saveReferences} from "../../lib/crud";
 
@@ -11,7 +11,20 @@ function Marque() {
   const marque = useSelector((state) => state.profile.marque)
   const references = useSelector((state) => state.profile.references)
   const [index, setIndex] = useState(-1)
+  const [sendReferences, setSendReferences] = useState(false)
 
+  useEffect(() => {
+    if(sendReferences) {
+      const token = localStorage.getItem('token')
+      saveReferences({references: references}, token)
+        .then(res => res.data)
+        .then(data => {
+          dispatch(setReferences(data))
+          setSendReferences(false)
+          dispatch(setFormStage(3))
+        })
+    }
+  }, [sendReferences])
   const handleLogoUpload = (e) => {
     const token = localStorage.getItem('token')
     let file = e.target.files[0]
@@ -84,17 +97,11 @@ function Marque() {
     }))
   }
   const handleSave = () => {
-    const token = localStorage.getItem('token')
-    if(!references.length || index > -1 || Object.values(marque).find(el => el === '' || el === null || el === []) == undefined) {
+    if(!references.length || index > -1 || Object.values(marque).find(el => el === '' || el === null || el === []) === undefined) {
       save()
     }
     if(references.length) {
-      saveReferences({references: references}, token)
-        .then(res => res.data)
-        .then(data => {
-          dispatch(setReferences(data))
-          dispatch(setFormStage(3))
-        })
+      setSendReferences(true)
     }else {
       dispatch(setFormStage(3))
     }

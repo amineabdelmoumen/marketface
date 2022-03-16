@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {setFormStage} from "../../store/rootSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {setArticle, setArticles} from "../../store/profileSlice";
@@ -11,7 +11,20 @@ function Article(props) {
   const articles = useSelector((state) => state.profile.articles)
   const [photos, setPhotos] = useState([])
   const [index, setIndex] = useState(-1)
+  const [sendArticles, setSendArticles] = useState(false)
 
+  useEffect(() => {
+    if(sendArticles) {
+      const token = localStorage.getItem('token')
+      saveArticles({articles: articles}, token)
+        .then((res) => res.data)
+        .then((data) => {
+          dispatch(setArticles(data))
+          setSendArticles(false)
+          dispatch(setFormStage(5))
+        })
+    }
+  }, [sendArticles])
   function handlePhotosUpload(e) {
     const token = localStorage.getItem('token')
     let data = {...article}
@@ -49,17 +62,11 @@ function Article(props) {
     }))
   }
   const save = () => {
-    const token = localStorage.getItem('token')
-    if(!articles.length || index > -1 || Object.values(article).find(el => el === '' || el === null || el === []) == undefined) {
+    if(!articles.length || index > -1 || Object.values(article).find(el => el === '' || el === null || el === []) === undefined) {
       appendArticle()
     }
     if(articles.length) {
-      saveArticles({articles: articles}, token)
-        .then((res) => res.data)
-        .then((data) => {
-          dispatch(setArticles(data))
-          dispatch(setFormStage(5))
-        })
+      setSendArticles(true)
     }else {
       dispatch(setFormStage(5))
     }

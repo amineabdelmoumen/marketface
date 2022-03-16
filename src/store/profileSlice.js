@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import {saveReferences} from "../lib/crud";
 
 const profileSlice = createSlice({
   name: "profile",
@@ -43,7 +44,7 @@ const profileSlice = createSlice({
     register: {
       titre: 'm',
       poste: 'directeur_general'
-    }
+    },
   },
   reducers: {
     setProfil: (state, action) => {
