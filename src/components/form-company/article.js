@@ -3,6 +3,7 @@ import {setFormStage} from "../../store/rootSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {setArticle, setArticles} from "../../store/profileSlice";
 import {deleteArticle, saveArticles, saveImages} from "../../lib/crud";
+import typesArticle from "../../lib/constants/typesArticle";
 
 let uploadForm = new FormData()
 function Article(props) {
@@ -58,7 +59,8 @@ function Article(props) {
     setIndex(-1)
     dispatch(setArticles(data))
     dispatch(setArticle({
-      type_article: "Produit"
+      type_article: "Produit",
+      type: "Produits chimiques"
     }))
   }
   const save = () => {
@@ -154,7 +156,15 @@ function Article(props) {
                 <label htmlFor="type">
                   Type:
                 </label>
-                <input type="text" id="type" value={article.type} onChange={(e) => handleInputUpdate('type', e)} />
+                <select name="type" id="type" value={article.type} onChange={(e) => handleInputUpdate('type', e)}>
+                  {
+                    typesArticle.map((type) => {
+                      return (
+                        <option value={type}>{type}</option>
+                      )
+                    })
+                  }
+                </select>
               </div>
               <div className="form-boxes">
                 <label htmlFor="photos">

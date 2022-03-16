@@ -36,7 +36,8 @@ const profileSlice = createSlice({
     },
     articles: [],
     article: {
-      type_article: "Produit"
+      type_article: "Produit",
+      type: "Produits chimiques"
     },
     cible: {
       cherche: "Clients"
