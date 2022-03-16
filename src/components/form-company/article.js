@@ -16,14 +16,19 @@ function Article(props) {
 
   useEffect(() => {
     if(sendArticles) {
-      const token = localStorage.getItem('token')
-      saveArticles({articles: articles}, token)
-        .then((res) => res.data)
-        .then((data) => {
-          dispatch(setArticles(data))
-          setSendArticles(false)
-          dispatch(setFormStage(5))
-        })
+      if(articles.length) {
+        const token = localStorage.getItem('token')
+        saveArticles({articles: articles}, token)
+          .then((res) => res.data)
+          .then((data) => {
+            dispatch(setArticles(data))
+            setSendArticles(false)
+            dispatch(setFormStage(5))
+          })
+      }else {
+        setSendArticles(false)
+        dispatch(setFormStage(5))
+      }
     }
   }, [sendArticles])
   function handlePhotosUpload(e) {
@@ -67,11 +72,7 @@ function Article(props) {
     if(!articles.length || index > -1 || Object.values(article).find(el => el === '' || el === null || el === []) === undefined) {
       appendArticle()
     }
-    if(articles.length) {
-      setSendArticles(true)
-    }else {
-      dispatch(setFormStage(5))
-    }
+    setSendArticles(true)
   }
   const setArticleData = (i) => {
     const data = {...articles[i]}

@@ -15,14 +15,19 @@ function Marque() {
 
   useEffect(() => {
     if(sendReferences) {
-      const token = localStorage.getItem('token')
-      saveReferences({references: references}, token)
-        .then(res => res.data)
-        .then(data => {
-          dispatch(setReferences(data))
-          setSendReferences(false)
-          dispatch(setFormStage(3))
-        })
+      if(references.length) {
+        const token = localStorage.getItem('token')
+        saveReferences({references: references}, token)
+          .then(res => res.data)
+          .then(data => {
+            dispatch(setReferences(data))
+            setSendReferences(false)
+            dispatch(setFormStage(3))
+          })
+      }else {
+        setSendReferences(false)
+        dispatch(setFormStage(3))
+      }
     }
   }, [sendReferences])
   const handleLogoUpload = (e) => {
@@ -100,11 +105,7 @@ function Marque() {
     if(!references.length || index > -1 || Object.values(marque).find(el => el === '' || el === null || el === []) === undefined) {
       save()
     }
-    if(references.length) {
-      setSendReferences(true)
-    }else {
-      dispatch(setFormStage(3))
-    }
+    setSendReferences(true)
   }
   return (
     <>
