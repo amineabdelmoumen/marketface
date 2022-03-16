@@ -246,13 +246,9 @@ function Marque() {
             <button type="button" className="btn pointer btn-outline-success rounded-pill px-4 ms-4" onClick={() => save()}>
               Enregistrer et ajouter
             </button>
-            {
-              references.length ?
-                <button type="button" className="btn pointer ml-4 btn-success text-white rounded-pill px-4 ms-5" onClick={() => handleSave()}>
-                  Suivant
-                </button>
-                : ''
-            }
+            <button type="button" className="btn pointer ml-4 btn-success text-white rounded-pill px-4 ms-5" onClick={() => handleSave()}>
+              Suivant
+            </button>
           </div>
         </div>
 
