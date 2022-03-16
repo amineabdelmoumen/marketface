@@ -166,7 +166,7 @@ function Cible() {
     const token = localStorage.getItem('token')
     saveCibles(cible, token)
       .then(() => {
-        navigate('/profil/save')
+        navigate('/company-setting/save')
       })
   }
   return (

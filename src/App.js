@@ -1,9 +1,10 @@
 import { Routes, Route } from "react-router-dom";
 import Signup from "./views/signup"; // load view
-import Profil from "./views/profil";
-import Save from "./views/profil/save";
+import CompanySetting from "./views/company-setting";
+import Save from "./views/company-setting/save";
 import Private from "./components/Private";
 import Login from "./views/login";
+import Profil from "./views/profil/profil";
 
 function App() {
   return (
@@ -11,8 +12,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/profil" element={< Private><Profil /> </Private>} />
-        <Route path="/profil/save" element={<Save />} />
+        <Route path="/company-setting" element={<Private><CompanySetting /> </Private>} />
+        <Route path="/profil" element={<Private><Profil /></Private>} />
+        <Route path="/company-setting/save" element={<Save />} />
       </Routes>
     </div>
   );

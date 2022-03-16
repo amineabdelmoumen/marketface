@@ -3,8 +3,11 @@ import { useNavigate } from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {setRegister} from "../../store/profileSlice";
 import {checkAuth, register} from "../../lib/auth";
+import { useSnackbar } from 'react-simple-snackbar'
+import snackbarStyles from "../../lib/snackbarStyles";
 
 const Signup = () => {
+  const [openSnackbar, closeSnackbar] = useSnackbar(snackbarStyles)
   const dispatch = useDispatch()
   const registerForm = useSelector((state) => state.profile.register)
 
@@ -14,7 +17,7 @@ const Signup = () => {
     const token = localStorage.getItem('token')
     checkAuth(token)
       .then(() => {
-        navigate('/profil')
+        navigate('/company-setting')
       })
   }, [])
   const handleInputUpdate = (field, e) => {
@@ -27,7 +30,14 @@ const Signup = () => {
       await register(registerForm)
       navigate('/login')
     }catch(e) {
-
+      let data = e.response.data
+      openSnackbar(
+        <ul>
+          {
+            Object.values(data.errors).map((errors) => errors.map((error) => <li>{error}</li>))
+          }
+        </ul>
+      )
     }
   };
 

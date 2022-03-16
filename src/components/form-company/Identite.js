@@ -10,6 +10,8 @@ import statusList from "../../lib/constants/status";
 import activites from '../../lib/constants/activites';
 import regions from '../../lib/constants/regions';
 import villes from '../../lib/constants/villes';
+import { useSnackbar } from 'react-simple-snackbar';
+import snackbarStyles from "../../lib/snackbarStyles";
 
 const form = new FormData()
 let uploadForm = new FormData()
@@ -18,12 +20,14 @@ function Identite() {
   const dispatch = useDispatch()
   const identite = useSelector((state) => state.profile.identite)
 
+  const [openSnackbar, closeSnackbar] = useSnackbar(snackbarStyles)
 
   const organismeSize = ["Start-up", "TPE", "PME", "PMI", "GE"];
   const nombreEmployes = ["De 1 à 10", "De 10 à 250", "Plus de 250"];
   const chaiffreDafaireList = ["< 10 MDhs", "< 75 MDhs", "> 75 MDhs"];
 
   const [logo, setLogo] = useState('')
+
   const handleSubmit = (e) => {
     e.preventDefault(); // stop form submission
   };
@@ -61,7 +65,14 @@ function Identite() {
     saveCompany(identite, token)
       .then(() => {
         dispatch(setFormStage(2))
-      })
+      }).catch((err) => {
+        let data = err.response.data
+        openSnackbar(<ul>
+          {
+            Object.values(data.errors).map((errors) => errors.map((error) => <li>{error}</li>))
+          }
+        </ul>)
+    })
   }
 
   return (

@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
+import SnackbarProvider from 'react-simple-snackbar'
 
 import { store } from "./store";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
@@ -13,7 +14,9 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <App />
+        <SnackbarProvider>
+          <App />
+        </SnackbarProvider>
       </Provider>
     </BrowserRouter>
   </React.StrictMode>,

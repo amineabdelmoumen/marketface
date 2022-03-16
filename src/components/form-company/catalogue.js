@@ -3,8 +3,10 @@ import {setFormStage} from "../../store/rootSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {setCatalogue} from "../../store/profileSlice";
 import {saveCatalogue} from "../../lib/crud";
+import {useSnackbar} from 'react-simple-snackbar'
 
 function Catalogue() {
+  const [openSnackbar, closeSnackbar] = useSnackbar()
   const dispatch = useDispatch()
   const catalogue = useSelector((state) => state.profile.catalogue)
   const handleInputUpdate = (field, e) => {
@@ -17,6 +19,13 @@ function Catalogue() {
     saveCatalogue(catalogue, token)
       .then(() => {
         dispatch(setFormStage(4))
+      }).catch((err) => {
+        let data = err.response.data
+        openSnackbar(<ul>
+          {
+            Object.values(data.errors).map((errors) => errors.map((error) => <li>{error}</li>))
+          }
+        </ul>)
       })
   }
 

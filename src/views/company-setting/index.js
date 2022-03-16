@@ -11,7 +11,7 @@ import "./styles.scss";
 import {getProfile} from "../../lib/crud";
 import {setProfil} from "../../store/profileSlice";
 
-function Profil() {
+function CompanySetting() {
   const pageStage = useSelector((state) => state.root.FormStage);
   const dispatch = useDispatch()
   useEffect(() => {
@@ -75,4 +75,4 @@ function Profil() {
   );
 }
 
-export default Profil;
+export default CompanySetting;

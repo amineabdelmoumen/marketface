@@ -1,8 +1,11 @@
 import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import {login} from "../../lib/auth";
+import { useSnackbar } from 'react-simple-snackbar'
+import snackbarStyles from "../../lib/snackbarStyles";
 
 const Login = () => {
+  const [openSnackbar, closeSnackbar] = useSnackbar(snackbarStyles)
   const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -13,10 +16,10 @@ const Login = () => {
       const user = response.data.data
       localStorage.setItem('token', user.token)
       if(user.email_verified_at) {
-        navigate("/profil")
+        navigate("/company-setting")
       }
     }catch (e) {
-      console.log(e)
+      openSnackbar(e.response.data.msg)
     }
   };
 
