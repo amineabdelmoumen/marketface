@@ -5,6 +5,8 @@ import Save from "./views/company-setting/save";
 import Private from "./components/Private";
 import Login from "./views/login";
 import Profil from "./views/profil/profil";
+import "./assets/scss/main.scss";
+import "./assets/css/normalize.css";
 
 function App() {
   return (

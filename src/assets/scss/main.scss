@@ -3,7 +3,24 @@ $success: #0ABC8A;
 $secondary: #00B6FF;
 
 @import '~bootstrap/scss/bootstrap.scss';
-@import '@fortawesome/fontawesome-free/scss/fontawesome';
+
+/* Import those files to compile the app
+ the fontawesome file contains an import of list.scss file which causes an error
+ the error is related to the calc function*/
+
+@import '@fortawesome/fontawesome-free/scss/functions';
+@import '@fortawesome/fontawesome-free/scss/variables';
+@import '@fortawesome/fontawesome-free/scss/mixins';
+@import '@fortawesome/fontawesome-free/scss/core';
+@import '@fortawesome/fontawesome-free/scss/sizing';
+@import '@fortawesome/fontawesome-free/scss/fixed-width';
+@import '@fortawesome/fontawesome-free/scss/bordered-pulled';
+@import '@fortawesome/fontawesome-free/scss/animated';
+@import '@fortawesome/fontawesome-free/scss/rotated-flipped';
+@import '@fortawesome/fontawesome-free/scss/stacked';
+@import '@fortawesome/fontawesome-free/scss/icons';
+@import '@fortawesome/fontawesome-free/scss/screen-reader';
+//@import '@fortawesome/fontawesome-free/scss/fontawesome';
 @import '@fortawesome/fontawesome-free/scss/brands';
 @import '@fortawesome/fontawesome-free/scss/regular';
 @import '@fortawesome/fontawesome-free/scss/solid';
