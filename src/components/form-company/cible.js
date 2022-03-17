@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {setFormStage} from "../../store/rootSlice";
 import {useDispatch, useSelector} from "react-redux";
 import Select from 'react-select';
@@ -7,6 +7,7 @@ import {useNavigate} from "react-router-dom";
 import {saveCibles} from "../../lib/crud";
 import {useSnackbar} from 'react-simple-snackbar';
 import snackbarStyles from "../../lib/snackbarStyles";
+
 
 const regions = [
   {
@@ -148,6 +149,32 @@ function Cible() {
   const dispatch = useDispatch()
   const cible = useSelector((state) => state.profile.cible)
 
+  const [defaultRegions, setDefaultRegions] = useState([]);
+  const [defaultActivites, setDefaultActivites] = useState([]);
+  useEffect(() => {
+    let loading = true;
+    let data = [];
+    if(loading) {
+      cible.regions.forEach((region) => {
+        let element = regions.find((el) => el.label === region)
+        if(element) {
+          data.push(element)
+        }
+      })
+      setDefaultRegions(data)
+      data = []
+      cible.activites.forEach((activite) => {
+        let element = activites.find((el) => el.label === activite)
+        if(element) {
+          data.push(element)
+        }
+      })
+      setDefaultActivites(data)
+      console.log(defaultActivites)
+    }
+    return () => {loading = false}
+  }, [])
+
   const handleInputUpdate = (field, e) => {
     let data = { ...cible }
     data[field] = e.target.value
@@ -212,13 +239,23 @@ function Cible() {
               <div className="form-boxes">
                 <label htmlFor="zone">Zone géographique</label>
                 <div className="w-50">
-                  <Select isMulti options={regions} onChange={(vals) => handleMultiSelect('regions', vals)}/>
+                  <Select
+                    isMulti
+                    options={regions}
+                    value={defaultRegions}
+                    onChange={(vals) => handleMultiSelect('regions', vals)}
+                  />
                 </div>
               </div>
               <div className="form-boxes">
                 <label htmlFor="activite">Activité:</label>
                 <div className="w-50">
-                  <Select isMulti options={activites} onChange={(vals) => handleMultiSelect('activites', vals)}/>
+                  <Select
+                    isMulti
+                    options={activites}
+                    value={defaultActivites}
+                    onChange={(vals) => handleMultiSelect('activites', vals)}
+                  />
                 </div>
               </div>
               <div className="form-boxes">
