@@ -207,152 +207,157 @@ function Cible() {
   }
   return (
     <>
-      <form
-        className="container"
-        name="form-identite"
-        id="form-identite"
-      >
-        <h3>Identifiez votre cible</h3>
-        <div className="form-identite-info d-block">
+      {
+        loading ?
+          ''
+          :
+          <form
+            className="container"
+            name="form-identite"
+            id="form-identite"
+          >
+            <h3>Identifiez votre cible</h3>
+            <div className="form-identite-info d-block">
 
-          <h5 className="text-center text-primary">Identifiez votre cible, vous aurez ainsi plus de chance de décrocher des opportunités d'affaires</h5>
-          <div className="row">
-            <div className="col-10">
+              <h5 className="text-center text-primary">Identifiez votre cible, vous aurez ainsi plus de chance de décrocher des opportunités d'affaires</h5>
+              <div className="row">
+                <div className="col-10">
 
-              <div className="form-boxes">
-                <label htmlFor="cherche">
-                  Que cherchez vous?
-                </label>
-                <select
-                  name="cherche"
-                  id="cherche"
-                  className="w-50 py-1"
-                  defaultValue={cible.cherche}
-                  onChange={(e) => handleInputUpdate('cherche', e)}
-                >
-                  <option value="Clients">Clients</option>
-                  <option value="Fournisseurs">Fournisseurs</option>
-                  <option value="Prestataire">Prestataire</option>
-                </select>
-              </div>
-              <div className="form-boxes">
-                <label htmlFor="zone">Zone géographique</label>
-                <div className="w-50">
-                  <Select
-                    isMulti
-                    options={regions}
-                    defaultValue={defaultRegions}
-                    onChange={(vals) => handleMultiSelect('regions', vals)}
-                  />
+                  <div className="form-boxes">
+                    <label htmlFor="cherche">
+                      Que cherchez vous?
+                    </label>
+                    <select
+                      name="cherche"
+                      id="cherche"
+                      className="w-50 py-1"
+                      defaultValue={cible.cherche}
+                      onChange={(e) => handleInputUpdate('cherche', e)}
+                    >
+                      <option value="Clients">Clients</option>
+                      <option value="Fournisseurs">Fournisseurs</option>
+                      <option value="Prestataire">Prestataire</option>
+                    </select>
+                  </div>
+                  <div className="form-boxes">
+                    <label htmlFor="zone">Zone géographique</label>
+                    <div className="w-50">
+                      <Select
+                        isMulti
+                        options={regions}
+                        defaultValue={defaultRegions}
+                        onChange={(vals) => handleMultiSelect('regions', vals)}
+                      />
+                    </div>
+                  </div>
+                  <div className="form-boxes">
+                    <label htmlFor="activite">Activité:</label>
+                    <div className="w-50">
+                      <Select
+                        isMulti
+                        options={activites}
+                        defaultValue={defaultActivites}
+                        onChange={(vals) => handleMultiSelect('activites', vals)}
+                      />
+                    </div>
+                  </div>
+                  <div className="form-boxes">
+                    <label htmlFor="taille_entreprise">
+                      Taille d'entreprise:
+                    </label>
+                    <div>
+                      <label htmlFor="startup"
+                             className={`border rounded px-2 cursor-pointer ${cible.taille_entreprise === 'Start-up' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                        Start-up
+                        <input type="checkbox" name="moyen" id="startup" value="Start-up" className="d-none"
+                               onChange={(e) => handleInputUpdate('taille_entreprise', e)}/>
+                      </label>
+                    </div>
+                    <div>
+                      <label htmlFor="tpe"
+                             className={`border rounded px-2 cursor-pointer ${cible.taille_entreprise === 'TPE' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                        TPE
+                        <input type="checkbox" name="moyen" id="tpe" value="TPE" className="d-none"
+                               onChange={(e) => handleInputUpdate('taille_entreprise', e)}/>
+                      </label>
+                    </div>
+                    <div>
+                      <label htmlFor="pmi"
+                             className={`border rounded px-2 cursor-pointer ${cible.taille_entreprise === 'PMI' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                        PMI
+                        <input type="checkbox" name="moyen" id="pmi" value="PMI" className="d-none"
+                               onChange={(e) => handleInputUpdate('taille_entreprise', e)}/>
+                      </label>
+                    </div>
+                    <div>
+                      <label htmlFor="pme"
+                             className={`border rounded px-2 cursor-pointer ${cible.taille_entreprise === 'PME' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                        PME
+                        <input type="checkbox" name="moyen" id="pme" value="PME" className="d-none"
+                               onChange={(e) => handleInputUpdate('taille_entreprise', e)}/>
+                      </label>
+                    </div>
+                    <div>
+                      <label htmlFor="ge"
+                             className={`border rounded px-2 cursor-pointer ${cible.taille_entreprise === 'GE' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                        GE
+                        <input type="checkbox" name="moyen" id="ge" value="GE" className="d-none"
+                               onChange={(e) => handleInputUpdate('taille_entreprise', e)}/>
+                      </label>
+                    </div>
+                  </div>
+                  <div className="form-boxes">
+                    <label htmlFor="activite_oprationnelle">
+                      Activité opérationnelle:
+                    </label>
+                    <div>
+                      <label htmlFor="matiere_premiere"
+                             className={`border rounded px-2 cursor-pointer ${cible.activite_oprationnelle === 'Matière première' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                        Matière première
+                        <input type="checkbox" name="moyen" id="matiere_premiere" value="Matière première" className="d-none"
+                               onChange={(e) => handleInputUpdate('activite_oprationnelle', e)}/>
+                      </label>
+                    </div>
+                    <div>
+                      <label htmlFor="transformation"
+                             className={`border rounded px-2 cursor-pointer ${cible.activite_oprationnelle === 'Transformation' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                        Transformation
+                        <input type="checkbox" name="moyen" id="transformation" value="Transformation" className="d-none"
+                               onChange={(e) => handleInputUpdate('activite_oprationnelle', e)}/>
+                      </label>
+                    </div>
+                    <div>
+                      <label htmlFor="distribution"
+                             className={`border rounded px-2 cursor-pointer ${cible.activite_oprationnelle === 'Distribution' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                        Distribution
+                        <input type="checkbox" name="moyen" id="distribution" value="Distribution" className="d-none"
+                               onChange={(e) => handleInputUpdate('activite_oprationnelle', e)}/>
+                      </label>
+                    </div>
+                    <div>
+                      <label htmlFor="revendeur"
+                             className={`border rounded px-2 cursor-pointer ${cible.activite_oprationnelle === 'Revendeur' ? 'bg-secondary text-white': 'text-black-50'}`}>
+                        Revendeur
+                        <input type="checkbox" name="moyen" id="revendeur" value="Revendeur" className="d-none"
+                               onChange={(e) => handleInputUpdate('activite_oprationnelle', e)}/>
+                      </label>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="form-boxes">
-                <label htmlFor="activite">Activité:</label>
-                <div className="w-50">
-                  <Select
-                    isMulti
-                    options={activites}
-                    defaultValue={defaultActivites}
-                    onChange={(vals) => handleMultiSelect('activites', vals)}
-                  />
-                </div>
-              </div>
-              <div className="form-boxes">
-                <label htmlFor="taille_entreprise">
-                  Taille d'entreprise:
-                </label>
-                <div>
-                  <label htmlFor="startup"
-                         className={`border rounded px-2 cursor-pointer ${cible.taille_entreprise === 'Start-up' ? 'bg-secondary text-white': 'text-black-50'}`}>
-                    Start-up
-                    <input type="checkbox" name="moyen" id="startup" value="Start-up" className="d-none"
-                           onChange={(e) => handleInputUpdate('taille_entreprise', e)}/>
-                  </label>
-                </div>
-                <div>
-                  <label htmlFor="tpe"
-                         className={`border rounded px-2 cursor-pointer ${cible.taille_entreprise === 'TPE' ? 'bg-secondary text-white': 'text-black-50'}`}>
-                    TPE
-                    <input type="checkbox" name="moyen" id="tpe" value="TPE" className="d-none"
-                           onChange={(e) => handleInputUpdate('taille_entreprise', e)}/>
-                  </label>
-                </div>
-                <div>
-                  <label htmlFor="pmi"
-                         className={`border rounded px-2 cursor-pointer ${cible.taille_entreprise === 'PMI' ? 'bg-secondary text-white': 'text-black-50'}`}>
-                    PMI
-                    <input type="checkbox" name="moyen" id="pmi" value="PMI" className="d-none"
-                           onChange={(e) => handleInputUpdate('taille_entreprise', e)}/>
-                  </label>
-                </div>
-                <div>
-                  <label htmlFor="pme"
-                         className={`border rounded px-2 cursor-pointer ${cible.taille_entreprise === 'PME' ? 'bg-secondary text-white': 'text-black-50'}`}>
-                    PME
-                    <input type="checkbox" name="moyen" id="pme" value="PME" className="d-none"
-                           onChange={(e) => handleInputUpdate('taille_entreprise', e)}/>
-                  </label>
-                </div>
-                <div>
-                  <label htmlFor="ge"
-                         className={`border rounded px-2 cursor-pointer ${cible.taille_entreprise === 'GE' ? 'bg-secondary text-white': 'text-black-50'}`}>
-                    GE
-                    <input type="checkbox" name="moyen" id="ge" value="GE" className="d-none"
-                           onChange={(e) => handleInputUpdate('taille_entreprise', e)}/>
-                  </label>
-                </div>
-              </div>
-              <div className="form-boxes">
-                <label htmlFor="activite_oprationnelle">
-                  Activité opérationnelle:
-                </label>
-                <div>
-                  <label htmlFor="matiere_premiere"
-                         className={`border rounded px-2 cursor-pointer ${cible.activite_oprationnelle === 'Matière première' ? 'bg-secondary text-white': 'text-black-50'}`}>
-                    Matière première
-                    <input type="checkbox" name="moyen" id="matiere_premiere" value="Matière première" className="d-none"
-                           onChange={(e) => handleInputUpdate('activite_oprationnelle', e)}/>
-                  </label>
-                </div>
-                <div>
-                  <label htmlFor="transformation"
-                         className={`border rounded px-2 cursor-pointer ${cible.activite_oprationnelle === 'Transformation' ? 'bg-secondary text-white': 'text-black-50'}`}>
-                    Transformation
-                    <input type="checkbox" name="moyen" id="transformation" value="Transformation" className="d-none"
-                           onChange={(e) => handleInputUpdate('activite_oprationnelle', e)}/>
-                  </label>
-                </div>
-                <div>
-                  <label htmlFor="distribution"
-                         className={`border rounded px-2 cursor-pointer ${cible.activite_oprationnelle === 'Distribution' ? 'bg-secondary text-white': 'text-black-50'}`}>
-                    Distribution
-                    <input type="checkbox" name="moyen" id="distribution" value="Distribution" className="d-none"
-                           onChange={(e) => handleInputUpdate('activite_oprationnelle', e)}/>
-                  </label>
-                </div>
-                <div>
-                  <label htmlFor="revendeur"
-                         className={`border rounded px-2 cursor-pointer ${cible.activite_oprationnelle === 'Revendeur' ? 'bg-secondary text-white': 'text-black-50'}`}>
-                    Revendeur
-                    <input type="checkbox" name="moyen" id="revendeur" value="Revendeur" className="d-none"
-                           onChange={(e) => handleInputUpdate('activite_oprationnelle', e)}/>
-                  </label>
-                </div>
+
+              {/*Line */}
+              <div className="d-flex justify-content-end">
+                <button type="button" className="btn pointer btn-outline-secondary rounded-pill px-4" onClick={() => dispatch(setFormStage(4))}>
+                  Précédent
+                </button>
+                <button type="button" className="btn pointer ml-4 btn-success text-white rounded-pill px-4 ms-5" onClick={() => handleSubmit()}>
+                  Suivant
+                </button>
               </div>
             </div>
-          </div>
-
-          {/*Line */}
-          <div className="d-flex justify-content-end">
-            <button type="button" className="btn pointer btn-outline-secondary rounded-pill px-4" onClick={() => dispatch(setFormStage(4))}>
-              Précédent
-            </button>
-            <button type="button" className="btn pointer ml-4 btn-success text-white rounded-pill px-4 ms-5" onClick={() => handleSubmit()}>
-              Suivant
-            </button>
-          </div>
-        </div>
-      </form>
+          </form>
+      }
     </>
   )
 }
