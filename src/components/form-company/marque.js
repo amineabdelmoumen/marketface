@@ -4,9 +4,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {setMarque, setReferences,} from "../../store/profileSlice";
 import categories from "../../lib/constants/categories";
 import {deleteReference, saveImages, saveReferences} from "../../lib/crud";
+import {useSnackbar} from 'react-simple-snackbar'
+import snackbarStyles from "../../lib/snackbarStyles";
 
 let uploadForm = new FormData()
 function Marque() {
+  const [openSnackbar, closeSnackbar] = useSnackbar(snackbarStyles)
   const dispatch = useDispatch()
   const marque = useSelector((state) => state.profile.marque)
   const references = useSelector((state) => state.profile.references)
@@ -23,6 +26,13 @@ function Marque() {
             dispatch(setReferences(data))
             setSendReferences(false)
             dispatch(setFormStage(3))
+          }).catch((err) => {
+            let data = err.response.data
+            openSnackbar(<ul>
+              {
+                Object.values(data.errors).map((errors) => errors.map((error) => <li>{error}</li>))
+              }
+            </ul>)
           })
       }else {
         setSendReferences(false)

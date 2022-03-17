@@ -4,9 +4,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {setArticle, setArticles} from "../../store/profileSlice";
 import {deleteArticle, saveArticles, saveImages} from "../../lib/crud";
 import typesArticle from "../../lib/constants/typesArticle";
+import {useSnackbar} from 'react-simple-snackbar';
+import snackbarStyles from "../../lib/snackbarStyles";
 
 let uploadForm = new FormData()
 function Article(props) {
+  const [openSnackbar, closeSnackbar] = useSnackbar(snackbarStyles)
   const dispatch = useDispatch()
   const article = useSelector((state) => state.profile.article)
   const articles = useSelector((state) => state.profile.articles)
@@ -24,6 +27,13 @@ function Article(props) {
             dispatch(setArticles(data))
             setSendArticles(false)
             dispatch(setFormStage(5))
+          }).catch((err) => {
+            let data = err.response.data
+            openSnackbar(<ul>
+              {
+                Object.values(data.errors).map((errors) => errors.map((error) => <li>{error}</li>))
+              }
+            </ul>)
           })
       }else {
         setSendArticles(false)

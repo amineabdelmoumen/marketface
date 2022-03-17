@@ -5,6 +5,8 @@ import Select from 'react-select';
 import {setCible} from "../../store/profileSlice";
 import {useNavigate} from "react-router-dom";
 import {saveCibles} from "../../lib/crud";
+import {useSnackbar} from 'react-simple-snackbar';
+import snackbarStyles from "../../lib/snackbarStyles";
 
 const regions = [
   {
@@ -141,6 +143,7 @@ const activites = [
 ];
 
 function Cible() {
+  const [openSnackbar, closeSnackbar] = useSnackbar(snackbarStyles)
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const cible = useSelector((state) => state.profile.cible)
@@ -167,6 +170,13 @@ function Cible() {
     saveCibles(cible, token)
       .then(() => {
         navigate('/company-setting/save')
+      }).catch((err) => {
+        let data = err.response.data
+        openSnackbar(<ul>
+          {
+            Object.values(data.errors).map((errors) => errors.map((error) => <li>{error}</li>))
+          }
+        </ul>)
       })
   }
   return (
