@@ -1,11 +1,6 @@
 import apiClient from "./api";
 
-const csrf = async () => {
-  await apiClient.get('/csrf')
-}
-
 export const login = async (email, password) => {
-  await csrf()
   return await apiClient.post('/login', {
     email,
     password
@@ -13,7 +8,6 @@ export const login = async (email, password) => {
 }
 
 export const register = async (data) => {
-  await csrf()
   return await apiClient.post('/register', data)
 }
 
