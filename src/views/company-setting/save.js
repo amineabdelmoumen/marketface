@@ -1,22 +1,28 @@
 import React from 'react';
-import {saveImages} from "../../lib/crud";
+import {saveDocs} from "../../lib/crud";
+import {useNavigate} from "react-router-dom";
 
 let form = new FormData()
 
 function Save(props) {
-
-  function handleDocsUpload(e) {
-    const token = localStorage.getItem('token')
+  const navigate = useNavigate()
+  const handleDocsUpload = (e) => {
     let files = e.target.files;
     for (let i = 0; i < files.length; i++) {
       form.append(`documents[${i}]`, files[i])
     }
-    saveImages(form, token)
+  }
+
+  const sendDocs = () => {
+    const token = localStorage.getItem('token')
+    saveDocs(form, token)
       .then((res) => {
-        const response = res.data
         form = new FormData()
+      }).then(() => {
+        navigate('/profil')
       })
   }
+
 
   return (
     <div
@@ -37,9 +43,8 @@ function Save(props) {
           </label>
           <div className="row">
             <div className="col-6 offset-3">
-              <div className="d-flex justify-content-center gap-5 my-5">
-                <button className="btn btn-success text-white rounded-pill px-5">Envoyer</button>
-                <button className="btn btn-outline-success rounded-pill px-5">Suivant</button>
+              <div className="d-flex justify-content-center my-5">
+                <button className="btn btn-success text-white rounded-pill px-5" onClick={() => sendDocs()}>Envoyer</button>
               </div>
             </div>
             <div className="col-3 d-flex justify-content-end align-items-baseline">
