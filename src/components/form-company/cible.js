@@ -151,29 +151,28 @@ function Cible() {
 
   const [defaultRegions, setDefaultRegions] = useState([]);
   const [defaultActivites, setDefaultActivites] = useState([]);
+  const [loading, setLoading] = useState(true)
   useEffect(() => {
-    let loading = true;
-    let data = [];
     if(loading) {
+      let data = [];
       cible.regions.forEach((region) => {
-        let element = regions.find((el) => el.label === region)
-        if(element) {
-          data.push(element)
-        }
+        data.push({
+          label: region,
+          value: region
+        });
       })
       setDefaultRegions(data)
       data = []
       cible.activites.forEach((activite) => {
-        let element = activites.find((el) => el.label === activite)
-        if(element) {
-          data.push(element)
-        }
+        data.push({
+          label: activite,
+          value: activite
+        })
       })
       setDefaultActivites(data)
-      console.log(defaultActivites)
+      setLoading(false)
     }
-    return () => {loading = false}
-  }, [])
+  }, [loading])
 
   const handleInputUpdate = (field, e) => {
     let data = { ...cible }
@@ -228,7 +227,7 @@ function Cible() {
                   name="cherche"
                   id="cherche"
                   className="w-50 py-1"
-                  value={cible.cherche}
+                  defaultValue={cible.cherche}
                   onChange={(e) => handleInputUpdate('cherche', e)}
                 >
                   <option value="Clients">Clients</option>
@@ -242,7 +241,7 @@ function Cible() {
                   <Select
                     isMulti
                     options={regions}
-                    value={defaultRegions}
+                    defaultValue={defaultRegions}
                     onChange={(vals) => handleMultiSelect('regions', vals)}
                   />
                 </div>
@@ -253,7 +252,7 @@ function Cible() {
                   <Select
                     isMulti
                     options={activites}
-                    value={defaultActivites}
+                    defaultValue={defaultActivites}
                     onChange={(vals) => handleMultiSelect('activites', vals)}
                   />
                 </div>
