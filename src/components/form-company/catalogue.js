@@ -4,9 +4,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {setCatalogue} from "../../store/profileSlice";
 import {saveCatalogue} from "../../lib/crud";
 import {useSnackbar} from 'react-simple-snackbar'
+import snackbarStyles from "../../lib/snackbarStyles";
 
 function Catalogue() {
-  const [openSnackbar, closeSnackbar] = useSnackbar()
+  const [openSnackbar, closeSnackbar] = useSnackbar(snackbarStyles)
   const dispatch = useDispatch()
   const catalogue = useSelector((state) => state.profile.catalogue)
   const handleInputUpdate = (field, e) => {
