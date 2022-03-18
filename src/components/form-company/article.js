@@ -75,7 +75,11 @@ function Article(props) {
     dispatch(setArticles(data))
     dispatch(setArticle({
       type_article: "Produit",
-      type: "Produits chimiques"
+      type: "Produits chimiques",
+      nom: '',
+      description: '',
+      prix: '',
+      quantite: ''
     }))
   }
   const save = () => {
