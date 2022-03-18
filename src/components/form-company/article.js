@@ -185,7 +185,7 @@ function Article(props) {
                 <label htmlFor="photos">
                   Joindre des photos d'article
                 </label>
-                <input type="file" id="photos" name="photos[]" multiple onChange={(e) => handlePhotosUpload(e)} />
+                <input type="file" id="photos" name="photos[]" accept="image/*" multiple onChange={(e) => handlePhotosUpload(e)} />
               </div>
             </section>
 
