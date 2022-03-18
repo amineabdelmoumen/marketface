@@ -41,6 +41,11 @@ function Save(props) {
             <p className="text-primary">Joindre votre demande</p>
             <input id="docs" type="file" name="documents[]" multiple className="d-none" onChange={(e) => handleDocsUpload(e)}/>
           </label>
+          <div className="d-flex justify-content-center mt-2">
+            <a href={`${process.env.REACT_APP_HOST_URL}/../Demande.pdf`} target="_blank">
+              <small><span className="fas fa-download mr-2"></span>Téléchargez le modèle de la demande de vérification</small>
+            </a>
+          </div>
           <div className="row">
             <div className="col-6 offset-3">
               <div className="d-flex justify-content-center my-5">
