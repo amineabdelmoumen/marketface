@@ -12,8 +12,22 @@ function App() {
       <Routes>
         <Route path="/" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/company-setting" element={<Private><CompanySetting /> </Private>} />
-        <Route path="/profil" element={<Private><Profil /></Private>} />
+        <Route
+          path="/company-setting"
+          element={
+            <Private>
+              <CompanySetting />{" "}
+            </Private>
+          }
+        />
+        <Route
+          path="/profil"
+          element={
+            <Private>
+              <Profil />
+            </Private>
+          }
+        />
         <Route path="/company-setting/save" element={<Save />} />
       </Routes>
     </div>

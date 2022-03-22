@@ -1,16 +1,16 @@
-$primary: #1578A2;
-$success: #0ABC8A;
-$secondary: #00B6FF;
+$primary: #1578a2;
+$success: #0abc8a;
+$secondary: #00b6ff;
 
-@import '~bootstrap/scss/bootstrap.scss';
-@import '@fortawesome/fontawesome-free/scss/fontawesome';
-@import '@fortawesome/fontawesome-free/scss/brands';
-@import '@fortawesome/fontawesome-free/scss/regular';
-@import '@fortawesome/fontawesome-free/scss/solid';
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
+@import "~bootstrap/scss/bootstrap.scss";
+@import "@fortawesome/fontawesome-free/scss/fontawesome";
+@import "@fortawesome/fontawesome-free/scss/brands";
+@import "@fortawesome/fontawesome-free/scss/regular";
+@import "@fortawesome/fontawesome-free/scss/solid";
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap");
 body {
   //background-color: #EBF9FF;
-  font-family: 'Comfortaa', sans-serif;
+  font-family: "Comfortaa", sans-serif;
 }
 
 .background {
@@ -36,4 +36,11 @@ input[type="file"]::-webkit-file-upload-button {
 input[type="file"] {
   content: "";
   color: white !important;
+}
+
+.bg-orange-500 {
+  background-color: $orange-500;
+}
+.bg-indigo-600 {
+  background-color: $indigo-600;
 }
