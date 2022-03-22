@@ -1,25 +1,29 @@
-import React, {useState} from "react";
-import { useNavigate } from "react-router-dom";
-import {login} from "../../lib/auth";
-import { useSnackbar } from 'react-simple-snackbar'
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { login } from "../../lib/auth";
+import { useSnackbar } from "react-simple-snackbar";
 import snackbarStyles from "../../lib/snackbarStyles";
+import "./styles.scss";
 
 const Login = () => {
-  const [openSnackbar, closeSnackbar] = useSnackbar(snackbarStyles)
-  const navigate = useNavigate()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const styleImage = {
+    maxWidth: "100%",
+  };
+  const [openSnackbar, closeSnackbar] = useSnackbar(snackbarStyles);
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleClick = async () => {
     try {
-      const response = await login(email, password)
-      const user = response.data.data
-      localStorage.setItem('token', user.token)
-      if(user.email_verified_at) {
-        navigate("/company-setting")
+      const response = await login(email, password);
+      const user = response.data.data;
+      localStorage.setItem("token", user.token);
+      if (user.email_verified_at) {
+        navigate("/company-setting");
       }
-    }catch (e) {
-      openSnackbar(e.response.data.msg)
+    } catch (e) {
+      openSnackbar(e.response.data.msg);
     }
   };
 
@@ -36,12 +40,17 @@ const Login = () => {
           </p>
         </div>
         <div className="row mt-4">
-          <div className="col-md-6 d-flex justify-content-center align-items-start">
+          <div className="col-md-6  d-flex justify-content-center align-items-start">
             {/*<img src="https://via.placeholder.com/300" alt="" />*/}
-            <img src="/imgs/business-bag.png" alt="" width={400}/>
+            <img
+              className="image"
+              src="/imgs/business-bag.png"
+              alt=""
+              width={400}
+              style={styleImage}
+            />
           </div>
           <div className="col-md-6">
-
             <div className="form-group mb-4">
               <input
                 type="text"
@@ -58,7 +67,16 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <div className="d-flex flex-column align-items-end mb-5">
+            <div>
+              <Link to="/reset-password"><small>Mot de passe oublié?</small></Link>
+            </div>
+            <div className="d-flex justify-content-end  align-items-end mb-5 m-10">
+              <Link
+                to="/signup"
+                className="btn btn-light text-success border-success rounded-pill px-4 me-2"
+              >
+                S'enregistrer
+              </Link>
               <button
                 onClick={handleClick}
                 className="btn btn-success text-white rounded-pill px-4"
