@@ -1,78 +1,80 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Icon } from "@iconify/react";
-import {setFormStage} from "../../store/rootSlice";
+import { setFormStage } from "../../store/rootSlice";
 import "./styles.scss";
-import {useDispatch, useSelector} from "react-redux";
-import {setIdentite} from "../../store/profileSlice";
-import {saveCompany, saveImages} from "../../lib/crud";
+import { useDispatch, useSelector } from "react-redux";
+import { setIdentite } from "../../store/profileSlice";
+import { saveCompany, saveImages } from "../../lib/crud";
 import types from "../../lib/constants/types";
 import statusList from "../../lib/constants/status";
-import activites from '../../lib/constants/activites';
-import regions from '../../lib/constants/regions';
-import villes from '../../lib/constants/villes';
-import { useSnackbar } from 'react-simple-snackbar';
+import activites from "../../lib/constants/activites";
+import regions from "../../lib/constants/regions";
+import villes from "../../lib/constants/villes";
+import { useSnackbar } from "react-simple-snackbar";
 import snackbarStyles from "../../lib/snackbarStyles";
 
-const form = new FormData()
-let uploadForm = new FormData()
+const form = new FormData();
+let uploadForm = new FormData();
 
 function Identite() {
-  const dispatch = useDispatch()
-  const identite = useSelector((state) => state.profile.identite)
+  const dispatch = useDispatch();
+  const identite = useSelector((state) => state.profile.identite);
 
-  const [openSnackbar, closeSnackbar] = useSnackbar(snackbarStyles)
+  const [openSnackbar, closeSnackbar] = useSnackbar(snackbarStyles);
 
   const organismeSize = ["Start-up", "TPE", "PME", "PMI", "GE"];
   const nombreEmployes = ["De 1 à 10", "De 10 à 250", "Plus de 250"];
   const chaiffreDafaireList = ["< 10 MDhs", "< 75 MDhs", "> 75 MDhs"];
 
-  const [logo, setLogo] = useState('')
+  const [logo, setLogo] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault(); // stop form submission
   };
   const handleInputChange = (field, e) => {
-    let data = { ...identite }
-    data[field] = e.target.value
-    form.set(field, e.target.value)
-    dispatch(setIdentite(data))
-  }
+    let data = { ...identite };
+    data[field] = e.target.value;
+    form.set(field, e.target.value);
+    dispatch(setIdentite(data));
+  };
   const handleChooseFile = () => {
     const inputElement = document.getElementById("logo-input");
     inputElement.click();
   };
   const uploadLogo = (event) => {
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem("token");
     const file = event.files[0];
-    let data = {...identite}
-    uploadForm.set('logo', file)
-    saveImages(uploadForm, token)
-      .then((res) => {
-        const response = res.data
-        uploadForm = new FormData()
-        data['logo'] = response.path;
-        dispatch(setIdentite(data))
-      })
+    let data = { ...identite };
+    uploadForm.set("logo", file);
+    saveImages(uploadForm, token).then((res) => {
+      const response = res.data;
+      uploadForm = new FormData();
+      data["logo"] = response.path;
+      dispatch(setIdentite(data));
+    });
   };
 
   async function save() {
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem("token");
     await saveCompany(identite, token);
   }
 
   function nextPage() {
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem("token");
     saveCompany(identite, token)
       .then(() => {
-        dispatch(setFormStage(2))
-      }).catch((err) => {
-        let data = err.response.data
-        openSnackbar(<ul>
-          {
-            Object.values(data.errors).map((errors) => errors.map((error) => <li>{error}</li>))
-          }
-        </ul>)
-    })
+        dispatch(setFormStage(2));
+      })
+      .catch((err) => {
+        let data = err.response.data;
+        openSnackbar(
+          <ul>
+            {Object.values(data.errors).map((errors) =>
+              errors.map((error) => <li>{error}</li>)
+            )}
+          </ul>
+        );
+      });
   }
 
   return (
@@ -87,12 +89,15 @@ function Identite() {
         <div className="logo">
           <p>*Insere votre logo</p>
           <p className="icon-img">
-            {
-              identite.logo ?
-                <img src={`${process.env.REACT_APP_HOST_URL}/${identite.logo}`} width={40} alt="" />
-                :
-                <Icon id="icon-ingerprint" icon="bi:fingerprint" />
-            }
+            {identite.logo ? (
+              <img
+                src={`${process.env.REACT_APP_HOST_URL}/${identite.logo}`}
+                width={40}
+                alt=""
+              />
+            ) : (
+              <Icon id="icon-ingerprint" icon="bi:fingerprint" />
+            )}
           </p>
           <input
             onChange={(e) => uploadLogo(e.target)}
@@ -110,13 +115,13 @@ function Identite() {
             <p className="section-title">Informations légales</p>
             <div className="form-boxes">
               <label htmlFor="prenom_nom">
-                *Raison social / prenom et nom:
+                *Raisone social / prénom et nom:
               </label>
               <input
                 type="text"
                 id="prenom_nom"
                 name="prenom_nom"
-                onChange={(e) => handleInputChange('raison_ou_nom', e)}
+                onChange={(e) => handleInputChange("raison_ou_nom", e)}
                 defaultValue={identite.raison_ou_nom}
               />
             </div>
@@ -125,16 +130,12 @@ function Identite() {
               <select
                 name="activite"
                 id="activite"
-                onChange={(e) => handleInputChange('activite', e)}
+                onChange={(e) => handleInputChange("activite", e)}
                 defaultValue={identite.activite}
               >
-                {
-                  activites.map((activite) => {
-                    return (
-                      <option value={activite}>{activite}</option>
-                    )
-                  })
-                }
+                {activites.map((activite) => {
+                  return <option value={activite}>{activite}</option>;
+                })}
               </select>
             </div>
             <div className="form-boxes">
@@ -142,7 +143,7 @@ function Identite() {
               <select
                 name="statut"
                 id="statut"
-                onChange={(e) => handleInputChange('statut', e)}
+                onChange={(e) => handleInputChange("statut", e)}
                 defaultValue={identite.statut}
               >
                 {statusList.map((opt) => (
@@ -156,7 +157,7 @@ function Identite() {
                 type="text"
                 id="ice"
                 name="ice"
-                onChange={(e) => handleInputChange('ice', e)}
+                onChange={(e) => handleInputChange("ice", e)}
                 defaultValue={identite.ice}
               />
             </div>
@@ -168,7 +169,7 @@ function Identite() {
                 type="text"
                 id="annee"
                 name="annee"
-                onChange={(e) => handleInputChange('annee_creation', e)}
+                onChange={(e) => handleInputChange("annee_creation", e)}
                 defaultValue={identite.annee_creation}
               />
             </div>
@@ -179,7 +180,7 @@ function Identite() {
               <select
                 name="organisme_type"
                 id="organisme_type"
-                onChange={(e) => handleInputChange('type', e)}
+                onChange={(e) => handleInputChange("type", e)}
                 defaultValue={identite.type}
               >
                 {types.map((opt) => (
@@ -194,7 +195,7 @@ function Identite() {
               <select
                 name="organisme_taille"
                 id="organisme_taille"
-                onChange={(e) => handleInputChange('taille', e)}
+                onChange={(e) => handleInputChange("taille", e)}
                 defaultValue={identite.taille}
               >
                 {organismeSize.map((opt) => (
@@ -207,7 +208,7 @@ function Identite() {
               <select
                 name="nombre_employés"
                 id="nombre_employés"
-                onChange={(e) => handleInputChange('nombre_employes', e)}
+                onChange={(e) => handleInputChange("nombre_employes", e)}
                 defaultValue={identite.nombre_employes}
               >
                 {nombreEmployes.map((opt) => (
@@ -216,7 +217,7 @@ function Identite() {
               </select>
             </div>
             <p className="info-obg">
-              *Les informations obligatoire pour accéder à la plateforme
+              *Les informations obligatoires pour accéder à la plateforme
             </p>
           </section>
           {/*Line */}
@@ -231,7 +232,7 @@ function Identite() {
                 id="capital"
                 name="capital"
                 defaultValue={identite.capital}
-                onChange={(e) => handleInputChange('capital', e)}
+                onChange={(e) => handleInputChange("capital", e)}
               />
             </p>
             <p className="form-boxes">
@@ -240,7 +241,7 @@ function Identite() {
                 name="chiffre_affaire"
                 id="chiffre_affaire"
                 defaultValue={identite.chiffre_affaire}
-                onChange={(e) => handleInputChange('chiffre_affaire', e)}
+                onChange={(e) => handleInputChange("chiffre_affaire", e)}
               >
                 {chaiffreDafaireList.map((opt) => (
                   <option value={opt}>{opt}</option>
@@ -255,21 +256,20 @@ function Identite() {
                 id="siege"
                 name="siege"
                 defaultValue={identite.siege_social}
-                onChange={(e) => handleInputChange('siege_social', e)}
+                onChange={(e) => handleInputChange("siege_social", e)}
               />
             </div>
             <div className="form-boxes">
               <label htmlFor="region">*Région:</label>
-              <select name="region" id="region" defaultValue={identite.region}
-                      onChange={(e) => handleInputChange('region', e)}
+              <select
+                name="region"
+                id="region"
+                defaultValue={identite.region}
+                onChange={(e) => handleInputChange("region", e)}
               >
-                {
-                  regions.map((region) => {
-                    return (
-                      <option value={region}>{region}</option>
-                    )
-                  })
-                }
+                {regions.map((region) => {
+                  return <option value={region}>{region}</option>;
+                })}
               </select>
             </div>
             <div className="form-boxes">
@@ -278,25 +278,22 @@ function Identite() {
                 name="ville"
                 id="ville"
                 defaultValue={identite.ville}
-                onChange={(e) => handleInputChange('ville', e)}
+                onChange={(e) => handleInputChange("ville", e)}
               >
-                {
-                  villes.map((ville) => {
-                    return (
-                      <option value={ville}>{ville}</option>
-                    )
-                  })
-                }
+                {villes.map((ville) => {
+                  return <option value={ville}>{ville}</option>;
+                })}
               </select>
             </div>
             <p className="form-boxes">
               <label htmlFor="pays">*Pays:</label>
               <input
                 type="text"
+                value={"Maroc"}
+                readOnly
                 id="pays"
                 name="pays"
                 defaultValue={identite.pays}
-                onChange={(e) => handleInputChange('pays', e)}
               />
             </p>
             <p className="form-boxes">
@@ -306,15 +303,23 @@ function Identite() {
                 id="telephone"
                 name="telephone"
                 defaultValue={identite.telephone}
-                onChange={(e) => handleInputChange('telephone', e)}
+                onChange={(e) => handleInputChange("telephone", e)}
               />
             </p>
 
             <div className="buttons">
-              <button type="button" className="btn pointer btn-outline-success rounded-pill px-4" onClick={() => save()}>
+              <button
+                type="button"
+                className="btn pointer btn-outline-success rounded-pill px-4"
+                onClick={() => save()}
+              >
                 Enregistrer
               </button>
-              <button type="button" className="btn pointer ml-4 btn-success text-white rounded-pill px-4" onClick={() => nextPage()}>
+              <button
+                type="button"
+                className="btn pointer ml-4 btn-success text-white rounded-pill px-4"
+                onClick={() => nextPage()}
+              >
                 Suivant
               </button>
             </div>
