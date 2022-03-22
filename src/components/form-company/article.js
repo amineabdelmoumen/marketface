@@ -6,8 +6,29 @@ import {deleteArticle, saveArticles, saveImages} from "../../lib/crud";
 import typesArticle from "../../lib/constants/typesArticle";
 import {useSnackbar} from 'react-simple-snackbar';
 import snackbarStyles from "../../lib/snackbarStyles";
+import services from "../../lib/constants/services";
 
 let uploadForm = new FormData()
+
+const biensImmobiliers = [
+  'Affaires immobilières'
+];
+
+const natures = [
+  'Terrain agricole',
+  'terrain industriel',
+  'usine',
+  'immeuble',
+  'villa',
+  'lotissement',
+  'terrain de construction',
+  'plateau bureau',
+  'appartement',
+  'magasin',
+  'local industriel',
+  'Ferme',
+];
+
 function Article(props) {
   const [openSnackbar, closeSnackbar] = useSnackbar(snackbarStyles)
   const dispatch = useDispatch()
@@ -173,13 +194,37 @@ function Article(props) {
                 </label>
                 <select name="type" id="type" value={article.type} onChange={(e) => handleInputUpdate('type', e)}>
                   {
-                    typesArticle.map((type) => {
-                      return (
-                        <option value={type}>{type}</option>
-                      )
-                    })
+                    {
+                      'produit': typesArticle.map((type) => {
+                        return (
+                          <option value={type}>{type}</option>
+                        )
+                      }),
+                      'service': services.map((type) => {
+                        return (
+                          <option value={type}>{type}</option>
+                        )
+                      }),
+                      'immobilier': biensImmobiliers.map((type) => {
+                        return (
+                          <option value={type}>{type}</option>
+                        )
+                      })
+                    }[article.type_article]
                   }
                 </select>
+              </div>
+              <div className="form-boxes">
+                <label htmlFor="adresse">
+                  Adresse:
+                </label>
+                <input type="text" id="adresse" value={article.adresse} onChange={(e) => handleInputUpdate('adresse', e)} />
+              </div>
+              <div className="form-boxes">
+                <label htmlFor="superficie">
+                  Superficie:
+                </label>
+                <input type="text" id="superficie" value={article.superficie} onChange={(e) => handleInputUpdate('superficie', e)} />
               </div>
               <div className="form-boxes">
                 <label htmlFor="photos">

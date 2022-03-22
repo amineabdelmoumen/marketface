@@ -70,7 +70,7 @@ const Login = () => {
 
             <div className="d-flex justify-content-end  align-items-end mb-5 m-10">
               <Link
-                to="/"
+                to="/signup"
                 className="btn btn-light text-success border-success rounded-pill px-4 me-2"
               >
                 S'enregistrer
