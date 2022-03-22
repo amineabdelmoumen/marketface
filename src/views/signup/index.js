@@ -8,10 +8,14 @@ import snackbarStyles from "../../lib/snackbarStyles";
 import PageLoading from "../../components/PageLoading";
 
 const Signup = () => {
+  const styleImage = {
+    maxWidth: "100%",
+  };
   const [openSnackbar, closeSnackbar] = useSnackbar(snackbarStyles);
   const dispatch = useDispatch();
   const registerForm = useSelector((state) => state.profile.register);
   const [loading, setLoading] = useState(true);
+  const [style, setStyle] = useState("form-check-label");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,7 +30,6 @@ const Signup = () => {
       });
   }, []);
   const handleInputUpdate = (field, e) => {
-    setDr("Directeur ");
     let data = { ...registerForm };
     data[field] = e.target.value;
     dispatch(setRegister(data));
@@ -51,6 +54,9 @@ const Signup = () => {
           </ul>
         );
       }
+    } else {
+      console.log("You should agree about about the terms");
+      setStyle((prev) => "form-check-label text-danger");
     }
   };
 
@@ -71,7 +77,12 @@ const Signup = () => {
           <div className="row mt-4">
             <div className="col-md-6 d-flex justify-content-center align-items-start">
               {/*<img src="https://via.placeholder.com/300" alt="" />*/}
-              <img src="/imgs/business-bag.png" alt="" width={400} />
+              <img
+                src="/imgs/business-bag.png"
+                alt=""
+                width={400}
+                style={styleImage}
+              />
             </div>
             <div className="col-md-6">
               <div className="form-group mb-4">
@@ -111,12 +122,6 @@ const Signup = () => {
                     />
                   </div>
                 </div>
-                <button
-                  onClick={handleClick}
-                  className="btn btn-success text-white rounded-pill m-20 signIn "
-                >
-                  Envoyer
-                </button>
               </div>
               <div className="form-group mb-4">
                 <select
@@ -126,27 +131,15 @@ const Signup = () => {
                   defaultValue={registerForm.poste}
                   onChange={(e) => handleInputUpdate("poste", e)}
                 >
-                  <option value="directeur_general">Directeur général</option>
-                  <option value="directeur_commercial">
-                    Directeur Commercial
-                  </option>
-                  <option value="directeur_marketing">
-                    Directeur Marketing
-                  </option>
-                  <option value="directeur_finance">Directeur Finance</option>
-                  <option value="directeur_achat">Directeur Achat</option>
-                  <option value="directeur_communication">
-                    Directeur Communication
-                  </option>
-                  <option value="directeur_informatique">
-                    Directeur Informatique
-                  </option>
-                  <option value="directeur_ressource_humaine">
-                    Directeur Ressource humaine
-                  </option>
-                  <option value="directeur_technique">
-                    Directeur Technique
-                  </option>
+                  <option value="directeur">Directeur</option>
+                  <option value="commercial">Commercial</option>
+                  <option value="marketing">Marketing</option>
+                  <option value="finance"> Finance</option>
+                  <option value="achat"> Achat</option>
+                  <option value="communication">Communication</option>
+                  <option value="informatique">Informatique</option>
+                  <option value="ressource_humaine">Ressource humaine</option>
+                  <option value="technique">Technique</option>
                 </select>
               </div>
               <div className="form-group mb-4">
@@ -188,10 +181,28 @@ const Signup = () => {
                 />
               </div>
               <div className="d-flex flex-column align-items-end mb-5">
-                <p className="small">
-                  En cliquant sur s'inscrire, vous acceptez nos{" "}
-                  <a href="#">Conditions d'utilisation</a>
+                <p>
+                  Conformément à la loi 09-08, vous disposez d'un droit d'accès,
+                  de rectifications et d'opposition au traitement de vos données
+                  personnelles. Ce traitement a été autorisé par la CNDP sous le
+                  n°XXXXX
                 </p>
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="flexCheckDefault"
+                    checked={registerForm.terms}
+                    onChange={(e) => handleAgreementConditions(e)}
+                  />
+                  <label className={style} for="flexCheckDefault">
+                    J'ai lu et j'accepte les conditions générales d'utilisation,
+                    notamment la mention relative à la protection des données
+                    personnelles
+                  </label>
+                </div>
+
                 <button
                   onClick={handleClick}
                   className="btn btn-success text-white rounded-pill px-4"
