@@ -19,6 +19,7 @@ const activites = [
   "Arts, Spectacles Et Activités Récréatives",
   "Autres Activités De Services",
   "Activités Extra-Territoriales",
+  "Activités Des Ménages En Tant Qu'employeurs ; Activités Indifférenciées Des Ménages En Tant Que Producteurs De Biens Et Services Pour Usage Propre",
 ];
 
-export default activites
+export default activites;
