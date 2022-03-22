@@ -13,7 +13,6 @@ import { setProfil } from "../../store/profileSlice";
 import { checkAuth } from "../../lib/auth";
 import { useNavigate } from "react-router-dom";
 import PageLoading from "../../components/PageLoading";
-import cibleImg from "../../assets/imgs/cible.png";
 
 function CompanySetting() {
   const navigate = useNavigate();
