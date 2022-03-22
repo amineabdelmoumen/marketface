@@ -43,7 +43,7 @@ const Signup = () => {
     if (registerForm.terms) {
       try {
         await register(registerForm);
-        navigate("/login");
+        navigate("/");
       } catch (e) {
         let data = e.response.data;
         openSnackbar(

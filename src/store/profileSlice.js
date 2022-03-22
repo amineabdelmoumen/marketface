@@ -58,7 +58,9 @@ const profileSlice = createSlice({
   },
   reducers: {
     setProfil: (state, action) => {
-      state.identite = { ...action.payload };
+      if(action.payload.taille) {
+        state.identite = { ...action.payload };
+      }
       let cible = {};
       if (action.payload.cibles && action.payload.cibles.length) {
         cible = { ...action.payload.cibles[0] };

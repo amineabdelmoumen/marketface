@@ -15,7 +15,7 @@ function Private({children}) {
   return authenticated ?
     children
     :
-    (<Navigate to="/login" />)
+    (<Navigate to="/" />)
 }
 
 export default Private;
