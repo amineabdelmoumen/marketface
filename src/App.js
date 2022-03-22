@@ -5,6 +5,9 @@ import Save from "./views/company-setting/save";
 import Private from "./components/Private";
 import Login from "./views/login";
 import Profil from "./views/profil/profil";
+import "./assets/scss/main.scss";
+import "./assets/css/normalize.css";
+import ResetPassword from "./views/reset-password";
 
 function App() {
   return (
@@ -29,6 +32,7 @@ function App() {
           }
         />
         <Route path="/company-setting/save" element={<Save />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
       </Routes>
     </div>
   );

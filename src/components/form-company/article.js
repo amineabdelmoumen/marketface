@@ -75,7 +75,11 @@ function Article(props) {
     dispatch(setArticles(data))
     dispatch(setArticle({
       type_article: "Produit",
-      type: "Produits chimiques"
+      type: "Produits chimiques",
+      nom: '',
+      description: '',
+      prix: '',
+      quantite: ''
     }))
   }
   const save = () => {
@@ -181,7 +185,7 @@ function Article(props) {
                 <label htmlFor="photos">
                   Joindre des photos d'article
                 </label>
-                <input type="file" id="photos" name="photos[]" multiple onChange={(e) => handlePhotosUpload(e)} />
+                <input type="file" id="photos" name="photos[]" accept="image/*" multiple onChange={(e) => handlePhotosUpload(e)} />
               </div>
             </section>
 

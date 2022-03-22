@@ -38,9 +38,17 @@ const profileSlice = createSlice({
     article: {
       type_article: "Produit",
       type: "Produits chimiques",
+      nom: "",
+      description: "",
+      prix: "",
+      quantite: "",
     },
     cible: {
       cherche: "Clients",
+      regions: [],
+      activites: [],
+      taille_entreprise: [],
+      activite_oprationnelle: [],
     },
     register: {
       titre: "m",
@@ -56,6 +64,9 @@ const profileSlice = createSlice({
         state.cible = { ...cible };
         state.cible.regions = cible.regions.split(", ");
         state.cible.activites = cible.activites.split(", ");
+        state.cible.taille_entreprise = cible.taille_entreprise.split(", ");
+        state.cible.activite_oprationnelle =
+          cible.activite_oprationnelle.split(", ");
       }
       state.articles = [...action.payload.articles];
       state.references = [...action.payload.references];

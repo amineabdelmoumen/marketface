@@ -206,14 +206,14 @@ function Marque() {
                 <label htmlFor="">Joindre logo de client</label>
                 <label htmlFor="logo" className="text-center upload">
                   upload
-                  <input type="file" id="logo" name="logo" className="d-none" onChange={(e) => handleLogoUpload(e)} />
+                  <input type="file" id="logo" name="logo" accept="image/*" className="d-none" onChange={(e) => handleLogoUpload(e)} />
                 </label>
               </div>
               <div className="form-boxes">
                 <label htmlFor="">Joindre photos des réalisations</label>
                 <label htmlFor="photos" className="text-center upload">
                   upload
-                  <input type="file" id="photos" name="photos" className="d-none" multiple onChange={(e) => handlePhotosUpload(e)} />
+                  <input type="file" id="photos" name="photos" accept="image/*" className="d-none" multiple onChange={(e) => handlePhotosUpload(e)} />
                 </label>
               </div>
             </section>

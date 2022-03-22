@@ -18,3 +18,11 @@ export const checkAuth = async (token) => {
     }
   })
 }
+
+export const resetPassword = async (data, token) => {
+  return await apiClient.post('/reset-password', data, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  })
+}
