@@ -1,33 +1,33 @@
-$primary: #1578A2;
-$success: #0ABC8A;
-$secondary: #00B6FF;
+$primary: #1578a2;
+$success: #0abc8a;
+$secondary: #00b6ff;
 
-@import '~bootstrap/scss/bootstrap.scss';
+@import "~bootstrap/scss/bootstrap.scss";
 
 /* Import those files to compile the app
  the fontawesome file contains an import of list.scss file which causes an error
  the error is related to the calc function*/
 
-@import '@fortawesome/fontawesome-free/scss/functions';
-@import '@fortawesome/fontawesome-free/scss/variables';
-@import '@fortawesome/fontawesome-free/scss/mixins';
-@import '@fortawesome/fontawesome-free/scss/core';
-@import '@fortawesome/fontawesome-free/scss/sizing';
-@import '@fortawesome/fontawesome-free/scss/fixed-width';
-@import '@fortawesome/fontawesome-free/scss/bordered-pulled';
-@import '@fortawesome/fontawesome-free/scss/animated';
-@import '@fortawesome/fontawesome-free/scss/rotated-flipped';
-@import '@fortawesome/fontawesome-free/scss/stacked';
-@import '@fortawesome/fontawesome-free/scss/icons';
-@import '@fortawesome/fontawesome-free/scss/screen-reader';
+@import "@fortawesome/fontawesome-free/scss/functions";
+@import "@fortawesome/fontawesome-free/scss/variables";
+@import "@fortawesome/fontawesome-free/scss/mixins";
+@import "@fortawesome/fontawesome-free/scss/core";
+@import "@fortawesome/fontawesome-free/scss/sizing";
+@import "@fortawesome/fontawesome-free/scss/fixed-width";
+@import "@fortawesome/fontawesome-free/scss/bordered-pulled";
+@import "@fortawesome/fontawesome-free/scss/animated";
+@import "@fortawesome/fontawesome-free/scss/rotated-flipped";
+@import "@fortawesome/fontawesome-free/scss/stacked";
+@import "@fortawesome/fontawesome-free/scss/icons";
+@import "@fortawesome/fontawesome-free/scss/screen-reader";
 //@import '@fortawesome/fontawesome-free/scss/fontawesome';
-@import '@fortawesome/fontawesome-free/scss/brands';
-@import '@fortawesome/fontawesome-free/scss/regular';
-@import '@fortawesome/fontawesome-free/scss/solid';
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
+@import "@fortawesome/fontawesome-free/scss/brands";
+@import "@fortawesome/fontawesome-free/scss/regular";
+@import "@fortawesome/fontawesome-free/scss/solid";
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap");
 body {
   //background-color: #EBF9FF;
-  font-family: 'Comfortaa', sans-serif;
+  font-family: "Comfortaa", sans-serif;
 }
 
 .background {
@@ -53,4 +53,11 @@ input[type="file"]::-webkit-file-upload-button {
 input[type="file"] {
   content: "";
   color: white !important;
+}
+
+.bg-orange-500 {
+  background-color: $orange-500;
+}
+.bg-indigo-600 {
+  background-color: $indigo-600;
 }
