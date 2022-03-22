@@ -163,9 +163,7 @@ function Identite() {
               />
             </div>
             <div className="form-boxes">
-              <label htmlFor="annee">
-                L'année de création de votre organisme:
-              </label>
+              <label htmlFor="annee">L' de création de votre organisme:</label>
               <select
                 name="annee"
                 id="annee"
@@ -176,13 +174,6 @@ function Identite() {
                   <option value={opt}>{opt}</option>
                 ))}
               </select>
-              {/* <input
-                type="text"
-                id="annee"
-                name="annee"
-                onChange={(e) => handleInputChange("annee_creation", e)}
-                defaultValue={identite.annee_creation}
-              /> */}
             </div>
             <div className="form-boxes">
               <label htmlFor="organisme_type">
@@ -237,7 +228,7 @@ function Identite() {
           <section>
             <p className="section-title">Informations financières</p>
             <p className="form-boxes">
-              <label htmlFor="capital">*Capital:</label>
+              <label htmlFor="capital">*Capital (MAD):</label>
               <input
                 type="text"
                 id="capital"
