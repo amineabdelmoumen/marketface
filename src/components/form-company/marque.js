@@ -245,7 +245,7 @@ function Marque() {
                   <h4 className="text-secondary">
                     {marque.titre} | {marque.annee}
                   </h4>
-                  {marque.description?.length < 10 ? (
+                  {marque.description?.length < 256 ? (
                     <p className="text-black-50 h6 mt-4">
                       {marque.description}
                     </p>

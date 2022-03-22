@@ -282,7 +282,7 @@ function Article(props) {
                     {article.prix}dh/{article.quantite}
                   </p>
 
-                  {article.description?.length < 10 ? (
+                  {article.description?.length < 256 ? (
                     <p>{article.description}</p>
                   ) : isFullDescription ? (
                     <p>{article.description}</p>
