@@ -36,7 +36,7 @@ const profileSlice = createSlice({
     },
     articles: [],
     article: {
-      type_article: "Produit",
+      type_article: "produit",
       type: "Produits chimiques",
       nom: '',
       description: '',
