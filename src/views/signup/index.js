@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setRegister } from "../../store/profileSlice";
@@ -11,6 +11,13 @@ const Signup = () => {
   const styleImage = {
     maxWidth: "100%",
   };
+  const titreRef = useRef()
+  const prenomRef = useRef()
+  const nomRef = useRef()
+  const posteRef = useRef()
+  const emailRef = useRef()
+  const phoneRef = useRef()
+  const passwordRef = useRef()
   const [openSnackbar, closeSnackbar] = useSnackbar(snackbarStyles);
   const dispatch = useDispatch();
   const registerForm = useSelector((state) => state.profile.register);
@@ -46,19 +53,40 @@ const Signup = () => {
         navigate("/");
       } catch (e) {
         let data = e.response.data;
-        openSnackbar(
-          <ul>
-            {Object.values(data.errors).map((errors) =>
-              errors.map((error) => <li>{error}</li>)
-            )}
-          </ul>
-        );
+        showErrors(data.errors)
       }
     } else {
       console.log("You should agree about about the terms");
       setStyle((prev) => "form-check-label text-danger");
     }
   };
+
+  const showErrors = (errors) => {
+    if(errors.titre) {
+      titreRef.current.innerText = errors.titre[0]
+    }
+    if(errors.prenom) {
+      prenomRef.current.innerText = errors.prenom[0]
+    }
+    if(errors.nom) {
+      nomRef.current.innerText = errors.nom[0]
+    }
+    if(errors.poste) {
+      posteRef.current.innerText = errors.poste[0]
+    }
+    if(errors.email) {
+      emailRef.current.innerText = errors.email[0]
+    }
+    if(errors.phone) {
+      phoneRef.current.innerText = errors.phone[0]
+    }
+    if(errors.poste) {
+      posteRef.current.innerText = errors.poste[0]
+    }
+    if(errors.password) {
+      passwordRef.current.innerText = errors.password[0]
+    }
+  }
 
   return (
     <>
@@ -98,6 +126,7 @@ const Signup = () => {
                   <option value="dr">Dr</option>
                   <option value="pr">Pr</option>
                 </select>
+                <small ref={titreRef} className="text-danger ms-2"></small>
               </div>
               <div className="row mb-4">
                 <div className="col-6">
@@ -109,6 +138,7 @@ const Signup = () => {
                       defaultValue={registerForm.prenom}
                       onChange={(e) => handleInputUpdate("prenom", e)}
                     />
+                    <small ref={prenomRef} className="text-danger ms-2"></small>
                   </div>
                 </div>
                 <div className="col-6">
@@ -120,6 +150,7 @@ const Signup = () => {
                       defaultValue={registerForm.nom}
                       onChange={(e) => handleInputUpdate("nom", e)}
                     />
+                    <small ref={nomRef} className="text-danger ms-2"></small>
                   </div>
                 </div>
               </div>
@@ -141,6 +172,7 @@ const Signup = () => {
                   <option value="ressource_humaine">Ressource humaine</option>
                   <option value="technique">Technique</option>
                 </select>
+                <small ref={posteRef} className="text-danger ms-2"></small>
               </div>
               <div className="form-group mb-4">
                 <input
@@ -150,6 +182,7 @@ const Signup = () => {
                   defaultValue={registerForm.email}
                   onChange={(e) => handleInputUpdate("email", e)}
                 />
+                <small ref={emailRef} className="text-danger ms-2"></small>
               </div>
               <div className="form-group mb-4">
                 <input
@@ -159,6 +192,7 @@ const Signup = () => {
                   defaultValue={registerForm.phone}
                   onChange={(e) => handleInputUpdate("phone", e)}
                 />
+                <small ref={phoneRef} className="text-danger ms-2"></small>
               </div>
               <div className="form-group mb-4">
                 <input
@@ -168,6 +202,7 @@ const Signup = () => {
                   defaultValue={registerForm.password}
                   onChange={(e) => handleInputUpdate("password", e)}
                 />
+                <small ref={passwordRef} className="text-danger ms-2"></small>
               </div>
               <div className="form-group mb-4">
                 <input
