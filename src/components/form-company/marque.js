@@ -1,49 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, {useRef, useState} from "react";
 import { setFormStage } from "../../store/rootSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setMarque, setReferences } from "../../store/profileSlice";
 import categories from "../../lib/constants/categories";
-import { deleteReference, saveImages, saveReferences } from "../../lib/crud";
-import { useSnackbar } from "react-simple-snackbar";
-import snackbarStyles from "../../lib/snackbarStyles";
+import { deleteReference, saveImages, saveReference } from "../../lib/crud";
 
 let uploadForm = new FormData();
+
 function Marque() {
-  const [openSnackbar, closeSnackbar] = useSnackbar(snackbarStyles);
   const dispatch = useDispatch();
   const marque = useSelector((state) => state.profile.marque);
   const references = useSelector((state) => state.profile.references);
   const [index, setIndex] = useState(-1);
-  const [sendReferences, setSendReferences] = useState(false);
   const [isFullDescription, setIsFullDescription] = useState(false);
+  const titreRef = useRef()
+  const anneeRef = useRef()
+  const descriptionRef = useRef()
+  const categorieRef = useRef()
+  const nomRef = useRef()
 
-  useEffect(() => {
-    if (sendReferences) {
-      if (references.length) {
-        const token = localStorage.getItem("token");
-        saveReferences({ references: references }, token)
-          .then((res) => res.data)
-          .then((data) => {
-            dispatch(setReferences(data));
-            setSendReferences(false);
-            dispatch(setFormStage(3));
-          })
-          .catch((err) => {
-            let data = err.response.data;
-            openSnackbar(
-              <ul>
-                {Object.values(data.errors).map((errors) =>
-                  errors.map((error) => <li>{error}</li>)
-                )}
-              </ul>
-            );
-          });
-      } else {
-        setSendReferences(false);
-        dispatch(setFormStage(3));
-      }
-    }
-  }, [sendReferences]);
   const handleLogoUpload = (e) => {
     const token = localStorage.getItem("token");
     let file = e.target.files[0];
@@ -95,25 +70,33 @@ function Marque() {
     dispatch(setMarque(data));
   };
   const save = () => {
-    let data = [...references];
-    if (index > -1) {
-      data[index] = marque;
-    } else {
-      data.push(marque);
-    }
-    setIndex(-1);
-    dispatch(setReferences(data));
-    dispatch(
-      setMarque({
-        titre: "",
-        annee: "",
-        description: "",
-        categorie: "Produits chimiques",
-        nom_client: "",
-        images: [],
-        logo: null,
-      })
-    );
+    const token = localStorage.getItem('token')
+    saveReference(marque, token)
+      .then(res => res.data)
+      .then(ref => {
+        let data = [...references];
+        if (index > -1) {
+          data[index] = ref;
+        } else {
+          data.push(ref);
+        }
+        setIndex(-1);
+        dispatch(setReferences(data));
+        dispatch(
+          setMarque({
+            titre: "",
+            annee: "",
+            description: "",
+            categorie: "Produits chimiques",
+            nom_client: "",
+            images: [],
+            logo: null,
+          })
+        );
+      }).catch((err) => {
+      let data = err.response.data;
+      showErrors(data.errors)
+    })
   };
   const handleSave = () => {
     if (
@@ -125,9 +108,26 @@ function Marque() {
     ) {
       save();
     }
-    setSendReferences(true);
+    dispatch(setFormStage(3));
   };
 
+  const showErrors = (errors) => {
+    if(errors.titre) {
+      titreRef.current.innerText = errors.titre[0]
+    }
+    if(errors.annee) {
+      anneeRef.current.innerText = errors.annee[0]
+    }
+    if(errors.description) {
+      descriptionRef.current.innerText = errors.description[0]
+    }
+    if(errors.categorie) {
+      categorieRef.current.innerText = errors.categorie[0]
+    }
+    if(errors.nom_client) {
+      nomRef.current.innerText = errors.nom_client[0]
+    }
+  }
   return (
     <>
       <form className="container" name="form-identite" id="form-identite">
@@ -161,6 +161,7 @@ function Marque() {
                   onChange={(e) => handleInputUpdate("titre", e)}
                 />
               </div>
+              <small ref={titreRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
               <div className="form-boxes">
                 <label htmlFor="annee">Année</label>
                 <input
@@ -171,6 +172,7 @@ function Marque() {
                   onChange={(e) => handleInputUpdate("annee", e)}
                 />
               </div>
+              <small ref={anneeRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
               <div className="form-boxes">
                 <label htmlFor="description">Description</label>
                 <textarea
@@ -183,7 +185,7 @@ function Marque() {
                   onClick={() => setIsFullDescription(false)}
                 />
               </div>
-
+              <small ref={descriptionRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
               <div className="form-boxes">
                 <label htmlFor="categorie">Catégorie</label>
                 <select
@@ -197,6 +199,7 @@ function Marque() {
                   })}
                 </select>
               </div>
+              <small ref={categorieRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
               <div className="form-boxes">
                 <label htmlFor="nom_client">Nom de client</label>
                 <input
@@ -207,6 +210,7 @@ function Marque() {
                   onChange={(e) => handleInputUpdate("nom_client", e)}
                 />
               </div>
+              <small ref={nomRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
               <div className="form-boxes">
                 <label htmlFor="">Joindre logo de client</label>
                 <label htmlFor="logo" className="text-center upload">
