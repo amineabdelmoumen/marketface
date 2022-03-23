@@ -16,7 +16,7 @@ export const saveCatalogue = async (data, token) => {
   })
 }
 
-export const saveArticles = async (data, token) => {
+export const saveArticle = async (data, token) => {
   return await apiClient.post('/article', data, {
     headers: {
       'Authorization': `Bearer ${token}`
@@ -32,7 +32,7 @@ export const deleteArticle = async (id, token) => {
   })
 }
 
-export const saveReferences = async (data, token) => {
+export const saveReference = async (data, token) => {
   return await apiClient.post('/reference', data, {
     headers: {
       'Authorization': `Bearer ${token}`,

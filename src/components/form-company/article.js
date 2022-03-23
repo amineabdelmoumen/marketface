@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { setFormStage } from "../../store/rootSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setArticle, setArticles } from "../../store/profileSlice";
-import { deleteArticle, saveArticles, saveImages } from "../../lib/crud";
+import { deleteArticle, saveArticle, saveImages } from "../../lib/crud";
 import typesArticle from "../../lib/constants/typesArticle";
 import { useSnackbar } from "react-simple-snackbar";
 import snackbarStyles from "../../lib/snackbarStyles";
@@ -41,7 +41,7 @@ function Article(props) {
     if (sendArticles) {
       if (articles.length) {
         const token = localStorage.getItem("token");
-        saveArticles({ articles: articles }, token)
+        saveArticle({ articles: articles }, token)
           .then((res) => res.data)
           .then((data) => {
             dispatch(setArticles(data));
