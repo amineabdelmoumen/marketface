@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
+
 import Identite from "../../components/form-company/Identite";
 import Marque from "../../components/form-company/marque";
 import Catalogue from "../../components/form-company/catalogue";
@@ -11,7 +12,7 @@ import "./styles.scss";
 import { getProfile } from "../../lib/crud";
 import { setProfil } from "../../store/profileSlice";
 import { checkAuth } from "../../lib/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import PageLoading from "../../components/PageLoading";
 import cibleImg from "../../assets/imgs/cible.png";
 import cibleActiveImg from "../../assets/imgs/cible-active.png";
@@ -40,6 +41,14 @@ function CompanySetting() {
         }
       });
   }, []);
+
+  const handleDisconnect = () => {
+    localStorage.removeItem("token");
+    const token = localStorage.getItem("token");
+    if (token == null) {
+      navigate("/login");
+    }
+  };
   return (
     <>
       {loading ? (
@@ -60,17 +69,12 @@ function CompanySetting() {
                 </p>
                 <p className="title">Identité</p>
               </div>
-              <div className="line"></div>
               <div className={pageStage === 2 ? `step step-active` : `step`}>
                 <p
                   className="step-icon"
                   onClick={() => dispatch(setFormStage(2))}
                 >
-                  {pageStage === 2 ? (
-                    <img src={marqueActiveImg} style={{ width: 34 }} alt="" />
-                  ) : (
-                    <img src={marqueImg} style={{ width: 34 }} alt="" />
-                  )}
+                  <Icon id="icon" icon="fa-solid:bullhorn" />
                 </p>
                 <p className="title">Image de marque</p>
               </div>
@@ -96,11 +100,7 @@ function CompanySetting() {
                   className="step-icon"
                   onClick={() => dispatch(setFormStage(5))}
                 >
-                  {pageStage === 5 ? (
-                    <img src={cibleActiveImg} style={{ width: 34 }} alt="" />
-                  ) : (
-                    <img src={cibleImg} style={{ width: 34 }} alt="" />
-                  )}
+                  <Icon id="icon" icon="fluent:target-arrow-16-filled" />
                 </p>
                 <p className="title">Cible</p>
               </div>
@@ -119,6 +119,10 @@ function CompanySetting() {
               }[pageStage]
             }
           </div>
+
+          <Link to="/" className="disconnect-btn" onClick={handleDisconnect}>
+            Se déconnecter
+          </Link>
         </div>
       )}
     </>
