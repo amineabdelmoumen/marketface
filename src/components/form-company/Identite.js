@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useRef, useState} from "react";
 import { Icon } from "@iconify/react";
 import { setFormStage } from "../../store/rootSlice";
 import "./styles.scss";
@@ -22,11 +22,25 @@ function Identite() {
 
   const [openSnackbar, closeSnackbar] = useSnackbar(snackbarStyles);
 
+  const raisonRef = useRef()
+  const activiteRef = useRef()
+  const statutRef = useRef()
+  const iceRef = useRef()
+  const anneeRef = useRef()
+  const typeRef = useRef()
+  const tailleRef = useRef()
+  const employesRef = useRef()
+  const capitalRef = useRef()
+  const chiffreAffairesRef = useRef()
+  const siegeRef = useRef()
+  const regionRef = useRef()
+  const villeRef = useRef()
+  const paysRef = useRef()
+  const phoneRef = useRef()
+
   const organismeSize = ["Start-up", "TPE", "PME", "PMI", "GE"];
   const nombreEmployes = ["De 1 à 10", "De 10 à 250", "Plus de 250"];
   const chaiffreDafaireList = ["< 10 MDhs", "< 75 MDhs", "> 75 MDhs"];
-
-  const [logo, setLogo] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault(); // stop form submission
@@ -67,14 +81,56 @@ function Identite() {
       })
       .catch((err) => {
         let data = err.response.data;
-        openSnackbar(
-          <ul>
-            {Object.values(data.errors).map((errors) =>
-              errors.map((error) => <li>{error}</li>)
-            )}
-          </ul>
-        );
+        showErrors(data.errors)
       });
+  }
+
+  const showErrors = (errors) => {
+    if(errors.raison_ou_nom) {
+      raisonRef.current.innerText = errors.raison_ou_nom[0]
+    }
+    if(errors.activite) {
+      activiteRef.current.innerText = errors.activite[0]
+    }
+    if(errors.statut) {
+      statutRef.current.innerText = errors.statut[0]
+    }
+    if(errors.annee_creation) {
+      anneeRef.current.innerText = errors.annee_creation[0]
+    }
+    if(errors.ice) {
+      iceRef.current.innerText = errors.ice[0]
+    }
+    if(errors.type) {
+      typeRef.current.innerText = errors.type[0]
+    }
+    if(errors.taille) {
+      tailleRef.current.innerText = errors.taille[0]
+    }
+    if(errors.nombre_employes) {
+      employesRef.current.innerText = errors.nombre_employes[0]
+    }
+    if(errors.capital) {
+      capitalRef.current.innerText = errors.capital[0]
+    }
+    if(errors.chiffre_affaire) {
+      chiffreAffairesRef.current.innerText = errors.chiffre_affaire[0]
+    }
+    if(errors.siege_social) {
+      siegeRef.current.innerText = errors.siege_social[0]
+    }
+    if(errors.region) {
+      regionRef.current.innerText = errors.region[0]
+    }
+    if(errors.ville) {
+      villeRef.current.innerText = errors.ville[0]
+    }
+    if(errors.pays) {
+      paysRef.current.innerText = errors.pays[0]
+    }
+    if(errors.telephone) {
+      phoneRef.current.innerText = errors.telephone[0]
+    }
   }
 
   return (
@@ -115,7 +171,7 @@ function Identite() {
             <p className="section-title">Informations légales</p>
             <div className="form-boxes">
               <label htmlFor="prenom_nom">
-                *Raisone social / prénom et nom:
+                *Raison sociale / prénom et nom:
               </label>
               <input
                 type="text"
@@ -125,6 +181,7 @@ function Identite() {
                 defaultValue={identite.raison_ou_nom}
               />
             </div>
+            <small ref={raisonRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
             <div className="form-boxes">
               <label htmlFor="activite">*Activité:</label>
               <select
@@ -138,6 +195,7 @@ function Identite() {
                 })}
               </select>
             </div>
+            <small ref={activiteRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}/>
             <div className="form-boxes">
               <label htmlFor="statut">*Statut:</label>
               <select
@@ -151,6 +209,7 @@ function Identite() {
                 ))}
               </select>
             </div>
+            <small ref={statutRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
             <div className="form-boxes">
               <label htmlFor="ice">*ICE:</label>
               <input
@@ -161,6 +220,7 @@ function Identite() {
                 defaultValue={identite.ice}
               />
             </div>
+            <small ref={iceRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
             <div className="form-boxes">
               <label htmlFor="annee">
                 L'année de création de votre organisme:
@@ -173,6 +233,7 @@ function Identite() {
                 defaultValue={identite.annee_creation}
               />
             </div>
+            <small ref={anneeRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
             <div className="form-boxes">
               <label htmlFor="organisme_type">
                 *Le type de votre organisme:
@@ -188,6 +249,7 @@ function Identite() {
                 ))}
               </select>
             </div>
+            <small ref={typeRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
             <div className="form-boxes">
               <label htmlFor="organisme_taille">
                 *La taille de votre organisme:
@@ -203,6 +265,7 @@ function Identite() {
                 ))}
               </select>
             </div>
+            <small ref={tailleRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
             <div className="form-boxes">
               <label htmlFor="nombre_employés">*Le nombre d'employés:</label>
               <select
@@ -216,6 +279,7 @@ function Identite() {
                 ))}
               </select>
             </div>
+            <small ref={employesRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
             <p className="info-obg">
               *Les informations obligatoires pour accéder à la plateforme
             </p>
@@ -225,7 +289,7 @@ function Identite() {
           {/*Information financier */}
           <section>
             <p className="section-title">Informations financières</p>
-            <p className="form-boxes">
+            <div className="form-boxes">
               <label htmlFor="capital">*Capital:</label>
               <input
                 type="text"
@@ -234,8 +298,9 @@ function Identite() {
                 defaultValue={identite.capital}
                 onChange={(e) => handleInputChange("capital", e)}
               />
-            </p>
-            <p className="form-boxes">
+            </div>
+            <small ref={capitalRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
+            <div className="form-boxes">
               <label htmlFor="chiffre_affaire">Chiffre d'affaires:</label>
               <select
                 name="chiffre_affaire"
@@ -247,7 +312,8 @@ function Identite() {
                   <option value={opt}>{opt}</option>
                 ))}
               </select>
-            </p>
+            </div>
+            <small ref={chiffreAffairesRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
             <p className="section-title">Contact:</p>
             <div className="form-boxes">
               <label htmlFor="siege">*Siège social:</label>
@@ -259,6 +325,7 @@ function Identite() {
                 onChange={(e) => handleInputChange("siege_social", e)}
               />
             </div>
+            <small ref={siegeRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
             <div className="form-boxes">
               <label htmlFor="region">*Région:</label>
               <select
@@ -272,6 +339,7 @@ function Identite() {
                 })}
               </select>
             </div>
+            <small ref={regionRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
             <div className="form-boxes">
               <label htmlFor="ville">*Ville:</label>
               <select
@@ -280,12 +348,13 @@ function Identite() {
                 defaultValue={identite.ville}
                 onChange={(e) => handleInputChange("ville", e)}
               >
-                {villes.map((ville) => {
+                {villes[identite.region].map((ville) => {
                   return <option value={ville}>{ville}</option>;
                 })}
               </select>
             </div>
-            <p className="form-boxes">
+            <small ref={villeRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
+            <div className="form-boxes">
               <label htmlFor="pays">*Pays:</label>
               <input
                 type="text"
@@ -295,8 +364,9 @@ function Identite() {
                 name="pays"
                 defaultValue={identite.pays}
               />
-            </p>
-            <p className="form-boxes">
+            </div>
+            <small ref={paysRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
+            <div className="form-boxes">
               <label htmlFor="telephone">*Numéro de téléphone:</label>
               <input
                 type="text"
@@ -305,8 +375,8 @@ function Identite() {
                 defaultValue={identite.telephone}
                 onChange={(e) => handleInputChange("telephone", e)}
               />
-            </p>
-
+            </div>
+            <small ref={phoneRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
             <div className="buttons">
               <button
                 type="button"

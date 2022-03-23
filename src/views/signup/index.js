@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setRegister } from "../../store/profileSlice";
 import { checkAuth, register } from "../../lib/auth";
-import { useSnackbar } from "react-simple-snackbar";
-import snackbarStyles from "../../lib/snackbarStyles";
 import PageLoading from "../../components/PageLoading";
 
 const Signup = () => {
@@ -18,7 +16,6 @@ const Signup = () => {
   const emailRef = useRef()
   const phoneRef = useRef()
   const passwordRef = useRef()
-  const [openSnackbar, closeSnackbar] = useSnackbar(snackbarStyles);
   const dispatch = useDispatch();
   const registerForm = useSelector((state) => state.profile.register);
   const [loading, setLoading] = useState(true);
