@@ -258,8 +258,8 @@ function Cible() {
           <h3>Identifiez votre cible</h3>
           <div className="form-identite-info d-block">
             <h5 className="text-center text-primary">
-              Identifiez votre cible, vous aurez ainsi plus de chance de
-              décrocher des opportunités d'affaires
+              Vous aurez ainsi plus de chance de décrocher des opportunités
+              d'affaires
             </h5>
             <div className="row">
               <div className="col-10">

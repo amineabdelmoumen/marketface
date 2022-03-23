@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setIdentite } from "../../store/profileSlice";
 import { saveCompany, saveImages } from "../../lib/crud";
 import types from "../../lib/constants/types";
+import years from "../../lib/constants/years";
 import statusList from "../../lib/constants/status";
 import activites from "../../lib/constants/activites";
 import regions from "../../lib/constants/regions";
@@ -115,7 +116,7 @@ function Identite() {
             <p className="section-title">Informations légales</p>
             <div className="form-boxes">
               <label htmlFor="prenom_nom">
-                *Raisone social / prénom et nom:
+                *Raison sociale / prénom et nom:
               </label>
               <input
                 type="text"
@@ -154,7 +155,7 @@ function Identite() {
             <div className="form-boxes">
               <label htmlFor="ice">*ICE:</label>
               <input
-                type="text"
+                type="number"
                 id="ice"
                 name="ice"
                 onChange={(e) => handleInputChange("ice", e)}
@@ -162,16 +163,17 @@ function Identite() {
               />
             </div>
             <div className="form-boxes">
-              <label htmlFor="annee">
-                L'année de création de votre organisme:
-              </label>
-              <input
-                type="text"
-                id="annee"
+              <label htmlFor="annee">L' de création de votre organisme:</label>
+              <select
                 name="annee"
+                id="annee"
                 onChange={(e) => handleInputChange("annee_creation", e)}
                 defaultValue={identite.annee_creation}
-              />
+              >
+                {years.map((opt) => (
+                  <option value={opt}>{opt}</option>
+                ))}
+              </select>
             </div>
             <div className="form-boxes">
               <label htmlFor="organisme_type">
@@ -226,7 +228,7 @@ function Identite() {
           <section>
             <p className="section-title">Informations financières</p>
             <p className="form-boxes">
-              <label htmlFor="capital">*Capital:</label>
+              <label htmlFor="capital">*Capital (MAD):</label>
               <input
                 type="text"
                 id="capital"

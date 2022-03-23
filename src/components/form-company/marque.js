@@ -3,6 +3,7 @@ import { setFormStage } from "../../store/rootSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setMarque, setReferences } from "../../store/profileSlice";
 import categories from "../../lib/constants/categories";
+import years from "../../lib/constants/years";
 import { deleteReference, saveImages, saveReferences } from "../../lib/crud";
 import { useSnackbar } from "react-simple-snackbar";
 import snackbarStyles from "../../lib/snackbarStyles";
@@ -163,13 +164,16 @@ function Marque() {
               </div>
               <div className="form-boxes">
                 <label htmlFor="annee">Année</label>
-                <input
-                  type="text"
+                <select
                   name="annee"
                   id="annee"
-                  value={marque.annee}
                   onChange={(e) => handleInputUpdate("annee", e)}
-                />
+                  defaultValue={marque.annee}
+                >
+                  {years.map((opt) => (
+                    <option value={opt}>{opt}</option>
+                  ))}
+                </select>
               </div>
               <div className="form-boxes">
                 <label htmlFor="description">Description</label>
