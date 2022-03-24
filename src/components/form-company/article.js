@@ -194,7 +194,7 @@ function Article(props) {
               </div>
 
               <div className="form-boxes">
-                <label htmlFor="category">Prix</label>
+                <label htmlFor="category">Prix (MAD):</label>
                 <input
                   type="number"
                   value={article.prix}
