@@ -167,7 +167,7 @@ function Article(props) {
                 >
                   <option value="produit">Produit</option>
                   <option value="service">Service</option>
-                  <option value="immobilier">Immobilier</option>
+                  <option value="immobilier">Bien immobilier</option>
                 </select>
               </div>
               <div className="form-boxes">
