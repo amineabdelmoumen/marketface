@@ -13,6 +13,10 @@ import { setProfil } from "../../store/profileSlice";
 import { checkAuth } from "../../lib/auth";
 import { useNavigate } from "react-router-dom";
 import PageLoading from "../../components/PageLoading";
+import cibleImg from "../../assets/imgs/cible.png";
+import cibleActiveImg from "../../assets/imgs/cible-active.png";
+import marqueImg from "../../assets/imgs/marque.png";
+import marqueActiveImg from "../../assets/imgs/marque-active.png";
 
 function CompanySetting() {
   const navigate = useNavigate();
@@ -62,7 +66,11 @@ function CompanySetting() {
                   className="step-icon"
                   onClick={() => dispatch(setFormStage(2))}
                 >
-                  <Icon id="icon" icon="fa-solid:bullhorn" />
+                  {pageStage === 2 ? (
+                    <img src={marqueActiveImg} style={{ width: 34 }} alt="" />
+                  ) : (
+                    <img src={marqueImg} style={{ width: 34 }} alt="" />
+                  )}
                 </p>
                 <p className="title">Image de marque</p>
               </div>
@@ -88,7 +96,11 @@ function CompanySetting() {
                   className="step-icon"
                   onClick={() => dispatch(setFormStage(5))}
                 >
-                  <Icon id="icon" icon="fluent:target-arrow-16-filled" />
+                  {pageStage === 5 ? (
+                    <img src={cibleActiveImg} style={{ width: 34 }} alt="" />
+                  ) : (
+                    <img src={cibleImg} style={{ width: 34 }} alt="" />
+                  )}
                 </p>
                 <p className="title">Cible</p>
               </div>
