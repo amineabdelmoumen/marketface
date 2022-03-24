@@ -73,6 +73,13 @@ form#form-identite {
       box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px,
         rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
 
+      .icon-img-img {
+        min-height: 80px;
+        width: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
       #icon-ingerprint {
         font-size: 50px;
       }
@@ -108,7 +115,8 @@ form#form-identite {
         width: 170px;
       }
 
-      input, textarea {
+      input,
+      textarea {
         border-radius: 16px;
         border: 1px solid silver;
         color: grey;
