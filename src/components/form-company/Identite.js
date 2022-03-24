@@ -149,7 +149,7 @@ function Identite() {
             {identite.logo ? (
               <img
                 src={`${process.env.REACT_APP_HOST_URL}/${identite.logo}`}
-                width={40}
+                className="icon-img-img"
                 alt=""
               />
             ) : (
