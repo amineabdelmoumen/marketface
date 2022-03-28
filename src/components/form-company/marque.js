@@ -20,6 +20,7 @@ function Marque() {
   const descriptionRef = useRef()
   const categorieRef = useRef()
   const nomRef = useRef()
+  const logoRef = useRef()
 
   const handleLogoUpload = (e) => {
     const token = localStorage.getItem("token");
@@ -104,13 +105,42 @@ function Marque() {
     if (
       !references.length ||
       index > -1 ||
-      Object.values(marque).find(
+      !Object.values(marque).find(
         (el) => el === "" || el === null || el === []
-      ) === undefined
+      )
     ) {
-      save();
+      const token = localStorage.getItem('token')
+      saveReference(marque, token)
+        .then(res => res.data)
+        .then(ref => {
+          let data = [...references];
+          if (index > -1) {
+            data[index] = ref;
+          } else {
+            data.push(ref);
+          }
+          setIndex(-1);
+          dispatch(setReferences(data));
+          dispatch(
+            setMarque({
+              titre: "",
+              annee: "",
+              description: "",
+              categorie: "Produits chimiques",
+              nom_client: "",
+              images: [],
+              logo: null,
+            })
+          );
+        })
+        .then(() => {
+          dispatch(setFormStage(3));
+        })
+        .catch((err) => {
+        let data = err.response.data;
+        showErrors(data.errors)
+      })
     }
-    dispatch(setFormStage(3));
   };
 
   const showErrors = (errors) => {
@@ -128,6 +158,9 @@ function Marque() {
     }
     if(errors.nom_client) {
       nomRef.current.innerText = errors.nom_client[0]
+    }
+    if(errors.logo) {
+      logoRef.current.innerText = errors.logo[0]
     }
   }
   return (
@@ -230,6 +263,7 @@ function Marque() {
                   />
                 </label>
               </div>
+              <small ref={logoRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
               <div className="form-boxes">
                 <label htmlFor="">Joindre photos des réalisations</label>
                 <label htmlFor="photos" className="text-center upload">
