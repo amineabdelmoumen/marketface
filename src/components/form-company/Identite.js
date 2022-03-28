@@ -325,7 +325,7 @@ function Identite() {
               className="text-danger ms-2 d-block"
               style={{ "font-size": "10px" }}
             ></small>
-            <p className="section-title">Contact:</p>
+            <p className="section-title mt-3">Contact:</p>
             <div className="form-boxes">
               <label htmlFor="siege">*Siège social:</label>
               <input
