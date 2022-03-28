@@ -18,8 +18,8 @@ export default function About() {
             <input type="text" className="input" placeholder="Section" />
             <input type="text" className="input" placeholder="Section" />
             <input type="text" className="input1" placeholder="Section" />
-            <div className="comp-info">
-              <div className="address">
+            <div className="d-flex flex-column flex-lg-row justify-content-around gap-3 mt-3 comp-info">
+              <div className="address ">
                 <img className="local-image" src="/imgs/cafe.svg" alt="" />
                 <span className="local-text">Casablanca,Maroc</span>
               </div>

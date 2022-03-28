@@ -40,10 +40,7 @@ function CompanySetting() {
 
   const handleDisconnect = () => {
     localStorage.removeItem("token");
-    const token = localStorage.getItem("token");
-    if (token == null) {
-      navigate("/login");
-    }
+    navigate("/login");
   };
   return (
     <>
@@ -116,9 +113,11 @@ function CompanySetting() {
             }
           </div>
 
-          <a href="#" className="disconnect-btn" onClick={handleDisconnect}>
-            Se déconnecter
-          </a>
+          <div className="d-flex justify-content-center pb-5">
+            <a href="#" onClick={handleDisconnect}>
+              Se déconnecter
+            </a>
+          </div>
         </div>
       )}
     </>
