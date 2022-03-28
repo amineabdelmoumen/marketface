@@ -8,15 +8,21 @@
   }
 
   .steps-icons {
+    position: relative;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     width: 50%;
     margin: auto;
 
     .line {
-      border: 1px solid #00b6ff;
-      height: 1px;
-      width: 250px;
+      position: absolute;
+      top: 42%;
+      background-color: #00b6ff;
+      height: 3px;
+      border: none;
+      width: calc(100% - 20px);
+      left: 10px;
+      z-index: -1;
     }
     .step {
       margin: 10px;
