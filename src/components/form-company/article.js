@@ -113,11 +113,40 @@ function Article(props) {
       index > -1 ||
       Object.values(article).find(
         (el) => el === "" || el === null || el === []
-      ) === undefined
+      )
     ) {
-      appendArticle();
+      const token = localStorage.getItem("token");
+      saveArticle(article, token)
+        .then((res) => res.data)
+        .then((data) => {
+          let list = [...articles];
+          if (index > -1) {
+            list[index] = data;
+          } else {
+            list.push(data);
+          }
+          setIndex(-1);
+          dispatch(setArticles(list));
+          dispatch(
+            setArticle({
+              type_article: "Produit",
+              type: "Produits chimiques",
+              nom: "",
+              description: "",
+              prix: "",
+              quantite: "",
+            })
+          );
+        })
+        .then(() => {
+          dispatch(setFormStage(5));
+        })
+        .catch((err) => {
+          let errors = err.response.data.errors;
+          showErrors(errors);
+        });
     }
-    dispatch(setFormStage(5));
+
   };
   const setArticleData = (i) => {
     const data = { ...articles[i] };
