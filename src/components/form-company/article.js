@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import { setFormStage } from "../../store/rootSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setArticle, setArticles } from "../../store/profileSlice";
-import { deleteArticle, saveArticle, saveImages } from "../../lib/crud";
+import {deleteArticle, saveArticle, saveDocs, saveImages} from "../../lib/crud";
 import typesArticle from "../../lib/constants/typesArticle";
-import { useSnackbar } from "react-simple-snackbar";
-import snackbarStyles from "../../lib/snackbarStyles";
 import services from "../../lib/constants/services";
 
 let uploadForm = new FormData();
@@ -28,42 +26,32 @@ const natures = [
 ];
 
 function Article(props) {
-  const [openSnackbar, closeSnackbar] = useSnackbar(snackbarStyles);
+  const typeArticleRef = useRef()
+  const nomRef = useRef()
+  const descriptionRef = useRef()
+  const prixRef = useRef()
+  const quantiteRef = useRef()
+  const typeRef = useRef()
   const dispatch = useDispatch();
   const article = useSelector((state) => state.profile.article);
   const articles = useSelector((state) => state.profile.articles);
-  const [photos, setPhotos] = useState([]);
   const [index, setIndex] = useState(-1);
-  const [sendArticles, setSendArticles] = useState(false);
   const [isFullDescription, setIsFullDescription] = useState(false);
 
-  useEffect(() => {
-    if (sendArticles) {
-      if (articles.length) {
-        const token = localStorage.getItem("token");
-        saveArticle({ articles: articles }, token)
-          .then((res) => res.data)
-          .then((data) => {
-            dispatch(setArticles(data));
-            setSendArticles(false);
-            dispatch(setFormStage(5));
-          })
-          .catch((err) => {
-            let data = err.response.data;
-            openSnackbar(
-              <ul>
-                {Object.values(data.errors).map((errors) =>
-                  errors.map((error) => <li>{error}</li>)
-                )}
-              </ul>
-            );
-          });
-      } else {
-        setSendArticles(false);
-        dispatch(setFormStage(5));
-      }
+  const handleDocsUpload = (e) => {
+    const token = localStorage.getItem("token");
+    let data = { ...article };
+    let files = e.target.files;
+    for (let i = 0; i < files.length; i++) {
+      uploadForm.append(`documents[${i}]`, files[i]);
     }
-  }, [sendArticles]);
+    saveDocs(uploadForm, token).then((res) => {
+      const response = res.data;
+      uploadForm = new FormData();
+      data["documents"] = response.paths;
+      dispatch(setArticle(data));
+    });
+  }
   function handlePhotosUpload(e) {
     const token = localStorage.getItem("token");
     let data = { ...article };
@@ -77,7 +65,6 @@ function Article(props) {
       data["images"] = response.paths;
       dispatch(setArticle(data));
     });
-    setPhotos(photos);
   }
 
   const handleInputUpdate = (field, e) => {
@@ -87,24 +74,33 @@ function Article(props) {
   };
 
   const appendArticle = () => {
-    let data = [...articles];
-    if (index > -1) {
-      data[index] = article;
-    } else {
-      data.push(article);
-    }
-    setIndex(-1);
-    dispatch(setArticles(data));
-    dispatch(
-      setArticle({
-        type_article: "Produit",
-        type: "Produits chimiques",
-        nom: "",
-        description: "",
-        prix: "",
-        quantite: "",
+    const token = localStorage.getItem('token')
+    saveArticle(article, token)
+      .then(res => res.data)
+      .then(data => {
+        let list = [...articles];
+        if (index > -1) {
+          list[index] = data;
+        } else {
+          list.push(data);
+        }
+        setIndex(-1);
+        dispatch(setArticles(list));
+        dispatch(
+          setArticle({
+            type_article: "Produit",
+            type: "Produits chimiques",
+            nom: "",
+            description: "",
+            prix: "",
+            quantite: "",
+          })
+        );
       })
-    );
+      .catch(err => {
+        let errors = err.response.data.errors
+        showErrors(errors)
+      })
   };
   const save = () => {
     if (
@@ -116,7 +112,7 @@ function Article(props) {
     ) {
       appendArticle();
     }
-    setSendArticles(true);
+    dispatch(setFormStage(5))
   };
   const setArticleData = (i) => {
     const data = { ...articles[i] };
@@ -124,6 +120,26 @@ function Article(props) {
     dispatch(setArticle(data));
   };
 
+  const showErrors = (errors) => {
+    if(errors.type_article) {
+      typeArticleRef.current.innerText = errors.type_article[0]
+    }
+    if(errors.nom) {
+      nomRef.current.innerText = errors.nom[0]
+    }
+    if(errors.description) {
+      descriptionRef.current.innerText = errors.description[0]
+    }
+    if(errors.prix) {
+      prixRef.current.innerText = errors.prix[0]
+    }
+    if(errors.quantite) {
+      quantiteRef.current.innerText = errors.quantite[0]
+    }
+    if(errors.type) {
+      typeRef.current.innerText = errors.type[0]
+    }
+  }
   const removeArticle = async (i) => {
     const token = localStorage.getItem("token");
     setIndex(-1);
@@ -170,6 +186,7 @@ function Article(props) {
                   <option value="immobilier">Immobilier</option>
                 </select>
               </div>
+              <small ref={typeArticleRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
               <div className="form-boxes">
                 <label htmlFor="nom">Nom d'article</label>
                 <input
@@ -180,6 +197,7 @@ function Article(props) {
                   onChange={(e) => handleInputUpdate("nom", e)}
                 />
               </div>
+              <small ref={nomRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
               <div className="form-boxes">
                 <label htmlFor="description">Description</label>
                 <textarea
@@ -192,7 +210,7 @@ function Article(props) {
                   onClick={() => setIsFullDescription(false)}
                 />
               </div>
-
+              <small ref={descriptionRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
               <div className="form-boxes">
                 <label htmlFor="category">Prix</label>
                 <input
@@ -201,12 +219,8 @@ function Article(props) {
                   onChange={(e) => handleInputUpdate("prix", e)}
                 />
               </div>
-              {/*<p className="form-boxes">*/}
-              {/*  <label htmlFor="nom_client">*/}
-              {/*    Catégorie:*/}
-              {/*  </label>*/}
-              {/*  <input type="text" id="nom_client" onChange={(e) => setCategorie(e.target.value)} />*/}
-              {/*</p>*/}
+              <small ref={prixRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
+
               <div className="form-boxes">
                 <label htmlFor="quantite">Quantité:</label>
                 <input
@@ -216,6 +230,7 @@ function Article(props) {
                   onChange={(e) => handleInputUpdate("quantite", e)}
                 />
               </div>
+              <small ref={quantiteRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
               <div className="form-boxes">
                 <label htmlFor="type">Type:</label>
                 <select
@@ -239,24 +254,57 @@ function Article(props) {
                   }
                 </select>
               </div>
-              <div className="form-boxes">
-                <label htmlFor="adresse">Adresse:</label>
-                <input
-                  type="text"
-                  id="adresse"
-                  value={article.adresse}
-                  onChange={(e) => handleInputUpdate("adresse", e)}
-                />
-              </div>
-              <div className="form-boxes">
-                <label htmlFor="superficie">Superficie:</label>
-                <input
-                  type="text"
-                  id="superficie"
-                  value={article.superficie}
-                  onChange={(e) => handleInputUpdate("superficie", e)}
-                />
-              </div>
+              <small ref={typeRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
+              {
+                article.type_article === 'service' ?
+                  <div className="form-boxes">
+                    <label htmlFor="duree_service">Durée du service:</label>
+                    <input
+                      type="text"
+                      id="duree_service"
+                      value={article.duree_service}
+                      onChange={(e) => handleInputUpdate("duree_service", e)}
+                    />
+                  </div>
+                  : ''
+              }
+              {
+                article.type_article === 'immobilier' ? (
+                    <>
+                      <div className="form-boxes">
+                        <label htmlFor="adresse">Adresse:</label>
+                        <input
+                          type="text"
+                          id="adresse"
+                          value={article.adresse}
+                          onChange={(e) => handleInputUpdate("adresse", e)}
+                        />
+                      </div>
+                      <div className="form-boxes">
+                        <label htmlFor="superficie">Superficie:</label>
+                        <input
+                          type="text"
+                          id="superficie"
+                          value={article.superficie}
+                          onChange={(e) => handleInputUpdate("superficie", e)}
+                        />
+                      </div></>
+                ) : ''
+              }
+              {
+                article.type_article !== 'produit' ?
+                  <div className="form-boxes">
+                    <label htmlFor="photos">Joindre les documents d'article</label>
+                    <input
+                      type="file"
+                      id="documents"
+                      name="documents[]"
+                      multiple
+                      onChange={(e) => handleDocsUpload(e)}
+                    />
+                  </div>
+                  : ''
+              }
               <div className="form-boxes">
                 <label htmlFor="photos">Joindre des photos d'article</label>
                 <input
@@ -338,7 +386,7 @@ function Article(props) {
             <button
               type="button"
               className="btn pointer ml-4 btn-success text-white rounded-pill px-4 ms-5"
-              onClick={() => dispatch(setFormStage(5))}
+              onClick={() => save()}
             >
               Suivant
             </button>
