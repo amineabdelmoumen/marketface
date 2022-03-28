@@ -144,24 +144,12 @@ function Marque() {
   };
 
   const showErrors = (errors) => {
-    if(errors.titre) {
-      titreRef.current.innerText = errors.titre[0]
-    }
-    if(errors.annee) {
-      anneeRef.current.innerText = errors.annee[0]
-    }
-    if(errors.description) {
-      descriptionRef.current.innerText = errors.description[0]
-    }
-    if(errors.categorie) {
-      categorieRef.current.innerText = errors.categorie[0]
-    }
-    if(errors.nom_client) {
-      nomRef.current.innerText = errors.nom_client[0]
-    }
-    if(errors.logo) {
-      logoRef.current.innerText = errors.logo[0]
-    }
+    titreRef.current.innerText = errors.titre ? errors.titre[0] : '';
+    anneeRef.current.innerText = errors.annee ? errors.annee[0] : '';
+    descriptionRef.current.innerText = errors.description ? errors.description[0] : '';
+    categorieRef.current.innerText = errors.categorie ? errors.categorie[0] : '';
+    nomRef.current.innerText = errors.nom_client ? errors.nom_client[0] : '';
+    logoRef.current.innerText = errors.logo ? errors.logo[0] : '';
   }
   return (
     <>

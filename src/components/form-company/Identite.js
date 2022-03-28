@@ -83,51 +83,21 @@ function Identite() {
   }
 
   const showErrors = (errors) => {
-    if (errors.raison_ou_nom) {
-      raisonRef.current.innerText = errors.raison_ou_nom[0];
-    }
-    if (errors.activite) {
-      activiteRef.current.innerText = errors.activite[0];
-    }
-    if (errors.statut) {
-      statutRef.current.innerText = errors.statut[0];
-    }
-    if (errors.annee_creation) {
-      anneeRef.current.innerText = errors.annee_creation[0];
-    }
-    if (errors.ice) {
-      iceRef.current.innerText = errors.ice[0];
-    }
-    if (errors.type) {
-      typeRef.current.innerText = errors.type[0];
-    }
-    if (errors.taille) {
-      tailleRef.current.innerText = errors.taille[0];
-    }
-    if (errors.nombre_employes) {
-      employesRef.current.innerText = errors.nombre_employes[0];
-    }
-    if (errors.capital) {
-      capitalRef.current.innerText = errors.capital[0];
-    }
-    if (errors.chiffre_affaire) {
-      chiffreAffairesRef.current.innerText = errors.chiffre_affaire[0];
-    }
-    if (errors.siege_social) {
-      siegeRef.current.innerText = errors.siege_social[0];
-    }
-    if (errors.region) {
-      regionRef.current.innerText = errors.region[0];
-    }
-    if (errors.ville) {
-      villeRef.current.innerText = errors.ville[0];
-    }
-    if (errors.pays) {
-      paysRef.current.innerText = errors.pays[0];
-    }
-    if (errors.telephone) {
-      phoneRef.current.innerText = errors.telephone[0];
-    }
+    raisonRef.current.innerText = errors.raison_ou_nom ? errors.raison_ou_nom[0] : '';
+    activiteRef.current.innerText = errors.activite ? errors.activite[0] : '';
+    statutRef.current.innerText = errors.statut ? errors.statut[0] : '';
+    anneeRef.current.innerText = errors.annee_creation ? errors.annee_creation[0] : '';
+    iceRef.current.innerText = errors.ice ? errors.ice[0] : '';
+    typeRef.current.innerText = errors.type ? errors.type[0] : '';
+    tailleRef.current.innerText = errors.taille ? errors.taille[0] : '';
+    employesRef.current.innerText = errors.nombre_employes ? errors.nombre_employes[0] : '';
+    capitalRef.current.innerText = errors.capital ? errors.capital[0] : '';
+    chiffreAffairesRef.current.innerText = errors.chiffre_affaire ? errors.chiffre_affaire[0] : '';
+    siegeRef.current.innerText = errors.siege_social ? errors.siege_social[0] : '';
+    regionRef.current.innerText = errors.region ? errors.region[0] : '';
+    villeRef.current.innerText = errors.ville ? errors.ville[0] : '';
+    paysRef.current.innerText = errors.pays ? errors.pays[0] : '';
+    phoneRef.current.innerText = errors.telephone ? errors.telephone[0] : '';
   };
 
   return (

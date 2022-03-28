@@ -155,24 +155,12 @@ function Article(props) {
   };
 
   const showErrors = (errors) => {
-    if (errors.type_article) {
-      typeArticleRef.current.innerText = errors.type_article[0];
-    }
-    if (errors.nom) {
-      nomRef.current.innerText = errors.nom[0];
-    }
-    if (errors.description) {
-      descriptionRef.current.innerText = errors.description[0];
-    }
-    if (errors.prix) {
-      prixRef.current.innerText = errors.prix[0];
-    }
-    if (errors.quantite) {
-      quantiteRef.current.innerText = errors.quantite[0];
-    }
-    if (errors.type) {
-      typeRef.current.innerText = errors.type[0];
-    }
+    typeArticleRef.current.innerText = errors.type_article ? errors.type_article[0] : '';
+    nomRef.current.innerText = errors.nom ? errors.nom[0] : '';
+    descriptionRef.current.innerText = errors.description ? errors.description[0] : '';
+    prixRef.current.innerText = errors.prix ? errors.prix[0] : '';
+    quantiteRef.current.innerText = errors.quantite ? errors.quantite[0] : '';
+    typeRef.current.innerText = errors.type ? errors.type[0] : '';
   };
   const removeArticle = async (i) => {
     const token = localStorage.getItem("token");
