@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Icon } from "@iconify/react";
 import { setFormStage } from "../../store/rootSlice";
-import "./styles.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { setIdentite } from "../../store/profileSlice";
 import { saveCompany, saveImages } from "../../lib/crud";
@@ -13,6 +12,7 @@ import regions from "../../lib/constants/regions";
 import villes from "../../lib/constants/villes";
 import { useSnackbar } from "react-simple-snackbar";
 import snackbarStyles from "../../lib/snackbarStyles";
+import "./styles.scss";
 
 const form = new FormData();
 let uploadForm = new FormData();

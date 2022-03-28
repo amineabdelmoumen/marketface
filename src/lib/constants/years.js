@@ -1,6 +1,6 @@
 const getYears = () => {
   const currentYear = new Date().getFullYear();
-  let yearsList = [];
+  let yearsList = [""];
   for (let index = currentYear; index >= 1950; index--) {
     yearsList.push(index);
   }
