@@ -90,6 +90,12 @@ function Save(props) {
             <div className="col-6 offset-3">
               <div className="d-flex justify-content-center my-5">
                 <button
+                  className="btn pointer btn-outline-success rounded-pill me-3 px-4"
+                  onClick={() => navigate("/profil")}
+                >
+                  Plus tard
+                </button>
+                <button
                   className="btn btn-success text-white rounded-pill px-5"
                   onClick={() => sendDocs()}
                 >
