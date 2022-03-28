@@ -445,13 +445,6 @@ function Identite() {
             <div className="buttons">
               <button
                 type="button"
-                className="btn pointer btn-outline-success rounded-pill px-4"
-                onClick={() => save()}
-              >
-                Enregistrer
-              </button>
-              <button
-                type="button"
                 className="btn pointer ml-4 btn-success text-white rounded-pill px-4"
                 onClick={() => nextPage()}
               >
