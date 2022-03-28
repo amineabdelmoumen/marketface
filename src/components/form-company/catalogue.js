@@ -490,7 +490,7 @@ function Catalogue() {
               </div>
             </div>
           </div>
-          <div className="d-flex justify-content-end">
+          <div className="d-flex mt-3 justify-content-end">
             <button
               type="button"
               className="btn pointer btn-outline-secondary rounded-pill px-4"
