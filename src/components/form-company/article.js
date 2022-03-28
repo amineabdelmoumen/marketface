@@ -1,8 +1,13 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { setFormStage } from "../../store/rootSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setArticle, setArticles } from "../../store/profileSlice";
-import {deleteArticle, saveArticle, saveDocs, saveImages} from "../../lib/crud";
+import {
+  deleteArticle,
+  saveArticle,
+  saveDocs,
+  saveImages,
+} from "../../lib/crud";
 import typesArticle from "../../lib/constants/typesArticle";
 import services from "../../lib/constants/services";
 
@@ -26,12 +31,12 @@ const natures = [
 ];
 
 function Article(props) {
-  const typeArticleRef = useRef()
-  const nomRef = useRef()
-  const descriptionRef = useRef()
-  const prixRef = useRef()
-  const quantiteRef = useRef()
-  const typeRef = useRef()
+  const typeArticleRef = useRef();
+  const nomRef = useRef();
+  const descriptionRef = useRef();
+  const prixRef = useRef();
+  const quantiteRef = useRef();
+  const typeRef = useRef();
   const dispatch = useDispatch();
   const article = useSelector((state) => state.profile.article);
   const articles = useSelector((state) => state.profile.articles);
@@ -51,7 +56,7 @@ function Article(props) {
       data["documents"] = response.paths;
       dispatch(setArticle(data));
     });
-  }
+  };
   function handlePhotosUpload(e) {
     const token = localStorage.getItem("token");
     let data = { ...article };
@@ -74,10 +79,10 @@ function Article(props) {
   };
 
   const appendArticle = () => {
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem("token");
     saveArticle(article, token)
-      .then(res => res.data)
-      .then(data => {
+      .then((res) => res.data)
+      .then((data) => {
         let list = [...articles];
         if (index > -1) {
           list[index] = data;
@@ -97,10 +102,10 @@ function Article(props) {
           })
         );
       })
-      .catch(err => {
-        let errors = err.response.data.errors
-        showErrors(errors)
-      })
+      .catch((err) => {
+        let errors = err.response.data.errors;
+        showErrors(errors);
+      });
   };
   const save = () => {
     if (
@@ -112,7 +117,7 @@ function Article(props) {
     ) {
       appendArticle();
     }
-    dispatch(setFormStage(5))
+    dispatch(setFormStage(5));
   };
   const setArticleData = (i) => {
     const data = { ...articles[i] };
@@ -121,25 +126,25 @@ function Article(props) {
   };
 
   const showErrors = (errors) => {
-    if(errors.type_article) {
-      typeArticleRef.current.innerText = errors.type_article[0]
+    if (errors.type_article) {
+      typeArticleRef.current.innerText = errors.type_article[0];
     }
-    if(errors.nom) {
-      nomRef.current.innerText = errors.nom[0]
+    if (errors.nom) {
+      nomRef.current.innerText = errors.nom[0];
     }
-    if(errors.description) {
-      descriptionRef.current.innerText = errors.description[0]
+    if (errors.description) {
+      descriptionRef.current.innerText = errors.description[0];
     }
-    if(errors.prix) {
-      prixRef.current.innerText = errors.prix[0]
+    if (errors.prix) {
+      prixRef.current.innerText = errors.prix[0];
     }
-    if(errors.quantite) {
-      quantiteRef.current.innerText = errors.quantite[0]
+    if (errors.quantite) {
+      quantiteRef.current.innerText = errors.quantite[0];
     }
-    if(errors.type) {
-      typeRef.current.innerText = errors.type[0]
+    if (errors.type) {
+      typeRef.current.innerText = errors.type[0];
     }
-  }
+  };
   const removeArticle = async (i) => {
     const token = localStorage.getItem("token");
     setIndex(-1);
@@ -186,7 +191,11 @@ function Article(props) {
                   <option value="immobilier">Bien immobilier</option>
                 </select>
               </div>
-              <small ref={typeArticleRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
+              <small
+                ref={typeArticleRef}
+                className="text-danger ms-2 d-block"
+                style={{ "font-size": "10px" }}
+              ></small>
               <div className="form-boxes">
                 <label htmlFor="nom">Nom d'article</label>
                 <input
@@ -197,7 +206,11 @@ function Article(props) {
                   onChange={(e) => handleInputUpdate("nom", e)}
                 />
               </div>
-              <small ref={nomRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
+              <small
+                ref={nomRef}
+                className="text-danger ms-2 d-block"
+                style={{ "font-size": "10px" }}
+              ></small>
               <div className="form-boxes">
                 <label htmlFor="description">Description</label>
                 <textarea
@@ -210,7 +223,11 @@ function Article(props) {
                   onClick={() => setIsFullDescription(false)}
                 />
               </div>
-              <small ref={descriptionRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
+              <small
+                ref={descriptionRef}
+                className="text-danger ms-2 d-block"
+                style={{ "font-size": "10px" }}
+              ></small>
               <div className="form-boxes">
                 <label htmlFor="category">Prix (MAD):</label>
                 <input
@@ -219,7 +236,11 @@ function Article(props) {
                   onChange={(e) => handleInputUpdate("prix", e)}
                 />
               </div>
-              <small ref={prixRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
+              <small
+                ref={prixRef}
+                className="text-danger ms-2 d-block"
+                style={{ "font-size": "10px" }}
+              ></small>
 
               <div className="form-boxes">
                 <label htmlFor="quantite">Quantité:</label>
@@ -230,7 +251,11 @@ function Article(props) {
                   onChange={(e) => handleInputUpdate("quantite", e)}
                 />
               </div>
-              <small ref={quantiteRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
+              <small
+                ref={quantiteRef}
+                className="text-danger ms-2 d-block"
+                style={{ "font-size": "10px" }}
+              ></small>
               <div className="form-boxes">
                 <label htmlFor="type">Type:</label>
                 <select
@@ -254,67 +279,82 @@ function Article(props) {
                   }
                 </select>
               </div>
-              <small ref={typeRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
-              {
-                article.type_article === 'service' ?
+              <small
+                ref={typeRef}
+                className="text-danger ms-2 d-block"
+                style={{ "font-size": "10px" }}
+              ></small>
+              {article.type_article === "service" ? (
+                <div className="form-boxes">
+                  <label htmlFor="duree_service">Durée du service:</label>
+                  <input
+                    type="text"
+                    id="duree_service"
+                    value={article.duree_service}
+                    onChange={(e) => handleInputUpdate("duree_service", e)}
+                  />
+                </div>
+              ) : (
+                ""
+              )}
+              {article.type_article === "immobilier" ? (
+                <>
                   <div className="form-boxes">
-                    <label htmlFor="duree_service">Durée du service:</label>
+                    <label htmlFor="adresse">Adresse:</label>
                     <input
                       type="text"
-                      id="duree_service"
-                      value={article.duree_service}
-                      onChange={(e) => handleInputUpdate("duree_service", e)}
+                      id="adresse"
+                      value={article.adresse}
+                      onChange={(e) => handleInputUpdate("adresse", e)}
                     />
                   </div>
-                  : ''
-              }
-              {
-                article.type_article === 'immobilier' ? (
-                    <>
-                      <div className="form-boxes">
-                        <label htmlFor="adresse">Adresse:</label>
-                        <input
-                          type="text"
-                          id="adresse"
-                          value={article.adresse}
-                          onChange={(e) => handleInputUpdate("adresse", e)}
-                        />
-                      </div>
-                      <div className="form-boxes">
-                        <label htmlFor="superficie">Superficie:</label>
-                        <input
-                          type="text"
-                          id="superficie"
-                          value={article.superficie}
-                          onChange={(e) => handleInputUpdate("superficie", e)}
-                        />
-                      </div></>
-                ) : ''
-              }
-              {
-                article.type_article !== 'produit' ?
                   <div className="form-boxes">
-                    <label htmlFor="photos">Joindre les documents d'article</label>
+                    <label htmlFor="superficie">Superficie:</label>
+                    <input
+                      type="text"
+                      id="superficie"
+                      value={article.superficie}
+                      onChange={(e) => handleInputUpdate("superficie", e)}
+                    />
+                  </div>
+                </>
+              ) : (
+                ""
+              )}
+              {article.type_article !== "produit" ? (
+                <div className="form-boxes">
+                  <label htmlFor="photos">
+                    Joindre les documents d'article
+                  </label>
+                  <label htmlFor="documents" className="text-center upload">
+                    Choisir un fichier
                     <input
                       type="file"
                       id="documents"
                       name="documents[]"
+                      className="d-none"
                       multiple
                       onChange={(e) => handleDocsUpload(e)}
                     />
-                  </div>
-                  : ''
-              }
+                  </label>
+                </div>
+              ) : (
+                ""
+              )}
               <div className="form-boxes">
                 <label htmlFor="photos">Joindre des photos d'article</label>
-                <input
-                  type="file"
-                  id="photos"
-                  name="photos[]"
-                  accept="image/*"
-                  multiple
-                  onChange={(e) => handlePhotosUpload(e)}
-                />
+                <label htmlFor="photos" className="text-center upload">
+                  Choisir un fichier
+                  <input
+                    type="file"
+                    id="photos"
+                    name="photos[]"
+                    accept="image/*"
+                    className="d-none"
+                    multiple
+                    onChange={(e) => handlePhotosUpload(e)}
+                  />
+                </label>
               </div>
             </section>
 

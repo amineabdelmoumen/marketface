@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { formStage, formCompany } from "../../store/rootSlice";
 import Identite from "./Identite";
-import "./styles.scss";
 import Marque from "./marque";
 import Catalogue from "./catalogue";
 import Cible from "./cible";
+import "./styles.scss";
 
 function FormUserCompany({ pageTitle, submitButtonText, previousButton }) {
   // redux
@@ -61,7 +61,6 @@ function FormUserCompany({ pageTitle, submitButtonText, previousButton }) {
   return (
     <>
       <Identite />
-
     </>
   );
 }
