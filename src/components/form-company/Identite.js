@@ -415,7 +415,6 @@ function Identite() {
               <label htmlFor="pays">*Pays:</label>
               <input
                 type="text"
-                value={"Maroc"}
                 readOnly
                 id="pays"
                 name="pays"
