@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getProfile } from "../../lib/crud";
+import { useDispatch, useSelector } from "react-redux";
 import About from "./profilComponents/About";
 import CompanyCard from "./profilComponents/CompanyCard";
 import CompanyDetails from "./profilComponents/CompanyDetails";
@@ -7,12 +8,14 @@ import CompanyTeam from "./profilComponents/CompanyTeam";
 import NavBar from "./profilComponents/NavBar";
 import SideBar from "./profilComponents/SideBar";
 import "./styles.scss";
+import { setProfil } from "../../store/profileSlice";
 
 function Profil() {
+  const dispatch = useDispatch();
   useEffect(async () => {
     const token = localStorage.getItem("token");
     const response = await getProfile(token);
-    console.log(response);
+    dispatch(setProfil(response.data));
   }, []);
 
   return (
