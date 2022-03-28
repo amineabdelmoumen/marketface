@@ -1,5 +1,5 @@
 import React from "react";
-import { saveDocs } from "../../lib/crud";
+import {saveDocuments} from "../../lib/crud";
 import { useNavigate } from "react-router-dom";
 
 let form = new FormData();
@@ -15,7 +15,7 @@ function Save(props) {
 
   const sendDocs = () => {
     const token = localStorage.getItem("token");
-    saveDocs(form, token)
+    saveDocuments(form, token)
       .then((res) => {
         form = new FormData();
       })

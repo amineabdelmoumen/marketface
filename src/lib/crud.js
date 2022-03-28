@@ -65,6 +65,15 @@ export const saveImages = async (data, token) => {
   })
 }
 
+export const saveDocuments = async (data, token) => {
+  return await apiClient.post('/document', data, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data'
+    }
+  })
+}
+
 export const saveDocs = async (data, token) => {
   return await apiClient.post('/upload/document', data, {
     headers: {
