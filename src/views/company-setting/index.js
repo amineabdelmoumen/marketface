@@ -14,10 +14,6 @@ import { setProfil } from "../../store/profileSlice";
 import { checkAuth } from "../../lib/auth";
 import { useNavigate, Link } from "react-router-dom";
 import PageLoading from "../../components/PageLoading";
-import cibleImg from "../../assets/imgs/cible.png";
-import cibleActiveImg from "../../assets/imgs/cible-active.png";
-import marqueImg from "../../assets/imgs/marque.png";
-import marqueActiveImg from "../../assets/imgs/marque-active.png";
 
 function CompanySetting() {
   const navigate = useNavigate();
@@ -120,9 +116,9 @@ function CompanySetting() {
             }
           </div>
 
-          <Link to="/" className="disconnect-btn" onClick={handleDisconnect}>
+          <a href="#" className="disconnect-btn" onClick={handleDisconnect}>
             Se déconnecter
-          </Link>
+          </a>
         </div>
       )}
     </>
