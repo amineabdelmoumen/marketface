@@ -34,6 +34,7 @@ function Identite() {
   const villeRef = useRef();
   const paysRef = useRef();
   const phoneRef = useRef();
+  const logoRef = useRef();
 
   const organismeSize = ["Start-up", "TPE", "PME", "PMI", "GE"];
   const nombreEmployes = ["De 1 à 10", "De 10 à 250", "Plus de 250"];
@@ -83,21 +84,32 @@ function Identite() {
   }
 
   const showErrors = (errors) => {
-    raisonRef.current.innerText = errors.raison_ou_nom ? errors.raison_ou_nom[0] : '';
-    activiteRef.current.innerText = errors.activite ? errors.activite[0] : '';
-    statutRef.current.innerText = errors.statut ? errors.statut[0] : '';
-    anneeRef.current.innerText = errors.annee_creation ? errors.annee_creation[0] : '';
-    iceRef.current.innerText = errors.ice ? errors.ice[0] : '';
-    typeRef.current.innerText = errors.type ? errors.type[0] : '';
-    tailleRef.current.innerText = errors.taille ? errors.taille[0] : '';
-    employesRef.current.innerText = errors.nombre_employes ? errors.nombre_employes[0] : '';
-    capitalRef.current.innerText = errors.capital ? errors.capital[0] : '';
-    chiffreAffairesRef.current.innerText = errors.chiffre_affaire ? errors.chiffre_affaire[0] : '';
-    siegeRef.current.innerText = errors.siege_social ? errors.siege_social[0] : '';
-    regionRef.current.innerText = errors.region ? errors.region[0] : '';
-    villeRef.current.innerText = errors.ville ? errors.ville[0] : '';
-    paysRef.current.innerText = errors.pays ? errors.pays[0] : '';
-    phoneRef.current.innerText = errors.telephone ? errors.telephone[0] : '';
+    raisonRef.current.innerText = errors.raison_ou_nom
+      ? errors.raison_ou_nom[0]
+      : "";
+    activiteRef.current.innerText = errors.activite ? errors.activite[0] : "";
+    statutRef.current.innerText = errors.statut ? errors.statut[0] : "";
+    anneeRef.current.innerText = errors.annee_creation
+      ? errors.annee_creation[0]
+      : "";
+    iceRef.current.innerText = errors.ice ? errors.ice[0] : "";
+    typeRef.current.innerText = errors.type ? errors.type[0] : "";
+    tailleRef.current.innerText = errors.taille ? errors.taille[0] : "";
+    employesRef.current.innerText = errors.nombre_employes
+      ? errors.nombre_employes[0]
+      : "";
+    capitalRef.current.innerText = errors.capital ? errors.capital[0] : "";
+    chiffreAffairesRef.current.innerText = errors.chiffre_affaire
+      ? errors.chiffre_affaire[0]
+      : "";
+    siegeRef.current.innerText = errors.siege_social
+      ? errors.siege_social[0]
+      : "";
+    regionRef.current.innerText = errors.region ? errors.region[0] : "";
+    villeRef.current.innerText = errors.ville ? errors.ville[0] : "";
+    paysRef.current.innerText = errors.pays ? errors.pays[0] : "";
+    phoneRef.current.innerText = errors.telephone ? errors.telephone[0] : "";
+    logoRef.current.innerText = errors.logo ? errors.logo[0] : "";
   };
 
   return (
@@ -131,6 +143,11 @@ function Identite() {
           <button onClick={handleChooseFile} className="pointer">
             Choisir un fichier
           </button>
+          <small
+            ref={logoRef}
+            className="text-danger ms-2 d-block"
+            style={{ "font-size": "10px", marginTop: "6px" }}
+          ></small>
         </div>
         <div className="form-identite-info">
           {/*Information legal */}
