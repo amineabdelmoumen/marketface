@@ -183,7 +183,7 @@ function Article(props) {
                 >
                   <option value="produit">Produit</option>
                   <option value="service">Service</option>
-                  <option value="immobilier">Immobilier</option>
+                  <option value="immobilier">Bien immobilier</option>
                 </select>
               </div>
               <small ref={typeArticleRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
@@ -212,7 +212,7 @@ function Article(props) {
               </div>
               <small ref={descriptionRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
               <div className="form-boxes">
-                <label htmlFor="category">Prix</label>
+                <label htmlFor="category">Prix (MAD):</label>
                 <input
                   type="number"
                   value={article.prix}

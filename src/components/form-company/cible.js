@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { setFormStage } from "../../store/rootSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
@@ -167,6 +167,10 @@ function Cible() {
   const [defaultRegions, setDefaultRegions] = useState([]);
   const [defaultActivites, setDefaultActivites] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const regionsRef = useRef();
+  const activitesRef = useRef();
+
   useEffect(() => {
     if (loading) {
       let data = [];
@@ -192,6 +196,15 @@ function Cible() {
       setLoading(false);
     }
   }, [loading]);
+
+  const showErrors = (errors) => {
+    if (errors.regions) {
+      regionsRef.current.innerText = errors.regions[0];
+    }
+    if (errors.activites) {
+      activitesRef.current.innerText = errors.activites[0];
+    }
+  };
 
   const handleInputUpdate = (field, e) => {
     let data = { ...cible };
@@ -240,13 +253,7 @@ function Cible() {
       })
       .catch((err) => {
         let data = err.response.data;
-        openSnackbar(
-          <ul>
-            {Object.values(data.errors).map((errors) =>
-              errors.map((error) => <li>{error}</li>)
-            )}
-          </ul>
-        );
+        showErrors(data.errors);
       });
   };
   return (
@@ -288,6 +295,11 @@ function Cible() {
                     />
                   </div>
                 </div>
+                <small
+                  ref={regionsRef}
+                  className="text-danger ms-2 d-block"
+                  style={{ "font-size": "10px" }}
+                ></small>
                 <div className="form-boxes">
                   <label htmlFor="activite">Activité:</label>
                   <div className="w-50">
@@ -299,6 +311,11 @@ function Cible() {
                     />
                   </div>
                 </div>
+                <small
+                  ref={activitesRef}
+                  className="text-danger ms-2 d-block"
+                  style={{ "font-size": "10px" }}
+                ></small>
                 <div className="form-boxes">
                   <label htmlFor="taille_entreprise">
                     Taille d'entreprise:
