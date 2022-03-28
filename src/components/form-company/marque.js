@@ -191,7 +191,7 @@ function Marque() {
                   name="annee"
                   id="annee"
                   onChange={(e) => handleInputUpdate("annee", e)}
-                  defaultValue={marque.annee}
+                  value={marque.annee}
                 >
                   {years.map((opt) => (
                     <option value={opt}>{opt}</option>
