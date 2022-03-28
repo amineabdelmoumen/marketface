@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { login } from "../../lib/auth";
-import { useSnackbar } from "react-simple-snackbar";
-import snackbarStyles from "../../lib/snackbarStyles";
 import "./styles.scss";
 
 const Login = () => {
   const styleImage = {
     maxWidth: "100%",
   };
-  const [openSnackbar, closeSnackbar] = useSnackbar(snackbarStyles);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,9 +19,7 @@ const Login = () => {
       if (user.email_verified_at) {
         navigate("/company-setting");
       }
-    } catch (e) {
-      openSnackbar(e.response.data.msg);
-    }
+    } catch (e) {}
   };
 
   return (
@@ -68,7 +63,9 @@ const Login = () => {
               />
             </div>
             <div>
-              <Link to="/reset-password"><small>Mot de passe oublié?</small></Link>
+              <Link to="/reset-password">
+                <small>Mot de passe oublié?</small>
+              </Link>
             </div>
             <div className="d-flex justify-content-end  align-items-end mb-5 m-10">
               <Link

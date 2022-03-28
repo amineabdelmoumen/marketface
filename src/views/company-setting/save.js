@@ -1,11 +1,20 @@
 import React from "react";
-import {saveDocuments} from "../../lib/crud";
+import { saveDocuments } from "../../lib/crud";
 import { useNavigate } from "react-router-dom";
+import { useSnackbar } from "react-simple-snackbar";
+import {
+  snackbarErrorStyle,
+  snackbarSuccessStyle,
+} from "../../lib/snackbarStyles";
 
 let form = new FormData();
 
 function Save(props) {
   const navigate = useNavigate();
+  const [openSuccessSnackbar, closeSuccessSnackbar] =
+    useSnackbar(snackbarSuccessStyle);
+  const [openErrorSnackbar, closeErrorSnackbar] =
+    useSnackbar(snackbarErrorStyle);
   const handleDocsUpload = (e) => {
     let files = e.target.files;
     for (let i = 0; i < files.length; i++) {
@@ -18,9 +27,18 @@ function Save(props) {
     saveDocuments(form, token)
       .then((res) => {
         form = new FormData();
+        openSuccessSnackbar(
+          "Votre demande de vérification de compte a été bien envoyée"
+        );
       })
       .then(() => {
-        navigate("/profil");
+        setTimeout(() => {
+          closeSuccessSnackbar();
+          navigate("/profil");
+        }, 3000);
+      })
+      .catch((err) => {
+        openErrorSnackbar("Veuillez joindre la demande de vérification");
       });
   };
 

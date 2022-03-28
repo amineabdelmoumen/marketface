@@ -10,8 +10,6 @@ import statusList from "../../lib/constants/status";
 import activites from "../../lib/constants/activites";
 import regions from "../../lib/constants/regions";
 import villes from "../../lib/constants/villes";
-import { useSnackbar } from "react-simple-snackbar";
-import snackbarStyles from "../../lib/snackbarStyles";
 import "./styles.scss";
 
 const form = new FormData();
@@ -20,8 +18,6 @@ let uploadForm = new FormData();
 function Identite() {
   const dispatch = useDispatch();
   const identite = useSelector((state) => state.profile.identite);
-
-  const [openSnackbar, closeSnackbar] = useSnackbar(snackbarStyles);
 
   const raisonRef = useRef();
   const activiteRef = useRef();
