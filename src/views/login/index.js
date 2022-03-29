@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { login } from "../../lib/auth";
+import { useSnackbar } from "react-simple-snackbar";
+import { snackbarErrorStyle } from "../../lib/snackbarStyles";
 import "./styles.scss";
 
 const Login = () => {
   const styleImage = {
     maxWidth: "100%",
   };
+  const [openSnackbar, closeSnackbar] = useSnackbar(snackbarErrorStyle);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,12 +17,15 @@ const Login = () => {
   const handleClick = async () => {
     try {
       const response = await login(email, password);
+      console.log("response: ", response);
       const user = response.data.data;
       localStorage.setItem("token", user.token);
       if (user.email_verified_at) {
         navigate("/company-setting");
       }
-    } catch (e) {}
+    } catch (e) {
+      openSnackbar(e.response.data.msg);
+    }
   };
 
   return (
