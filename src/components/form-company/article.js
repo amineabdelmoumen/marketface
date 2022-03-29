@@ -111,9 +111,7 @@ function Article(props) {
     if (
       !articles.length ||
       index > -1 ||
-      Object.values(article).find(
-        (el) => el === "" || el === null || el === []
-      )
+      Object.values(article).find((el) => el === "" || el === null || el === [])
     ) {
       const token = localStorage.getItem("token");
       saveArticle(article, token)
@@ -145,10 +143,9 @@ function Article(props) {
           let errors = err.response.data.errors;
           showErrors(errors);
         });
-    }else {
+    } else {
       dispatch(setFormStage(5));
     }
-
   };
   const setArticleData = (i) => {
     const data = { ...articles[i] };
@@ -157,12 +154,16 @@ function Article(props) {
   };
 
   const showErrors = (errors) => {
-    typeArticleRef.current.innerText = errors.type_article ? errors.type_article[0] : '';
-    nomRef.current.innerText = errors.nom ? errors.nom[0] : '';
-    descriptionRef.current.innerText = errors.description ? errors.description[0] : '';
-    prixRef.current.innerText = errors.prix ? errors.prix[0] : '';
-    quantiteRef.current.innerText = errors.quantite ? errors.quantite[0] : '';
-    typeRef.current.innerText = errors.type ? errors.type[0] : '';
+    typeArticleRef.current.innerText = errors.type_article
+      ? errors.type_article[0]
+      : "";
+    nomRef.current.innerText = errors.nom ? errors.nom[0] : "";
+    descriptionRef.current.innerText = errors.description
+      ? errors.description[0]
+      : "";
+    prixRef.current.innerText = errors.prix ? errors.prix[0] : "";
+    quantiteRef.current.innerText = errors.quantite ? errors.quantite[0] : "";
+    typeRef.current.innerText = errors.type ? errors.type[0] : "";
   };
   const removeArticle = async (i) => {
     const token = localStorage.getItem("token");
@@ -251,6 +252,7 @@ function Article(props) {
                 <label htmlFor="category">Prix (MAD):</label>
                 <input
                   type="number"
+                  min="0"
                   value={article.prix}
                   onChange={(e) => handleInputUpdate("prix", e)}
                 />
@@ -265,6 +267,7 @@ function Article(props) {
                 <label htmlFor="quantite">Quantité:</label>
                 <input
                   type="number"
+                  min="0"
                   id="quantite"
                   value={article.quantite}
                   onChange={(e) => handleInputUpdate("quantite", e)}

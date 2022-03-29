@@ -1,11 +1,10 @@
-import React, {useRef, useState} from "react";
+import React, { useRef, useState } from "react";
 import { setFormStage } from "../../store/rootSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setMarque, setReferences } from "../../store/profileSlice";
 import categories from "../../lib/constants/categories";
 import years from "../../lib/constants/years";
 import { deleteReference, saveImages, saveReference } from "../../lib/crud";
-
 
 let uploadForm = new FormData();
 
@@ -15,12 +14,12 @@ function Marque() {
   const references = useSelector((state) => state.profile.references);
   const [index, setIndex] = useState(-1);
   const [isFullDescription, setIsFullDescription] = useState(false);
-  const titreRef = useRef()
-  const anneeRef = useRef()
-  const descriptionRef = useRef()
-  const categorieRef = useRef()
-  const nomRef = useRef()
-  const logoRef = useRef()
+  const titreRef = useRef();
+  const anneeRef = useRef();
+  const descriptionRef = useRef();
+  const categorieRef = useRef();
+  const nomRef = useRef();
+  const logoRef = useRef();
 
   const handleLogoUpload = (e) => {
     const token = localStorage.getItem("token");
@@ -73,10 +72,10 @@ function Marque() {
     dispatch(setMarque(data));
   };
   const save = () => {
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem("token");
     saveReference(marque, token)
-      .then(res => res.data)
-      .then(ref => {
+      .then((res) => res.data)
+      .then((ref) => {
         let data = [...references];
         if (index > -1) {
           data[index] = ref;
@@ -96,23 +95,22 @@ function Marque() {
             logo: null,
           })
         );
-      }).catch((err) => {
-      let data = err.response.data;
-      showErrors(data.errors)
-    })
+      })
+      .catch((err) => {
+        let data = err.response.data;
+        showErrors(data.errors);
+      });
   };
   const handleSave = () => {
     if (
       !references.length ||
       index > -1 ||
-      !Object.values(marque).find(
-        (el) => el === "" || el === null || el === []
-      )
+      !Object.values(marque).find((el) => el === "" || el === null || el === [])
     ) {
-      const token = localStorage.getItem('token')
+      const token = localStorage.getItem("token");
       saveReference(marque, token)
-        .then(res => res.data)
-        .then(ref => {
+        .then((res) => res.data)
+        .then((ref) => {
           let data = [...references];
           if (index > -1) {
             data[index] = ref;
@@ -137,20 +135,24 @@ function Marque() {
           dispatch(setFormStage(3));
         })
         .catch((err) => {
-        let data = err.response.data;
-        showErrors(data.errors)
-      })
+          let data = err.response.data;
+          showErrors(data.errors);
+        });
     }
   };
 
   const showErrors = (errors) => {
-    titreRef.current.innerText = errors.titre ? errors.titre[0] : '';
-    anneeRef.current.innerText = errors.annee ? errors.annee[0] : '';
-    descriptionRef.current.innerText = errors.description ? errors.description[0] : '';
-    categorieRef.current.innerText = errors.categorie ? errors.categorie[0] : '';
-    nomRef.current.innerText = errors.nom_client ? errors.nom_client[0] : '';
-    logoRef.current.innerText = errors.logo ? errors.logo[0] : '';
-  }
+    titreRef.current.innerText = errors.titre ? errors.titre[0] : "";
+    anneeRef.current.innerText = errors.annee ? errors.annee[0] : "";
+    descriptionRef.current.innerText = errors.description
+      ? errors.description[0]
+      : "";
+    categorieRef.current.innerText = errors.categorie
+      ? errors.categorie[0]
+      : "";
+    nomRef.current.innerText = errors.nom_client ? errors.nom_client[0] : "";
+    logoRef.current.innerText = errors.logo ? errors.logo[0] : "";
+  };
   return (
     <>
       <form className="container" name="form-identite" id="form-identite">
@@ -184,7 +186,11 @@ function Marque() {
                   onChange={(e) => handleInputUpdate("titre", e)}
                 />
               </div>
-              <small ref={titreRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
+              <small
+                ref={titreRef}
+                className="text-danger ms-2 d-block"
+                style={{ "font-size": "10px" }}
+              ></small>
               <div className="form-boxes">
                 <label htmlFor="annee">Année</label>
                 <select
@@ -198,7 +204,11 @@ function Marque() {
                   ))}
                 </select>
               </div>
-              <small ref={anneeRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
+              <small
+                ref={anneeRef}
+                className="text-danger ms-2 d-block"
+                style={{ "font-size": "10px" }}
+              ></small>
               <div className="form-boxes">
                 <label htmlFor="description">Description</label>
                 <textarea
@@ -211,7 +221,11 @@ function Marque() {
                   onClick={() => setIsFullDescription(false)}
                 />
               </div>
-              <small ref={descriptionRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
+              <small
+                ref={descriptionRef}
+                className="text-danger ms-2 d-block"
+                style={{ "font-size": "10px" }}
+              ></small>
               <div className="form-boxes">
                 <label htmlFor="categorie">Catégorie</label>
                 <select
@@ -225,7 +239,11 @@ function Marque() {
                   })}
                 </select>
               </div>
-              <small ref={categorieRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
+              <small
+                ref={categorieRef}
+                className="text-danger ms-2 d-block"
+                style={{ "font-size": "10px" }}
+              ></small>
               <div className="form-boxes">
                 <label htmlFor="nom_client">Nom de client</label>
                 <input
@@ -236,7 +254,11 @@ function Marque() {
                   onChange={(e) => handleInputUpdate("nom_client", e)}
                 />
               </div>
-              <small ref={nomRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
+              <small
+                ref={nomRef}
+                className="text-danger ms-2 d-block"
+                style={{ "font-size": "10px" }}
+              ></small>
               <div className="form-boxes">
                 <label htmlFor="">Joindre logo de client</label>
                 <label htmlFor="logo" className="text-center upload">
@@ -251,7 +273,11 @@ function Marque() {
                   />
                 </label>
               </div>
-              <small ref={logoRef} className="text-danger ms-2 d-block" style={{'font-size': '10px'}}></small>
+              <small
+                ref={logoRef}
+                className="text-danger ms-2 d-block"
+                style={{ "font-size": "10px" }}
+              ></small>
               <div className="form-boxes">
                 <label htmlFor="">Joindre photos des réalisations</label>
                 <label htmlFor="photos" className="text-center upload">
