@@ -1,12 +1,15 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 export default function About() {
+  const about = useSelector((state) => state.profile.identite);
+  console.log(about.telephonne);
   return (
     <div className="about">
       <div className="about-flex">
         <div className="title">
           {" "}
-          <p>A props</p>{" "}
+          <p>A propos</p>{" "}
         </div>
         <div className="text">
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo,
@@ -18,10 +21,10 @@ export default function About() {
             <input type="text" className="input" placeholder="Section" />
             <input type="text" className="input" placeholder="Section" />
             <input type="text" className="input1" placeholder="Section" />
-            <div className="d-flex flex-column flex-lg-row justify-content-around gap-3 mt-3 comp-info">
+            <div className="d-flex flex-column flex-lg-row justify-content-around gap-4 mt-3 comp-info">
               <div className="address ">
                 <img className="local-image" src="/imgs/cafe.svg" alt="" />
-                <span className="local-text">Casablanca,Maroc</span>
+                <span className="local-text">{about.region}</span>
               </div>
               <div className="address">
                 {" "}
@@ -35,7 +38,7 @@ export default function About() {
               <div className="address">
                 {" "}
                 <img className="local-image" src="/imgs/job.svg" alt="" />
-                <span className="local-text1">06 00 00 00 00</span>
+                <span className="local-text1">{about.telephone}</span>
               </div>
             </div>
             <div className="d-flex flex-column flex-lg-row justify-content-end gap-3 mt-3">

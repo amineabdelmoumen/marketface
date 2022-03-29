@@ -14,6 +14,11 @@ const profileSlice = createSlice({
       ville: "Tanger-Assilah",
       pays: "Maroc",
       chiffre_affaire: "< 10 MDhs",
+      annee_creation: "",
+      raison_ou_nom: "",
+      telephone: "",
+      logo: "",
+      siege_social: "",
     },
     marque: {
       titre: "",
@@ -59,8 +64,15 @@ const profileSlice = createSlice({
   },
   reducers: {
     setProfil: (state, action) => {
-      if(action.payload.taille) {
-        state.identite = { ...action.payload };
+      if (action.payload.taille) {
+        let profile = { ...action.payload };
+        delete profile["cibles"];
+        delete profile["articles"];
+        delete profile["references"];
+        delete profile["documents"];
+        delete profile["catalogues"];
+        delete profile["marque"];
+        state.identite = profile;
       }
       let cible = {};
       if (action.payload.cibles && action.payload.cibles.length) {

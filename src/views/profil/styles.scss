@@ -239,6 +239,7 @@ input[type="text"]:focus {
   display: flex;
   justify-content: space-around;
   margin-top: 1%;
+  max-width: fit-content;
 }
 .local-image {
   height: 30px;
@@ -257,7 +258,7 @@ input[type="text"]:focus {
 }
 .local-text {
   margin-top: 4%;
-  margin-left: 4%;
+
   color: #25a9e0;
   font-size: 15px;
 }

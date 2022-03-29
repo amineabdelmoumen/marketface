@@ -1,42 +1,43 @@
 import React from "react";
-
+import { useSelector } from "react-redux";
 export default function GeneralInfo() {
+  const profil = useSelector((state) => state.profile);
   return (
     <div className="row py-4 px-1 text-font">
       <div className="col-md-6 py-4">
         <div className="row">
           <div className="col-md-6 mt-2">
             <div>
-              <p>Année de creation :</p>
+              <p>Franchise :</p>
             </div>
           </div>
           <div className="col-md-6 mt-2">
             <div>
-              <p>2000</p>
-            </div>
-          </div>
-        </div>
-        <div className="row mt-5">
-          <div className="col-md-6 mt-2">
-            <div>
-              <p>RCE :</p>
-            </div>
-          </div>
-          <div className="col-md-6 mt-2">
-            <div>
-              <p>-----------</p>
+              <p>{profil.catalogue.vous_etes}</p>
             </div>
           </div>
         </div>
         <div className="row mt-5">
           <div className="col-md-6 mt-2">
             <div>
-              <p>ICE :</p>
+              <p>Moyen de vente :</p>
             </div>
           </div>
           <div className="col-md-6 mt-2">
             <div>
-              <p>-----------</p>
+              <p>{profil.catalogue.type_vente}</p>
+            </div>
+          </div>
+        </div>
+        <div className="row mt-5">
+          <div className="col-md-6 mt-2">
+            <div>
+              <p>Activites Operationnels:</p>
+            </div>
+          </div>
+          <div className="col-md-6 mt-2">
+            <div>
+              <p>{profil.ice}</p>
             </div>
           </div>
         </div>
@@ -86,7 +87,7 @@ export default function GeneralInfo() {
           </div>
           <div className="col-md-2 mt-2">
             <div>
-              <p>SARL</p>
+              <p>{profil.statut}</p>
             </div>
           </div>
         </div>
@@ -96,9 +97,9 @@ export default function GeneralInfo() {
               <p>siège social :</p>
             </div>
           </div>
-          <div className="col-md-3 mt-2">
+          <div className="col-md-6 mt-2">
             <div>
-              <p>-----------</p>
+              <p>{profil.siege_social}</p>
             </div>
           </div>
         </div>
@@ -108,9 +109,9 @@ export default function GeneralInfo() {
               <p>Pays :</p>
             </div>
           </div>
-          <div className="col-md-3 mt-2">
+          <div className="col-md-6 mt-2">
             <div>
-              <p>Maroc</p>
+              <p>{profil.pays}</p>
             </div>
           </div>
         </div>
@@ -120,9 +121,9 @@ export default function GeneralInfo() {
               <p>Ville :</p>
             </div>
           </div>
-          <div className="col-md-3 mt-2">
+          <div className="col-md-6 mt-2">
             <div>
-              <p>-----------</p>
+              <p>{profil.ville}</p>
             </div>
           </div>
         </div>

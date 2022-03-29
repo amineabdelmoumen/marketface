@@ -12,12 +12,14 @@ import { setProfil } from "../../store/profileSlice";
 
 function Profil() {
   const dispatch = useDispatch();
+  const profil = useSelector((state) => state.profile);
   useEffect(async () => {
     const token = localStorage.getItem("token");
     const response = await getProfile(token);
+    console.log(response.data);
     dispatch(setProfil(response.data));
   }, []);
-
+  console.log("identite is", profil);
   return (
     <div>
       <NavBar />
@@ -38,11 +40,6 @@ function Profil() {
             <div className="row mt-2">
               <div className="col-12 col-md-12">
                 <CompanyDetails />
-              </div>
-            </div>
-            <div className="row mt-2">
-              <div className="col-12 col-md-12">
-                <CompanyTeam />
               </div>
             </div>
           </div>

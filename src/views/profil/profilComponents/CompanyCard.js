@@ -1,12 +1,18 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 export default function CompanyCard() {
+  const company = useSelector((state) => state.profile.identite);
   return (
     <div className="flex-profile">
-      <img className="comp-logo" src="/imgs/comp-logo.png" alt="" />
+      <img
+        className="comp-logo"
+        src={`${process.env.REACT_APP_HOST_URL}/${company.logo}`}
+        alt=""
+      />
       <img className="office" src="/imgs/office-building.svg" alt="" />
 
-      <p className="nom-entreprise">Nom de L'entreprise</p>
+      <p className="nom-entreprise">{company.raison_ou_nom}</p>
 
       <p className="slogan">
         Le slogan peut se definir comme une phrase percutante
