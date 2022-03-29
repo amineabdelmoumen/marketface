@@ -145,6 +145,8 @@ function Article(props) {
           let errors = err.response.data.errors;
           showErrors(errors);
         });
+    }else {
+      dispatch(setFormStage(5));
     }
 
   };
