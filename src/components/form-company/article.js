@@ -389,26 +389,22 @@ function Article(props) {
               ) : (
                 ""
               )}
-              {article.type_article !== "produit" ? (
-                <div className="form-boxes">
-                  <label htmlFor="photos">
-                    Joindre les documents d'article
-                  </label>
-                  <label htmlFor="documents" className="text-center upload">
-                    Choisir un fichier
-                    <input
-                      type="file"
-                      id="documents"
-                      name="documents[]"
-                      className="d-none"
-                      multiple
-                      onChange={(e) => handleDocsUpload(e)}
-                    />
-                  </label>
-                </div>
-              ) : (
-                ""
-              )}
+
+              <div className="form-boxes">
+                <label htmlFor="photos">Joindre les documents d'article</label>
+                <label htmlFor="documents" className="text-center upload">
+                  Choisir un fichier
+                  <input
+                    type="file"
+                    id="documents"
+                    name="documents[]"
+                    className="d-none"
+                    multiple
+                    onChange={(e) => handleDocsUpload(e)}
+                  />
+                </label>
+              </div>
+
               <div className="form-boxes">
                 <label htmlFor="photos">Joindre des photos d'article</label>
                 <label htmlFor="photos" className="text-center upload">
