@@ -19,7 +19,7 @@ const profileSlice = createSlice({
       titre: "",
       annee: "",
       description: "",
-      categorie: "Produits chimiques",
+      categorie: "",
       nom_client: "",
       images: [],
       logo: null,
@@ -38,7 +38,7 @@ const profileSlice = createSlice({
     articles: [],
     article: {
       type_article: "produit",
-      type: "Produits chimiques",
+      categorie: "",
       nom: "",
       description: "",
       prix: "",
@@ -59,7 +59,7 @@ const profileSlice = createSlice({
   },
   reducers: {
     setProfil: (state, action) => {
-      if(action.payload.taille) {
+      if (action.payload.taille) {
         state.identite = { ...action.payload };
       }
       let cible = {};
