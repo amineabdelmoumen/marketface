@@ -7,6 +7,22 @@ import years from "../../lib/constants/years";
 import { deleteReference, saveImages, saveReference } from "../../lib/crud";
 
 let uploadForm = new FormData();
+const areaScrollStyle = {
+  border: "none",
+  outline: "none",
+  boxShadow: "none",
+  overflow: "auto",
+  resize: "none",
+  display: "block",
+};
+const areaStyle = {
+  border: "none",
+  outline: "none",
+  boxShadow: "none",
+  overflow: "hidden",
+  resize: "none",
+  display: "block",
+};
 
 function Marque() {
   const dispatch = useDispatch();
@@ -89,7 +105,7 @@ function Marque() {
             titre: "",
             annee: "",
             description: "",
-            categorie: "Produits chimiques",
+            categorie: "",
             nom_client: "",
             images: [],
             logo: null,
@@ -124,7 +140,7 @@ function Marque() {
               titre: "",
               annee: "",
               description: "",
-              categorie: "Produits chimiques",
+              categorie: "",
               nom_client: "",
               images: [],
               logo: null,
@@ -303,17 +319,36 @@ function Marque() {
                     {marque.titre} | {marque.annee}
                   </h4>
                   {marque.description?.length < 256 ? (
-                    <p className="text-black-50 h6 mt-4">
-                      {marque.description}
-                    </p>
+                    <textarea
+                      style={areaScrollStyle}
+                      name=""
+                      id=""
+                      cols="50"
+                      rows="10"
+                      className="text-black-50 h6 mt-4"
+                      value={marque.description}
+                    />
                   ) : isFullDescription ? (
-                    <p className="text-black-50 h6 mt-4">
-                      {marque.description}
-                    </p>
+                    <textarea
+                      style={areaScrollStyle}
+                      name=""
+                      id=""
+                      cols="50"
+                      rows="10"
+                      className="text-black-50 h6 mt-4"
+                      value={marque.description}
+                    />
                   ) : (
-                    <p className="text-black-50 h6 mt-4">
-                      {marque.description.slice(0, 256)}
-                      {"... "}
+                    <>
+                      <textarea
+                        style={areaStyle}
+                        name=""
+                        id=""
+                        cols="50"
+                        rows="6"
+                        className="text-black-50 h6 mt-4 mb-0"
+                        value={marque.description.slice(0, 256) + "..."}
+                      />
                       <a
                         onClick={() => setIsFullDescription(true)}
                         href="#"
@@ -321,7 +356,7 @@ function Marque() {
                       >
                         Voir plus
                       </a>
-                    </p>
+                    </>
                   )}
                   <p className="text-secondary h6 mt-4">{marque.categorie}</p>
                   <p className="d-flex gap-2 mt-5">
