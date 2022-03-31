@@ -1,6 +1,6 @@
 import React from "react";
 import { saveDocuments } from "../../lib/crud";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useSnackbar } from "react-simple-snackbar";
 import {
   snackbarErrorStyle,
@@ -11,6 +11,7 @@ let form = new FormData();
 
 function Save(props) {
   const navigate = useNavigate();
+  const location = useLocation();
   const [openSuccessSnackbar, closeSuccessSnackbar] =
     useSnackbar(snackbarSuccessStyle);
   const [openErrorSnackbar, closeErrorSnackbar] =
@@ -47,7 +48,13 @@ function Save(props) {
       <img src="/imgs/logo.png" alt="logo" width={100} />
       <div className="row">
         <div className="col-8 offset-2">
-          <h5 className="text-secondary">Vérification de votre compte</h5>
+          {location.state && location.state?.auth === 1 ? (
+            <h5 className="text-secondary">
+              Félicitation! vous avez complété votre profil avec succès !
+            </h5>
+          ) : (
+            <h5 className="text-secondary">Vérification de votre compte</h5>
+          )}
           <p>
             Le document ci-après nous permet de vérifier l’identité de votre
             entreprise et garantir votre sécurité. Vous pourrez alors accéder à

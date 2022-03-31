@@ -246,7 +246,7 @@ function Cible() {
       .then((res) => res.data)
       .then((data) => {
         dispatch(setCible({ ...cible, id: data.id }));
-        navigate("/company-setting/save");
+        navigate("/company-setting/save", { state: { auth: 1 } });
       })
       .catch((err) => {
         let data = err.response.data;
