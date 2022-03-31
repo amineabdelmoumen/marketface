@@ -1,19 +1,22 @@
-import React, {useState} from 'react';
-import {useSnackbar} from 'react-simple-snackbar'
-import {resetPassword} from "../../lib/auth";
+import React, { useState } from "react";
+import { useSnackbar } from "react-simple-snackbar";
+import { resetPassword } from "../../lib/auth";
 
 function ResetPassword(props) {
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState("");
   const [openSnackbar, closeSnackbar] = useSnackbar();
   const handleClick = () => {
-    const token = localStorage.getItem('token')
-    resetPassword({email}, token)
+    const token = localStorage.getItem("token");
+    resetPassword({ email }, token)
       .then(() => {
-        openSnackbar('Reset link has been sent to your email!')
-      }).catch(() => {
-        openSnackbar('Error while sending reset link!')
-    })
-  }
+        openSnackbar(
+          "Le lien de réinitialisation a été envoyé à votre adresse e-mail !"
+        );
+      })
+      .catch(() => {
+        openSnackbar("Erreur lors de l'envoi du lien de réinitialisation");
+      });
+  };
   return (
     <>
       <div className="background"></div>
@@ -29,10 +32,9 @@ function ResetPassword(props) {
         <div className="row mt-4">
           <div className="col-md-6 d-flex justify-content-center align-items-start">
             {/*<img src="https://via.placeholder.com/300" alt="" />*/}
-            <img src="/imgs/business-bag.png" alt="" width={400}/>
+            <img src="/imgs/business-bag.png" alt="" width={400} />
           </div>
           <div className="col-md-6">
-
             <div className="form-group">
               <input
                 type="text"
@@ -49,10 +51,9 @@ function ResetPassword(props) {
                 Envoyer
               </button>
             </div>
-            </div>
-
           </div>
         </div>
+      </div>
     </>
   );
 }

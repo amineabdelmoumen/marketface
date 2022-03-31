@@ -36,7 +36,7 @@ const Login = () => {
         <div className="text-center">
           <h1 className="text-secondary">Accédez au marché en temps réel!</h1>
           <p className="text-primary">
-            Ne ratez pas aucune opportunité d'affaires! Créez votre compte dès
+            Ne ratez aucune opportunité d'affaires! Créez votre compte dès
             aujourd'hui!
           </p>
         </div>
