@@ -47,7 +47,7 @@ function Catalogue() {
       <form className="container" name="form-identite" id="form-identite">
         <div className="page_number">1/2</div>
         <h4 className="ms-5 text-primary">Créez votre E-Catalogue</h4>
-        <div className="form-identite-info d-block">
+        <div className="form-identite-info d-block mt-3">
           <div className="row">
             <div className="col-10 offset-2">
               <div className="form-boxes">

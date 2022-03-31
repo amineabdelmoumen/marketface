@@ -260,7 +260,7 @@ function Cible() {
       ) : (
         <form className="container" name="form-identite" id="form-identite">
           <h3>Identifiez votre cible</h3>
-          <div className="form-identite-info d-block">
+          <div className="form-identite-info d-block mt-3">
             <h5 className="text-center text-primary">
               Vous aurez ainsi plus de chance de décrocher des opportunités
               d'affaires
