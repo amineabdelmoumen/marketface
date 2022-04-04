@@ -73,6 +73,7 @@ function Article(props) {
       const response = res.data;
       uploadForm = new FormData();
       data["documents"] = response.paths;
+      console.log("documents: ", data.documents[0].nom);
       dispatch(setArticle(data));
     });
   };
@@ -489,6 +490,12 @@ function Article(props) {
                           );
                         })
                       : ""}
+                  </div>
+                  <div className="row mt-2">
+                    {article?.documents &&
+                      article?.documents.map((doc) => {
+                        return <div className="col-6 mt-2">{doc.nom}</div>;
+                      })}
                   </div>
                 </div>
               </div>
