@@ -254,12 +254,12 @@ export default function LegalInfo({ setLegalcomponent }) {
         </div>
       </div>
 
-      <div className="d-flex justify-content-center mt-5">
+      <div className="d-flex justify-content-end mt-3">
         {showUpdateButton == 1 ? (
           <button
-            className="bt btn-success position-absolute"
+            type="button"
+            className="btn pointer btn-success text-white m-4 rounded-pill px-4"
             onClick={handleOnSave}
-            style={style2}
           >
             Save Changes
           </button>

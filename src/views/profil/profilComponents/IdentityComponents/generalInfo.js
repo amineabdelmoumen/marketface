@@ -512,7 +512,7 @@ function Catalogue() {
                 </div>
               </div>
               <div className="row">
-                <div className="d-flex mt-3 justify-content-end">
+                <div className="d-flex mt-3 justify-content-end mt-3">
                   {showOnSaveButton == 1 ? (
                     <button
                       type="button"

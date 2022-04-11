@@ -37,19 +37,6 @@ export default function ContactInfo() {
   return (
     <div className="row py-5 px-1 mt-5">
       <div className="col-md-8 offset-md-3 py-4 identite-form">
-        <div>
-          {showButton == 1 ? (
-            <button
-              className="bt btn-success position-absolute"
-              onClick={handleOnSave}
-              style={style2}
-            >
-              Save Changes
-            </button>
-          ) : (
-            ""
-          )}
-        </div>
         <div className="row form-boxes">
           <div className="col-md-6 mt-2 ">
             <div>
@@ -93,6 +80,19 @@ export default function ContactInfo() {
               />
             </div>
           </div>
+        </div>
+        <div className="d-flex justify-content-end mt-3">
+          {showButton == 1 ? (
+            <button
+              type="button"
+              className="btn pointer btn-success text-white m-4 rounded-pill px-4"
+              onClick={handleOnSave}
+            >
+              Save Changes
+            </button>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>

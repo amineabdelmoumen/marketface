@@ -37,19 +37,6 @@ export default function FinancialInfo() {
   return (
     <div className="row py-4 px-1 text-font position-relative">
       <div className="identite-form">
-        <div>
-          {showButton == 1 ? (
-            <button
-              className="bt btn-success position-absolute"
-              onClick={handleOnSave}
-              style={style2}
-            >
-              Save Changes
-            </button>
-          ) : (
-            ""
-          )}
-        </div>
         <div className="col-md-8 offset-md-3 py-5 ">
           <div className="row ">
             <div className="col-md-6 mt-2">
@@ -128,6 +115,19 @@ export default function FinancialInfo() {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="d-flex justify-content-end mt-3">
+            {showButton == 1 ? (
+              <button
+                type="button"
+                className="btn pointer btn-success text-white m-4 rounded-pill px-4"
+                onClick={handleOnSave}
+              >
+                Save Changes
+              </button>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>
