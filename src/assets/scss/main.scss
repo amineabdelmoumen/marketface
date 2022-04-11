@@ -1,7 +1,6 @@
 $primary: #1578a2;
 $success: #0abc8a;
 $secondary: #00b6ff;
-
 @import "~bootstrap/scss/bootstrap.scss";
 
 /* Import those files to compile the app
@@ -60,4 +59,8 @@ input[type="file"] {
 }
 .bg-indigo-600 {
   background-color: $indigo-600;
+}
+
+.blue-500 {
+  color: $blue-600;
 }
