@@ -18,24 +18,13 @@ export default function About() {
         <h5 className="text-black-50 mt-2">Activities</h5>
         <div className="px-4 mt-2">
           <div className="row">
-            <p className="activite col-12 col-md-3 mt-3 me-4 my-1 px-4">
-              activite x
-            </p>{" "}
-            <p className="activite col-12 col-md-3 mt-3 me-4 px-4">
-              activite y
-            </p>{" "}
-            <p className="activite col-12 col-md-3 mt-3 me-4 px-4">activiteZ</p>
-            <p className="activite col-12 col-md-3 mt-3 me-4 my-1 px-4">
-              activite x
-            </p>{" "}
-            <p className="activite col-12 col-md-3 mt-3 me-4 px-4">
-              activite y
-            </p>{" "}
-            {/* {about.cible.activites.map((activite) => {
+            {about.cible.activites.map((activite) => {
               return (
-               
+                <p className="activite col-12 col-md-3 mt-3 me-4 px-4">
+                  {activite}
+                </p>
               );
-            })} */}
+            })}
           </div>
           <div className="form-area">
             <div className="d-flex flex-column align-items-around gap-3  mt-5 comp-info">
