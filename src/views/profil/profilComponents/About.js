@@ -20,7 +20,7 @@ export default function About() {
           <div className="row">
             {about.cible.activites.map((activite) => {
               return (
-                <p className="activite col-12 col-md-3 mt-3 me-4 px-4">
+                <p className="activite col-12 col-md-4 mt-3 me-4 px-4">
                   {activite}
                 </p>
               );
