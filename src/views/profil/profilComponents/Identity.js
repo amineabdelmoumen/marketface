@@ -110,7 +110,7 @@ export default function Identity() {
             onClick={() => setSelectedComponent(4)}
           >
             <div
-              className="d-flex justify-content-evenly
+              className="d-flex justify-content-around
             "
             >
               <div>
