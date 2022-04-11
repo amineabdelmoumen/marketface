@@ -40,8 +40,15 @@ function CompanySetting() {
 
   const handleDisconnect = () => {
     localStorage.removeItem("token");
+<<<<<<< HEAD
     localStorage.removeItem("persist:root"); //persist:root = is profile slice key
     navigate("/login");
+=======
+    const token = localStorage.getItem("token");
+    if (token == null) {
+      navigate("/login");
+    }
+>>>>>>> 8c5d45f5f4c124410e78de514897f2afc593024c
   };
   return (
     <>
@@ -63,6 +70,10 @@ function CompanySetting() {
                 </p>
                 <p className="title">Identité</p>
               </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8c5d45f5f4c124410e78de514897f2afc593024c
               <div className={pageStage === 2 ? `step step-active` : `step`}>
                 <p
                   className="step-icon"
@@ -112,6 +123,7 @@ function CompanySetting() {
                 5: <Cible />,
               }[pageStage]
             }
+<<<<<<< HEAD
           </div>
 
           <div className="d-flex justify-content-center pb-5">
@@ -119,6 +131,13 @@ function CompanySetting() {
               Se déconnecter
             </a>
           </div>
+=======
+          </div>
+
+          <Link to="/" className="disconnect-btn" onClick={handleDisconnect}>
+            Se déconnecter
+          </Link>
+>>>>>>> 8c5d45f5f4c124410e78de514897f2afc593024c
         </div>
       )}
     </>
