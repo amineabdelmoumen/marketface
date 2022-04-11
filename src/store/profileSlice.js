@@ -94,7 +94,7 @@ const profileSlice = createSlice({
       }
       let catalogue = {};
       if (action.payload.catalogues && action.payload.catalogues.length) {
-        const catalogue = { ...action.payload.catalogues[0] };
+        catalogue = { ...action.payload.catalogues[0] };
       }
       if (Object.keys(catalogue).length) {
         state.catalogue = {

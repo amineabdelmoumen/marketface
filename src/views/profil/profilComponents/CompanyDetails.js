@@ -5,6 +5,7 @@ import Catalogue from "./catalogue";
 import Identity from "./Identity";
 
 export default function CompanyDetails() {
+  const linkStyle = "text-select cursor-pointer fw-normal";
   const [selectedText, setSelectedText] = useState(1);
   const selectComponent = () => {
     if (selectedText == 1) {
@@ -19,13 +20,13 @@ export default function CompanyDetails() {
   };
   return (
     <div>
-      <div className="d-flex justify-content-around about p-3 ">
+      <div className="d-flex justify-content-around about p-3  ">
         <div>
           <h3
             className={
               selectedText == 1
-                ? "text-select fw-normal text-success"
-                : "text-select fw-normal text-primary"
+                ? `${linkStyle} text-success`
+                : `${linkStyle} text-primary`
             }
             onClick={() => setSelectedText(1)}
           >
@@ -36,8 +37,8 @@ export default function CompanyDetails() {
           <h3
             className={
               selectedText == 2
-                ? "text-select fw-normal text-success"
-                : "text-select fw-normal text-primary"
+                ? `${linkStyle} text-success`
+                : `${linkStyle} text-primary`
             }
             onClick={() => setSelectedText(2)}
           >
@@ -48,8 +49,8 @@ export default function CompanyDetails() {
           <h3
             className={
               selectedText == 3
-                ? "text-select fw-normal text-success"
-                : "text-select fw-normal text-primary"
+                ? `${linkStyle} text-success`
+                : `${linkStyle} text-primary`
             }
             onClick={() => setSelectedText(3)}
           >
@@ -57,16 +58,16 @@ export default function CompanyDetails() {
           </h3>
         </div>
         <div>
-          <a
+          <h3
             className={
               selectedText == 4
-                ? "text-select fw-normal text-success"
-                : "text-select fw-normal text-primary"
+                ? `${linkStyle} text-success`
+                : `${linkStyle} text-primary`
             }
             onClick={() => setSelectedText(4)}
           >
             Actualité
-          </a>
+          </h3>
         </div>
       </div>
       {selectComponent()}

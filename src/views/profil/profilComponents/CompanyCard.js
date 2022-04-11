@@ -5,6 +5,7 @@ export default function CompanyCard() {
   const company = useSelector((state) => state.profile.identite);
   return (
     <div className="flex-profile">
+      <i class="fa-solid fa-ellipsis eclipse"></i>
       <img
         className="comp-logo"
         src={`${process.env.REACT_APP_HOST_URL}/${company.logo}`}

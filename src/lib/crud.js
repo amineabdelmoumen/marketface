@@ -1,92 +1,92 @@
 import apiClient from "./api";
 
-export const saveCompany = async(data, token) => {
-  return await apiClient.post('/company', data, {
+export const saveCompany = async (data, token) => {
+  return await apiClient.post("/company", data, {
     headers: {
-      'Authorization': `Bearer ${token}`,
-    }
-  })
-}
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
 
 export const saveCatalogue = async (data, token) => {
-  return await apiClient.post('/catalogue', data, {
+  return await apiClient.post("/catalogue", data, {
     headers: {
-      'Authorization': `Bearer ${token}`
-    }
-  })
-}
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
 
 export const saveArticle = async (data, token) => {
-  return await apiClient.post('/article', data, {
+  return await apiClient.post("/article", data, {
     headers: {
-      'Authorization': `Bearer ${token}`
-    }
-  })
-}
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
 
 export const deleteArticle = async (id, token) => {
   return await apiClient.delete(`/article/${id}`, {
     headers: {
-      'Authorization': `Bearer ${token}`,
-    }
-  })
-}
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
 
 export const saveReference = async (data, token) => {
-  return await apiClient.post('/reference', data, {
+  return await apiClient.post("/reference", data, {
     headers: {
-      'Authorization': `Bearer ${token}`,
-    }
-  })
-}
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
 
 export const deleteReference = async (id, token) => {
   return await apiClient.delete(`/reference/${id}`, {
     headers: {
-      'Authorization': `Bearer ${token}`,
-    }
-  })
-}
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
 
 export const saveCibles = async (data, token) => {
-  return await apiClient.post('/cible', data, {
+  return await apiClient.post("/cible", data, {
     headers: {
-      'Authorization': `Bearer ${token}`
-    }
-  })
-}
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
 
 export const saveImages = async (data, token) => {
-  return await apiClient.post('/upload', data, {
+  return await apiClient.post("/upload", data, {
     headers: {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'multipart/form-data'
-    }
-  })
-}
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
 
 export const saveDocuments = async (data, token) => {
-  return await apiClient.post('/document', data, {
+  return await apiClient.post("/document", data, {
     headers: {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'multipart/form-data'
-    }
-  })
-}
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
 
 export const saveDocs = async (data, token) => {
-  return await apiClient.post('/upload/document', data, {
+  return await apiClient.post("/upload/document", data, {
     headers: {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'multipart/form-data'
-    }
-  })
-}
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
 
 export const getProfile = async (token) => {
-  return await apiClient.get('/profile', {
+  return await apiClient.get("/profile", {
     headers: {
-      'Authorization': `Bearer ${token}`,
-    }
-  })
-}
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};

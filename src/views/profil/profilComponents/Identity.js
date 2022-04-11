@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ContactInfo from "./IdentityComponents/contactInfo";
 import FinancialInfo from "./IdentityComponents/financialInfo";
 import GeneralInfo from "./IdentityComponents/generalInfo";
 import LegalInfo from "./IdentityComponents/legalInfo";
+import LegalInformPat2 from "./IdentityComponents/legalInformPat2";
 
 export default function Identity() {
   const [selectedComponent, setSelectedComponent] = useState(1);
+  const [legalComponent, setLegalcomponent] = useState(0);
   const style = {
     marginRight: "28px",
   };
@@ -14,10 +16,6 @@ export default function Identity() {
   };
   const style2 = {
     marginRight: "-10px",
-  };
-  const style3 = {
-    right: "48px",
-    top: "38px",
   };
 
   return (
@@ -28,7 +26,7 @@ export default function Identity() {
             className="border-details p-5"
             onClick={() => setSelectedComponent(1)}
           >
-            <div className="d-flex justify-content-between">
+            <div className="d-flex justify-content-evenly">
               <div>
                 <img
                   src={
@@ -42,8 +40,8 @@ export default function Identity() {
               <div
                 className={
                   selectedComponent == 1
-                    ? "h5 text-select fw-normal text-success"
-                    : "h5 text-select fw-normal text-primary"
+                    ? "h5 text-select cursor-pointer fw-normal text-success"
+                    : "h5 text-select cursor-pointer fw-normal text-primary"
                 }
               >
                 <p>Informations Generales</p>
@@ -55,7 +53,7 @@ export default function Identity() {
             className="border-details p-5 mt-1"
             onClick={() => setSelectedComponent(2)}
           >
-            <div className="d-flex justify-content-between">
+            <div className="d-flex justify-content-evenly">
               <div>
                 <img
                   src={
@@ -70,8 +68,8 @@ export default function Identity() {
                 <p
                   className={
                     selectedComponent == 2
-                      ? "h5 text-select fw-normal text-success"
-                      : "h5 text-select fw-normal text-primary"
+                      ? "h5 text-select cursor-pointer fw-normal text-success"
+                      : "h5 text-select cursor-pointer fw-normal text-primary"
                   }
                 >
                   Informations Legals
@@ -83,7 +81,7 @@ export default function Identity() {
             className="border-details p-5 mt-1"
             onClick={() => setSelectedComponent(3)}
           >
-            <div className="d-flex justify-content-between">
+            <div className="d-flex justify-content-evenly">
               <div>
                 <img
                   src={
@@ -98,8 +96,8 @@ export default function Identity() {
                 <p
                   className={
                     selectedComponent == 3
-                      ? "h5 text-select fw-normal text-success"
-                      : "h5 text-select fw-normal text-primary"
+                      ? "h5 text-select cursor-pointer fw-normal text-success"
+                      : "h5 text-select cursor-pointer fw-normal text-primary"
                   }
                 >
                   Informations Financieres
@@ -112,7 +110,7 @@ export default function Identity() {
             onClick={() => setSelectedComponent(4)}
           >
             <div
-              className="d-flex justify-content-between
+              className="d-flex justify-content-evenly
             "
             >
               <div>
@@ -123,18 +121,17 @@ export default function Identity() {
                       : "/imgs/contact.png"
                   }
                   alt=""
-                  className="green-icon"
                 />
               </div>
               <div style={style2}>
                 <p
                   className={
                     selectedComponent == 4
-                      ? "h5 me-2 text-select fw-normal text-success"
-                      : "h5 me-2 text-select fw-normal text-primary"
+                      ? "h5  text-select  cursor-pointer fw-normal text-success"
+                      : "h5  text-select cursor-pointer fw-normal text-primary"
                   }
                 >
-                  contact
+                  Contact
                 </p>
               </div>
             </div>
@@ -142,14 +139,13 @@ export default function Identity() {
         </div>
       </div>
       <div className="col-12 col-md-8 form-box position-relative">
-        <div className="position-absolute" style={style3}>
-          <img src="/imgs/add.png" />
-        </div>
-
         {
           {
             1: <GeneralInfo />,
-            2: <LegalInfo />,
+            2: {
+              0: <LegalInfo setLegalcomponent={setLegalcomponent} />,
+              1: <LegalInformPat2 setLegalcomponent={setLegalcomponent} />,
+            }[legalComponent],
             3: <FinancialInfo />,
             4: <ContactInfo />,
           }[selectedComponent]

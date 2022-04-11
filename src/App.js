@@ -31,6 +31,7 @@ function App() {
             </Private>
           }
         />
+
         <Route path="/company-setting/save" element={<Save />} />
         <Route path="/reset-password" element={<ResetPassword />} />
       </Routes>

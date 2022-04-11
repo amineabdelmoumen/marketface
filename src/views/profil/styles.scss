@@ -110,6 +110,7 @@
 }
 
 .flex-profile {
+  position: relative;
   display: flex;
   flex-direction: column;
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -118,6 +119,12 @@
   @media screen and (max-width: 600px) {
     min-width: 100%;
   }
+}
+.eclipse {
+  position: absolute;
+  right: 12px;
+  top: 15px;
+  width: 20px;
 }
 .badges {
   display: flex;
@@ -188,11 +195,16 @@
   opacity: 1;
   margin-left: -6px;
 }
+.form-check-input:checked {
+  background-color: blue;
+  border-color: blue;
+  width: 31px;
+  height: 24px;
+}
 
 .text-font {
-  font: normal normal 600 17px/20px Montserrat;
   letter-spacing: 0px;
-  color: #707070;
+  color: #3d3a3a;
   opacity: 1;
 }
 .input-profil {
@@ -233,7 +245,10 @@ input[type="text"]:focus {
   display: flex;
   /* justify-content: space-around; */
   gap: 8%;
-  margin-left: -4%;
+  margin-left: 50px;
+  @media only screen and(max-width:370px) {
+    margin-left: 0px;
+  }
 }
 .address {
   display: flex;
@@ -261,9 +276,11 @@ input[type="text"]:focus {
 
   color: #25a9e0;
   font-size: 15px;
+  margin-left: 28px;
 }
 .local-text1 {
   margin-top: 4%;
+  margin-left: 28px;
 
   color: #25a9e0;
   font-size: 15px;
@@ -274,6 +291,14 @@ input[type="text"]:focus {
   justify-content: end;
   gap: 2%;
   margin-top: 2%;
+}
+.activite {
+  background: #ffffff 0% 0% no-repeat padding-box;
+  box-shadow: 3px 4px 24px #d8ecf5;
+  border-radius: 70px;
+  padding: 13px 60px 11px 60px;
+  color: #25a9e0;
+  text-align: center;
 }
 
 .text-input {
@@ -303,6 +328,72 @@ input[type="text"]:focus {
   color: #c4c4c4;
   text-transform: uppercase;
   opacity: 1;
+}
+
+.identite-form {
+  .form-boxes {
+    margin-top: 1em;
+
+    select {
+      border-radius: 16px;
+      border: 1px solid silver;
+      color: grey;
+      padding: 0 6px;
+      font-size: 14px;
+      text-align: center;
+      width: 170px;
+      height: 30px;
+    }
+
+    input,
+    textarea {
+      border-radius: 16px;
+      border: 1px solid silver;
+      color: grey;
+      text-align: center;
+      padding: 0 6px;
+      font-size: 14px;
+      width: 170px;
+      height: 30px;
+    }
+    textarea {
+      resize: unset;
+    }
+  }
+  section {
+    margin: 10px 0;
+    width: 50%;
+  }
+  .line {
+    border: 1px solid grey;
+    margin: 0 2%;
+  }
+}
+.text-contact {
+  position: relative;
+  margin-left: -180px;
+}
+
+.next-btn {
+  position: absolute;
+  width: 23px;
+  right: 100px;
+  top: 40%;
+}
+.back-btn {
+  position: absolute;
+  width: 23px;
+  left: 5px;
+  top: 50%;
+}
+.legal2 {
+  background-color: #f3fcff;
+  box-shadow: 3px 4px 24px #d8ecf5;
+}
+.vl1 {
+  border-left: 4px solid #379bbd;
+  height: fit-content;
+  margin: 0% 2%;
 }
 
 /* .icon {

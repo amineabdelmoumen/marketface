@@ -40,6 +40,7 @@ function CompanySetting() {
 
   const handleDisconnect = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("persist:root"); //persist:root = is profile slice key
     navigate("/login");
   };
   return (
