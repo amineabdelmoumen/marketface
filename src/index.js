@@ -3,18 +3,21 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import SnackbarProvider from 'react-simple-snackbar'
-
+import SnackbarProvider from "react-simple-snackbar";
+import { PersistGate } from "redux-persist/integration/react";
 import { store } from "./store";
+import { persistStore } from "redux-persist";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
-
+let persistor = persistStore(store);
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <SnackbarProvider>
-          <App />
-        </SnackbarProvider>
+        <PersistGate loading={null} persistor={persistor}>
+          <SnackbarProvider>
+            <App />
+          </SnackbarProvider>
+        </PersistGate>
       </Provider>
     </BrowserRouter>
   </React.StrictMode>,
