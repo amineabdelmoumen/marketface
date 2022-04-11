@@ -3,7 +3,9 @@ import { setFormStage } from "../../store/rootSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setCatalogue } from "../../store/profileSlice";
 import { saveCatalogue } from "../../lib/crud";
-import { useSnackbar } from "react-simple-snackbar";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Catalogue() {
   const dispatch = useDispatch();
@@ -496,6 +498,7 @@ function Catalogue() {
             >
               Suivant
             </button>
+            <ToastContainer />
           </div>
         </div>
       </form>

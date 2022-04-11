@@ -1,21 +1,16 @@
 import React from "react";
 import { saveDocuments } from "../../lib/crud";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useSnackbar } from "react-simple-snackbar";
-import {
-  snackbarErrorStyle,
-  snackbarSuccessStyle,
-} from "../../lib/snackbarStyles";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 let form = new FormData();
 
 function Save(props) {
   const navigate = useNavigate();
   const location = useLocation();
-  const [openSuccessSnackbar, closeSuccessSnackbar] =
-    useSnackbar(snackbarSuccessStyle);
-  const [openErrorSnackbar, closeErrorSnackbar] =
-    useSnackbar(snackbarErrorStyle);
+
   const handleDocsUpload = (e) => {
     let files = e.target.files;
     for (let i = 0; i < files.length; i++) {
@@ -28,18 +23,15 @@ function Save(props) {
     saveDocuments(form, token)
       .then((res) => {
         form = new FormData();
-        openSuccessSnackbar(
-          "Votre demande de vérification de compte a été bien envoyée"
-        );
+        toast("Votre demande de vérification de compte a été bien envoyée");
       })
       .then(() => {
         setTimeout(() => {
-          closeSuccessSnackbar();
           navigate("/profil");
         }, 3000);
       })
       .catch((err) => {
-        openErrorSnackbar("Veuillez joindre la demande de vérification");
+        toast("Veuillez joindre la demande de vérification");
       });
   };
 
@@ -108,6 +100,7 @@ function Save(props) {
                 >
                   Envoyer
                 </button>
+                <ToastContainer />
               </div>
             </div>
             <div className="col-3 d-flex justify-content-end align-items-baseline">

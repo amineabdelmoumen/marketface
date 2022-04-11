@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import SnackbarProvider from "react-simple-snackbar";
+
 import { PersistGate } from "redux-persist/integration/react";
 import { store } from "./store";
 import { persistStore } from "redux-persist";
@@ -14,9 +14,7 @@ ReactDOM.render(
     <BrowserRouter>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <SnackbarProvider>
-            <App />
-          </SnackbarProvider>
+          <App />
         </PersistGate>
       </Provider>
     </BrowserRouter>

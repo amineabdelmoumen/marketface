@@ -1,20 +1,20 @@
 import React, { useState } from "react";
-import { useSnackbar } from "react-simple-snackbar";
 import { resetPassword } from "../../lib/auth";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function ResetPassword(props) {
   const [email, setEmail] = useState("");
-  const [openSnackbar, closeSnackbar] = useSnackbar();
   const handleClick = () => {
     const token = localStorage.getItem("token");
     resetPassword({ email }, token)
       .then(() => {
-        openSnackbar(
+        toast(
           "Le lien de réinitialisation a été envoyé à votre adresse e-mail !"
         );
       })
       .catch(() => {
-        openSnackbar("Erreur lors de l'envoi du lien de réinitialisation");
+        toast("Erreur lors de l'envoi du lien de réinitialisation");
       });
   };
   return (
@@ -50,6 +50,7 @@ function ResetPassword(props) {
               >
                 Envoyer
               </button>
+              <ToastContainer />
             </div>
           </div>
         </div>
