@@ -5,7 +5,7 @@ import Catalogue from "./catalogue";
 import Identity from "./Identity";
 
 export default function CompanyDetails() {
-  const linkStyle = "text-select cursor-pointer fw-normal";
+  const linkStyle = "text-select1 cursor-pointer fw-normal";
   const [selectedText, setSelectedText] = useState(1);
   const selectComponent = () => {
     if (selectedText == 1) {

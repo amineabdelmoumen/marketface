@@ -9,8 +9,16 @@ import { saveCompany } from "../../../../lib/crud";
 import { Navigate } from "react-router-dom";
 export default function LegalInfo({ setLegalcomponent }) {
   const style1 = {
-    color: "#00b6ff",
-    fontSize: "15px",
+    font: "normal normal 600 15px/15px Montserrat",
+    letterSspacing: "0px",
+    color: "#707070",
+    opacity: 1,
+  };
+  const InputStyle = {
+    font: "normal normal 600 15px/15px Montserrat",
+    letterSspacing: "0px",
+    color: "#707070",
+    opacity: 1,
   };
   const profil = useSelector((state) => state.profile.identite);
 
@@ -65,6 +73,7 @@ export default function LegalInfo({ setLegalcomponent }) {
             type="text"
             id="prenom_nom"
             name="prenom_nom"
+            style={InputStyle}
             onChange={(e) => handleInputChange("raison_ou_nom", e)}
             defaultValue={identitie.raison_ou_nom}
           />
@@ -80,6 +89,7 @@ export default function LegalInfo({ setLegalcomponent }) {
           <select
             name="annee"
             id="annee"
+            style={InputStyle}
             onChange={(e) => handleInputChange("annee_creation", e)}
             defaultValue={identitie.annee_creation}
           >
@@ -100,6 +110,7 @@ export default function LegalInfo({ setLegalcomponent }) {
             <select
               name="statut"
               id="statut"
+              style={InputStyle}
               onChange={(e) => handleInputChange("statut", e)}
               defaultValue={identitie.statut}
             >
@@ -121,6 +132,7 @@ export default function LegalInfo({ setLegalcomponent }) {
             <select
               name="organisme_taille"
               id="organisme_taille"
+              style={InputStyle}
               onChange={(e) => handleInputChange("taille", e)}
               defaultValue={identitie.taille}
             >
@@ -142,6 +154,7 @@ export default function LegalInfo({ setLegalcomponent }) {
             <select
               name="nombre_employés"
               id="nombre_employés"
+              style={InputStyle}
               onChange={(e) => handleInputChange("nombre_employes", e)}
               defaultValue={identitie.nombre_employes}
             >
@@ -165,6 +178,7 @@ export default function LegalInfo({ setLegalcomponent }) {
               id="organisme_type"
               onChange={(e) => handleInputChange("type", e)}
               defaultValue={identitie.type}
+              style={InputStyle}
             >
               {types.map((opt) => (
                 <option value={opt}>{opt}</option>
@@ -186,6 +200,7 @@ export default function LegalInfo({ setLegalcomponent }) {
               id="pays"
               name="pays"
               defaultValue={identitie.pays}
+              style={InputStyle}
             />
           </div>
         </div>
@@ -206,6 +221,7 @@ export default function LegalInfo({ setLegalcomponent }) {
               name="ice"
               onChange={(e) => handleInputChange("ice", e)}
               defaultValue={identitie.ice}
+              style={InputStyle}
             />
           </div>
         </div>
@@ -224,6 +240,7 @@ export default function LegalInfo({ setLegalcomponent }) {
               id="region"
               defaultValue={identitie.region}
               onChange={(e) => handleInputChange("region", e)}
+              style={InputStyle}
             >
               {regions.map((region) => {
                 return <option value={region}>{region}</option>;
@@ -245,6 +262,7 @@ export default function LegalInfo({ setLegalcomponent }) {
               id="ville"
               defaultValue={identitie.ville}
               onChange={(e) => handleInputChange("ville", e)}
+              style={InputStyle}
             >
               {villes[identitie.region].map((ville) => {
                 return <option value={ville}>{ville}</option>;

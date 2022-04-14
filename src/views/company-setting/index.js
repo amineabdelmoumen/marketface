@@ -63,6 +63,7 @@ function CompanySetting() {
                 </p>
                 <p className="title">Identité</p>
               </div>
+              <div className="line"></div>
               <div className={pageStage === 2 ? `step step-active` : `step`}>
                 <p
                   className="step-icon"

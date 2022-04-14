@@ -10,9 +10,17 @@ export default function FinancialInfo() {
     padding: "8px",
     borderRadius: "8px",
   };
+  const InputStyle = {
+    font: "normal normal 600 15px/15px Montserrat",
+    letterSspacing: "0px",
+    color: "#707070",
+    opacity: 1,
+  };
   const style1 = {
-    color: "#00b6ff",
-    fontSize: "15px",
+    font: "normal normal 600 16px/15px Montserrat",
+    letterSpacing: "0px",
+    color: "#707070",
+    opacity: 1,
   };
   const chaiffreDafaireList = ["< 10 MDhs", "< 75 MDhs", "> 75 MDhs"];
   const dispatch = useDispatch();
@@ -47,6 +55,7 @@ export default function FinancialInfo() {
             <div className="col-md-6 mt-2 form-boxes">
               <div>
                 <input
+                  style={InputStyle}
                   type="number"
                   value={identitie.capital}
                   onChange={(e) => {
@@ -70,6 +79,7 @@ export default function FinancialInfo() {
                 <select
                   name="chiffre_affaire"
                   id="chiffre_affaire"
+                  style={InputStyle}
                   defaultValue={identitie.chiffre_affaire}
                   onChange={(e) => handleInputChange("chiffre_affaire", e)}
                 >

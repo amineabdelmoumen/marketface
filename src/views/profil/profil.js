@@ -46,7 +46,8 @@ function Profil() {
             <div className="col-3 position-fixed d-none d-lg-block">
               <SideBar />
             </div>
-            <div className="col-12 col-lg-9 offset-md-3">
+
+            <div className="col-12 col-lg-9 offset-lg-3">
               <div className="row">
                 <div className="col-12 col-md-3">
                   <CompanyCard />

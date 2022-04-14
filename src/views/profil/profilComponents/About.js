@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function About() {
   const about = useSelector((state) => state.profile);
@@ -12,10 +13,14 @@ export default function About() {
           <p>A propos</p>{" "}
         </div>
         <div className="text">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo,
-          consequatur. Vitae quod minus voluptatem numquam.
+          Quis enim aut eum diligat quem metuat, aut eum a quo se metui putet?
+          Coluntur tamen simulatione dumtaxat ad tempus. Quod si forte, ut fit
+          plerumque, ceciderunt, tum intellegitur quam fuerint inopes amicorum.
+          Quod Tarquinium dixisse ferunt, tum exsulantem se intellexisse quos
+          fidos amicos habuisset, quos infidos, cum iam neutris gratiam referre
+          posset.
         </div>
-        <h5 className="text-black-50 mt-2">Activities</h5>
+        <h5 className="activite-title">Activities</h5>
         <div className="px-4 mt-2">
           <div className="row">
             {about.cible.activites.map((activite) => {
@@ -27,30 +32,44 @@ export default function About() {
             })}
           </div>
           <div className="form-area">
-            <div className="d-flex flex-column align-items-around gap-3  mt-5 comp-info">
-              <div className="address ">
-                <img className="local-image" src="/imgs/cafe.svg" alt="" />
-                <span className="local-text">{about.identite.region}</span>
+            <div className="row  mt-3">
+              <div className="col-12 col-lg-4 address mt-2 ">
+                <div className="d-flex">
+                  <img className="local-image" src="/imgs/cafe.svg" alt="" />
+                  <span className="local-text">{about.identite.region}</span>
+                </div>
               </div>
-              <div className="address">
+
+              <div className="col-12 col-lg-4 address mt-2">
                 {" "}
-                <img
-                  className="local-image"
-                  src="/imgs/communications.svg"
-                  alt=""
-                />
-                <span className="local-text">Marketface.com</span>
+                <div className="d-flex">
+                  <img
+                    className="local-image"
+                    src="/imgs/communications.svg"
+                    alt=""
+                  />
+
+                  <span>
+                    {" "}
+                    <a href="" className="local-text">
+                      Marketface.com
+                    </a>
+                  </span>
+                </div>
               </div>
-              <div className="address">
-                {" "}
-                <img className="local-image" src="/imgs/job.svg" alt="" />
-                <span className="local-text1">{about.identite.telephone}</span>
+              <div className="col-12 col-lg-4 address mt-2">
+                <div className="d-flex">
+                  <img className="local-image" src="/imgs/job.svg" alt="" />
+                  <span className="local-text1">
+                    {about.identite.telephone}
+                  </span>
+                </div>
               </div>
             </div>
             <div className="d-flex flex-column flex-lg-row justify-content-end gap-3 mt-3">
               <button
                 type="submit"
-                className="btn btn-success text-white rounded-pill px-4"
+                className="btn btn-success contact text-white rounded-pill px-4"
               >
                 Contacter
               </button>

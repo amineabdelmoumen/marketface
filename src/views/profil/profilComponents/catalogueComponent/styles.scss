@@ -1,0 +1,39 @@
+.form-boxes {
+  margin-top: 1em;
+  display: flex;
+  justify-content: space-between;
+
+  select {
+    border-radius: 16px;
+    border: 1px solid silver;
+    color: grey;
+    padding: 0 6px;
+    font-size: 14px;
+    text-align: center;
+    width: 180px;
+  }
+
+  input,
+  textarea {
+    border-radius: 16px;
+    border: 1px solid silver;
+    color: grey;
+    text-align: center;
+    padding: 0 6px;
+    font-size: 14px;
+  }
+  textarea {
+    resize: unset;
+  }
+  .text {
+    font: "normal normal 600 17px/17px Montserrat";
+  }
+}
+.line1 {
+  border-left: 2px solid #b2b2b2;
+  height: 400px;
+  position: absolute;
+  left: 45%;
+  margin-left: -3px;
+  top: 0;
+}

@@ -7,9 +7,17 @@ import { useSnackbar } from "react-simple-snackbar";
 
 function Catalogue() {
   const style = "fw-bold";
+  const InputStyle = {
+    font: "normal normal 600 15px/15px Montserrat",
+    letterSspacing: "0px",
+    color: "#707070",
+    opacity: 1,
+  };
   const style1 = {
-    color: "#00b6ff",
-    fontSize: "15px",
+    font: "normal normal 600 15px/15px Montserrat",
+    letterSspacing: "0px",
+    color: "#707070",
+    opacity: 1,
   };
   const dispatch = useDispatch();
   const catalogue = useSelector((state) => state.profile.catalogue);
@@ -61,10 +69,11 @@ function Catalogue() {
                     Vous êtes:
                   </label>
                 </div>
-                <div className="col-md-4 ">
+                <div className="col-md-9 ">
                   <select
                     name="vous_etes"
                     id="vous_etes"
+                    style={InputStyle}
                     value={catalogue.vous_etes}
                     onChange={(e) => handleInputUpdate("vous_etes", e)}
                   >
@@ -84,8 +93,9 @@ function Catalogue() {
                   <div className="row">
                     <div className="col-12 col-md-6">
                       <label
+                        style={InputStyle}
                         htmlFor="matiere"
-                        className={`border rounded px-2 cursor-pointer ${
+                        className={`border rounded px-2 py-1 cursor-pointer ${
                           findElement("matière première", catalogue.matiere)
                             ? "bg-secondary text-white"
                             : "text-black-50"
@@ -105,7 +115,8 @@ function Catalogue() {
                     <div className="col-12 col-md-6">
                       <label
                         htmlFor="transformation"
-                        className={`border rounded px-2 cursor-pointer ${
+                        style={InputStyle}
+                        className={`border rounded px-2 py-1 cursor-pointer ${
                           findElement("transformation", catalogue.matiere)
                             ? "bg-secondary text-white"
                             : "text-black-50"
@@ -127,7 +138,8 @@ function Catalogue() {
                     <div className="col-12 col-md-6">
                       <label
                         htmlFor="distribution"
-                        className={`border rounded px-2 cursor-pointer ${
+                        style={InputStyle}
+                        className={`border rounded px-2 py-1 cursor-pointer ${
                           findElement("distribution", catalogue.matiere)
                             ? "bg-secondary text-white"
                             : "text-black-50"
@@ -147,7 +159,8 @@ function Catalogue() {
                     <div className="col-12 col-md-2">
                       <label
                         htmlFor="revendeur"
-                        className={`border rounded px-2 cursor-pointer ${
+                        style={InputStyle}
+                        className={`border rounded px-2 py-1 cursor-pointer ${
                           findElement("revendeur", catalogue.matiere)
                             ? "bg-secondary text-white"
                             : "text-black-50"
@@ -176,7 +189,8 @@ function Catalogue() {
                 <div className="col-md-2">
                   <label
                     htmlFor="b2b"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`border rounded px-2 py-1 cursor-pointer ${
                       findElement("B2B", catalogue.business)
                         ? "bg-secondary text-white"
                         : "text-black-50"
@@ -196,7 +210,8 @@ function Catalogue() {
                 <div className="col-md-2">
                   <label
                     htmlFor="b2c"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`border rounded px-2 py-1 cursor-pointer ${
                       findElement("B2C", catalogue.business)
                         ? "bg-secondary text-white"
                         : "text-black-50"
@@ -216,7 +231,8 @@ function Catalogue() {
                 <div className="col-md-2">
                   <label
                     htmlFor="b2g"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`border rounded px-2 py-1 cursor-pointer ${
                       findElement("B2G", catalogue.business)
                         ? "bg-secondary text-white"
                         : "text-black-50"
@@ -241,7 +257,8 @@ function Catalogue() {
                 <div className="col-md-3">
                   <label
                     htmlFor="offshore"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`border rounded px-2 py-1 cursor-pointer ${
                       findElement("Offshore", catalogue.location)
                         ? "bg-secondary text-white"
                         : "text-black-50"
@@ -261,7 +278,8 @@ function Catalogue() {
                 <div className="col-md-3">
                   <label
                     htmlFor="onshore"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`border rounded px-2 py-1 cursor-pointer ${
                       findElement("Onshore", catalogue.location)
                         ? "bg-secondary text-white"
                         : "text-black-50"
@@ -281,7 +299,8 @@ function Catalogue() {
                 <div className="col-md-3">
                   <label
                     htmlFor="nearshore"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`border rounded px-2 py-1 cursor-pointer ${
                       findElement("Nearshore", catalogue.location)
                         ? "bg-secondary text-white"
                         : "text-black-50"
@@ -309,7 +328,8 @@ function Catalogue() {
                 <div className="col-md-3">
                   <label
                     htmlFor="online"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`border rounded px-2 py-1 cursor-pointer ${
                       findElement("En ligne", catalogue.moyen)
                         ? "bg-secondary text-white"
                         : "text-black-50"
@@ -329,7 +349,8 @@ function Catalogue() {
                 <div className="col-md-3">
                   <label
                     htmlFor="magasin"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`border rounded px-2 py-1 cursor-pointer ${
                       findElement("En magasin", catalogue.moyen)
                         ? "bg-secondary text-white"
                         : "text-black-50"
@@ -349,7 +370,8 @@ function Catalogue() {
                 <div className="col-md-3">
                   <label
                     htmlFor="usine"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`border rounded px-2 py-1 cursor-pointer ${
                       findElement("En usine", catalogue.moyen)
                         ? "bg-secondary text-white"
                         : "text-black-50"
@@ -376,7 +398,8 @@ function Catalogue() {
                 <div className="col-md-4">
                   <label
                     htmlFor="detaillant"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`border rounded px-2 py-1 cursor-pointer ${
                       findElement("Détaillant", catalogue.type_vente)
                         ? "bg-secondary text-white"
                         : "text-black-50"
@@ -396,7 +419,8 @@ function Catalogue() {
                 <div className="col-md-4">
                   <label
                     htmlFor="grossiste"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`border rounded px-2 py-1 cursor-pointer ${
                       findElement("Grossiste", catalogue.type_vente)
                         ? "bg-secondary text-white"
                         : "text-black-50"
@@ -425,7 +449,8 @@ function Catalogue() {
                 <div className="col-md-4">
                   <label
                     htmlFor="importes"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`border rounded px-2 py-1 cursor-pointer ${
                       findElement("Importés", catalogue.produit_achete)
                         ? "bg-secondary text-white"
                         : "text-black-50"
@@ -446,7 +471,8 @@ function Catalogue() {
                 <div className="col-md-4">
                   <label
                     htmlFor="locaux"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`border rounded px-2 py-1 cursor-pointer ${
                       findElement("Locaux", catalogue.produit_achete)
                         ? "bg-secondary text-white"
                         : "text-black-50"
@@ -473,7 +499,8 @@ function Catalogue() {
                 <div className="col-md-4">
                   <label
                     htmlFor="local"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`border rounded px-2 py-1 cursor-pointer ${
                       findElement("Local", catalogue.distribution)
                         ? "bg-secondary text-white"
                         : "text-black-50"
@@ -493,7 +520,8 @@ function Catalogue() {
                 <div className="col-md-4">
                   <label
                     htmlFor="export"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`border rounded px-2 py-1 cursor-pointer ${
                       findElement("Export", catalogue.distribution)
                         ? "bg-secondary text-white"
                         : "text-black-50"
