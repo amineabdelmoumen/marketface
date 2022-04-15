@@ -252,6 +252,7 @@ function Article(props) {
                 <label htmlFor="category">Prix (MAD):</label>
                 <input
                   type="number"
+                  min="0"
                   value={article.prix}
                   onChange={(e) => handleInputUpdate("prix", e)}
                 />
@@ -266,6 +267,7 @@ function Article(props) {
                 <label htmlFor="quantite">Quantité:</label>
                 <input
                   type="number"
+                  min="0"
                   id="quantite"
                   value={article.quantite}
                   onChange={(e) => handleInputUpdate("quantite", e)}

@@ -210,6 +210,7 @@ function Identite() {
               <label htmlFor="ice">*ICE:</label>
               <input
                 type="number"
+                min="0"
                 id="ice"
                 name="ice"
                 onChange={(e) => handleInputChange("ice", e)}
@@ -312,7 +313,8 @@ function Identite() {
               <label htmlFor="capital">*Capital (MAD):</label>
 
               <input
-                type="text"
+                type="number"
+                min="0"
                 id="capital"
                 name="capital"
                 defaultValue={identite.capital}

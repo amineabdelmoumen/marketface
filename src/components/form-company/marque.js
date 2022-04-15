@@ -153,7 +153,6 @@ function Marque() {
     nomRef.current.innerText = errors.nom_client ? errors.nom_client[0] : "";
     logoRef.current.innerText = errors.logo ? errors.logo[0] : "";
   };
-
   return (
     <>
       <form className="container" name="form-identite" id="form-identite">
