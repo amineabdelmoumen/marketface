@@ -153,6 +153,7 @@ function Marque() {
     nomRef.current.innerText = errors.nom_client ? errors.nom_client[0] : "";
     logoRef.current.innerText = errors.logo ? errors.logo[0] : "";
   };
+
   return (
     <>
       <form className="container" name="form-identite" id="form-identite">
@@ -303,25 +304,33 @@ function Marque() {
                     {marque.titre} | {marque.annee}
                   </h4>
                   {marque.description?.length < 256 ? (
-                    <p className="text-black-50 h6 mt-4">
-                      {marque.description}
-                    </p>
+                    <div className="texet">
+                      {" "}
+                      <p className="text-black-50 h6 mt-4">
+                        {marque.description}
+                      </p>
+                    </div>
                   ) : isFullDescription ? (
-                    <p className="text-black-50 h6 mt-4">
-                      {marque.description}
-                    </p>
+                    <div className="texet">
+                      {" "}
+                      <p className="text-black-50 h6 mt-4">
+                        {marque.description}
+                      </p>
+                    </div>
                   ) : (
-                    <p className="text-black-50 h6 mt-4">
-                      {marque.description.slice(0, 256)}
-                      {"... "}
-                      <a
-                        onClick={() => setIsFullDescription(true)}
-                        href="#"
-                        className="pointer"
-                      >
-                        Voir plus
-                      </a>
-                    </p>
+                    <div className="texet">
+                      <p className="text-black-50 h6 mt-4">
+                        {marque.description.slice(0, 256)}
+                        {"... "}
+                        <a
+                          onClick={() => setIsFullDescription(true)}
+                          href="#"
+                          className="pointer"
+                        >
+                          Voir plus
+                        </a>
+                      </p>
+                    </div>
                   )}
                   <p className="text-secondary h6 mt-4">{marque.categorie}</p>
                   <p className="d-flex gap-2 mt-5">

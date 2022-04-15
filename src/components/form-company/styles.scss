@@ -153,3 +153,9 @@ form#form-identite {
   font-size: 14px;
   width: 170px;
 }
+.texet {
+  height: fit-content;
+  p {
+    word-wrap: break-word;
+  }
+}
