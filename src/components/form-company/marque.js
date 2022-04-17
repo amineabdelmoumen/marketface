@@ -7,6 +7,22 @@ import years from "../../lib/constants/years";
 import { deleteReference, saveImages, saveReference } from "../../lib/crud";
 
 let uploadForm = new FormData();
+const areaScrollStyle = {
+  border: "none",
+  outline: "none",
+  boxShadow: "none",
+  overflow: "auto",
+  resize: "none",
+  display: "block",
+};
+const areaStyle = {
+  border: "none",
+  outline: "none",
+  boxShadow: "none",
+  overflow: "hidden",
+  resize: "none",
+  display: "block",
+};
 
 function Marque() {
   const dispatch = useDispatch();
@@ -89,7 +105,7 @@ function Marque() {
             titre: "",
             annee: "",
             description: "",
-            categorie: "Produits chimiques",
+            categorie: "",
             nom_client: "",
             images: [],
             logo: null,
@@ -124,7 +140,7 @@ function Marque() {
               titre: "",
               annee: "",
               description: "",
-              categorie: "Produits chimiques",
+              categorie: "",
               nom_client: "",
               images: [],
               logo: null,

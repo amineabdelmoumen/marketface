@@ -3,7 +3,9 @@ import { setFormStage } from "../../store/rootSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setCatalogue } from "../../store/profileSlice";
 import { saveCatalogue } from "../../lib/crud";
-import { useSnackbar } from "react-simple-snackbar";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Catalogue() {
   const dispatch = useDispatch();
@@ -47,7 +49,7 @@ function Catalogue() {
       <form className="container" name="form-identite" id="form-identite">
         <div className="page_number">1/2</div>
         <h4 className="ms-5 text-primary">Créez votre E-Catalogue</h4>
-        <div className="form-identite-info d-block">
+        <div className="form-identite-info d-block mt-3">
           <div className="row">
             <div className="col-10 offset-2">
               <div className="form-boxes">
@@ -496,6 +498,7 @@ function Catalogue() {
             >
               Suivant
             </button>
+            <ToastContainer />
           </div>
         </div>
       </form>

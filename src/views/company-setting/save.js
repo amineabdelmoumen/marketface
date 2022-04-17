@@ -1,20 +1,16 @@
 import React from "react";
 import { saveDocuments } from "../../lib/crud";
-import { useNavigate } from "react-router-dom";
-import { useSnackbar } from "react-simple-snackbar";
-import {
-  snackbarErrorStyle,
-  snackbarSuccessStyle,
-} from "../../lib/snackbarStyles";
+import { useNavigate, useLocation } from "react-router-dom";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 let form = new FormData();
 
 function Save(props) {
   const navigate = useNavigate();
-  const [openSuccessSnackbar, closeSuccessSnackbar] =
-    useSnackbar(snackbarSuccessStyle);
-  const [openErrorSnackbar, closeErrorSnackbar] =
-    useSnackbar(snackbarErrorStyle);
+  const location = useLocation();
+
   const handleDocsUpload = (e) => {
     let files = e.target.files;
     for (let i = 0; i < files.length; i++) {
@@ -27,18 +23,15 @@ function Save(props) {
     saveDocuments(form, token)
       .then((res) => {
         form = new FormData();
-        openSuccessSnackbar(
-          "Votre demande de vérification de compte a été bien envoyée"
-        );
+        toast("Votre demande de vérification de compte a été bien envoyée");
       })
       .then(() => {
         setTimeout(() => {
-          closeSuccessSnackbar();
           navigate("/profil");
         }, 3000);
       })
       .catch((err) => {
-        openErrorSnackbar("Veuillez joindre la demande de vérification");
+        toast("Veuillez joindre la demande de vérification");
       });
   };
 
@@ -47,7 +40,13 @@ function Save(props) {
       <img src="/imgs/logo.png" alt="logo" width={100} />
       <div className="row">
         <div className="col-8 offset-2">
-          <h5 className="text-secondary">Vérification de votre compte</h5>
+          {location.state && location.state?.auth === 1 ? (
+            <h5 className="text-secondary">
+              Félicitation! vous avez complété votre profil avec succès !
+            </h5>
+          ) : (
+            <h5 className="text-secondary">Vérification de votre compte</h5>
+          )}
           <p>
             Le document ci-après nous permet de vérifier l’identité de votre
             entreprise et garantir votre sécurité. Vous pourrez alors accéder à
@@ -101,6 +100,7 @@ function Save(props) {
                 >
                   Envoyer
                 </button>
+                <ToastContainer />
               </div>
             </div>
             <div className="col-3 d-flex justify-content-end align-items-baseline">

@@ -12,10 +12,27 @@ import typesArticle from "../../lib/constants/typesArticle";
 import services from "../../lib/constants/services";
 
 let uploadForm = new FormData();
+const areaScrollStyle = {
+  border: "none",
+  outline: "none",
+  boxShadow: "none",
+  overflow: "auto",
+  resize: "none",
+  display: "block",
+};
+const areaStyle = {
+  border: "none",
+  outline: "none",
+  boxShadow: "none",
+  overflow: "hidden",
+  resize: "none",
+  display: "block",
+};
 
-const biensImmobiliers = ["Affaires immobilières"];
+const biensImmobiliers = ["", "Affaires immobilières"];
 
 const natures = [
+  "",
   "Terrain agricole",
   "terrain industriel",
   "usine",
@@ -29,6 +46,8 @@ const natures = [
   "local industriel",
   "Ferme",
 ];
+
+const types = ["", "Vente/ Location"];
 
 function Article(props) {
   const typeArticleRef = useRef();
@@ -54,6 +73,7 @@ function Article(props) {
       const response = res.data;
       uploadForm = new FormData();
       data["documents"] = response.paths;
+      console.log("documents: ", data.documents[0].nom);
       dispatch(setArticle(data));
     });
   };
@@ -94,7 +114,7 @@ function Article(props) {
         dispatch(
           setArticle({
             type_article: "Produit",
-            type: "Produits chimiques",
+            type: "",
             nom: "",
             description: "",
             prix: "",
@@ -128,7 +148,7 @@ function Article(props) {
           dispatch(
             setArticle({
               type_article: "Produit",
-              type: "Produits chimiques",
+              type: "",
               nom: "",
               description: "",
               prix: "",
@@ -249,7 +269,7 @@ function Article(props) {
                 style={{ "font-size": "10px" }}
               ></small>
               <div className="form-boxes">
-                <label htmlFor="category">Prix (MAD):</label>
+                <label htmlFor="prix">Prix (MAD):</label>
                 <input
                   type="number"
                   min="0"
@@ -279,12 +299,12 @@ function Article(props) {
                 style={{ "font-size": "10px" }}
               ></small>
               <div className="form-boxes">
-                <label htmlFor="type">Type:</label>
+                <label htmlFor="categorie">Catégorie:</label>
                 <select
-                  name="type"
-                  id="type"
+                  name="categorie"
+                  id="categorie"
                   value={article.type}
-                  onChange={(e) => handleInputUpdate("type", e)}
+                  onChange={(e) => handleInputUpdate("categorie", e)}
                 >
                   {
                     {
@@ -331,7 +351,7 @@ function Article(props) {
                     />
                   </div>
                   <div className="form-boxes">
-                    <label htmlFor="superficie">Superficie:</label>
+                    <label htmlFor="superficie">Superficie (m2):</label>
                     <input
                       type="text"
                       id="superficie"
@@ -339,30 +359,52 @@ function Article(props) {
                       onChange={(e) => handleInputUpdate("superficie", e)}
                     />
                   </div>
+                  <div className="form-boxes">
+                    <label htmlFor="nature">Nature:</label>
+                    <select
+                      name="nature"
+                      id="nature"
+                      value={article.type}
+                      onChange={(e) => handleInputUpdate("nature", e)}
+                    >
+                      {natures.map((nature) => (
+                        <option value={nature}>{nature}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="form-boxes">
+                    <label htmlFor="type">Type:</label>
+                    <select
+                      name="type"
+                      id="type"
+                      value={article.type}
+                      onChange={(e) => handleInputUpdate("type", e)}
+                    >
+                      {types.map((type) => (
+                        <option value={type}>{type}</option>
+                      ))}
+                    </select>
+                  </div>
                 </>
               ) : (
                 ""
               )}
-              {article.type_article !== "produit" ? (
-                <div className="form-boxes">
-                  <label htmlFor="photos">
-                    Joindre les documents d'article
-                  </label>
-                  <label htmlFor="documents" className="text-center upload">
-                    Choisir un fichier
-                    <input
-                      type="file"
-                      id="documents"
-                      name="documents[]"
-                      className="d-none"
-                      multiple
-                      onChange={(e) => handleDocsUpload(e)}
-                    />
-                  </label>
-                </div>
-              ) : (
-                ""
-              )}
+
+              <div className="form-boxes">
+                <label htmlFor="photos">Joindre les documents d'article</label>
+                <label htmlFor="documents" className="text-center upload">
+                  Choisir un fichier
+                  <input
+                    type="file"
+                    id="documents"
+                    name="documents[]"
+                    className="d-none"
+                    multiple
+                    onChange={(e) => handleDocsUpload(e)}
+                  />
+                </label>
+              </div>
+
               <div className="form-boxes">
                 <label htmlFor="photos">Joindre des photos d'article</label>
                 <label htmlFor="photos" className="text-center upload">
@@ -391,15 +433,37 @@ function Article(props) {
                   <p>
                     {article.prix}dh/{article.quantite}
                   </p>
-
                   {article.description?.length < 256 ? (
-                    <p>{article.description}</p>
+                    <textarea
+                      style={areaScrollStyle}
+                      name=""
+                      id=""
+                      cols="50"
+                      rows="10"
+                      className="text-black-50 h6 mt-4"
+                      value={article.description}
+                    />
                   ) : isFullDescription ? (
-                    <p>{article.description}</p>
+                    <textarea
+                      style={areaScrollStyle}
+                      name=""
+                      id=""
+                      cols="50"
+                      rows="10"
+                      className="text-black-50 h6 mt-4"
+                      value={article.description}
+                    />
                   ) : (
-                    <p>
-                      {article.description.slice(0, 256)}
-                      {"... "}
+                    <>
+                      <textarea
+                        style={areaStyle}
+                        name=""
+                        id=""
+                        cols="50"
+                        rows="6"
+                        className="text-black-50 h6 mt-4 mb-0"
+                        value={article.description.slice(0, 256) + "..."}
+                      />
                       <a
                         onClick={() => setIsFullDescription(true)}
                         href="#"
@@ -407,7 +471,7 @@ function Article(props) {
                       >
                         Voir plus
                       </a>
-                    </p>
+                    </>
                   )}
                 </div>
                 <div className="col-6">
@@ -425,6 +489,12 @@ function Article(props) {
                           );
                         })
                       : ""}
+                  </div>
+                  <div className="row mt-2">
+                    {article?.documents &&
+                      article?.documents.map((doc) => {
+                        return <div className="col-6 mt-2">{doc.nom}</div>;
+                      })}
                   </div>
                 </div>
               </div>

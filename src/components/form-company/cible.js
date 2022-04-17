@@ -246,7 +246,7 @@ function Cible() {
       .then((res) => res.data)
       .then((data) => {
         dispatch(setCible({ ...cible, id: data.id }));
-        navigate("/company-setting/save");
+        navigate("/company-setting/save", { state: { auth: 1 } });
       })
       .catch((err) => {
         let data = err.response.data;
@@ -260,7 +260,7 @@ function Cible() {
       ) : (
         <form className="container" name="form-identite" id="form-identite">
           <h3>Identifiez votre cible</h3>
-          <div className="form-identite-info d-block">
+          <div className="form-identite-info d-block mt-3">
             <h5 className="text-center text-primary">
               Vous aurez ainsi plus de chance de décrocher des opportunités
               d'affaires

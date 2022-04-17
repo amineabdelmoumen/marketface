@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { login } from "../../lib/auth";
-import { useSnackbar } from "react-simple-snackbar";
-import { snackbarErrorStyle } from "../../lib/snackbarStyles";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./styles.scss";
 
 const Login = () => {
   const styleImage = {
     maxWidth: "100%",
   };
-  const [openSnackbar, closeSnackbar] = useSnackbar(snackbarErrorStyle);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,7 +23,7 @@ const Login = () => {
         navigate("/company-setting");
       }
     } catch (e) {
-      openSnackbar(e.response.data.msg);
+      toast(e.response.data.msg);
     }
   };
 
@@ -36,7 +35,7 @@ const Login = () => {
         <div className="text-center">
           <h1 className="text-secondary">Accédez au marché en temps réel!</h1>
           <p className="text-primary">
-            Ne ratez pas aucune opportunité d'affaires! Créez votre compte dès
+            Ne ratez aucune opportunité d'affaires! Créez votre compte dès
             aujourd'hui!
           </p>
         </div>

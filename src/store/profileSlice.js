@@ -24,7 +24,7 @@ const profileSlice = createSlice({
       titre: "",
       annee: "",
       description: "",
-      categorie: "Produits chimiques",
+      categorie: "",
       nom_client: "",
       images: [],
       logo: null,
@@ -43,7 +43,7 @@ const profileSlice = createSlice({
     articles: [],
     article: {
       type_article: "produit",
-      type: "Produits chimiques",
+      categorie: "",
       nom: "",
       description: "",
       prix: "",
