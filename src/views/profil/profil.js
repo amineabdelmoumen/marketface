@@ -15,6 +15,7 @@ import { setProfil } from "../../store/profileSlice";
 
 function Profil() {
   const dispatch = useDispatch();
+  const [sideBarColumns, setSideBarColumns] = useState(0);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const profil = useSelector((state) => state.profile);
@@ -43,11 +44,26 @@ function Profil() {
         <NavBar />
         <div className="container-fluid mt-5">
           <div className="row">
-            <div className="col-3 position-fixed d-none d-lg-block">
-              <SideBar />
+            <div
+              className={
+                sideBarColumns == 1
+                  ? "col-3 position-fixed d-none d-lg-block"
+                  : "col-1 position-fixed d-none d-lg-block"
+              }
+            >
+              <SideBar
+                setSideBarColumns={setSideBarColumns}
+                sideBarColumns={sideBarColumns}
+              />
             </div>
 
-            <div className="col-12 col-lg-9 offset-lg-3">
+            <div
+              className={
+                sideBarColumns == 1
+                  ? "col-12 col-lg-9 offset-lg-3"
+                  : "col-12 col-lg-11 offset-lg-1"
+              }
+            >
               <div className="row">
                 <div className="col-12 col-md-3">
                   <CompanyCard />

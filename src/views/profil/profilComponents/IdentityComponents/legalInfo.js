@@ -9,14 +9,15 @@ import { saveCompany } from "../../../../lib/crud";
 import { Navigate } from "react-router-dom";
 export default function LegalInfo({ setLegalcomponent }) {
   const style1 = {
-    font: "normal normal 600 15px/15px Montserrat",
-    letterSspacing: "0px",
+    font: "normal normal normal 14px/11px Montserrat",
+    letterSpacing: "0px",
     color: "#707070",
     opacity: 1,
+    marginTop: "10px",
   };
   const InputStyle = {
-    font: "normal normal 600 15px/15px Montserrat",
-    letterSspacing: "0px",
+    font: "normal normal normal 14px/11px Montserrat",
+    letterspacing: "0px",
     color: "#707070",
     opacity: 1,
   };
@@ -63,12 +64,12 @@ export default function LegalInfo({ setLegalcomponent }) {
       </div>
 
       <div className="row form-boxes">
-        <div className="col-md-6 mt-2">
+        <div className="col-md-4 mt-2">
           <div>
             <p style={style1}>Raison Social :</p>
           </div>
         </div>
-        <div className="col-md-6 mt-2">
+        <div className="col-md-8 mt-2">
           <input
             type="text"
             id="prenom_nom"
@@ -80,12 +81,12 @@ export default function LegalInfo({ setLegalcomponent }) {
         </div>
       </div>
       <div className="row mt-4 form-boxes">
-        <div className="col-md-6 mt-2">
+        <div className="col-md-4 mt-2">
           <div>
             <p style={style1}>Année de Creation :</p>
           </div>
         </div>
-        <div className="col-md-6 mt-2">
+        <div className="col-md-8 mt-2">
           <select
             name="annee"
             id="annee"
@@ -100,12 +101,12 @@ export default function LegalInfo({ setLegalcomponent }) {
         </div>
       </div>
       <div className="row mt-4 form-boxes">
-        <div className="col-md-6 mt-2">
+        <div className="col-md-4 mt-2">
           <div>
             <p style={style1}>Statut :</p>
           </div>
         </div>
-        <div className="col-md-6 mt-2">
+        <div className="col-md-8 mt-2">
           <div>
             <select
               name="statut"
@@ -122,12 +123,12 @@ export default function LegalInfo({ setLegalcomponent }) {
         </div>
       </div>
       <div className="row mt-4 form-boxes">
-        <div className="col-md-6 mt-2">
+        <div className="col-md-4 mt-2">
           <div>
             <p style={style1}>Taille d'Organisme :</p>
           </div>
         </div>
-        <div className="col-md-6 mt-2">
+        <div className="col-md-8 mt-2">
           <div>
             <select
               name="organisme_taille"
@@ -144,12 +145,12 @@ export default function LegalInfo({ setLegalcomponent }) {
         </div>
       </div>
       <div className="row mt-4 form-boxes">
-        <div className="col-md-6 mt-2">
+        <div className="col-md-4 mt-2">
           <div>
             <p style={style1}>Nombres D'employés:</p>
           </div>
         </div>
-        <div className="col-md-6 mt-2">
+        <div className="col-md-8 mt-2">
           <div>
             <select
               name="nombre_employés"
@@ -166,12 +167,12 @@ export default function LegalInfo({ setLegalcomponent }) {
         </div>
       </div>
       <div className="row mt-4 mb-1 form-boxes">
-        <div className="col-md-6 mt-2">
+        <div className="col-md-4 mt-2">
           <div>
             <p style={style1}>Type d'organisme :</p>
           </div>
         </div>
-        <div className="col-md-6 mt-2">
+        <div className="col-md-8 mt-2">
           <div>
             <select
               name="organisme_type"
@@ -188,12 +189,12 @@ export default function LegalInfo({ setLegalcomponent }) {
         </div>
       </div>
       <div className="row mt-4 form-boxes">
-        <div className="col-md-6 mt-2">
+        <div className="col-md-4 mt-2">
           <div>
             <p style={style1}>Pays:</p>
           </div>
         </div>
-        <div className="col-md-5 mt-2">
+        <div className="col-md-7 mt-2">
           <div>
             <input
               type="text"
@@ -208,12 +209,12 @@ export default function LegalInfo({ setLegalcomponent }) {
       </div>
 
       <div className="row mt-4 form-boxes">
-        <div className="col-md-6 mt-2">
+        <div className="col-md-4 mt-2">
           <div>
             <p style={style1}>ICE :</p>
           </div>
         </div>
-        <div className="col-md-6 mt-2">
+        <div className="col-md-8 mt-2">
           <div>
             <input
               type="number"
@@ -228,12 +229,12 @@ export default function LegalInfo({ setLegalcomponent }) {
       </div>
 
       <div className="row mt-4 mb-1 form-boxes">
-        <div className="col-md-6 mt-2">
+        <div className="col-md-4 mt-2">
           <div>
             <p style={style1}>Région :</p>
           </div>
         </div>
-        <div className="col-md-6 mt-2">
+        <div className="col-md-8 mt-2">
           <div>
             <select
               name="region"
@@ -250,12 +251,12 @@ export default function LegalInfo({ setLegalcomponent }) {
         </div>
       </div>
       <div className="row mt-3 mb-1 form-boxes">
-        <div className="col-md-6 mt-2">
+        <div className="col-md-4 mt-2">
           <div>
             <p style={style1}>Ville :</p>
           </div>
         </div>
-        <div className="col-md-6 mt-2">
+        <div className="col-md-8 mt-2">
           <div>
             <select
               name="ville"

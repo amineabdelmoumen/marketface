@@ -8,13 +8,22 @@ import Profil from "./views/profil/profil";
 import "./assets/scss/main.scss";
 import "./assets/css/normalize.css";
 import ResetPassword from "./views/reset-password";
+import PrivateProfil from "./components/privateProfil";
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/signup" element={<Signup />} />
-        <Route path="/" element={<Login />} />
+
+        <Route
+          path="/"
+          element={
+            <PrivateProfil>
+              <Login />
+            </PrivateProfil>
+          }
+        />
         <Route
           path="/company-setting"
           element={

@@ -11,16 +11,17 @@ export default function FinancialInfo() {
     borderRadius: "8px",
   };
   const InputStyle = {
-    font: "normal normal 600 15px/15px Montserrat",
-    letterSspacing: "0px",
+    font: "normal normal normal 14px/11px Montserrat",
+    letterspacing: "0px",
     color: "#707070",
     opacity: 1,
   };
   const style1 = {
-    font: "normal normal 600 16px/15px Montserrat",
-    letterSpacing: "0px",
+    font: "normal normal normal 14px/11px Montserrat",
+    letterspacing: "0px",
     color: "#707070",
     opacity: 1,
+    marginTop: "10px",
   };
   const chaiffreDafaireList = ["< 10 MDhs", "< 75 MDhs", "> 75 MDhs"];
   const dispatch = useDispatch();

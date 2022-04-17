@@ -4,6 +4,18 @@ import { Link } from "react-router-dom";
 
 export default function About() {
   const about = useSelector((state) => state.profile);
+  const formatPhoneNumber = (phoneNumber) => {
+    let FormatedPhoneNumber = "";
+    for (let i = 0; i < phoneNumber.length; i++) {
+      if (i % 2 == 0) {
+        FormatedPhoneNumber += phoneNumber[i];
+      } else {
+        FormatedPhoneNumber += phoneNumber[i] + " ";
+      }
+    }
+
+    return <span className="local-text1"> {FormatedPhoneNumber}</span>;
+  };
 
   console.log(about.telephonne);
   return (
@@ -60,9 +72,8 @@ export default function About() {
               <div className="col-12 col-lg-4 address mt-2">
                 <div className="d-flex">
                   <img className="local-image" src="/imgs/job.svg" alt="" />
-                  <span className="local-text1">
-                    {about.identite.telephone}
-                  </span>
+
+                  {formatPhoneNumber(about.identite.telephone)}
                 </div>
               </div>
             </div>

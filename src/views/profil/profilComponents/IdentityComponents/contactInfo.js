@@ -7,14 +7,15 @@ export default function ContactInfo() {
   const [showButton, setShowButton] = useState(0);
   const [identitie, setIdentitie] = useState(profil.identite);
   const style1 = {
-    font: "normal normal 600 15px/15px Montserrat",
-    letterSspacing: "0px",
+    font: "normal normal normal 14px/11px Montserrat",
+    letterspacing: "0px",
     color: "#707070",
     opacity: 1,
+    marginTop: "10px",
   };
   const InputStyle = {
-    font: "normal normal 600 14px/15px Montserrat",
-    letterSspacing: "0px",
+    font: "normal normal normal 14px/11px Montserrat",
+    letterspacing: "0px",
     color: "#707070",
     opacity: 1,
   };

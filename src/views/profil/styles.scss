@@ -27,13 +27,7 @@
 }
 
 .items {
-  display: grid;
-  grid-template-columns: 30% 70%;
   margin-top: 25px;
-  @media screen and(max-width:991px) {
-    display: grid;
-    grid-template-columns: 100%;
-  }
 }
 .profile {
   position: relative;
@@ -65,6 +59,9 @@
 .icon1 {
   margin-left: 20px;
   margin-top: 26px;
+  @media screen and (max-width: 1170px) {
+    margin-left: 3px;
+  }
 
   height: 50px;
 }
@@ -75,9 +72,9 @@
   margin-bottom: 4px;
 }
 .side-text {
-  margin-top: 30px;
+  margin-top: 35px;
+  margin-left: 11%;
 
-  font: normal normal medium 10px/15px Montserrat;
   letter-spacing: 0px;
   color: #646464;
   opacity: 1;
@@ -152,10 +149,11 @@
 .comp-logo {
   //margin-left: 80px;
   //margin-top:90px ;
-  max-width: 100px;
+  max-width: 100%;
   margin-left: 32%;
   margin-right: 26%;
   margin-top: 16%;
+  border-radius: 50%;
 }
 .badges-container {
   display: flex;
@@ -168,6 +166,7 @@
   height: 30px;
   margin-right: 13%;
   margin-left: 70%;
+  margin-top: 2%;
 }
 .about {
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -426,7 +425,7 @@ input[type="text"]:focus {
 .next-btn {
   position: absolute;
   width: 23px;
-  right: 100px;
+  right: 30%;
   top: 40%;
   @media only screen and (max-width: 400px) {
     right: 70px;
