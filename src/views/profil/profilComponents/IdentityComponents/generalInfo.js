@@ -3,7 +3,7 @@ import { setFormStage } from "../../../../store/rootSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setCatalogue } from "../../../../store/profileSlice";
 import { saveCatalogue } from "../../../../lib/crud";
-import { useSnackbar } from "react-simple-snackbar";
+
 import "./styles.scss";
 
 function Catalogue() {
