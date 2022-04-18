@@ -8,13 +8,24 @@ import Profil from "./views/profil/profil";
 import "./assets/scss/main.scss";
 import "./assets/css/normalize.css";
 import ResetPassword from "./views/reset-password";
+import PrivateProfil from "./components/privateProfil";
+import PageLoading from "./components/PageLoading";
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/signup" element={<Signup />} />
-        <Route path="/" element={<Login />} />
+
+        <Route
+          path="/"
+          element={
+            <PrivateProfil>
+              <PageLoading />
+              <Login />
+            </PrivateProfil>
+          }
+        />
         <Route
           path="/company-setting"
           element={
@@ -31,6 +42,7 @@ function App() {
             </Private>
           }
         />
+
         <Route path="/company-setting/save" element={<Save />} />
         <Route path="/reset-password" element={<ResetPassword />} />
       </Routes>

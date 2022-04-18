@@ -67,24 +67,27 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <div>
-              <Link to="/reset-password">
-                <small>Mot de passe oublié?</small>
-              </Link>
-            </div>
-            <div className="d-flex justify-content-end  align-items-end mb-5 m-10">
-              <Link
-                to="/signup"
-                className="btn btn-light text-success border-success rounded-pill px-4 me-2"
-              >
-                S'enregistrer
-              </Link>
-              <button
-                onClick={handleClick}
-                className="btn btn-success text-white rounded-pill px-4"
-              >
-                Envoyer
-              </button>
+
+            <div className="d-flex  mb-5 m-10">
+              <div className="me-auto align-self-center">
+                <Link to="/reset-password">
+                  <small>Mot de passe oublié?</small>
+                </Link>
+              </div>
+              <div>
+                <Link
+                  to="/signup"
+                  className="btn btn-light text-success border-success rounded-pill px-4 me-2 enreg"
+                >
+                  S'enregistrer
+                </Link>
+                <button
+                  onClick={handleClick}
+                  className="btn btn-success text-white rounded-pill px-4"
+                >
+                  Envoyer
+                </button>
+              </div>
               <ToastContainer />
             </div>
           </div>

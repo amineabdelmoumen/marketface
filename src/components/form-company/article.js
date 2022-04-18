@@ -273,7 +273,6 @@ function Article(props) {
                 <input
                   type="number"
                   min="0"
-                  id="prix"
                   value={article.prix}
                   onChange={(e) => handleInputUpdate("prix", e)}
                 />

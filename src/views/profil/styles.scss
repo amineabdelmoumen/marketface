@@ -19,15 +19,15 @@
     margin-right: 1px;
   }
 }
+.text {
+  font: normal normal normal 15px/15px Montserrat;
+  letter-spacing: 0.5px;
+  color: #707070;
+  opacity: 1;
+}
 
 .items {
-  display: grid;
-  grid-template-columns: 30% 70%;
   margin-top: 25px;
-  @media screen and(max-width:991px) {
-    display: grid;
-    grid-template-columns: 100%;
-  }
 }
 .profile {
   position: relative;
@@ -39,10 +39,10 @@
 }
 .border-details {
   background: #ffffff 0% 0% no-repeat padding-box;
-  box-shadow: 3px 4px 24px #d8ecf5;
-  border-radius: 17px;
-
+  border: 1px solid #e0e0e0;
   opacity: 1;
+  border-top: none;
+  border-left: 10px green;
 }
 
 .sidebar-container {
@@ -59,6 +59,9 @@
 .icon1 {
   margin-left: 20px;
   margin-top: 26px;
+  @media screen and (max-width: 1170px) {
+    margin-left: 3px;
+  }
 
   height: 50px;
 }
@@ -69,9 +72,9 @@
   margin-bottom: 4px;
 }
 .side-text {
-  margin-top: 30px;
+  margin-top: 35px;
+  margin-left: 11%;
 
-  font: normal normal medium 10px/15px Montserrat;
   letter-spacing: 0px;
   color: #646464;
   opacity: 1;
@@ -100,7 +103,7 @@
 }
 
 .slogan {
-  font: normal normal normal 12px/17px Segoe UI;
+  font: normal normal normal 12px/15px Montserrat;
   letter-spacing: 0px;
   opacity: 1;
   margin-left: 24%;
@@ -146,10 +149,11 @@
 .comp-logo {
   //margin-left: 80px;
   //margin-top:90px ;
-  max-width: 100px;
+  max-width: 100%;
   margin-left: 32%;
   margin-right: 26%;
   margin-top: 16%;
+  border-radius: 50%;
 }
 .badges-container {
   display: flex;
@@ -162,6 +166,7 @@
   height: 30px;
   margin-right: 13%;
   margin-left: 70%;
+  margin-top: 2%;
 }
 .about {
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -180,7 +185,21 @@
   padding: 3%;
 }
 .title {
+  font: normal normal normal 18px/22px Montserrat;
+  letter-spacing: 0px;
   color: #25a9e0;
+  opacity: 1;
+  margin-bottom: 19px;
+}
+.activite-title {
+  font: normal normal normal 18px/22px Montserrat;
+  letter-spacing: 0px;
+  color: #25a9e0;
+  opacity: 1;
+  margin-top: 20px;
+}
+.clicked {
+  border-left: 5px solid #09bc8a;
 }
 .form {
   display: flex;
@@ -190,10 +209,10 @@
 }
 .form-box {
   background: #ffffff 0% 0% no-repeat padding-box;
-  box-shadow: 3px 4px 24px #d8ecf5;
-  border-radius: 17px;
+  box-shadow: 3px 4px 17px #d8ecf5;
+  border-radius: 0px 17px 17px 0px;
   opacity: 1;
-  margin-left: -6px;
+  margin-left: -10px;
 }
 .form-check-input:checked {
   background-color: blue;
@@ -244,27 +263,42 @@ input[type="text"]:focus {
 .comp-info {
   display: flex;
   /* justify-content: space-around; */
-  gap: 8%;
-  margin-left: 50px;
+
+  margin-left: 20px;
   @media only screen and(max-width:370px) {
     margin-left: 0px;
   }
 }
 .address {
   display: flex;
-  justify-content: space-around;
+
   margin-top: 1%;
-  max-width: fit-content;
+  max-width: 100%;
 }
 .local-image {
   height: 30px;
 }
 .text-select {
-  font: normal normal normal 27px/33px Montserrat;
+  font: normal normal 600 16px/22px Montserrat;
+  letter-spacing: 0px;
+  color: #25a9e0;
+  opacity: 1;
   @media only screen and (max-width: 600px) {
     font-size: 20px;
   }
-  @media only screen and (max-width: 430px) {
+  @media only screen and(max-width: 430px) {
+    font-size: 13px;
+  }
+}
+.text-select1 {
+  font: normal normal 600 18px/22px Montserrat;
+  letter-spacing: 0px;
+  color: #25a9e0;
+  opacity: 1;
+  @media only screen and (max-width: 600px) {
+    font-size: 20px;
+  }
+  @media only screen and(max-width: 430px) {
     font-size: 13px;
   }
 }
@@ -274,16 +308,26 @@ input[type="text"]:focus {
 .local-text {
   margin-top: 4%;
 
-  color: #25a9e0;
-  font-size: 15px;
-  margin-left: 28px;
+  font: normal normal normal 14px/32px Montserrat;
+  margin-left: 18px;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: left;
+  letter-spacing: 0px;
+  color: #a7a7a7;
+  text-transform: capitalize;
+  opacity: 1;
 }
 .local-text1 {
   margin-top: 4%;
-  margin-left: 28px;
+  margin-left: 18px;
 
-  color: #25a9e0;
-  font-size: 15px;
+  font: normal normal normal 14px/32px Montserrat;
+  letter-spacing: var(--unnamed-character-spacing-0);
+  text-align: left;
+  letter-spacing: 0px;
+  color: #a7a7a7;
+  text-transform: capitalize;
+  opacity: 1;
 }
 
 .submit-flex {
@@ -299,6 +343,7 @@ input[type="text"]:focus {
   padding: 13px 60px 11px 60px;
   color: #25a9e0;
   text-align: center;
+  font: normal normal normal 14px/15px Segoe UI;
 }
 
 .text-input {
@@ -306,15 +351,18 @@ input[type="text"]:focus {
   border: 1px solid #e0e0e0;
   border-radius: 36px;
   opacity: 1;
-  width: 250px;
+  width: 335px;
   outline: none;
   height: 43px;
 }
 .search-icon {
   position: relative;
-  top: -29px;
-  right: -214px;
-  width: 20px;
+  top: -31px;
+  right: -288px;
+  width: 24px;
+}
+.contact {
+  font: normal normal bold 10px/13px Montserrat;
 }
 
 .input-form {
@@ -377,8 +425,11 @@ input[type="text"]:focus {
 .next-btn {
   position: absolute;
   width: 23px;
-  right: 100px;
+  right: 30%;
   top: 40%;
+  @media only screen and (max-width: 400px) {
+    right: 70px;
+  }
 }
 .back-btn {
   position: absolute;
@@ -394,6 +445,12 @@ input[type="text"]:focus {
   border-left: 4px solid #379bbd;
   height: fit-content;
   margin: 0% 2%;
+}
+
+.catalogue-icon {
+  position: absolute;
+  left: 26px;
+  top: 10px;
 }
 
 /* .icon {

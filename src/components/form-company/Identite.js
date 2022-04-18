@@ -122,7 +122,7 @@ function Identite() {
       >
         <h3>Dites-nous plus sur vous</h3>
         <div className="logo">
-          <p>*Insere votre logo</p>
+          <p>*Inserez votre logo</p>
           <p className="icon-img">
             {identite.logo ? (
               <img

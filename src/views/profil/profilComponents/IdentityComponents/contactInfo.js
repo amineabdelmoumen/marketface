@@ -7,8 +7,17 @@ export default function ContactInfo() {
   const [showButton, setShowButton] = useState(0);
   const [identitie, setIdentitie] = useState(profil.identite);
   const style1 = {
-    color: "#00b6ff",
-    fontSize: "15px",
+    font: "normal normal normal 14px/11px Montserrat",
+    letterspacing: "0px",
+    color: "#707070",
+    opacity: 1,
+    marginTop: "10px",
+  };
+  const InputStyle = {
+    font: "normal normal normal 14px/11px Montserrat",
+    letterspacing: "0px",
+    color: "#707070",
+    opacity: 1,
   };
 
   const handleInputChange = (field, e) => {
@@ -48,6 +57,7 @@ export default function ContactInfo() {
               <input
                 type="text"
                 value={identitie.telephone}
+                style={InputStyle}
                 onChange={(e) => handleInputChange("telephone", e)}
               />
             </div>
@@ -76,6 +86,7 @@ export default function ContactInfo() {
               <input
                 type="text"
                 value={identitie.siege_social}
+                style={InputStyle}
                 onChange={(e) => handleInputChange("siege_social", e)}
               />
             </div>

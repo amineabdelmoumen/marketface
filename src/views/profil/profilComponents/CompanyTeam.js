@@ -4,32 +4,49 @@ export default function CompanyTeam() {
   const style = "text-bold text-black-50 mt-2";
   const style2 = {
     height: "50px",
+    font: "normal normal normal 13px/13px Montserrat",
+  };
+
+  const nextStyle = {
+    marginLeft: "60px",
   };
   return (
     <div className="container">
       <div className="row p-3">
         <div className="col-12 col-md-2">
-          <p className={style}>CERTIFICATS</p>
+          <p className={style} style={style2}>
+            CERTIFICATS
+          </p>
         </div>
         <div className="col-12 col-md-2">
-          <p className={style}>MARQUES</p>
+          <p className={style} style={style2}>
+            MARQUES
+          </p>
         </div>
         <div className="col-12 col-md-2">
-          <p className={style}>PARTENAIRES</p>
+          <p className={style} style={style2}>
+            PARTENAIRES
+          </p>
         </div>
         <div className="col-12 col-md-2">
-          <p className={style}>FILIALES</p>
+          <p className={style} style={style2}>
+            FILIALES
+          </p>
         </div>
         <div className="col-12 col-md-2">
-          <p className={style}>EVENNEMENT</p>
+          <p className={style} style={style2}>
+            EVENNEMENT
+          </p>
         </div>
         <div className="col-12 col-md-2">
-          <p className={style}>Equipe</p>
+          <p className={style} style={style2}>
+            ÉQUIPE
+          </p>
         </div>
       </div>
 
       <div className="row m-4 border border-5 border-primary py-5">
-        <div className="col-12 col-md-2 offset-md-2">
+        <div className="col-12 col-md-2 offset-lg-1">
           <img src="imgs/member1.png" alt="" />
         </div>
         <div className="col-12 col-md-2 ">
@@ -42,7 +59,7 @@ export default function CompanyTeam() {
           <img src="imgs/member3.png" alt="" />
         </div>
         <div className="col-12 col-md-2  ">
-          <img src="imgs/mem.png" alt="" />
+          <img src="imgs/mem.png" style={nextStyle} alt="" />
         </div>
       </div>
     </div>

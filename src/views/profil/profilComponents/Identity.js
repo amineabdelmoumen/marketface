@@ -13,9 +13,13 @@ export default function Identity() {
   };
   const style1 = {
     marginRight: "-10px",
+    fontSize: "20px",
   };
   const style2 = {
     marginRight: "-10px",
+  };
+  const widthStyle = {
+    width: "150px",
   };
 
   return (
@@ -23,7 +27,11 @@ export default function Identity() {
       <div className="col-12 col-md-4">
         <div className="d-flex flex-column">
           <div
-            className="border-details p-5"
+            className={
+              selectedComponent == 1
+                ? "border-details clicked py-4"
+                : "border-details py-4"
+            }
             onClick={() => setSelectedComponent(1)}
           >
             <div className="d-flex justify-content-evenly">
@@ -40,8 +48,8 @@ export default function Identity() {
               <div
                 className={
                   selectedComponent == 1
-                    ? "h5 text-select cursor-pointer fw-normal text-success"
-                    : "h5 text-select cursor-pointer fw-normal text-primary"
+                    ? " text-select cursor-pointer fw-normal text-success"
+                    : " text-select cursor-pointer fw-normal text-primary"
                 }
               >
                 <p>Informations Generales</p>
@@ -50,7 +58,11 @@ export default function Identity() {
           </div>
 
           <div
-            className="border-details p-5 mt-1"
+            className={
+              selectedComponent == 2
+                ? "border-details clicked py-4"
+                : "border-details py-4"
+            }
             onClick={() => setSelectedComponent(2)}
           >
             <div className="d-flex justify-content-evenly">
@@ -68,8 +80,8 @@ export default function Identity() {
                 <p
                   className={
                     selectedComponent == 2
-                      ? "h5 text-select cursor-pointer fw-normal text-success"
-                      : "h5 text-select cursor-pointer fw-normal text-primary"
+                      ? " text-select cursor-pointer fw-normal text-success"
+                      : " text-select cursor-pointer fw-normal text-primary"
                   }
                 >
                   Informations Legals
@@ -78,7 +90,11 @@ export default function Identity() {
             </div>
           </div>
           <div
-            className="border-details p-5 mt-1"
+            className={
+              selectedComponent == 3
+                ? "border-details clicked py-4"
+                : "border-details py-4"
+            }
             onClick={() => setSelectedComponent(3)}
           >
             <div className="d-flex justify-content-evenly">
@@ -96,8 +112,8 @@ export default function Identity() {
                 <p
                   className={
                     selectedComponent == 3
-                      ? "h5 text-select cursor-pointer fw-normal text-success"
-                      : "h5 text-select cursor-pointer fw-normal text-primary"
+                      ? " text-select cursor-pointer fw-normal text-success "
+                      : " text-select cursor-pointer fw-normal text-primary"
                   }
                 >
                   Informations Financieres
@@ -106,11 +122,15 @@ export default function Identity() {
             </div>
           </div>
           <div
-            className="border-details p-5 mt-1"
+            className={
+              selectedComponent == 4
+                ? "border-details clicked py-4"
+                : "border-details py-4"
+            }
             onClick={() => setSelectedComponent(4)}
           >
             <div
-              className="d-flex justify-content-around
+              className="d-flex justify-content-evenly
             "
             >
               <div>
@@ -127,11 +147,11 @@ export default function Identity() {
                 <p
                   className={
                     selectedComponent == 4
-                      ? "h5  text-select  cursor-pointer fw-normal text-success"
-                      : "h5  text-select cursor-pointer fw-normal text-primary"
+                      ? " text-select  cursor-pointer fw-normal text-success "
+                      : " text-select cursor-pointer fw-normal text-primary"
                   }
                 >
-                  Contact
+                  Contact <div style={widthStyle}></div>
                 </p>
               </div>
             </div>

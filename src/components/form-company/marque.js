@@ -319,44 +319,33 @@ function Marque() {
                     {marque.titre} | {marque.annee}
                   </h4>
                   {marque.description?.length < 256 ? (
-                    <textarea
-                      style={areaScrollStyle}
-                      name=""
-                      id=""
-                      cols="50"
-                      rows="10"
-                      className="text-black-50 h6 mt-4"
-                      value={marque.description}
-                    />
+                    <div className="texet">
+                      {" "}
+                      <p className="text-black-50 h6 mt-4">
+                        {marque.description}
+                      </p>
+                    </div>
                   ) : isFullDescription ? (
-                    <textarea
-                      style={areaScrollStyle}
-                      name=""
-                      id=""
-                      cols="50"
-                      rows="10"
-                      className="text-black-50 h6 mt-4"
-                      value={marque.description}
-                    />
+                    <div className="texet">
+                      {" "}
+                      <p className="text-black-50 h6 mt-4">
+                        {marque.description}
+                      </p>
+                    </div>
                   ) : (
-                    <>
-                      <textarea
-                        style={areaStyle}
-                        name=""
-                        id=""
-                        cols="50"
-                        rows="6"
-                        className="text-black-50 h6 mt-4 mb-0"
-                        value={marque.description.slice(0, 256) + "..."}
-                      />
-                      <a
-                        onClick={() => setIsFullDescription(true)}
-                        href="#"
-                        className="pointer"
-                      >
-                        Voir plus
-                      </a>
-                    </>
+                    <div className="texet">
+                      <p className="text-black-50 h6 mt-4">
+                        {marque.description.slice(0, 256)}
+                        {"... "}
+                        <a
+                          onClick={() => setIsFullDescription(true)}
+                          href="#"
+                          className="pointer"
+                        >
+                          Voir plus
+                        </a>
+                      </p>
+                    </div>
                   )}
                   <p className="text-secondary h6 mt-4">{marque.categorie}</p>
                   <p className="d-flex gap-2 mt-5">
