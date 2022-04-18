@@ -44,7 +44,7 @@ export default function About() {
             })}
           </div>
           <div className="form-area">
-            <div className="row  mt-3">
+            <div className="row d-flex align-items-center mt-3">
               <div className="col-12 col-lg-4 address mt-2 ">
                 <div className="d-flex">
                   <img className="local-image" src="/imgs/cafe.svg" alt="" />
@@ -54,7 +54,7 @@ export default function About() {
 
               <div className="col-12 col-lg-4 address mt-2">
                 {" "}
-                <div className="d-flex">
+                <div className="d-flex align-items-center">
                   <img
                     className="local-image"
                     src="/imgs/communications.svg"
@@ -70,7 +70,7 @@ export default function About() {
                 </div>
               </div>
               <div className="col-12 col-lg-4 address mt-2">
-                <div className="d-flex">
+                <div className="d-flex align-items-center">
                   <img className="local-image" src="/imgs/job.svg" alt="" />
 
                   {formatPhoneNumber(about.identite.telephone)}

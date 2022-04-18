@@ -141,6 +141,7 @@ export default function Identity() {
                       : "/imgs/contact.png"
                   }
                   alt=""
+                  style={{ marginLeft: "-4%" }}
                 />
               </div>
               <div style={style2}>
