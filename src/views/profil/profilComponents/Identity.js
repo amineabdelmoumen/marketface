@@ -34,7 +34,10 @@ export default function Identity() {
             }
             onClick={() => setSelectedComponent(1)}
           >
-            <div className="d-flex justify-content-center">
+            <div
+              className="d-flex align-items-center"
+              style={{ padding: "0 55px  " }}
+            >
               <div style={{ width: "75px" }}>
                 <img
                   src={
@@ -65,7 +68,10 @@ export default function Identity() {
             }
             onClick={() => setSelectedComponent(2)}
           >
-            <div className="d-flex justify-content-center">
+            <div
+              className="d-flex align-items-center"
+              style={{ padding: "0 55px  " }}
+            >
               <div style={{ width: "75px" }}>
                 <img
                   src={
@@ -76,7 +82,7 @@ export default function Identity() {
                   alt=""
                 />
               </div>
-              <div style={style}>
+              <div>
                 <p
                   className={
                     selectedComponent == 2
@@ -97,7 +103,10 @@ export default function Identity() {
             }
             onClick={() => setSelectedComponent(3)}
           >
-            <div className="d-flex justify-content-center">
+            <div
+              className="d-flex align-items-center "
+              style={{ padding: "0 55px  " }}
+            >
               <div style={{ width: "75px" }}>
                 <img
                   src={
@@ -108,7 +117,7 @@ export default function Identity() {
                   alt=""
                 />
               </div>
-              <div style={style1}>
+              <div>
                 <p
                   className={
                     selectedComponent == 3
@@ -130,8 +139,9 @@ export default function Identity() {
             onClick={() => setSelectedComponent(4)}
           >
             <div
-              className="d-flex justify-content-center
+              className="d-flex align-items-center
             "
+              style={{ padding: "0 55px  " }}
             >
               <div style={{ width: "75px" }}>
                 <img
@@ -143,7 +153,7 @@ export default function Identity() {
                   alt=""
                 />
               </div>
-              <div style={style2}>
+              <div>
                 <p
                   className={
                     selectedComponent == 4
@@ -151,7 +161,7 @@ export default function Identity() {
                       : " text-select cursor-pointer fw-normal text-primary"
                   }
                 >
-                  Contact <div style={widthStyle}></div>
+                  Contact
                 </p>
               </div>
             </div>
