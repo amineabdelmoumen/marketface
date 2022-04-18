@@ -127,6 +127,8 @@ form#form-identite {
       }
       textarea {
         resize: unset;
+        width: 250px;
+        padding: 10px 20px 10px 5px;
       }
     }
     section {
@@ -154,8 +156,12 @@ form#form-identite {
   width: 170px;
 }
 .texet {
-  height: fit-content;
+  height: 200px;
+
+  overflow-y: scroll;
+  scroll-behavior: smooth;
   p {
     word-wrap: break-word;
+    padding-right: 22px;
   }
 }
