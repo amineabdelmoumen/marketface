@@ -75,10 +75,10 @@ function Catalogue() {
                 Parlez nous de votre activité et attirez plus de prospect
               </h5>
               <div className="row form-boxes">
-                <div className="col-md-2">
+                <div className="col-md-3">
                   <label htmlFor="vous_etes">Vous êtes:</label>
                 </div>
-                <div className="col-md-10">
+                <div className="col-md-9">
                   <select
                     name="vous_etes"
                     id="vous_etes"
@@ -87,6 +87,7 @@ function Catalogue() {
                       width: "30%",
                       paddingTop: "5px",
                       paddingBottom: "5px",
+                      backgroundColor: "white",
                     }}
                     value={catalogue.vous_etes}
                     onChange={(e) => handleInputUpdate("vous_etes", e)}

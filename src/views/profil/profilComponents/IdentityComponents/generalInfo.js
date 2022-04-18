@@ -101,6 +101,7 @@ function Catalogue() {
                     style={{
                       ...InputStyle,
                       width: screenWidth <= 768 ? "100%" : "40%",
+                      backgroundColor: "white",
                     }}
                     value={catalogue.vous_etes}
                     onChange={(e) => handleInputUpdate("vous_etes", e)}
