@@ -63,6 +63,14 @@ function Catalogue() {
     textAlign: "center",
     marginBottom: "35px",
   };
+  const areaScrollStyle = {
+    border: "none",
+    outline: "none",
+    boxShadow: "none",
+    overflow: "auto",
+    resize: "none",
+    display: "block",
+  };
   return (
     <>
       <form className="container" name="form-identite" id="form-identite">
