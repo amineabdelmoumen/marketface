@@ -44,6 +44,25 @@ function Catalogue() {
     }
     dispatch(setCatalogue(data));
   };
+  let InputStyle = {
+    font: "normal normal normal 14px/11px Montserrat",
+    letterspacing: "0px",
+    color: "#707070",
+    opacity: 1,
+    border: "1px solid #A4A4A4",
+    width: "100%",
+    borderRadius: "36px",
+    paddingLeft: "3px",
+    textAlign: "center",
+  };
+  const accrochStyle = {
+    font: "normal normal 600 20px/24px Montserrat",
+    letterSpacing: "0px",
+    color: "#00B5FF",
+    opacity: 1,
+    textAlign: "center",
+    marginBottom: "35px",
+  };
   return (
     <>
       <form className="container" name="form-identite" id="form-identite">
@@ -52,33 +71,49 @@ function Catalogue() {
         <div className="form-identite-info d-block mt-3">
           <div className="row">
             <div className="col-10 offset-2">
-              <div className="form-boxes">
-                <label htmlFor="vous_etes">Vous êtes:</label>
-                <select
-                  name="vous_etes"
-                  id="vous_etes"
-                  value={catalogue.vous_etes}
-                  onChange={(e) => handleInputUpdate("vous_etes", e)}
-                >
-                  <option value="franchisé">franchisé</option>
-                  <option value="franchiseur">franchiseur</option>
-                  <option value="aucun">aucun</option>
-                </select>
+              <h5 style={accrochStyle}>
+                Parlez nous de votre activité et attirez plus de prospect
+              </h5>
+              <div className="row form-boxes">
+                <div className="col-md-2">
+                  <label htmlFor="vous_etes">Vous êtes:</label>
+                </div>
+                <div className="col-md-10">
+                  <select
+                    name="vous_etes"
+                    id="vous_etes"
+                    style={{
+                      ...InputStyle,
+                      width: "30%",
+                      paddingTop: "5px",
+                      paddingBottom: "5px",
+                    }}
+                    value={catalogue.vous_etes}
+                    onChange={(e) => handleInputUpdate("vous_etes", e)}
+                  >
+                    <option value="franchisé">Franchisé</option>
+                    <option value="franchiseur">Franchiseur</option>
+                    <option value="aucun">Aucun</option>
+                  </select>
+                </div>
               </div>
-              <div className="form-boxes">
-                <label htmlFor="activite">
-                  Quelle est votre activité opérationnelle?
-                </label>
-                <div>
+              <div className=" row form-boxes">
+                <div className="col-lg-3">
+                  <label htmlFor="activite">
+                    Quelle est votre activité opérationnelle?
+                  </label>
+                </div>
+                <div className="col-6 col-lg-3">
                   <label
                     htmlFor="matiere"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`px-2 py-2 cursor-pointer ${
                       findElement("matière première", catalogue.matiere)
                         ? "bg-secondary text-white"
                         : "text-black-50"
                     }`}
                   >
-                    matière première
+                    Matière première
                     <input
                       type="checkbox"
                       name="matiere"
@@ -89,16 +124,18 @@ function Catalogue() {
                     />
                   </label>
                 </div>
-                <div>
+
+                <div className=" col-6 col-lg-2">
                   <label
                     htmlFor="transformation"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`px-2 py-2 cursor-pointer ${
                       findElement("transformation", catalogue.matiere)
                         ? "bg-secondary text-white"
                         : "text-black-50"
                     }`}
                   >
-                    transformation
+                    Transformation
                     <input
                       type="checkbox"
                       name="matiere"
@@ -109,16 +146,18 @@ function Catalogue() {
                     />
                   </label>
                 </div>
-                <div>
+
+                <div className=" col-6 col-lg-2">
                   <label
                     htmlFor="distribution"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`px-2 py-2 cursor-pointer ${
                       findElement("distribution", catalogue.matiere)
                         ? "bg-secondary text-white"
                         : "text-black-50"
                     }`}
                   >
-                    distribution
+                    Distribution
                     <input
                       type="checkbox"
                       name="matiere"
@@ -129,16 +168,17 @@ function Catalogue() {
                     />
                   </label>
                 </div>
-                <div>
+                <div className="col-6 col-lg-2">
                   <label
                     htmlFor="revendeur"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`px-2 py-2 cursor-pointer ${
                       findElement("revendeur", catalogue.matiere)
                         ? "bg-secondary text-white"
                         : "text-black-50"
                     }`}
                   >
-                    revendeur
+                    Revendeur
                     <input
                       type="checkbox"
                       name="matiere"
@@ -151,14 +191,18 @@ function Catalogue() {
                 </div>
               </div>
 
-              <div className="form-boxes">
-                <label htmlFor="prenom_nome">
-                  Quel est le type de business que vous entreprenez?
-                </label>
-                <div>
+              <div className=" row form-boxes">
+                <div className="col-md-5">
+                  <label htmlFor="prenom_nome">
+                    Quel est le type de business que vous entreprenez?
+                  </label>
+                </div>
+
+                <div className="col-md-2">
                   <label
                     htmlFor="b2b"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`px-2 py-2 cursor-pointer ${
                       findElement("B2B", catalogue.business)
                         ? "bg-secondary text-white"
                         : "text-black-50"
@@ -175,10 +219,11 @@ function Catalogue() {
                     />
                   </label>
                 </div>
-                <div>
+                <div className="col-md-2">
                   <label
                     htmlFor="b2c"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`px-2 py-2 cursor-pointer ${
                       findElement("B2C", catalogue.business)
                         ? "bg-secondary text-white"
                         : "text-black-50"
@@ -195,10 +240,11 @@ function Catalogue() {
                     />
                   </label>
                 </div>
-                <div>
+                <div className="col-md-2">
                   <label
                     htmlFor="b2g"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`px-2 py-2 cursor-pointer ${
                       findElement("B2G", catalogue.business)
                         ? "bg-secondary text-white"
                         : "text-black-50"
@@ -216,14 +262,18 @@ function Catalogue() {
                   </label>
                 </div>
               </div>
-              <div className="form-boxes">
-                <label htmlFor="prenom_nome">
-                  Où sont localisées vos activités?
-                </label>
-                <div>
+              <div className=" row form-boxes">
+                <div className="col-md-5">
+                  <label htmlFor="prenom_nome">
+                    Où sont localisées vos activités?
+                  </label>
+                </div>
+
+                <div className="col-md-2">
                   <label
                     htmlFor="offshore"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`px-2 py-2 cursor-pointer ${
                       findElement("Offshore", catalogue.location)
                         ? "bg-secondary text-white"
                         : "text-black-50"
@@ -240,10 +290,11 @@ function Catalogue() {
                     />
                   </label>
                 </div>
-                <div>
+                <div className="col-md-2">
                   <label
                     htmlFor="onshore"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`px-2 py-2 cursor-pointer ${
                       findElement("Onshore", catalogue.location)
                         ? "bg-secondary text-white"
                         : "text-black-50"
@@ -260,10 +311,11 @@ function Catalogue() {
                     />
                   </label>
                 </div>
-                <div>
+                <div className="col-md-2">
                   <label
                     htmlFor="nearshore"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`px-2 py-2 cursor-pointer ${
                       findElement("Nearshore", catalogue.location)
                         ? "bg-secondary text-white"
                         : "text-black-50"
@@ -281,14 +333,18 @@ function Catalogue() {
                   </label>
                 </div>
               </div>
-              <div className="form-boxes">
-                <label htmlFor="organisme_type">
-                  Quel moyen utilisez-vous pour vendre vos services?
-                </label>
-                <div>
+              <div className=" row form-boxes">
+                <div className="col-md-5">
+                  <label htmlFor="organisme_type">
+                    Quel moyen utilisez-vous pour vendre vos services?
+                  </label>
+                </div>
+
+                <div className="col-md-2">
                   <label
                     htmlFor="online"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`px-2 py-2 cursor-pointer ${
                       findElement("En ligne", catalogue.moyen)
                         ? "bg-secondary text-white"
                         : "text-black-50"
@@ -305,10 +361,11 @@ function Catalogue() {
                     />
                   </label>
                 </div>
-                <div>
+                <div className="col-md-2">
                   <label
                     htmlFor="magasin"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`px-2 py-2 cursor-pointer ${
                       findElement("En magasin", catalogue.moyen)
                         ? "bg-secondary text-white"
                         : "text-black-50"
@@ -325,10 +382,11 @@ function Catalogue() {
                     />
                   </label>
                 </div>
-                <div>
+                <div className="col-md-2">
                   <label
                     htmlFor="usine"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`px-2 py-2 cursor-pointer ${
                       findElement("En usine", catalogue.moyen)
                         ? "bg-secondary text-white"
                         : "text-black-50"
@@ -346,14 +404,19 @@ function Catalogue() {
                   </label>
                 </div>
               </div>
-              <div className="form-boxes">
-                <label htmlFor="organisme_taille">
-                  De quelle façon vendez-vous vos produits?
-                </label>
-                <div>
+              <div className="row form-boxes">
+                <div className="col-md-5">
+                  {" "}
+                  <label htmlFor="organisme_taille">
+                    De quelle façon vendez-vous vos produits?
+                  </label>
+                </div>
+
+                <div className="col-md-2">
                   <label
                     htmlFor="detaillant"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`px-2 py-2 cursor-pointer ${
                       findElement("Détaillant", catalogue.type_vente)
                         ? "bg-secondary text-white"
                         : "text-black-50"
@@ -370,10 +433,11 @@ function Catalogue() {
                     />
                   </label>
                 </div>
-                <div>
+                <div className="col-md-2">
                   <label
                     htmlFor="grossiste"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`px-2 py-2 cursor-pointer ${
                       findElement("Grossiste", catalogue.type_vente)
                         ? "bg-secondary text-white"
                         : "text-black-50"
@@ -390,15 +454,21 @@ function Catalogue() {
                     />
                   </label>
                 </div>
+                <div className="col-md-2"></div>
               </div>
-              <div className="form-boxes">
-                <label htmlFor="nombre_employés">
-                  Les produits que vous achetez sont:
-                </label>
-                <div>
+              <div className="row form-boxes">
+                <div className="col-md-5">
+                  {" "}
+                  <label htmlFor="nombre_employés">
+                    Les produits que vous achetez sont:
+                  </label>
+                </div>
+
+                <div className="col-md-2">
                   <label
                     htmlFor="importes"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`px-2 py-2 cursor-pointer ${
                       findElement("Importés", catalogue.produit_achete)
                         ? "bg-secondary text-white"
                         : "text-black-50"
@@ -415,10 +485,11 @@ function Catalogue() {
                     />
                   </label>
                 </div>
-                <div>
+                <div className="col-md-2">
                   <label
                     htmlFor="locaux"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`px-2 py-2 cursor-pointer ${
                       findElement("Locaux", catalogue.produit_achete)
                         ? "bg-secondary text-white"
                         : "text-black-50"
@@ -435,15 +506,20 @@ function Catalogue() {
                     />
                   </label>
                 </div>
+                <div className="col-md-2"></div>
               </div>
-              <div className="form-boxes">
-                <label htmlFor="nombre_employés">
-                  De quelle façon distribuez-vous vos produits?
-                </label>
-                <div>
+              <div className=" row form-boxes">
+                <div className="col-md-5">
+                  <label htmlFor="nombre_employés">
+                    De quelle façon distribuez-vous vos produits?
+                  </label>
+                </div>
+
+                <div className="col-md-2">
                   <label
                     htmlFor="local"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`px-2 py-2 cursor-pointer ${
                       findElement("Local", catalogue.distribution)
                         ? "bg-secondary text-white"
                         : "text-black-50"
@@ -460,10 +536,11 @@ function Catalogue() {
                     />
                   </label>
                 </div>
-                <div>
+                <div className="col-md-2">
                   <label
                     htmlFor="export"
-                    className={`border rounded px-2 cursor-pointer ${
+                    style={InputStyle}
+                    className={`px-2 py-2 cursor-pointer ${
                       findElement("Export", catalogue.distribution)
                         ? "bg-secondary text-white"
                         : "text-black-50"
@@ -480,6 +557,7 @@ function Catalogue() {
                     />
                   </label>
                 </div>
+                <div className="col-md-2"></div>
               </div>
             </div>
           </div>

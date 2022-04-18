@@ -77,7 +77,7 @@ const Login = () => {
               <div>
                 <Link
                   to="/signup"
-                  className="btn btn-light text-success border-success rounded-pill px-4 me-2"
+                  className="btn btn-light text-success border-success rounded-pill px-4 me-2 enreg"
                 >
                   S'enregistrer
                 </Link>
@@ -88,6 +88,7 @@ const Login = () => {
                   Envoyer
                 </button>
               </div>
+              <ToastContainer />
             </div>
           </div>
         </div>

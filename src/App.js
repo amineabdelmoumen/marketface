@@ -9,6 +9,7 @@ import "./assets/scss/main.scss";
 import "./assets/css/normalize.css";
 import ResetPassword from "./views/reset-password";
 import PrivateProfil from "./components/privateProfil";
+import PageLoading from "./components/PageLoading";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           path="/"
           element={
             <PrivateProfil>
+              <PageLoading />
               <Login />
             </PrivateProfil>
           }

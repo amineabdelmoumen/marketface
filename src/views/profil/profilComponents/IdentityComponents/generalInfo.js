@@ -100,7 +100,7 @@ function Catalogue() {
                     id="vous_etes"
                     style={{
                       ...InputStyle,
-                      width: screenWidth <= 768 ? "80%" : "30%",
+                      width: screenWidth <= 768 ? "100%" : "40%",
                     }}
                     value={catalogue.vous_etes}
                     onChange={(e) => handleInputUpdate("vous_etes", e)}
@@ -121,7 +121,10 @@ function Catalogue() {
                   <div className="row">
                     <div className="col-md-12">
                       <label
-                        style={{ ...InputStyle, width: "30%" }}
+                        style={{
+                          ...InputStyle,
+                          width: screenWidth <= 768 ? "100%" : "40%",
+                        }}
                         htmlFor="matiere"
                         className={`px-2 py-2 cursor-pointer ${
                           findElement("matière première", catalogue.matiere)
@@ -143,7 +146,10 @@ function Catalogue() {
                     <div className="col-12 col-md-12 mt-2">
                       <label
                         htmlFor="transformation"
-                        style={{ ...InputStyle, width: "30%" }}
+                        style={{
+                          ...InputStyle,
+                          width: screenWidth <= 768 ? "100%" : "40%",
+                        }}
                         className={`px-2 py-2 cursor-pointer ${
                           findElement("transformation", catalogue.matiere)
                             ? "bg-secondary text-white"
@@ -165,7 +171,10 @@ function Catalogue() {
                     <div className="col-12 mt-2">
                       <label
                         htmlFor="distribution"
-                        style={{ ...InputStyle, width: "30%" }}
+                        style={{
+                          ...InputStyle,
+                          width: screenWidth <= 768 ? "100%" : "40%",
+                        }}
                         className={`px-2 py-2 cursor-pointer ${
                           findElement("distribution", catalogue.matiere)
                             ? "bg-secondary text-white"
@@ -186,7 +195,10 @@ function Catalogue() {
                     <div className="col-12 mt-2">
                       <label
                         htmlFor="revendeur"
-                        style={{ ...InputStyle, width: "30%" }}
+                        style={{
+                          ...InputStyle,
+                          width: screenWidth <= 768 ? "100%" : "40%",
+                        }}
                         className={`px-2 py-2 cursor-pointer ${
                           findElement("revendeur", catalogue.matiere)
                             ? "bg-secondary text-white"
@@ -219,7 +231,10 @@ function Catalogue() {
                   <div className="col-md-3">
                     <label
                       htmlFor="b2b"
-                      style={InputStyle}
+                      style={{
+                        ...InputStyle,
+                        marginTop: screenWidth <= 768 ? "10px" : "",
+                      }}
                       className={`px-2 py-2 cursor-pointer ${
                         findElement("B2B", catalogue.business)
                           ? "bg-secondary text-white"
@@ -240,7 +255,10 @@ function Catalogue() {
                   <div className="col-md-3">
                     <label
                       htmlFor="b2c"
-                      style={InputStyle}
+                      style={{
+                        ...InputStyle,
+                        marginTop: screenWidth <= 768 ? "10px" : "",
+                      }}
                       className={`px-2 py-2 cursor-pointer ${
                         findElement("B2C", catalogue.business)
                           ? "bg-secondary text-white"
@@ -261,7 +279,10 @@ function Catalogue() {
                   <div className="col-md-3">
                     <label
                       htmlFor="b2g"
-                      style={InputStyle}
+                      style={{
+                        ...InputStyle,
+                        marginTop: screenWidth <= 768 ? "10px" : "",
+                      }}
                       className={`px-2 py-2 cursor-pointer ${
                         findElement("B2G", catalogue.business)
                           ? "bg-secondary text-white"
@@ -289,7 +310,10 @@ function Catalogue() {
               <div className="col-md-3">
                 <label
                   htmlFor="offshore"
-                  style={InputStyle}
+                  style={{
+                    ...InputStyle,
+                    marginTop: screenWidth <= 768 ? "10px" : "",
+                  }}
                   className={`px-2 py-2 cursor-pointer ${
                     findElement("Offshore", catalogue.location)
                       ? "bg-secondary text-white"
@@ -310,7 +334,10 @@ function Catalogue() {
               <div className="col-md-3">
                 <label
                   htmlFor="onshore"
-                  style={InputStyle}
+                  style={{
+                    ...InputStyle,
+                    marginTop: screenWidth <= 768 ? "10px" : "",
+                  }}
                   className={`px-2 py-2 cursor-pointer ${
                     findElement("Onshore", catalogue.location)
                       ? "bg-secondary text-white"
@@ -331,7 +358,10 @@ function Catalogue() {
               <div className="col-md-3">
                 <label
                   htmlFor="nearshore"
-                  style={InputStyle}
+                  style={{
+                    ...InputStyle,
+                    marginTop: screenWidth <= 768 ? "10px" : "",
+                  }}
                   className={`px-2 py-2 cursor-pointer ${
                     findElement("Nearshore", catalogue.location)
                       ? "bg-secondary text-white"
@@ -358,7 +388,10 @@ function Catalogue() {
               <div className="col-md-3">
                 <label
                   htmlFor="online"
-                  style={InputStyle}
+                  style={{
+                    ...InputStyle,
+                    marginTop: screenWidth <= 768 ? "10px" : "",
+                  }}
                   className={`px-2 py-2 cursor-pointer ${
                     findElement("En ligne", catalogue.moyen)
                       ? "bg-secondary text-white"
@@ -379,7 +412,10 @@ function Catalogue() {
               <div className="col-md-3">
                 <label
                   htmlFor="magasin"
-                  style={InputStyle}
+                  style={{
+                    ...InputStyle,
+                    marginTop: screenWidth <= 768 ? "10px" : "",
+                  }}
                   className={`px-2 py-2 cursor-pointer ${
                     findElement("En magasin", catalogue.moyen)
                       ? "bg-secondary text-white"
@@ -400,7 +436,10 @@ function Catalogue() {
               <div className="col-md-3">
                 <label
                   htmlFor="usine"
-                  style={InputStyle}
+                  style={{
+                    ...InputStyle,
+                    marginTop: screenWidth <= 768 ? "10px" : "",
+                  }}
                   className={`px-2 py-2 cursor-pointer ${
                     findElement("En usine", catalogue.moyen)
                       ? "bg-secondary text-white"
@@ -428,7 +467,10 @@ function Catalogue() {
               <div className="col-md-3">
                 <label
                   htmlFor="detaillant"
-                  style={{ ...InputStyle, width: "100%" }}
+                  style={{
+                    ...InputStyle,
+                    marginTop: screenWidth <= 768 ? "10px" : "",
+                  }}
                   className={`px-2 py-2 cursor-pointer ${
                     findElement("Détaillant", catalogue.type_vente)
                       ? "bg-secondary text-white"
@@ -449,7 +491,10 @@ function Catalogue() {
               <div className="col-md-3">
                 <label
                   htmlFor="grossiste"
-                  style={InputStyle}
+                  style={{
+                    ...InputStyle,
+                    marginTop: screenWidth <= 768 ? "10px" : "",
+                  }}
                   className={`px-2 py-2 cursor-pointer ${
                     findElement("Grossiste", catalogue.type_vente)
                       ? "bg-secondary text-white"
@@ -480,7 +525,10 @@ function Catalogue() {
               <div className="col-md-3">
                 <label
                   htmlFor="importes"
-                  style={InputStyle}
+                  style={{
+                    ...InputStyle,
+                    marginTop: screenWidth <= 768 ? "10px" : "",
+                  }}
                   className={`px-2 py-2 cursor-pointer ${
                     findElement("Importés", catalogue.produit_achete)
                       ? "bg-secondary text-white"
@@ -502,7 +550,10 @@ function Catalogue() {
               <div className="col-md-3">
                 <label
                   htmlFor="locaux"
-                  style={InputStyle}
+                  style={{
+                    ...InputStyle,
+                    marginTop: screenWidth <= 768 ? "10px" : "",
+                  }}
                   className={`px-2 py-2 cursor-pointer ${
                     findElement("Locaux", catalogue.produit_achete)
                       ? "bg-secondary text-white"
@@ -531,7 +582,10 @@ function Catalogue() {
               <div className="col-md-3">
                 <label
                   htmlFor="local"
-                  style={InputStyle}
+                  style={{
+                    ...InputStyle,
+                    marginTop: screenWidth <= 768 ? "10px" : "",
+                  }}
                   className={`px-2 py-2 cursor-pointer ${
                     findElement("Local", catalogue.distribution)
                       ? "bg-secondary text-white"
@@ -552,7 +606,10 @@ function Catalogue() {
               <div className="col-md-3">
                 <label
                   htmlFor="export"
-                  style={InputStyle}
+                  style={{
+                    ...InputStyle,
+                    marginTop: screenWidth <= 768 ? "10px" : "",
+                  }}
                   className={`px-2 py-2 cursor-pointer ${
                     findElement("Export", catalogue.distribution)
                       ? "bg-secondary text-white"
