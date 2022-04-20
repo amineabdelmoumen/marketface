@@ -1,8 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
+//@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,400;0,500;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,400;0,500;0,600;1,400&display=swap");
 // font
-$font-default: 'Roboto', sans-serif;
-//$font-default: Montserrat, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+$font-default: "Roboto", sans-serif;
+$font-default1: Montserrat, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 //$font-default: Helvetica, sans-serif, Arial;
 
 // font sizes
@@ -26,7 +27,6 @@ $font-weight-medium: 500;
 $font-weight-heavy: 700;
 $font-weight-heavyplus: 900;
 
-
 // spacings
 $spacing-vsmall: 0.5rem;
 $spacing-small: 0.75rem;
@@ -34,16 +34,14 @@ $spacing-medium: 1rem;
 $spacing-large: 1.5rem;
 $spacing-xlarge: 2rem;
 
-
 // colors
 $primary-color: #000;
 $primary-color-highlight: yellow;
-$primary-color-background: #D03987;
+$primary-color-background: #d03987;
 $secondary-color: #ccc;
 $third-color: #fff;
 $color-success: green;
 $color-alert: red;
-
 
 // borders
 $border-width-small: 1px;

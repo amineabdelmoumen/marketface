@@ -19,8 +19,11 @@ function Profil() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const profil = useSelector((state) => state.profile);
-  useEffect(() => {
+  useEffect(async () => {
     const token = localStorage.getItem("token");
+    const profile = await getProfile(token);
+    console.log(profile);
+
     checkAuth(token)
       .then((res) => res.data)
       .then((data) => {
@@ -37,7 +40,6 @@ function Profil() {
       });
   }, []);
 
-  console.log("identite this", profil.identite);
   return (
     <>
       <div>
@@ -47,7 +49,7 @@ function Profil() {
             <div
               className={
                 sideBarColumns == 1
-                  ? "col-3 position-fixed d-none d-lg-block"
+                  ? "col-2 position-fixed d-none d-lg-block"
                   : "col-1 position-fixed d-none d-lg-block"
               }
             >
@@ -60,7 +62,7 @@ function Profil() {
             <div
               className={
                 sideBarColumns == 1
-                  ? "col-12 col-lg-9 offset-lg-3"
+                  ? "col-12 col-lg-10 offset-lg-2"
                   : "col-12 col-lg-11 offset-lg-1"
               }
             >
