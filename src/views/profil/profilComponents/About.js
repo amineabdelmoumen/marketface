@@ -29,7 +29,7 @@ export default function About() {
         <div>
           <p className="title">A propos</p>{" "}
         </div>
-        <textarea style={styleText} rows={8} col={30} className="text">
+        <textarea style={styleText} rows={5} col={30} className="text">
           Quis enim aut eum diligat quem metuat, aut eum a quo se metui putet?
           Coluntur tamen simulatione dumtaxat ad tempus. Quod si forte, ut fit
           plerumque, ceciderunt, tum intellegitur quam fuerint inopes amicorum.
@@ -37,7 +37,7 @@ export default function About() {
           fidos amicos habuisset, quos infidos, cum iam neutris gratiam referre
           posset.
         </textarea>
-        <h5 className="activite-title">Activities</h5>
+        <p className="activite-title">Activities</p>
         <div className="px-4 mt-2">
           <div className="row">
             {about.cible.activites.map((activite) => {
