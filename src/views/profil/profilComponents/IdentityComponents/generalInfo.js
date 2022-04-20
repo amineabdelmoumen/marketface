@@ -27,7 +27,6 @@ function Catalogue() {
   }, []);
   const style = "fw-bold";
   let InputStyle = {
-    font: "normal normal normal 14px/11px Montserrat",
     letterspacing: "0px",
     color: "#707070",
     opacity: 1,
@@ -38,7 +37,6 @@ function Catalogue() {
     textAlign: "center",
   };
   const style1 = {
-    font: "normal normal normal 14px/11px Montserrat",
     letterspacing: "0px",
     color: "#707070",
     opacity: 1,
@@ -89,12 +87,12 @@ function Catalogue() {
           <div className="row">
             <div className="col-12">
               <div className="row form-boxes">
-                <div className="col-md-3">
+                <div className="col-md-5">
                   <label htmlFor="vous_etes" style={style1}>
                     Vous êtes:
                   </label>
                 </div>
-                <div className="col-md-9 ">
+                <div className="col-md-7 ">
                   <select
                     name="vous_etes"
                     id="vous_etes"
@@ -113,14 +111,14 @@ function Catalogue() {
                 </div>
               </div>
               <div className="row form-boxes mt-4">
-                <div className="col-6 col-md-3">
+                <div className="col-6 col-md-5">
                   <label htmlFor="" style={style1}>
-                    Activité opérationnelle:
+                    Quelle est votre activité opérationnelle ?
                   </label>
                 </div>
-                <div className="col-md-9">
+                <div className="col-md-7">
                   <div className="row">
-                    <div className="col-md-12">
+                    <div className="col-12 col-md-12">
                       <label
                         style={{
                           ...InputStyle,
@@ -133,7 +131,7 @@ function Catalogue() {
                             : "text-black-50"
                         }`}
                       >
-                        matière première
+                        Matière première
                         <input
                           type="checkbox"
                           name="matiere"
@@ -157,7 +155,7 @@ function Catalogue() {
                             : "text-black-50"
                         }`}
                       >
-                        transformation
+                        Transformation
                         <input
                           type="checkbox"
                           name="matiere"
@@ -182,7 +180,7 @@ function Catalogue() {
                             : "text-black-50"
                         }`}
                       >
-                        distribution
+                        Distribution
                         <input
                           type="checkbox"
                           name="matiere"
@@ -193,7 +191,7 @@ function Catalogue() {
                         />
                       </label>
                     </div>
-                    <div className="col-12 mt-2">
+                    <div className="col-12 col-md-12 mt-2">
                       <label
                         htmlFor="revendeur"
                         style={{
@@ -206,7 +204,7 @@ function Catalogue() {
                             : "text-black-50"
                         }`}
                       >
-                        revendeur
+                        Revendeur
                         <input
                           type="checkbox"
                           name="matiere"
@@ -222,12 +220,12 @@ function Catalogue() {
               </div>
             </div>
             <div className="row form-boxes mt-4">
-              <div className="col-md-3">
+              <div className="col-md-5">
                 <label htmlFor="prenom_nome" style={style1}>
-                  Le type de buziness:
+                  Quel est le type de business que vous entreprenez ?
                 </label>
               </div>
-              <div className="col-md-9">
+              <div className="col-md-7">
                 <div className="row">
                   <div className="col-md-3">
                     <label
@@ -305,10 +303,10 @@ function Catalogue() {
               </div>
             </div>
             <div className="row mt-4 form-boxes">
-              <div className="col-md-3 ">
-                <div style={style1}>Localisation des services: </div>
+              <div className="col-md-5 ">
+                <label style={style1}>Où sont localisées vos activités ?</label>
               </div>
-              <div className="col-md-3">
+              <div className="col-md-2">
                 <label
                   htmlFor="offshore"
                   style={{
@@ -332,7 +330,7 @@ function Catalogue() {
                   />
                 </label>
               </div>
-              <div className="col-md-3">
+              <div className="col-md-2">
                 <label
                   htmlFor="onshore"
                   style={{
@@ -356,7 +354,7 @@ function Catalogue() {
                   />
                 </label>
               </div>
-              <div className="col-md-3">
+              <div className="col-md-2">
                 <label
                   htmlFor="nearshore"
                   style={{
@@ -380,13 +378,16 @@ function Catalogue() {
                   />
                 </label>
               </div>
+              <div className="col-md-1"></div>
             </div>
 
             <div className="row mt-4 form-boxes">
-              <div className="col-md-3">
-                <div style={style1}>Moyen de Vente:</div>
+              <div className="col-md-5">
+                <label style={style1}>
+                  Quel moyen utilisez-vous pour vendre vos services ?
+                </label>
               </div>
-              <div className="col-md-3">
+              <div className="col-md-2">
                 <label
                   htmlFor="online"
                   style={{
@@ -410,7 +411,7 @@ function Catalogue() {
                   />
                 </label>
               </div>
-              <div className="col-md-3">
+              <div className="col-md-2">
                 <label
                   htmlFor="magasin"
                   style={{
@@ -434,7 +435,7 @@ function Catalogue() {
                   />
                 </label>
               </div>
-              <div className="col-md-3">
+              <div className="col-md-2">
                 <label
                   htmlFor="usine"
                   style={{
@@ -458,14 +459,15 @@ function Catalogue() {
                   />
                 </label>
               </div>
+              <div className="col-md-1"></div>
             </div>
             <div className="row form-boxes mt-4">
-              <div className="col-md-3">
+              <div className="col-md-5">
                 <label htmlFor="" style={style1}>
-                  Type de vente:
+                  De quelle façon vendez-vous vos produits ?
                 </label>
               </div>
-              <div className="col-md-3">
+              <div className="col-md-2">
                 <label
                   htmlFor="detaillant"
                   style={{
@@ -489,7 +491,7 @@ function Catalogue() {
                   />
                 </label>
               </div>
-              <div className="col-md-3">
+              <div className="col-md-2">
                 <label
                   htmlFor="grossiste"
                   style={{
@@ -513,17 +515,18 @@ function Catalogue() {
                   />
                 </label>
               </div>
+
               <div className="col-md-3"></div>
             </div>
             <div className="row form-boxes mt-4">
-              <div className="col-md-3">
+              <div className="col-md-5">
                 <label htmlFor="importes" style={style1}>
                   {" "}
-                  Provenance de produits:
+                  Les produits que vous achetez sont :
                 </label>
               </div>
 
-              <div className="col-md-3">
+              <div className="col-md-2">
                 <label
                   htmlFor="importes"
                   style={{
@@ -548,7 +551,7 @@ function Catalogue() {
                 </label>
               </div>
 
-              <div className="col-md-3">
+              <div className="col-md-2">
                 <label
                   htmlFor="locaux"
                   style={{
@@ -574,13 +577,14 @@ function Catalogue() {
               </div>
               <div className="col-md-3"></div>
             </div>
+
             <div className="row form-boxes mt-4">
-              <div className="col-md-3">
+              <div className="col-md-5">
                 <label htmlFor="nombre_employés" style={style1}>
-                  Distribution:
+                  De quelle façon distribuez-vous vos produits ?
                 </label>
               </div>
-              <div className="col-md-3">
+              <div className="col-md-2">
                 <label
                   htmlFor="local"
                   style={{
@@ -604,7 +608,7 @@ function Catalogue() {
                   />
                 </label>
               </div>
-              <div className="col-md-3">
+              <div className="col-md-2">
                 <label
                   htmlFor="export"
                   style={{

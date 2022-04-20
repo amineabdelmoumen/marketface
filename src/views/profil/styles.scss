@@ -1,3 +1,4 @@
+@use "../../assets/scss/variables" as *;
 .details {
   @media only screen and(max-width:500px) {
     font-size: 8px;
@@ -12,16 +13,17 @@
   outline: none !important;
 }
 .icon {
-  height: 37px;
-  margin-top: 1.5rem;
-  margin-right: 4rem !important;
+  height: 25px;
+  margin-top: 1.8rem;
+  margin-right: 4.5rem !important;
   @media only screen and(max-width:300px) {
     margin-right: 1px;
   }
 }
 .text {
-  font: normal normal normal 15px/15px Montserrat;
-  letter-spacing: 0.5px;
+  font-family: $font-default1;
+  font-size: 14px;
+  font-style: normal;
   color: #707070;
   opacity: 1;
 }
@@ -63,7 +65,7 @@
     margin-left: 3px;
   }
 
-  height: 50px;
+  height: 32px;
 }
 .body1 {
   margin-top: 20px;
@@ -72,13 +74,15 @@
   margin-bottom: 4px;
 }
 .side-text {
-  margin-top: 35px;
-  margin-left: 11%;
+  margin-top: 28px;
+  margin-left: 20px;
+  font-size: 12px;
 
   letter-spacing: 0px;
   color: #646464;
   opacity: 1;
 }
+
 .side-text:hover {
   text-decoration: none;
   color: #25a9e0;
@@ -92,7 +96,9 @@
 }
 
 .nom-entreprise {
-  font: normal normal bold 18px/22px Montserrat;
+  font-family: $font-default1;
+  font-weight: bold;
+  font-size: 16px;
   letter-spacing: 0px;
   color: #707070;
   opacity: 1;
@@ -103,7 +109,8 @@
 }
 
 .slogan {
-  font: normal normal normal 12px/15px Montserrat;
+  font-family: $font-default1;
+  font-size: 10px;
   letter-spacing: 0px;
   opacity: 1;
   margin-left: 24%;
@@ -185,14 +192,18 @@
   padding: 3%;
 }
 .title {
-  font: normal normal normal 18px/22px Montserrat;
+  font-family: $font-default1;
+  font-size: 14px;
+  font-style: normal;
   letter-spacing: 0px;
   color: #25a9e0;
   opacity: 1;
   margin-bottom: 19px;
 }
 .activite-title {
-  font: normal normal normal 18px/22px Montserrat;
+  font-family: $font-default1;
+  font-size: 14px;
+  font-style: normal;
   letter-spacing: 0px;
   color: #25a9e0;
   opacity: 1;
@@ -279,7 +290,10 @@ input[type="text"]:focus {
   height: 30px;
 }
 .text-select {
-  font: normal normal 600 16px/22px Montserrat;
+  font-family: $font-default1;
+  font-size: 12px;
+  font-weight: 600 !important;
+  font-style: normal;
   letter-spacing: 0px;
   color: #25a9e0;
   opacity: 1;
@@ -291,7 +305,9 @@ input[type="text"]:focus {
   }
 }
 .text-select1 {
-  font: normal normal 600 18px/22px Montserrat;
+  font-family: $font-default1;
+  font-size: 14px;
+  font-weight: 500;
   letter-spacing: 0px;
   color: #25a9e0;
   opacity: 1;
@@ -308,7 +324,8 @@ input[type="text"]:focus {
 .local-text {
   margin-top: 4%;
 
-  font: normal normal normal 14px/32px Montserrat;
+  font-family: $font-default1;
+  font-size: 14px;
   margin-left: 18px;
   letter-spacing: var(--unnamed-character-spacing-0);
   text-align: left;
@@ -321,7 +338,8 @@ input[type="text"]:focus {
   margin-top: 4%;
   margin-left: 18px;
 
-  font: normal normal normal 14px/32px Montserrat;
+  font-family: $font-default1;
+  font-size: 14px;
   letter-spacing: var(--unnamed-character-spacing-0);
   text-align: left;
   letter-spacing: 0px;
@@ -343,7 +361,9 @@ input[type="text"]:focus {
   padding: 13px 60px 11px 60px;
   color: #25a9e0;
   text-align: center;
-  font: normal normal normal 14px/15px Segoe UI;
+  font-family: Segoe UI;
+  font-style: normal;
+  font-size: 14px;
 }
 
 .text-input {
@@ -357,12 +377,12 @@ input[type="text"]:focus {
 }
 .search-icon {
   position: relative;
-  top: -31px;
-  right: -288px;
-  width: 24px;
+  top: -27px;
+  right: -289px;
+  width: 15px;
 }
 .contact {
-  font: normal normal bold 10px/13px Montserrat;
+  font-family: normal normal bold 10px/13px $font-default1;
 }
 
 .input-form {
@@ -371,7 +391,7 @@ input[type="text"]:focus {
 
 //team components
 .team {
-  font: normal normal normal 16px/19px Montserrat;
+  font-family: normal normal normal 16px/19px $font-default1;
   letter-spacing: 0px;
   color: #c4c4c4;
   text-transform: uppercase;
@@ -494,7 +514,7 @@ input[type="text"]:focus {
 .profile {
   margin-left: 80px;
   text-align: left;
-  font: normal normal 600 26px/30px Montserrat;
+  font: normal normal 600 26px/30px $font-default1;
 
   letter-spacing: 0px;
   color: #25a9e0;
@@ -516,7 +536,7 @@ input[type="text"]:focus {
 }
 .side-text {
   text-align: left;
-  font: normal normal medium 16px/20px Montserrat;
+  font: normal normal medium 16px/20px $font-default1;
   letter-spacing: 0px;
   color: #646464;
   opacity: 1;

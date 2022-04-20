@@ -51,8 +51,8 @@ export default function Identity() {
               <div
                 className={
                   selectedComponent == 1
-                    ? " text-select cursor-pointer fw-normal text-success"
-                    : " text-select cursor-pointer fw-normal text-primary"
+                    ? " text-select cursor-pointer  text-success"
+                    : " text-select cursor-pointer  text-primary"
                 }
               >
                 <p>Informations Generales</p>
@@ -86,8 +86,8 @@ export default function Identity() {
                 <p
                   className={
                     selectedComponent == 2
-                      ? " text-select cursor-pointer fw-normal text-success"
-                      : " text-select cursor-pointer fw-normal text-primary"
+                      ? " text-select cursor-pointer  text-success"
+                      : " text-select cursor-pointer  text-primary"
                   }
                 >
                   Informations Legals
@@ -121,8 +121,8 @@ export default function Identity() {
                 <p
                   className={
                     selectedComponent == 3
-                      ? " text-select cursor-pointer fw-normal text-success "
-                      : " text-select cursor-pointer fw-normal text-primary"
+                      ? " text-select cursor-pointer  text-success "
+                      : " text-select cursor-pointer  text-primary"
                   }
                 >
                   Informations Financieres
@@ -157,8 +157,8 @@ export default function Identity() {
                 <p
                   className={
                     selectedComponent == 4
-                      ? " text-select  cursor-pointer fw-normal text-success "
-                      : " text-select cursor-pointer fw-normal text-primary"
+                      ? " text-select  cursor-pointer  text-success "
+                      : " text-select cursor-pointer  text-primary"
                   }
                 >
                   Contact
