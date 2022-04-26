@@ -56,7 +56,7 @@ function Catalogue() {
     textAlign: "center",
   };
   const accrochStyle = {
-    font: "normal normal 600 20px/24px Montserrat",
+    fontFamily: "Montserrat",
     letterSpacing: "0px",
     color: "#00B5FF",
     opacity: 1,

@@ -66,12 +66,7 @@ const profileSlice = createSlice({
     setProfil: (state, action) => {
       if (action.payload.taille) {
         let profile = { ...action.payload };
-        delete profile["cibles"];
-        delete profile["articles"];
-        delete profile["references"];
-        delete profile["documents"];
-        delete profile["catalogues"];
-        delete profile["marque"];
+
         state.identite = profile;
       }
       let cible = {};

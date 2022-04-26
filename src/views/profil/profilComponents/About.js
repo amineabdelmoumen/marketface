@@ -1,10 +1,57 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import regions from "../../../lib/constants/regions";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { saveCompany, saveReference } from "../../../lib/crud";
 
 export default function About() {
   const about = useSelector((state) => state.profile);
-  const [aboutProfile, setAboutProfile] = useState(about);
+  const id = about.identite.id;
+  const navigate = useNavigate();
+  const [changePhoneNumber, setChangePhoneNumber] = useState(0);
+  const [ChangedState, setChangedState] = useState({
+    identite: 0,
+    reference: 0,
+  });
+  const [showOnSaveButton, setShowOnsaveButton] = useState(0);
+
+  const [aboutIdentite, setAboutIdentite] = useState(about.identite);
+  const [referenceAbout, setReferenceAbout] = useState(about.references[id]);
+
+  useEffect(() => {
+    let text = document.getElementById("textarea").value;
+    let lines = text.split(/\r|\r\n|\n/);
+    let count = lines.length;
+
+    console.log("number of lines", count + 1);
+  }, []);
+  const handleOnChange = (element, e) => {
+    setShowOnsaveButton(1);
+    if (element[0] == "identite") {
+      let identitie = { ...aboutIdentite };
+      identitie[element[1]] = e.target.value;
+      setAboutIdentite(identitie);
+      setChangedState({ ...ChangedState, identite: 1 });
+    } else if (element[0] == "references") {
+      let referenc = { ...referenceAbout };
+      referenc[element[1]] = e.target.value;
+      setReferenceAbout(referenc);
+      console.log("references are ", referenc);
+      setChangedState({ ...ChangedState, reference: 1 });
+    }
+  };
+  const handleOnsaveAbout = async () => {
+    const token = localStorage.getItem("token");
+    if (ChangedState.identite == 1) {
+      await saveCompany(aboutIdentite, token);
+      console.log("company updated");
+    }
+    if (ChangedState.reference == 1) {
+      await saveReference(referenceAbout, token);
+      console.log("reference updated");
+    }
+  };
   const formatPhoneNumber = (phoneNumber) => {
     let FormatedPhoneNumber = "";
     for (let i = 0; i < phoneNumber.length; i++) {
@@ -19,6 +66,7 @@ export default function About() {
   };
   const styleText = {
     border: "none",
+    backgroundColor: "white",
     resize: "none",
   };
 
@@ -29,14 +77,13 @@ export default function About() {
         <div>
           <p className="title">A propos</p>{" "}
         </div>
-        <textarea style={styleText} rows={5} col={30} className="text">
-          Quis enim aut eum diligat quem metuat, aut eum a quo se metui putet?
-          Coluntur tamen simulatione dumtaxat ad tempus. Quod si forte, ut fit
-          plerumque, ceciderunt, tum intellegitur quam fuerint inopes amicorum.
-          Quod Tarquinium dixisse ferunt, tum exsulantem se intellexisse quos
-          fidos amicos habuisset, quos infidos, cum iam neutris gratiam referre
-          posset.
-        </textarea>
+        <textarea
+          style={styleText}
+          id="textarea"
+          className="text"
+          value={referenceAbout["description"]}
+          onChange={(e) => handleOnChange(["references", "description"], e)}
+        ></textarea>
         <p className="activite-title">Activities</p>
         <div className="px-4 mt-2">
           <div className="row">
@@ -53,14 +100,18 @@ export default function About() {
               <div className="col-12 col-lg-4 address mt-2 ">
                 <div className="d-flex">
                   <img className="local-image" src="/imgs/cafe.svg" alt="" />
-                  <textarea
+                  <select
+                    name="region"
+                    id="region"
+                    defaultValue={aboutIdentite.region}
                     className="local-text"
                     style={styleText}
-                    col={2}
-                    rows={1}
+                    onChange={(e) => handleOnChange(["identite", "region"], e)}
                   >
-                    {about.identite.region}
-                  </textarea>
+                    {regions.map((region) => {
+                      return <option value={region}>{region}</option>;
+                    })}
+                  </select>
                 </div>
               </div>
 
@@ -75,27 +126,54 @@ export default function About() {
                     />
                   </a>
 
-                  <textarea
-                    col={2}
-                    rows={1}
+                  <input
+                    value="marketface.com"
                     style={styleText}
                     className="local-text"
-                  >
-                    Marketface.com
-                  </textarea>
+                  />
                 </div>
               </div>
               <div className="col-12 col-lg-4 address mt-2">
                 <div className="d-flex align-items-center">
                   <img className="local-image" src="/imgs/job.svg" alt="" />
-
-                  <textarea
-                    col={2}
-                    rows={1}
-                    style={styleText}
-                    className="local-text1"
-                    value={formatPhoneNumber(about.identite.telephone)}
-                  ></textarea>
+                  {changePhoneNumber == 1 ? (
+                    <textarea
+                      type="number"
+                      col={2}
+                      rows={1}
+                      onChange={(e) =>
+                        handleOnChange(["identite", "telephone"], e)
+                      }
+                      style={styleText}
+                      className="local-text"
+                      value={aboutIdentite.telephone}
+                    ></textarea>
+                  ) : (
+                    <textarea
+                      type="number"
+                      col={2}
+                      onClick={() => setChangePhoneNumber(1)}
+                      rows={1}
+                      style={styleText}
+                      className="local-text"
+                      value={formatPhoneNumber(aboutIdentite.telephone)}
+                    ></textarea>
+                  )}
+                </div>
+              </div>
+              <div className="row">
+                <div className="d-flex mt-3 justify-content-end mt-3">
+                  {showOnSaveButton == 1 ? (
+                    <button
+                      type="button"
+                      className="btn pointer btn-success text-white m-4 rounded-pill px-4"
+                      onClick={() => handleOnsaveAbout()}
+                    >
+                      Save Changes
+                    </button>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
             </div>

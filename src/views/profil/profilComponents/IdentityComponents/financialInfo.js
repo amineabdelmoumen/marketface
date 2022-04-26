@@ -39,7 +39,7 @@ export default function FinancialInfo() {
   const handleOnSave = () => {
     const token = localStorage.getItem("token");
     saveCompany(identitie, token);
-    console.log("compay updated");
+
     //Make api request with saveCompany
   };
   const style = "fw-bold";

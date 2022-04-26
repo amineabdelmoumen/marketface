@@ -11,7 +11,7 @@ import PageLoading from "../../components/PageLoading";
 import NavBar from "./profilComponents/NavBar";
 import SideBar from "./profilComponents/SideBar";
 import "./styles.scss";
-import { setProfil } from "../../store/profileSlice";
+import { setProfil, setReferences } from "../../store/profileSlice";
 
 function Profil() {
   const dispatch = useDispatch();
@@ -21,9 +21,8 @@ function Profil() {
   const profil = useSelector((state) => state.profile);
   useEffect(async () => {
     const token = localStorage.getItem("token");
-    const profile = await getProfile(token);
-    console.log(profile);
-
+    const profil = await getProfile(token);
+    console.log(profil);
     checkAuth(token)
       .then((res) => res.data)
       .then((data) => {
@@ -34,6 +33,7 @@ function Profil() {
             .then((res) => res.data)
             .then((data) => {
               dispatch(setProfil(data));
+
               setLoading(false);
             });
         }
