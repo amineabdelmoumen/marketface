@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import "./styles.scss";
 import categories from "../../../../lib/constants/categories";
-import { setArticle } from "../../../../store/profileSlice";
-
+import { setArticle, setArticles } from "../../../../store/profileSlice";
+import { saveImages } from "../../../../lib/crud";
+let uploadForm = new FormData();
 export default function ProductForm() {
-  const article = useSelector((state) => state.profile.articles);
-  const [articles, setArticles] = useState(article);
+  const identite = useSelector((state) => state.profile.identite);
+  const articles = useSelector((state) => state.profile.articles);
+  const [article, setArticles] = useState({ company_id: identite.id });
   console.log(articles);
   const style = {
     padding: "22px",
@@ -15,12 +17,26 @@ export default function ProductForm() {
   const style1 = {};
 
   const handleInputChange = (field, e) => {
-    let data = {};
+    let data = { ...article };
     data[field] = e.target.value;
     setArticles(data);
     console.log(data);
+    console.log(article);
   };
-
+  const handlePhotosUpload = (e) => {
+    const token = localStorage.getItem("token");
+    let files = e.target.files;
+    let data = { ...article };
+    for (let i = 0; i < files.length; i++) {
+      uploadForm.append(`images[${i}]`, files[i]);
+    }
+    saveImages(uploadForm, token).then((res) => {
+      const response = res.data;
+      uploadForm = new FormData();
+      data["images"] = response.paths;
+      setArticles(data);
+    });
+  };
   return (
     <div className="container-fluid ">
       <div className="title d-flex justify-content-center pt-4">
@@ -47,7 +63,7 @@ export default function ProductForm() {
           </div>
           <div className="row mt-1 form-boxes">
             <label htmlFor="" className="col-12 col-sm-5 col-md-3 text">
-              Nom de l'article:
+              Type de prix:
             </label>
             <div className="col-12  col-sm-5 col-md-9">
               <input
@@ -131,6 +147,7 @@ export default function ProductForm() {
               <label htmlFor="logo" className="text-center upload">
                 Choisir un fichier
                 <input
+                  onChangeCapture={(e) => handlePhotosUpload(e)}
                   type="file"
                   id="logo"
                   name="logo"
