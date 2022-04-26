@@ -33,7 +33,8 @@ export default function About() {
       identitie[element[1]] = e.target.value;
       setAboutIdentite(identitie);
       setChangedState({ ...ChangedState, identite: 1 });
-    } else if (element[0] == "references") {
+    }
+    if (element[0] == "references") {
       let referenc = { ...referenceAbout };
       referenc[element[1]] = e.target.value;
       setReferenceAbout(referenc);
