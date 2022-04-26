@@ -1,51 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
+import ProductForm from "./ProductForm";
 
-export default function CatalogueMenu({ setProductComponent }) {
+export default function CatalogueMenu() {
+  const [productComponent, setProductComponent] = useState(0);
   const style1 = {
     marginLeft: "120px",
     marginBottom: "40px",
     fontSize: "20px",
   };
-  const styleText = {
-    paddingLeft: "40px",
-  };
 
   const style2 = {
-    paddingTop: "80px",
+    paddingTop: "40px",
     paddingRight: "1.5rem",
     paddingLeft: "1.5rem",
   };
   return (
     <div style={style2}>
-      <div className="row">
-        <p className="col-4 offset-md-3 text-primary m-4">
+      <div className="row suggest-block">
+        <p className="col-12 col-md-2  mt-4 me-2 suggest">
           Vous Voulez Ajouter :
         </p>
-      </div>
 
-      <div className="row pb-5">
-        <div className=" col-md-3 mt-3 me-4 offset-md-1">
-          <button
-            className="col-12 btn btn-success text-white px-3 py-4 position-relative"
+        <div className="col-12  col-md-3 mt-3 me-2 ">
+          <div
+            className="d-flex justify-content-center cursor-pointer rounded-pill py-1 bg-success text-white "
             onClick={() => setProductComponent(1)}
           >
-            <img src="/imgs/product.svg" alt="" className="catalogue-icon" />
-            <span style={styleText}>Product</span>
-          </button>
+            <img style={{ width: "25px" }} src="/imgs/product.svg" alt="" />
+            <span className="catalogue-text">Product</span>
+          </div>
         </div>
-        <div className="col-md-3 mt-3 me-4">
-          <button className="col-12 btn bg-white border-primary text-primary px-3 py-4 position-relative">
-            <img src="/imgs/service.svg" alt="" className="catalogue-icon" />
-            <span style={styleText}>Service</span>
-          </button>
+        <div className="col-12  col-md-3 mt-3 me-2 ">
+          <div className="d-flex justify-content-center btn  btn-outline-primary rounded-pill py-1 bg-white text-primary">
+            <img style={{ width: "25px" }} src="/imgs/service.svg" alt="" />
+            <span className="catalogue-text">Service</span>
+          </div>
         </div>
-        <div className="col-md-4 mt-3  ">
-          <button className="col-12 btn bg-white border-primary text-primary px-4 py-4 position-relative">
-            <img src="/imgs/house.svg" alt="" className="catalogue-icon" />
-            <span style={styleText}>Bien Immobilier</span>
-          </button>
+        <div className="col-12  col-md-3 mt-3 me-2 ">
+          <div className="d-flex justify-content-center btn  btn-outline-primary rounded-pill py-1 bg-white text-primary">
+            <img style={{ width: "25px" }} src="/imgs/house.svg" alt="" />
+            <span className="catalogue-text">Bien Immobilier</span>
+          </div>
         </div>
       </div>
+      <div>{productComponent == 1 ? <ProductForm /> : ""}</div>
     </div>
   );
 }

@@ -1,80 +1,133 @@
-import React from "react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import "./styles.scss";
 import categories from "../../../../lib/constants/categories";
+import { setArticle } from "../../../../store/profileSlice";
+
 export default function ProductForm() {
+  const article = useSelector((state) => state.profile.articles);
+  const [articles, setArticles] = useState(article);
+  console.log(articles);
+  const style = {
+    padding: "22px",
+    marginBottom: "20px",
+  };
+  const style1 = {};
+
+  const handleInputChange = (field, e) => {
+    let data = {};
+    data[field] = e.target.value;
+    setArticles(data);
+    console.log(data);
+  };
+
   return (
     <div className="container-fluid ">
       <div className="title d-flex justify-content-center pt-4">
         <img src="/imgs/product.png" alt="" />
       </div>
 
-      <div className="row mt-5 position-relative">
-        <div className="col-12 col-lg-5 ">
+      <div className="row mt-5 position-relative ">
+        <div className="col-12 col-lg-7 inputs" style={style}>
           <div className="row form-boxes">
-            <label className="col-12 col-sm-5 col-md-5 text">
-              Il s'agit d'un:
+            <label className="col-12 col-sm-5 col-md-3">
+              Nom de l'article:
             </label>
-            <div className="col-12 col-sm-5 col-md-7">
-              <select name="categorie" id="categorie">
+            <div className="col-12 col-sm-5 col-md-9">
+              <select
+                name="type"
+                id="type"
+                onChange={(e) => handleInputChange("type", e)}
+              >
                 {categories.map((category) => {
                   return <option value={category}>{category}</option>;
                 })}
               </select>
             </div>
           </div>
-          <div className="row mt-3 form-boxes">
-            <label htmlFor="" className="col-12 col-sm-5 col-md-5 text">
+          <div className="row mt-1 form-boxes">
+            <label htmlFor="" className="col-12 col-sm-5 col-md-3 text">
               Nom de l'article:
             </label>
-            <div className="col-12  col-sm-5 col-md-7">
-              <input type="text" id="titre" name="titre" />
+            <div className="col-12  col-sm-5 col-md-9">
+              <input
+                type="text"
+                id="titre"
+                name="titre"
+                onChange={(e) => handleInputChange("nom", e)}
+              />
             </div>
           </div>
-          <div className="row mt-3 form-boxes">
-            <label htmlFor="" className="col-12 col-sm-5 col-md-5 text">
+          <div className="row mt-1 form-boxes">
+            <label htmlFor="" className="col-12 col-sm-5 col-md-3 text">
               Description:
             </label>
-            <div className="col-12 col-sm-5 col-md-7">
-              <textarea rows="10" type="text" id="titre" name="titre" />
+            <div className="col-12 col-sm-5 col-md-9">
+              <input
+                type="text"
+                id="titre"
+                name="titre"
+                onChange={(e) => handleInputChange("description", e)}
+              />
             </div>
           </div>
-          <div className="row mt-3 form-boxes">
-            <label htmlFor="" className="col-12 col-sm-5  col-md-5 text">
+          <div className="row mt-1 form-boxes">
+            <label htmlFor="" className="col-12 col-sm-5  col-md-3 text">
               Prix:
             </label>
-            <div className="col-12 col-sm-5 col-md-7">
-              <input type="text" id="titre" name="titre" />
+            <div className="col-12 col-sm-5 col-md-9">
+              <input
+                type="text"
+                id="titre"
+                name="prix"
+                onChange={(e) => handleInputChange("prix", e)}
+              />
             </div>
           </div>
-          <div className="row mt-3 form-boxes">
-            <label htmlFor="" className="col-12 col-sm-5 col-md-5 text">
+          <div className="row mt-1 form-boxes">
+            <label htmlFor="" className="col-12 col-sm-5 col-md-3 text">
               Categories
             </label>
-            <div className="col-12 col-sm-5 col-md-7">
-              <input type="text" id="titre" name="titre" />
+            <div className="col-12 col-sm-5 col-md-9">
+              <input
+                type="text"
+                id="titre"
+                name="categorie"
+                onChange={(e) => handleInputChange("categorie", e)}
+              />
             </div>
           </div>
-          <div className="row mt-3 form-boxes">
-            <label htmlFor="" className="col-12 col-sm-5 col-md-5 text">
+          <div className="row mt-1 form-boxes">
+            <label htmlFor="" className="col-12 col-sm-5 col-md-3 text">
               Quantite:
             </label>
-            <div className="col-12 col-sm-5 col-md-7">
-              <input type="text" id="titre" name="titre" />
+            <div className="col-12 col-sm-5 col-md-9">
+              <input
+                type="text"
+                id="titre"
+                name="quantite"
+                onChange={(e) => handleInputChange("quantite", e)}
+              />
             </div>
           </div>
-          <div className="row mt-3 pb-3 form-boxes">
-            <label htmlFor="" className="col-12 col-sm-5 col-md-5 text">
+          <div className="row mt-1 pb-3 form-boxes">
+            <label htmlFor="" className="col-12 col-sm-5 col-md-3 text">
               Type:
             </label>
-            <div className="col-12 col-sm-5 col-md-7">
-              <input type="text" id="titre" name="titre" />
+            <div className="col-12 col-sm-5 col-md-9">
+              <input
+                type="text"
+                id="titre"
+                name="ype_article"
+                onChange={(e) => handleInputChange("type_article", e)}
+              />
             </div>
           </div>
-          <div className="row mt-3 pb-3 form-boxes">
-            <label htmlFor="" className="col-12 col-sm-5 col-md-6 text">
-              Join des photos de l'article:
+          <div className="row  pb-3 form-boxes">
+            <label htmlFor="" className="col-12 col-sm-5 col-md-4 text">
+              Join des documents:
             </label>
-            <div className="col-12 col-sm-5 col-md-6">
+            <div className="col-12 col-sm-5 col-md-8">
               <label htmlFor="logo" className="text-center upload">
                 Choisir un fichier
                 <input
@@ -83,16 +136,46 @@ export default function ProductForm() {
                   name="logo"
                   accept="image/*"
                   className="d-none"
+                  onChange={(e) => handleInputChange("documents", e)}
                 />
               </label>
             </div>
           </div>
+          <div className="row  pb-3 form-boxes">
+            <label htmlFor="" className="col-12 col-sm-5 col-md-4 text">
+              Join des photos de l'article:
+            </label>
+            <div className="col-12 col-sm-5 col-md-8">
+              <label htmlFor="logo" className="text-center upload">
+                Choisir un fichier
+                <input
+                  type="file"
+                  id="logo"
+                  name="logo"
+                  accept="image/*"
+                  className="d-none"
+                  onChange={(e) => handleInputChange("images", e)}
+                />
+              </label>
+            </div>
+          </div>
+          <div className="row mt-1 pb-3 form-boxes">
+            <label htmlFor="" className="col-12 col-sm-5 col-md-3 text">
+              Description:
+            </label>
+            <div className="col-12 col-sm-5 col-md-9">
+              <textarea rows={5} id="titre" name="titre"></textarea>
+            </div>
+          </div>
+          <div className="d-flex justify-content-end ">
+            <button className="btn pointer btn-success text-white rounded-pill px-5 text-f">
+              Enregistrer
+            </button>
+          </div>
         </div>
 
-        <div className="line1 d-none d-xl-block"></div>
-
-        <div className="col-12 col-md-5 col-lg-7">
-          <div className="article">
+        <div className="col-12 col-md-5 col-lg-5">
+          {/* <div className="article">
             <div className="content">
               <div className="row">
                 <div className="col-md-5">
@@ -121,7 +204,7 @@ export default function ProductForm() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
