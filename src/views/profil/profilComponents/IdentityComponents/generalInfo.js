@@ -17,9 +17,8 @@ function Catalogue() {
   const onResize = () => {
     window.requestAnimationFrame(() => {
       const width = getWindowWidth();
-      console.log(width);
+
       setScreenWidth(width);
-      console.log("screen size is", screenWidth);
     });
   };
   useEffect(() => {
