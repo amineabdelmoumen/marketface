@@ -84,7 +84,7 @@ export default function About() {
           value={referenceAbout["description"]}
           onChange={(e) => handleOnChange(["references", "description"], e)}
         ></textarea>
-        <h5 className="activite-title">Activities</h5>
+        <p className="activite-title">Activities</p>
         <div className="px-4 mt-2">
           <div className="row">
             {about.cible.activites.map((activite) => {
