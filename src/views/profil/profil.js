@@ -21,22 +21,18 @@ function Profil() {
   const profil = useSelector((state) => state.profile);
   useEffect(async () => {
     const token = localStorage.getItem("token");
-    const profil = await getProfile(token);
-    console.log(profil);
+
     checkAuth(token)
       .then((res) => res.data)
       .then((data) => {
-        if (data.profile_completed) {
-          navigate("/profil");
-        } else {
-          getProfile(token)
-            .then((res) => res.data)
-            .then((data) => {
-              dispatch(setProfil(data));
+        getProfile(token)
+          .then((res) => res.data)
+          .then((data) => {
+            console.log(data);
+            dispatch(setProfil(data));
 
-              setLoading(false);
-            });
-        }
+            setLoading(false);
+          });
       });
   }, []);
 

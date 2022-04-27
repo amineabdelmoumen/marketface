@@ -25,16 +25,12 @@ function CompanySetting() {
     checkAuth(token)
       .then((res) => res.data)
       .then((data) => {
-        if (data.profile_completed) {
-          navigate("/profil");
-        } else {
-          getProfile(token)
-            .then((res) => res.data)
-            .then((data) => {
-              dispatch(setProfil(data));
-              setLoading(false);
-            });
-        }
+        getProfile(token)
+          .then((res) => res.data)
+          .then((data) => {
+            dispatch(setProfil(data));
+            setLoading(false);
+          });
       });
   }, []);
 
