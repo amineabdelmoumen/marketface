@@ -17,6 +17,7 @@ export default function About() {
   const [showOnSaveButton, setShowOnsaveButton] = useState(0);
 
   const [aboutIdentite, setAboutIdentite] = useState(about.identite);
+  console.log(aboutIdentite.website);
   const [referenceAbout, setReferenceAbout] = useState(about.references[id]);
 
   useEffect(() => {
@@ -31,6 +32,7 @@ export default function About() {
     if (element[0] == "identite") {
       let identitie = { ...aboutIdentite };
       identitie[element[1]] = e.target.value;
+      console.log(e.target.value);
       setAboutIdentite(identitie);
       setChangedState({ ...ChangedState, identite: 1 });
     }
@@ -128,9 +130,11 @@ export default function About() {
                   </a>
 
                   <input
-                    value="marketface.com"
+                    value="www.marketface.com"
+                    type="text"
                     style={styleText}
                     className="local-text"
+                    onChange={(e) => handleOnChange(["identite", "website"], e)}
                   />
                 </div>
               </div>

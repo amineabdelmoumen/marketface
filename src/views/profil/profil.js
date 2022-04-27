@@ -21,8 +21,7 @@ function Profil() {
   const profil = useSelector((state) => state.profile);
   useEffect(async () => {
     const token = localStorage.getItem("token");
-    const profil = await getProfile(token);
-    console.log(profil);
+
     checkAuth(token)
       .then((res) => res.data)
       .then((data) => {
