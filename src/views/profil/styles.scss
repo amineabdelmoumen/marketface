@@ -160,7 +160,10 @@
 .comp-logo {
   //margin-left: 80px;
   //margin-top:90px ;
-  max-width: 100%;
+  width: 120px;
+  min-height: 110px;
+  object-fit: cover;
+
   margin-left: 32%;
   margin-right: 26%;
   margin-top: 16%;
