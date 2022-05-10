@@ -82,9 +82,7 @@ export default function ServiceMenu() {
 
   const showErrors = (errors) => {
     nomRef.current.innerText = errors.nom ? errors.nom[0] : "";
-    descriptionRef.current.innerText = errors.description
-      ? errors.description[0]
-      : "";
+
     prixRef.current.innerText = errors.prix ? errors.prix[0] : "";
     quantiteRef.current.innerText = errors.quantite ? errors.quantite[0] : "";
     typeRef.current.innerText = errors.type ? errors.type[0] : "";
@@ -330,7 +328,22 @@ export default function ServiceMenu() {
                     <div className="d-flex">
                       <p className=" text-side col-5">Documents :</p>
                       <p className=" text-side text-primary col-7">
-                        {article.prix}
+                        {article?.documents &&
+                          article?.documents.map((doc) => {
+                            return (
+                              <p className="text-side text-primary col-7">
+                                {doc.nom}
+                              </p>
+                            );
+                          })}
+                      </p>
+                    </div>{" "}
+                  </div>
+                  <div className="row mt-4">
+                    <div className="d-flex">
+                      <p className=" text-side col-5">description :</p>
+                      <p className=" text-side text-primary col-7">
+                        {article.description}
                       </p>
                     </div>{" "}
                   </div>
