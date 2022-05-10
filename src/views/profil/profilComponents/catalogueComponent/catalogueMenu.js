@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import ImmobilierForm from "./ImmobilierForm";
 import ProductForm from "./ProductForm";
+import ServiceMenu from "./ServiceMenu";
 
 export default function CatalogueMenu() {
-  const [productComponent, setProductComponent] = useState(0);
+  const [productComponent, setProductComponent] = useState(1);
   const style1 = {
     marginLeft: "120px",
     marginBottom: "40px",
@@ -31,19 +33,32 @@ export default function CatalogueMenu() {
           </div>
         </div>
         <div className="col-12  col-md-3 mt-3 me-2 ">
-          <div className="d-flex justify-content-center btn  btn-outline-primary rounded-pill py-1 bg-white text-primary">
+          <div
+            onClick={() => setProductComponent(2)}
+            className="d-flex justify-content-center btn  btn-outline-primary rounded-pill py-1 bg-white text-primary"
+          >
             <img style={{ width: "25px" }} src="/imgs/service.svg" alt="" />
             <span className="catalogue-text">Service</span>
           </div>
         </div>
         <div className="col-12  col-md-3 mt-3 me-2 ">
-          <div className="d-flex justify-content-center btn  btn-outline-primary rounded-pill py-1 bg-white text-primary">
+          <div
+            onClick={() => setProductComponent(3)}
+            className="d-flex justify-content-center btn  btn-outline-primary rounded-pill py-1 bg-white text-primary"
+          >
             <img style={{ width: "25px" }} src="/imgs/house.svg" alt="" />
             <span className="catalogue-text">Bien Immobilier</span>
           </div>
         </div>
       </div>
-      <div>{productComponent == 1 ? <ProductForm /> : ""}</div>
+
+      {
+        {
+          1: <ProductForm />,
+          2: <ServiceMenu />,
+          3: <ImmobilierForm />,
+        }[productComponent]
+      }
     </div>
   );
 }

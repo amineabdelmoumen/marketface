@@ -28,6 +28,7 @@ function Profil() {
         getProfile(token)
           .then((res) => res.data)
           .then((data) => {
+            console.log(data);
             dispatch(setProfil(data));
 
             setLoading(false);

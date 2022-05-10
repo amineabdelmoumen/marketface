@@ -3,16 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import "./styles.scss";
 import categories from "../../../../lib/constants/categories";
 import { setArticle, setArticles } from "../../../../store/profileSlice";
-import {
-  saveArticle,
-  saveDocs,
-  saveDocuments,
-  saveImages,
-} from "../../../../lib/crud";
+import { saveArticle, saveDocuments, saveImages } from "../../../../lib/crud";
 let uploadForm = new FormData();
-export default function ProductForm() {
-  const dispatch = useDispatch();
+export default function ImmobilierForm() {
   const [index, setIndex] = useState(0);
+  const dispatch = useDispatch();
   const nomRef = useRef();
   const descriptionRef = useRef();
   const prixRef = useRef();
@@ -20,8 +15,10 @@ export default function ProductForm() {
   const categorieRef = useRef();
   const identite = useSelector((state) => state.profile.identite);
   const articles = useSelector((state) => state.profile.articles);
+  const types = ["Vente", "Location"];
   const [article, setArticle] = useState({
-    type_article: " produit",
+    type_article: " immobilier",
+    categorie: "Affaires immobilières",
 
     type: "",
 
@@ -33,9 +30,7 @@ export default function ProductForm() {
     padding: "22px",
     marginBottom: "20px",
   };
-  const style1 = {
-    marginRight: "60px",
-  };
+  const style1 = {};
 
   const handleInputChange = (field, e) => {
     setIndex(1);
@@ -48,7 +43,6 @@ export default function ProductForm() {
   };
   let images = [];
   const handlePhotosUpload = (e) => {
-    setIndex(1);
     const token = localStorage.getItem("token");
     let files = e.target.files;
 
@@ -59,17 +53,14 @@ export default function ProductForm() {
     saveImages(uploadForm, token).then((res) => {
       const response = res.data;
       uploadForm = new FormData();
-      console.log("paths", response.paths);
-      images = data.images.concat(response.paths);
-      data.images = images;
-      console.log("images", data.images);
+
+      data["images"].unshift(response.paths);
 
       console.log(data["images"]);
       setArticle(data);
     });
   };
   const handleDocumentUpload = (e) => {
-    setIndex(1);
     const token = localStorage.getItem("token");
     let files = e.target.files;
     console.log("files", files);
@@ -77,25 +68,16 @@ export default function ProductForm() {
     for (let i = 0; i < files.length; i++) {
       uploadForm.append(`documents[${i}]`, files[i]);
     }
-    saveDocs(uploadForm, token).then((res) => {
+    saveDocuments(uploadForm, token).then((res) => {
       const response = res.data;
+      console.log("response.paths", response.paths);
+      console.log("data['documents']", data["documents"]);
       uploadForm = new FormData();
-      data["documents"] = response.paths;
-      console.log("documents are", data["documents"]);
+      data["documents"].unshift(response.paths);
+      console.log(data["documents"]);
 
       setArticle(data);
     });
-  };
-
-  const onSubmit = () => {
-    const token = localStorage.getItem("token");
-    saveArticle(article, token)
-      .then((res) => res.data)
-      .then((data) => setArticle(data))
-      .catch((err) => {
-        let errors = err.response.data.errors;
-        showErrors(errors);
-      });
   };
   const showErrors = (errors) => {
     nomRef.current.innerText = errors?.nom ? errors?.nom[0] : "";
@@ -109,15 +91,27 @@ export default function ProductForm() {
       ? errors.categorie[0]
       : "";
   };
+
+  const onSubmit = () => {
+    const token = localStorage.getItem("token");
+    saveArticle(article, token)
+      .then((res) => res.data)
+      .then((data) => setArticle(data))
+      .catch((err) => {
+        let errors = err.response.data.errors;
+        showErrors(errors);
+      });
+    console.log("article saved");
+  };
   return (
     <div className="container-fluid ">
       <div className="title d-flex justify-content-center pt-4">
-        <img src="/imgs/product.png" alt="" style={{ width: "140px" }} />
+        <img src="/imgs/immobilier.png" alt="" style={{ width: "180px" }} />
       </div>
 
       <div className="row mt-5 position-relative ">
         <div className="col-12 col-lg-7 inputs" style={style}>
-          <div className="row form-boxes">
+          <div className="row form-boxes mt-1">
             <label className="col-12 col-sm-5 col-md-3">
               Nom de l'article:
             </label>
@@ -135,7 +129,55 @@ export default function ProductForm() {
               style={{ "font-size": "10px" }}
             ></small>
           </div>
-          <div className="row mt-1 form-boxes">
+          <div className="row form-boxes mt-1">
+            <label className="col-12 col-sm-5 col-md-3">Durée:</label>
+            <div className="col-12 col-sm-5 col-md-9">
+              <input
+                type="text"
+                id="titre"
+                name="nom"
+                onChange={(e) => handleInputChange("duree_service", e)}
+              />
+            </div>
+          </div>
+          <div className="row form-boxes mt-1">
+            <label className="col-12 col-sm-5 col-md-3">Adresse:</label>
+            <div className="col-12 col-sm-5 col-md-9">
+              <input
+                type="text"
+                id="titre"
+                name="nom"
+                onChange={(e) => handleInputChange("adresse", e)}
+              />
+            </div>
+          </div>
+          <div className="row d-flex form-boxes mt-1">
+            <label className="col-12 col-sm-5 col-md-3">Superficie:</label>
+            <div className="col-12 col-sm-5 col-md-9">
+              <input
+                type="text"
+                id="titre"
+                name="nom"
+                onChange={(e) => handleInputChange("superficie", e)}
+              />
+            </div>
+          </div>
+          <div className="row d-flex  form-boxes mt-1">
+            <label className="col-12 col-sm-5 col-md-3">Type:</label>
+            <div className="col-12 col-sm-5 col-md-9">
+              <select
+                name="prix"
+                id="prix"
+                onChange={(e) => handleInputChange("type", e)}
+              >
+                {types.map((type) => {
+                  return <option value={type}>{type}</option>;
+                })}
+              </select>
+            </div>
+          </div>
+
+          <div className="row  form-boxes mt-1">
             <label htmlFor="" className="col-12 col-sm-5 col-md-3 text">
               Prix:
             </label>
@@ -150,51 +192,19 @@ export default function ProductForm() {
                 <option value="quantité">quantité</option>
               </select>
             </div>
-            <small
-              ref={prixRef}
-              className="text-danger ms-2 d-block"
-              style={{ "font-size": "10px" }}
-            ></small>
           </div>
-          <div className="row mt-1 form-boxes">
+          <div className=" row mt-1 form-boxes ">
             <label htmlFor="" className="col-12 col-sm-5 col-md-3 text">
-              quantite:
+              Nature:
             </label>
             <div className="col-12 col-sm-5 col-md-9">
               <input
                 type="text"
                 id="quantite"
                 name="quantite"
-                onChange={(e) => handleInputChange("quantite", e)}
+                onChange={(e) => handleInputChange("nature", e)}
               />
             </div>
-            <small
-              ref={quantiteRef}
-              className="text-danger ms-2 d-block"
-              style={{ "font-size": "10px" }}
-            ></small>
-          </div>
-          <div className="row mt-1 form-boxes">
-            <label htmlFor="" className="col-12 col-sm-5  col-md-3 text">
-              Catégorie:
-            </label>
-            <div className="col-12 col-sm-5 col-md-9">
-              <select
-                name="categorie"
-                type="text"
-                id="categorie"
-                onChange={(e) => handleInputChange("type", e)}
-              >
-                {categories.map((category) => {
-                  return <option value={category}>{category}</option>;
-                })}
-              </select>
-            </div>
-            <small
-              ref={categorieRef}
-              className="text-danger ms-2 d-block"
-              style={{ "font-size": "10px" }}
-            ></small>
           </div>
 
           <div className="row mt-3  pb-3 form-boxes">
@@ -246,11 +256,6 @@ export default function ProductForm() {
                 onChange={(e) => handleInputChange("description", e)}
               ></textarea>
             </div>
-            <small
-              ref={descriptionRef}
-              className="text-danger ms-2 d-block"
-              style={{ "font-size": "10px" }}
-            ></small>
           </div>
           <div className="d-flex justify-content-end ">
             <button
@@ -262,7 +267,7 @@ export default function ProductForm() {
           </div>
         </div>
 
-        <div className="col-12  col-lg-5">
+        <div className="col-12 col-md-5 col-lg-5">
           <div className="row">
             {article?.images.map((image) => {
               return (
@@ -277,12 +282,12 @@ export default function ProductForm() {
             })}
           </div>
           {index == 1 ? (
-            <div className=" article mt-5 ">
-              <div className="content row ">
+            <div className="article mt-5 mb-3">
+              <div className="content ">
                 <div className="row">
                   <div className="row mt-4">
                     <div className="d-flex">
-                      <p className=" text-side col-5">Nom de l'article</p>
+                      <p className=" text-side col-5">Nom de l'article:</p>
                       <p className="text-side text-primary col-7">
                         {article.nom}
                       </p>
@@ -290,7 +295,7 @@ export default function ProductForm() {
                   </div>
                   <div className="row mt-4">
                     <div className="d-flex">
-                      <p className=" text-side col-5">categorie</p>
+                      <p className=" text-side col-5">Catégorie:</p>
                       <p className="text-side  text-primary col-7">
                         {article.type}
                       </p>
@@ -298,9 +303,9 @@ export default function ProductForm() {
                   </div>
                   <div className="row mt-4">
                     <div className="d-flex">
-                      <p className=" text-side col-5">Quantite</p>
+                      <p className=" text-side col-5">Durée de service:</p>
                       <p className=" text-side text-primary col-7">
-                        {article.quantite}
+                        {article.duree_service}
                       </p>
                     </div>{" "}
                   </div>

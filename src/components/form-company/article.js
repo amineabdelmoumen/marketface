@@ -175,7 +175,7 @@ function Article(props) {
 
   const showErrors = (errors) => {
     typeArticleRef.current.innerText = errors.type_article
-      ? errors.type_article[0]
+      ? errors?.type_article[0]
       : "";
     nomRef.current.innerText = errors.nom ? errors.nom[0] : "";
     descriptionRef.current.innerText = errors.description

@@ -75,19 +75,29 @@
     margin-left: 0px;
   }
 }
+.service {
+  color: #2a669a;
+  font-family: $font-default1;
+  font-size: 25px;
+}
 .content {
   padding: 20px 10px;
   .title {
     font-family: $font-default1;
-    font-size: 21px;
-    font-weight: 600;
+    font-size: 14px;
+
     letter-spacing: 0px;
-    color: #25a9e0;
+    color: #b2b2b2;
+  }
+  .text-side {
+    font-family: $font-default1;
+    color: #b2b2b2;
+    font-size: 14px;
   }
 }
 .suggest {
   font-family: $font-default1;
-  font-weight: 600;
+  font-weight: normal;
   font-size: 14px;
   color: #b2b2b2;
 }

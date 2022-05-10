@@ -2,29 +2,25 @@ import React, { useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./styles.scss";
 import categories from "../../../../lib/constants/categories";
+import services from "../../../../lib/constants/services";
 import { setArticle, setArticles } from "../../../../store/profileSlice";
-import {
-  saveArticle,
-  saveDocs,
-  saveDocuments,
-  saveImages,
-} from "../../../../lib/crud";
+import { saveArticle, saveDocuments, saveImages } from "../../../../lib/crud";
 let uploadForm = new FormData();
-export default function ProductForm() {
-  const dispatch = useDispatch();
-  const [index, setIndex] = useState(0);
+
+export default function ServiceMenu() {
   const nomRef = useRef();
+  const [index, setIndex] = useState(0);
+  const dureeRef = useRef();
   const descriptionRef = useRef();
   const prixRef = useRef();
   const quantiteRef = useRef();
-  const categorieRef = useRef();
+  const typeRef = useRef();
+  const dispatch = useDispatch();
   const identite = useSelector((state) => state.profile.identite);
   const articles = useSelector((state) => state.profile.articles);
   const [article, setArticle] = useState({
-    type_article: " produit",
-
-    type: "",
-
+    type_article: "service",
+    categorie: "",
     images: [],
     documents: [],
   });
@@ -33,62 +29,71 @@ export default function ProductForm() {
     padding: "22px",
     marginBottom: "20px",
   };
-  const style1 = {
-    marginRight: "60px",
+  const style1 = {};
+
+  const validate = (element) => {
+    return element !== "";
   };
 
   const handleInputChange = (field, e) => {
     setIndex(1);
     let data = { ...article };
-
-    data[field] = e.target.value;
-    setArticle(data);
-    console.log(data);
-    console.log(article);
+    if (validate(e.target.value)) {
+      data[field] = e.target.value;
+      setArticle(data);
+      console.log(data);
+      console.log(article);
+    }
   };
-  let images = [];
   const handlePhotosUpload = (e) => {
     setIndex(1);
     const token = localStorage.getItem("token");
     let files = e.target.files;
-
-    let data = { ...article };
-    for (let i = 0; i < files.length; i++) {
-      uploadForm.append(`images[${i}]`, files[i]);
+    if (validate(e.target.value)) {
+      let data = { ...article };
+      for (let i = 0; i < files.length; i++) {
+        uploadForm.append(`images[${i}]`, files[i]);
+      }
+      saveImages(uploadForm, token).then((res) => {
+        const response = res.data;
+        uploadForm = new FormData();
+        data["images"].push(response.paths);
+        console.log(data["images"]);
+        setArticle(data);
+      });
     }
-    saveImages(uploadForm, token).then((res) => {
-      const response = res.data;
-      uploadForm = new FormData();
-      console.log("paths", response.paths);
-      images = data.images.concat(response.paths);
-      data.images = images;
-      console.log("images", data.images);
-
-      console.log(data["images"]);
-      setArticle(data);
-    });
   };
   const handleDocumentUpload = (e) => {
     setIndex(1);
     const token = localStorage.getItem("token");
     let files = e.target.files;
-    console.log("files", files);
     let data = { ...article };
     for (let i = 0; i < files.length; i++) {
       uploadForm.append(`documents[${i}]`, files[i]);
     }
-    saveDocs(uploadForm, token).then((res) => {
+    saveDocuments(uploadForm, token).then((res) => {
       const response = res.data;
       uploadForm = new FormData();
-      data["documents"] = response.paths;
-      console.log("documents are", data["documents"]);
-
+      data["documents"].push(response.paths);
+      console.log(data["documents"]);
       setArticle(data);
     });
   };
 
+  const showErrors = (errors) => {
+    nomRef.current.innerText = errors.nom ? errors.nom[0] : "";
+    descriptionRef.current.innerText = errors.description
+      ? errors.description[0]
+      : "";
+    prixRef.current.innerText = errors.prix ? errors.prix[0] : "";
+    quantiteRef.current.innerText = errors.quantite ? errors.quantite[0] : "";
+    typeRef.current.innerText = errors.type ? errors.type[0] : "";
+    dureeRef.current.innerText = errors.duree ? errors.duree[0] : "";
+  };
+
   const onSubmit = () => {
     const token = localStorage.getItem("token");
+
     saveArticle(article, token)
       .then((res) => res.data)
       .then((data) => setArticle(data))
@@ -96,23 +101,13 @@ export default function ProductForm() {
         let errors = err.response.data.errors;
         showErrors(errors);
       });
-  };
-  const showErrors = (errors) => {
-    nomRef.current.innerText = errors?.nom ? errors?.nom[0] : "";
-    descriptionRef.current.innerText = errors.description
-      ? errors.description[0]
-      : "";
-    prixRef.current.innerText = errors.prix ? errors.prix[0] : "";
-    quantiteRef.current.innerText = errors.quantite ? errors.quantite[0] : "";
 
-    categorieRef.current.innerText = errors.categorie
-      ? errors.categorie[0]
-      : "";
+    console.log("article saved");
   };
   return (
     <div className="container-fluid ">
       <div className="title d-flex justify-content-center pt-4">
-        <img src="/imgs/product.png" alt="" style={{ width: "140px" }} />
+        <img src="/imgs/service1.png" alt="" style={{ width: "140px" }} />
       </div>
 
       <div className="row mt-5 position-relative ">
@@ -131,6 +126,24 @@ export default function ProductForm() {
             </div>
             <small
               ref={nomRef}
+              className="text-danger ms-2 d-block"
+              style={{ "font-size": "10px" }}
+            ></small>
+          </div>
+          <div className="row mt-1 form-boxes">
+            <label className="col-12 col-sm-5 col-md-3">
+              Durée de Service:
+            </label>
+            <div className="col-12 col-sm-5 col-md-9">
+              <input
+                type="text"
+                id="titre"
+                name="duree"
+                onChange={(e) => handleInputChange("duree", e)}
+              />
+            </div>
+            <small
+              ref={dureeRef}
               className="text-danger ms-2 d-block"
               style={{ "font-size": "10px" }}
             ></small>
@@ -158,7 +171,7 @@ export default function ProductForm() {
           </div>
           <div className="row mt-1 form-boxes">
             <label htmlFor="" className="col-12 col-sm-5 col-md-3 text">
-              quantite:
+              quantité:
             </label>
             <div className="col-12 col-sm-5 col-md-9">
               <input
@@ -180,56 +193,55 @@ export default function ProductForm() {
             </label>
             <div className="col-12 col-sm-5 col-md-9">
               <select
-                name="categorie"
+                name="type"
                 type="text"
-                id="categorie"
+                id="type"
                 onChange={(e) => handleInputChange("type", e)}
               >
-                {categories.map((category) => {
-                  return <option value={category}>{category}</option>;
+                {services.map((service) => {
+                  return <option value={service}>{service}</option>;
                 })}
               </select>
             </div>
             <small
-              ref={categorieRef}
+              ref={typeRef}
               className="text-danger ms-2 d-block"
               style={{ "font-size": "10px" }}
             ></small>
           </div>
 
           <div className="row mt-3  pb-3 form-boxes">
-            <label htmlFor="photos" className="col-12 col-sm-5 col-md-4 text">
+            <label htmlFor="" className="col-12 col-sm-5 col-md-4 text">
               Join des documents:
             </label>
             <div className="col-12 col-sm-5 col-md-8">
-              <label htmlFor="documents" className="text-center upload">
+              <label htmlFor="logo" className="text-center upload">
                 Choisir un fichier
                 <input
                   type="file"
-                  id="documents"
-                  name="documents[]"
+                  id="logo"
+                  name="logo"
+                  accept="image/*"
                   className="d-none"
-                  multiple
-                  onChange={(e) => handleDocumentUpload(e)}
+                  onChange={(e) => handlePhotosUpload(e)}
                 />
               </label>
             </div>
           </div>
           <div className="row mt-1  pb-3 form-boxes">
-            <label htmlFor="photos" className="col-12 col-sm-5 col-md-4 text">
+            <label htmlFor="" className="col-12 col-sm-5 col-md-4 text">
               Join des photos de l'article:
             </label>
             <div className="col-12 col-sm-5 col-md-8">
-              <label htmlFor="photos" className="text-center upload">
+              <label htmlFor="logo" className="text-center upload">
                 Choisir un fichier
                 <input
                   type="file"
-                  id="photos"
-                  name="photos[]"
+                  id="logo"
+                  name="logo"
                   accept="image/*"
                   className="d-none"
-                  multiple
-                  onChange={(e) => handlePhotosUpload(e)}
+                  onChange={(e) => handleDocumentUpload(e)}
                 />
               </label>
             </div>
@@ -262,7 +274,7 @@ export default function ProductForm() {
           </div>
         </div>
 
-        <div className="col-12  col-lg-5">
+        <div className="col-12 col-md-5 col-lg-5">
           <div className="row">
             {article?.images.map((image) => {
               return (
@@ -277,12 +289,12 @@ export default function ProductForm() {
             })}
           </div>
           {index == 1 ? (
-            <div className=" article mt-5 ">
-              <div className="content row ">
+            <div className="article mt-5 mb-3">
+              <div className="content ">
                 <div className="row">
                   <div className="row mt-4">
                     <div className="d-flex">
-                      <p className=" text-side col-5">Nom de l'article</p>
+                      <p className=" text-side col-5">Nom de l'article:</p>
                       <p className="text-side text-primary col-7">
                         {article.nom}
                       </p>
@@ -290,7 +302,7 @@ export default function ProductForm() {
                   </div>
                   <div className="row mt-4">
                     <div className="d-flex">
-                      <p className=" text-side col-5">categorie</p>
+                      <p className=" text-side col-5">Catégorie:</p>
                       <p className="text-side  text-primary col-7">
                         {article.type}
                       </p>
@@ -298,9 +310,9 @@ export default function ProductForm() {
                   </div>
                   <div className="row mt-4">
                     <div className="d-flex">
-                      <p className=" text-side col-5">Quantite</p>
+                      <p className=" text-side col-5">Durée de service:</p>
                       <p className=" text-side text-primary col-7">
-                        {article.quantite}
+                        {article.duree}
                       </p>
                     </div>{" "}
                   </div>

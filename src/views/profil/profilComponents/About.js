@@ -71,6 +71,7 @@ export default function About() {
     border: "none",
     backgroundColor: "white",
     resize: "none",
+    textTransform: "none",
   };
 
   return (
@@ -106,7 +107,7 @@ export default function About() {
                   <select
                     name="region"
                     id="region"
-                    defaultValue={aboutIdentite.region}
+                    defaultValue={aboutIdentite?.region}
                     className="local-text"
                     style={styleText}
                     onChange={(e) => handleOnChange(["identite", "region"], e)}
@@ -130,7 +131,7 @@ export default function About() {
                   </a>
 
                   <input
-                    value="www.marketface.com"
+                    value={`${aboutIdentite?.website.toLowerCase()}`}
                     type="text"
                     style={styleText}
                     className="local-text"
@@ -151,7 +152,7 @@ export default function About() {
                       }
                       style={styleText}
                       className="local-text"
-                      value={aboutIdentite.telephone}
+                      value={aboutIdentite?.telephone}
                     ></textarea>
                   ) : (
                     <textarea
