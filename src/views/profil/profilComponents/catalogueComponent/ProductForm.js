@@ -59,12 +59,9 @@ export default function ProductForm() {
     saveImages(uploadForm, token).then((res) => {
       const response = res.data;
       uploadForm = new FormData();
-      console.log("paths", response.paths);
-      images = data.images.concat(response.paths);
-      data.images = images;
-      console.log("images", data.images);
 
-      console.log(data["images"]);
+      data["images"] = response.paths;
+
       setArticle(data);
     });
   };
@@ -118,7 +115,7 @@ export default function ProductForm() {
       <div className="row mt-5 position-relative ">
         <div className="col-12 col-lg-7 inputs" style={style}>
           <div className="row form-boxes">
-            <label className="col-12 col-sm-5 col-md-3">
+            <label className="col-12 col-sm-5 col-md-3 text">
               Nom de l'article:
             </label>
             <div className="col-12 col-sm-5 col-md-9">
@@ -140,15 +137,12 @@ export default function ProductForm() {
               Prix:
             </label>
             <div className="col-12  col-sm-5 col-md-9">
-              <select
-                name="prix"
+              <input
+                type="text"
                 id="prix"
+                name="prix"
                 onChange={(e) => handleInputChange("prix", e)}
-              >
-                <option value="Grossite">Grossite</option>
-                <option value="détaillant">détaillant</option>
-                <option value="quantité">quantité</option>
-              </select>
+              />
             </div>
             <small
               ref={prixRef}
@@ -264,17 +258,19 @@ export default function ProductForm() {
 
         <div className="col-12  col-lg-5">
           <div className="row">
-            {article?.images.map((image) => {
-              return (
-                <div className="col-md-6">
-                  <img
-                    src={`${process.env.REACT_APP_HOST_URL}/${image.path}`}
-                    width={100}
-                    alt=""
-                  />
-                </div>
-              );
-            })}
+            {article.images && article.images.length
+              ? article.images.map((photo) => {
+                  return (
+                    <div className="col-6">
+                      <img
+                        src={`${process.env.REACT_APP_HOST_URL}/${photo.path}`}
+                        width={100}
+                        alt=""
+                      />
+                    </div>
+                  );
+                })
+              : ""}
           </div>
           {index == 1 ? (
             <div className=" article mt-5 ">
@@ -306,9 +302,33 @@ export default function ProductForm() {
                   </div>
                   <div className="row mt-4">
                     <div className="d-flex">
-                      <p className=" text-side col-5">Prix :</p>
+                      <p className=" text-side col-5"> Prix:</p>
                       <p className=" text-side text-primary col-7">
                         {article.prix}
+                      </p>
+                    </div>{" "}
+                  </div>
+                  <div className="row mt-4">
+                    <div className="d-flex">
+                      <p className=" text-side col-5">Documents :</p>
+                      {article?.documents &&
+                        article?.documents.map((doc) => {
+                          return (
+                            <p className="text-side text-primary col-7">
+                              {doc.nom}
+                            </p>
+                          );
+                        })}
+                    </div>{" "}
+                  </div>
+                  <div className="row mt-4">
+                    <div className="d-flex">
+                      <p className=" text-side col-5"> Description:</p>
+                      <p
+                        className=" text-side text-primary col-7"
+                        style={{ wordWrap: "break-word" }}
+                      >
+                        {article.description}
                       </p>
                     </div>{" "}
                   </div>

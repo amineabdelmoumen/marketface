@@ -88,7 +88,6 @@ export default function ServiceMenu() {
     prixRef.current.innerText = errors.prix ? errors.prix[0] : "";
     quantiteRef.current.innerText = errors.quantite ? errors.quantite[0] : "";
     typeRef.current.innerText = errors.type ? errors.type[0] : "";
-    dureeRef.current.innerText = errors.duree ? errors.duree[0] : "";
   };
 
   const onSubmit = () => {
@@ -113,7 +112,7 @@ export default function ServiceMenu() {
       <div className="row mt-5 position-relative ">
         <div className="col-12 col-lg-7 inputs" style={style}>
           <div className="row form-boxes">
-            <label className="col-12 col-sm-5 col-md-3">
+            <label className="col-12 col-sm-5 col-md-3 text">
               Nom de l'article:
             </label>
             <div className="col-12 col-sm-5 col-md-9">
@@ -131,7 +130,7 @@ export default function ServiceMenu() {
             ></small>
           </div>
           <div className="row mt-1 form-boxes">
-            <label className="col-12 col-sm-5 col-md-3">
+            <label className="col-12 col-sm-5 col-md-3 text">
               Durée de Service:
             </label>
             <div className="col-12 col-sm-5 col-md-9">
@@ -142,11 +141,6 @@ export default function ServiceMenu() {
                 onChange={(e) => handleInputChange("duree", e)}
               />
             </div>
-            <small
-              ref={dureeRef}
-              className="text-danger ms-2 d-block"
-              style={{ "font-size": "10px" }}
-            ></small>
           </div>
           <div className="row mt-1 form-boxes">
             <label htmlFor="" className="col-12 col-sm-5 col-md-3 text">
@@ -310,6 +304,14 @@ export default function ServiceMenu() {
                   </div>
                   <div className="row mt-4">
                     <div className="d-flex">
+                      <p className=" text-side col-5">Quantite:</p>
+                      <p className="text-side  text-primary col-7">
+                        {article.quantite}
+                      </p>
+                    </div>{" "}
+                  </div>
+                  <div className="row mt-4">
+                    <div className="d-flex">
                       <p className=" text-side col-5">Durée de service:</p>
                       <p className=" text-side text-primary col-7">
                         {article.duree}
@@ -319,6 +321,14 @@ export default function ServiceMenu() {
                   <div className="row mt-4">
                     <div className="d-flex">
                       <p className=" text-side col-5">Prix :</p>
+                      <p className=" text-side text-primary col-7">
+                        {article.prix}
+                      </p>
+                    </div>{" "}
+                  </div>
+                  <div className="row mt-4">
+                    <div className="d-flex">
+                      <p className=" text-side col-5">Documents :</p>
                       <p className=" text-side text-primary col-7">
                         {article.prix}
                       </p>

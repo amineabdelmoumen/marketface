@@ -31,13 +31,18 @@
     border-radius: 16px;
     border: 1px solid silver;
     color: gray;
-    text-align: center;
+
     padding: 0 6px;
     font-size: 14px;
     width: 90%;
   }
   textarea {
     resize: unset;
+  }
+
+  textarea:focus {
+    outline: none;
+    border: 2px solid #00b5ff;
   }
   .text {
     font-family: $font-default1;

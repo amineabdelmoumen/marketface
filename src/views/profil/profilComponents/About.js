@@ -91,13 +91,9 @@ export default function About() {
         <p className="activite-title">Activities</p>
         <div className="px-4 mt-2">
           <div className="row">
-            {about.cible.activites.map((activite) => {
-              return (
-                <p className="activite col-12 col-md-4 mt-3 me-4 px-4">
-                  {activite}
-                </p>
-              );
-            })}
+            <p className="activite col-12 col-md-4 mt-3 me-4 px-4">
+              {about.identite.activite}
+            </p>
           </div>
           <div className="form-area">
             <div className="row d-flex align-items-center mt-3">

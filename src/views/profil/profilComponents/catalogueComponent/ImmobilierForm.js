@@ -15,13 +15,10 @@ export default function ImmobilierForm() {
   const categorieRef = useRef();
   const identite = useSelector((state) => state.profile.identite);
   const articles = useSelector((state) => state.profile.articles);
-  const types = ["Vente", "Location"];
+  const types = ["Vente", "Location", "Vente/Location"];
   const [article, setArticle] = useState({
     type_article: " immobilier",
-    categorie: "Affaires immobilières",
-
     type: "",
-
     images: [],
     documents: [],
   });
@@ -112,7 +109,7 @@ export default function ImmobilierForm() {
       <div className="row mt-5 position-relative ">
         <div className="col-12 col-lg-7 inputs" style={style}>
           <div className="row form-boxes mt-1">
-            <label className="col-12 col-sm-5 col-md-3">
+            <label className="col-12 col-sm-5 col-md-3 text">
               Nom de l'article:
             </label>
             <div className="col-12 col-sm-5 col-md-9">
@@ -130,7 +127,7 @@ export default function ImmobilierForm() {
             ></small>
           </div>
           <div className="row form-boxes mt-1">
-            <label className="col-12 col-sm-5 col-md-3">Durée:</label>
+            <label className="col-12 col-sm-5 col-md-3 text">Durée:</label>
             <div className="col-12 col-sm-5 col-md-9">
               <input
                 type="text"
@@ -140,8 +137,8 @@ export default function ImmobilierForm() {
               />
             </div>
           </div>
-          <div className="row form-boxes mt-1">
-            <label className="col-12 col-sm-5 col-md-3">Adresse:</label>
+          <div className="row form-boxes mt-1 mb-1">
+            <label className="col-12 col-sm-5 col-md-3 text">Adresse:</label>
             <div className="col-12 col-sm-5 col-md-9">
               <input
                 type="text"
@@ -151,8 +148,8 @@ export default function ImmobilierForm() {
               />
             </div>
           </div>
-          <div className="row d-flex form-boxes mt-1">
-            <label className="col-12 col-sm-5 col-md-3">Superficie:</label>
+          <div className="row  form-boxes mt-2">
+            <label className="col-12 col-sm-5 col-md-3 text">Superficie:</label>
             <div className="col-12 col-sm-5 col-md-9">
               <input
                 type="text"
@@ -162,8 +159,8 @@ export default function ImmobilierForm() {
               />
             </div>
           </div>
-          <div className="row d-flex  form-boxes mt-1">
-            <label className="col-12 col-sm-5 col-md-3">Type:</label>
+          <div className="row form-boxes mt-1">
+            <label className="col-12 col-sm-5 col-md-3 text">Type:</label>
             <div className="col-12 col-sm-5 col-md-9">
               <select
                 name="prix"
@@ -303,9 +300,9 @@ export default function ImmobilierForm() {
                   </div>
                   <div className="row mt-4">
                     <div className="d-flex">
-                      <p className=" text-side col-5">Durée de service:</p>
+                      <p className=" text-side col-5">Durée:</p>
                       <p className=" text-side text-primary col-7">
-                        {article.duree_service}
+                        {article.duree}
                       </p>
                     </div>{" "}
                   </div>
@@ -314,6 +311,27 @@ export default function ImmobilierForm() {
                       <p className=" text-side col-5">Prix :</p>
                       <p className=" text-side text-primary col-7">
                         {article.prix}
+                      </p>
+                    </div>{" "}
+                  </div>
+                  <div className="row mt-4">
+                    <div className="d-flex">
+                      <p className=" text-side col-5">Documents :</p>
+                      {article?.documents &&
+                        article?.documents.map((doc) => {
+                          return (
+                            <p className="text-side text-primary col-7">
+                              {doc.nom}
+                            </p>
+                          );
+                        })}
+                    </div>{" "}
+                  </div>
+                  <div className="row mt-4">
+                    <div className="d-flex">
+                      <p className=" text-side col-5">description :</p>
+                      <p className=" text-side text-primary col-7">
+                        {article.description}
                       </p>
                     </div>{" "}
                   </div>

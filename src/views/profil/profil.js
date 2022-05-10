@@ -14,6 +14,11 @@ import "./styles.scss";
 import { setProfil, setReferences } from "../../store/profileSlice";
 
 function Profil() {
+  const getprofile = async () => {
+    const token = localStorage.getItem("token");
+    const profile = await getProfile(token);
+    console.log(profil);
+  };
   const dispatch = useDispatch();
   const [sideBarColumns, setSideBarColumns] = useState(0);
   const navigate = useNavigate();
