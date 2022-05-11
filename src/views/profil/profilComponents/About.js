@@ -85,14 +85,18 @@ export default function About() {
           style={styleText}
           id="textarea"
           className="text"
-          value={referenceAbout["description"]}
+          value={
+            referenceAbout["description"] != null
+              ? referenceAbout["description"]
+              : ""
+          }
           onChange={(e) => handleOnChange(["references", "description"], e)}
         ></textarea>
         <p className="activite-title">Activities</p>
         <div className="px-4 mt-2">
           <div className="row">
             <p className="activite col-12 col-md-4 mt-3 me-4 px-4">
-              {about.identite.activite}
+              {about.identite?.activite}
             </p>
           </div>
           <div className="form-area">
@@ -127,7 +131,11 @@ export default function About() {
                   </a>
 
                   <input
-                    value={`${aboutIdentite?.website.toLowerCase()}`}
+                    value={
+                      aboutIdentite?.website != null
+                        ? `${aboutIdentite?.website.toLowerCase()}`
+                        : ""
+                    }
                     type="text"
                     style={styleText}
                     className="local-text"

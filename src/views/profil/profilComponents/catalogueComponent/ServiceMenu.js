@@ -104,7 +104,7 @@ export default function ServiceMenu() {
   return (
     <div className="container-fluid ">
       <div className="title d-flex justify-content-center pt-4">
-        <img src="/imgs/service1.png" alt="" style={{ width: "140px" }} />
+        <img src="/imgs/service1.png" alt="" style={{ width: "120px" }} />
       </div>
 
       <div className="row mt-5 position-relative ">
@@ -145,15 +145,12 @@ export default function ServiceMenu() {
               Prix:
             </label>
             <div className="col-12  col-sm-5 col-md-9">
-              <select
-                name="prix"
-                id="prix"
+              <input
+                type="text"
+                id="titre"
+                name="duree"
                 onChange={(e) => handleInputChange("prix", e)}
-              >
-                <option value="Grossite">Grossite</option>
-                <option value="détaillant">détaillant</option>
-                <option value="quantité">quantité</option>
-              </select>
+              />
             </div>
             <small
               ref={prixRef}

@@ -179,15 +179,12 @@ export default function ImmobilierForm() {
               Prix:
             </label>
             <div className="col-12  col-sm-5 col-md-9">
-              <select
-                name="prix"
-                id="prix"
+              <input
+                type="text"
+                id="titre"
+                name="duree"
                 onChange={(e) => handleInputChange("prix", e)}
-              >
-                <option value="Grossite">Grossite</option>
-                <option value="détaillant">détaillant</option>
-                <option value="quantité">quantité</option>
-              </select>
+              />
             </div>
           </div>
           <div className=" row mt-1 form-boxes ">

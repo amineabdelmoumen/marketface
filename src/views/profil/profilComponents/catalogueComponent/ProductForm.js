@@ -22,9 +22,6 @@ export default function ProductForm() {
   const articles = useSelector((state) => state.profile.articles);
   const [article, setArticle] = useState({
     type_article: " produit",
-
-    type: "",
-
     images: [],
     documents: [],
   });
@@ -59,8 +56,9 @@ export default function ProductForm() {
     saveImages(uploadForm, token).then((res) => {
       const response = res.data;
       uploadForm = new FormData();
-
+      //response.paths.map((path) => data["images"].unshift(path));
       data["images"] = response.paths;
+      console.log("data[images]", data["images"]);
 
       setArticle(data);
     });
@@ -77,6 +75,7 @@ export default function ProductForm() {
     saveDocs(uploadForm, token).then((res) => {
       const response = res.data;
       uploadForm = new FormData();
+      //response.paths.map((path) => data["documents"].unshift(path));
       data["documents"] = response.paths;
       console.log("documents are", data["documents"]);
 
@@ -96,14 +95,16 @@ export default function ProductForm() {
   };
   const showErrors = (errors) => {
     nomRef.current.innerText = errors?.nom ? errors?.nom[0] : "";
-    descriptionRef.current.innerText = errors.description
-      ? errors.description[0]
-      : "";
+
     prixRef.current.innerText = errors.prix ? errors.prix[0] : "";
     quantiteRef.current.innerText = errors.quantite ? errors.quantite[0] : "";
 
     categorieRef.current.innerText = errors.categorie
       ? errors.categorie[0]
+      : "";
+
+    descriptionRef.current.innerText = description.errors
+      ? errors.description[0]
       : "";
   };
   return (
@@ -273,7 +274,7 @@ export default function ProductForm() {
               : ""}
           </div>
           {index == 1 ? (
-            <div className=" article mt-5 ">
+            <div className=" article mt-5 mb-4">
               <div className="content row ">
                 <div className="row">
                   <div className="row mt-4">
@@ -308,19 +309,7 @@ export default function ProductForm() {
                       </p>
                     </div>{" "}
                   </div>
-                  <div className="row mt-4">
-                    <div className="d-flex">
-                      <p className=" text-side col-5">Documents :</p>
-                      {article?.documents &&
-                        article?.documents.map((doc) => {
-                          return (
-                            <p className="text-side text-primary col-7">
-                              {doc.nom}
-                            </p>
-                          );
-                        })}
-                    </div>{" "}
-                  </div>
+
                   <div className="row mt-4">
                     <div className="d-flex">
                       <p className=" text-side col-5"> Description:</p>
