@@ -111,7 +111,7 @@ export default function ProductForm() {
     <div className="container-fluid ">
       <div className="title d-flex justify-content-center pt-4">
         <div className="d-flex position-relative">
-          <img src="/imgs/product.svg" alt="" style={{ width: "35px" }} />
+          <img src="/imgs/product12.png" alt="" style={{ width: "35px" }} />
           <p className="title-service ">Product</p>
           <p className="line-se"></p>
         </div>
