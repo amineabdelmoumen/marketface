@@ -56,8 +56,8 @@ export default function ProductForm() {
     saveImages(uploadForm, token).then((res) => {
       const response = res.data;
       uploadForm = new FormData();
-      //response.paths.map((path) => data["images"].unshift(path));
-      data["images"] = response.paths;
+      response.paths.map((path) => data["images"].unshift(path));
+
       console.log("data[images]", data["images"]);
 
       setArticle(data);
@@ -75,8 +75,8 @@ export default function ProductForm() {
     saveDocs(uploadForm, token).then((res) => {
       const response = res.data;
       uploadForm = new FormData();
-      //response.paths.map((path) => data["documents"].unshift(path));
-      data["documents"] = response.paths;
+      response.paths.map((path) => data["documents"].unshift(path));
+
       console.log("documents are", data["documents"]);
 
       setArticle(data);
@@ -96,7 +96,7 @@ export default function ProductForm() {
   const showErrors = (errors) => {
     nomRef.current.innerText = errors?.nom ? errors?.nom[0] : "";
 
-    prixRef.current.innerText = errors.prix ? errors.prix[0] : "";
+    prixRef.current.innerText = errors?.prix ? errors.prix[0] : "";
     quantiteRef.current.innerText = errors.quantite ? errors.quantite[0] : "";
 
     categorieRef.current.innerText = errors.categorie
@@ -110,9 +110,12 @@ export default function ProductForm() {
   return (
     <div className="container-fluid ">
       <div className="title d-flex justify-content-center pt-4">
-        <img src="/imgs/product.png" alt="" style={{ width: "140px" }} />
+        <div className="d-flex position-relative">
+          <img src="/imgs/product.svg" alt="" style={{ width: "35px" }} />
+          <p className="title-service ">Product</p>
+          <p className="line-se"></p>
+        </div>
       </div>
-
       <div className="row mt-5 position-relative ">
         <div className="col-12 col-lg-7 inputs" style={style}>
           <div className="row form-boxes">

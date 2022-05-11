@@ -103,7 +103,11 @@ export default function ImmobilierForm() {
   return (
     <div className="container-fluid ">
       <div className="title d-flex justify-content-center pt-4">
-        <img src="/imgs/immobilier.png" alt="" style={{ width: "180px" }} />
+        <div className="d-flex position-relative">
+          <img src="/imgs/house.svg" alt="" style={{ width: "33px" }} />
+          <p className="title-service ">Immobilier</p>
+          <p className="line-se"></p>
+        </div>
       </div>
 
       <div className="row mt-5 position-relative ">

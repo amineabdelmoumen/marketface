@@ -127,3 +127,18 @@
 
   padding-left: 6px;
 }
+
+.title-service {
+  font-family: $font-default1;
+  color: #2a669a;
+  font-weight: bold;
+  font-size: 23px;
+  margin-left: 10px;
+}
+.line-se {
+  position: absolute;
+  width: calc(100% - 20px);
+  height: 2px;
+  background-color: #2a669a;
+  bottom: -35%;
+}

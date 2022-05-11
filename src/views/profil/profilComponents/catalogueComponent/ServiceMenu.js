@@ -104,7 +104,11 @@ export default function ServiceMenu() {
   return (
     <div className="container-fluid ">
       <div className="title d-flex justify-content-center pt-4">
-        <img src="/imgs/service1.png" alt="" style={{ width: "120px" }} />
+        <div className="d-flex position-relative">
+          <img src="/imgs/service.svg" alt="" style={{ width: "35px" }} />
+          <p className="title-service ">Service</p>
+          <p className="line-se"></p>
+        </div>
       </div>
 
       <div className="row mt-5 position-relative ">
