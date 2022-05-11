@@ -312,7 +312,19 @@ export default function ProductForm() {
                       </p>
                     </div>{" "}
                   </div>
-
+                  <div className="row mt-4">
+                    <div className="d-flex">
+                      <p className=" text-side col-5">Documents :</p>
+                      {article?.documents &&
+                        article?.documents.map((doc) => {
+                          return (
+                            <p className="text-side text-primary col-7">
+                              {doc.nom}
+                            </p>
+                          );
+                        })}
+                    </div>{" "}
+                  </div>
                   <div className="row mt-4">
                     <div className="d-flex">
                       <p className=" text-side col-5"> Description:</p>

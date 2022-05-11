@@ -51,7 +51,7 @@ export default function ImmobilierForm() {
       const response = res.data;
       uploadForm = new FormData();
 
-      data["images"].unshift(response.paths);
+      response.paths.map((path) => data["images"].unshift(path));
 
       console.log(data["images"]);
       setArticle(data);
@@ -70,7 +70,7 @@ export default function ImmobilierForm() {
       console.log("response.paths", response.paths);
       console.log("data['documents']", data["documents"]);
       uploadForm = new FormData();
-      data["documents"].unshift(response.paths);
+      response.paths.map((path) => data["documents"].unshift(path));
       console.log(data["documents"]);
 
       setArticle(data);
@@ -167,8 +167,8 @@ export default function ImmobilierForm() {
             <label className="col-12 col-sm-5 col-md-3 text">Type:</label>
             <div className="col-12 col-sm-5 col-md-9">
               <select
-                name="prix"
-                id="prix"
+                name="type"
+                id="type"
                 onChange={(e) => handleInputChange("type", e)}
               >
                 {types.map((type) => {
@@ -184,9 +184,9 @@ export default function ImmobilierForm() {
             </label>
             <div className="col-12  col-sm-5 col-md-9">
               <input
-                type="text"
-                id="titre"
-                name="duree"
+                type="number"
+                id="prixs"
+                name="prix"
                 onChange={(e) => handleInputChange("prix", e)}
               />
             </div>
@@ -265,11 +265,11 @@ export default function ImmobilierForm() {
           </div>
         </div>
 
-        <div className="col-12 col-md-5 col-lg-5">
+        <div className="col-12  col-lg-5">
           <div className="row">
             {article?.images.map((image) => {
               return (
-                <div className="col-md-6">
+                <div className="col-5 mx-2 ">
                   <img
                     src={`${process.env.REACT_APP_HOST_URL}/${image.path}`}
                     width={100}
@@ -280,12 +280,12 @@ export default function ImmobilierForm() {
             })}
           </div>
           {index == 1 ? (
-            <div className="article mt-5 mb-3">
-              <div className="content ">
+            <div className=" article mt-5 mb-4">
+              <div className="content row ">
                 <div className="row">
                   <div className="row mt-4">
                     <div className="d-flex">
-                      <p className=" text-side col-5">Nom de l'article:</p>
+                      <p className=" text-side col-5">Nom de l'article</p>
                       <p className="text-side text-primary col-7">
                         {article.nom}
                       </p>
@@ -293,7 +293,39 @@ export default function ImmobilierForm() {
                   </div>
                   <div className="row mt-4">
                     <div className="d-flex">
-                      <p className=" text-side col-5">Catégorie:</p>
+                      <p className=" text-side col-5">Duree </p>
+                      <p className="text-side text-primary col-7">
+                        {article.duree}
+                      </p>
+                    </div>{" "}
+                  </div>
+                  <div className="row mt-4">
+                    <div className="d-flex">
+                      <p className=" text-side col-5">Adresse</p>
+                      <p className="text-side text-primary col-7">
+                        {article.adresse}
+                      </p>
+                    </div>{" "}
+                  </div>
+                  <div className="row mt-4">
+                    <div className="d-flex">
+                      <p className=" text-side col-5">Superficie</p>
+                      <p className="text-side text-primary col-7">
+                        {article.superficie}
+                      </p>
+                    </div>{" "}
+                  </div>
+                  <div className="row mt-4">
+                    <div className="d-flex">
+                      <p className=" text-side col-5">Nature</p>
+                      <p className="text-side text-primary col-7">
+                        {article.nature}
+                      </p>
+                    </div>{" "}
+                  </div>
+                  <div className="row mt-4">
+                    <div className="d-flex">
+                      <p className=" text-side col-5">categorie</p>
                       <p className="text-side  text-primary col-7">
                         {article.type}
                       </p>
@@ -301,15 +333,15 @@ export default function ImmobilierForm() {
                   </div>
                   <div className="row mt-4">
                     <div className="d-flex">
-                      <p className=" text-side col-5">Durée:</p>
+                      <p className=" text-side col-5">Quantite</p>
                       <p className=" text-side text-primary col-7">
-                        {article.duree}
+                        {article.quantite}
                       </p>
                     </div>{" "}
                   </div>
                   <div className="row mt-4">
                     <div className="d-flex">
-                      <p className=" text-side col-5">Prix :</p>
+                      <p className=" text-side col-5"> Prix:</p>
                       <p className=" text-side text-primary col-7">
                         {article.prix}
                       </p>
@@ -330,8 +362,11 @@ export default function ImmobilierForm() {
                   </div>
                   <div className="row mt-4">
                     <div className="d-flex">
-                      <p className=" text-side col-5">description :</p>
-                      <p className=" text-side text-primary col-7">
+                      <p className=" text-side col-5"> Description:</p>
+                      <p
+                        className=" text-side text-primary col-7"
+                        style={{ wordWrap: "break-word" }}
+                      >
                         {article.description}
                       </p>
                     </div>{" "}

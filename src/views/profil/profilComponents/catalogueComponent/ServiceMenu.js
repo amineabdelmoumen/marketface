@@ -57,7 +57,7 @@ export default function ServiceMenu() {
       saveImages(uploadForm, token).then((res) => {
         const response = res.data;
         uploadForm = new FormData();
-        data["images"].push(response.paths);
+        response.paths.map((path) => data["images"].unshift(path));
         console.log(data["images"]);
         setArticle(data);
       });
@@ -74,7 +74,7 @@ export default function ServiceMenu() {
     saveDocuments(uploadForm, token).then((res) => {
       const response = res.data;
       uploadForm = new FormData();
-      data["documents"].push(response.paths);
+      response.paths.map((path) => data["documents"].unshift(path));
       console.log(data["documents"]);
       setArticle(data);
     });
@@ -208,15 +208,15 @@ export default function ServiceMenu() {
               Join des documents:
             </label>
             <div className="col-12 col-sm-5 col-md-8">
-              <label htmlFor="logo" className="text-center upload">
+              <label htmlFor="documents" className="text-center upload">
                 Choisir un fichier
                 <input
                   type="file"
-                  id="logo"
-                  name="logo"
-                  accept="image/*"
+                  id="documents"
+                  name="documents[]"
                   className="d-none"
-                  onChange={(e) => handlePhotosUpload(e)}
+                  multiple
+                  onChange={(e) => handleDocumentUpload(e)}
                 />
               </label>
             </div>
@@ -226,15 +226,16 @@ export default function ServiceMenu() {
               Join des photos de l'article:
             </label>
             <div className="col-12 col-sm-5 col-md-8">
-              <label htmlFor="logo" className="text-center upload">
+              <label htmlFor="photos" className="text-center upload">
                 Choisir un fichier
                 <input
                   type="file"
-                  id="logo"
-                  name="logo"
+                  id="photos"
+                  name="photos[]"
                   accept="image/*"
                   className="d-none"
-                  onChange={(e) => handleDocumentUpload(e)}
+                  multiple
+                  onChange={(e) => handlePhotosUpload(e)}
                 />
               </label>
             </div>
