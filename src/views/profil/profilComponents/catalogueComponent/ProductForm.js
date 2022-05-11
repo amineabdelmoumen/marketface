@@ -103,7 +103,7 @@ export default function ProductForm() {
       ? errors.categorie[0]
       : "";
 
-    descriptionRef.current.innerText = description.errors
+    descriptionRef.current.innerText = errors.description
       ? errors.description[0]
       : "";
   };
