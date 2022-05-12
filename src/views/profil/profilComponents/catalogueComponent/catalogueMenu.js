@@ -37,7 +37,7 @@ export default function CatalogueMenu() {
               src={
                 productComponent == 1
                   ? "/imgs/product.svg"
-                  : "imgs/product12.png"
+                  : "imgs/product121.png"
               }
               alt=""
             />
@@ -53,7 +53,15 @@ export default function CatalogueMenu() {
                 : "d-flex justify-content-center btn  btn-outline-primary rounded-pill py-1 bg-white text-primary"
             }
           >
-            <img style={{ width: "25px" }} src="/imgs/service.svg" alt="" />
+            <img
+              style={{ width: "25px" }}
+              src={
+                productComponent == 2
+                  ? "/imgs/service12.png"
+                  : "imgs/service.svg"
+              }
+              alt=""
+            />
             <span className="catalogue-text">Service</span>
           </div>
         </div>
