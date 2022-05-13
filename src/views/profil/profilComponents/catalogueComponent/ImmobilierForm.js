@@ -3,7 +3,12 @@ import { useSelector, useDispatch } from "react-redux";
 import "./styles.scss";
 import categories from "../../../../lib/constants/categories";
 import { setArticle, setArticles } from "../../../../store/profileSlice";
-import { saveArticle, saveDocuments, saveImages } from "../../../../lib/crud";
+import {
+  saveArticle,
+  saveDocs,
+  saveDocuments,
+  saveImages,
+} from "../../../../lib/crud";
 let uploadForm = new FormData();
 export default function ImmobilierForm() {
   const [index, setIndex] = useState(0);
@@ -11,6 +16,10 @@ export default function ImmobilierForm() {
   const nomRef = useRef();
   const descriptionRef = useRef();
   const prixRef = useRef();
+  const adresseRef = useRef();
+  const natureRef = useRef();
+  const superficieRef = useRef();
+  const dureeRef = useRef();
   const quantiteRef = useRef();
   const categorieRef = useRef();
   const identite = useSelector((state) => state.profile.identite);
@@ -65,11 +74,12 @@ export default function ImmobilierForm() {
     for (let i = 0; i < files.length; i++) {
       uploadForm.append(`documents[${i}]`, files[i]);
     }
-    saveDocuments(uploadForm, token).then((res) => {
+    saveDocs(uploadForm, token).then((res) => {
       const response = res.data;
       console.log("response.paths", response.paths);
       console.log("data['documents']", data["documents"]);
       uploadForm = new FormData();
+
       response.paths.map((path) => data["documents"].unshift(path));
       console.log(data["documents"]);
 
@@ -84,9 +94,7 @@ export default function ImmobilierForm() {
     prixRef.current.innerText = errors.prix ? errors.prix[0] : "";
     quantiteRef.current.innerText = errors.quantite ? errors.quantite[0] : "";
 
-    categorieRef.current.innerText = errors.categorie
-      ? errors.categorie[0]
-      : "";
+    categorieRef.current.innerText = errors.type ? errors.type[0] : "";
   };
 
   const onSubmit = () => {
@@ -137,9 +145,14 @@ export default function ImmobilierForm() {
                 type="text"
                 id="titre"
                 name="nom"
-                onChange={(e) => handleInputChange("duree_service", e)}
+                onChange={(e) => handleInputChange("duree", e)}
               />
             </div>
+            <small
+              ref={dureeRef}
+              className="text-danger ms-2 d-block"
+              style={{ "font-size": "10px" }}
+            ></small>
           </div>
           <div className="row form-boxes mt-1 mb-1">
             <label className="col-12 col-sm-5 col-md-3 text">Adresse:</label>
@@ -151,6 +164,27 @@ export default function ImmobilierForm() {
                 onChange={(e) => handleInputChange("adresse", e)}
               />
             </div>
+            <small
+              ref={adresseRef}
+              className="text-danger ms-2 d-block"
+              style={{ "font-size": "10px" }}
+            ></small>
+          </div>
+          <div className="row  form-boxes mt-2">
+            <label className="col-12 col-sm-5 col-md-3 text">Quantite:</label>
+            <div className="col-12 col-sm-5 col-md-9">
+              <input
+                type="text"
+                id="titre"
+                name="nom"
+                onChange={(e) => handleInputChange("quantite", e)}
+              />
+            </div>
+            <small
+              ref={quantiteRef}
+              className="text-danger ms-2 d-block"
+              style={{ "font-size": "10px" }}
+            ></small>
           </div>
           <div className="row  form-boxes mt-2">
             <label className="col-12 col-sm-5 col-md-3 text">Superficie:</label>
@@ -162,6 +196,11 @@ export default function ImmobilierForm() {
                 onChange={(e) => handleInputChange("superficie", e)}
               />
             </div>
+            <small
+              ref={superficieRef}
+              className="text-danger ms-2 d-block"
+              style={{ "font-size": "10px" }}
+            ></small>
           </div>
           <div className="row form-boxes mt-1">
             <label className="col-12 col-sm-5 col-md-3 text">Type:</label>
@@ -176,6 +215,11 @@ export default function ImmobilierForm() {
                 })}
               </select>
             </div>
+            <small
+              ref={categorieRef}
+              className="text-danger ms-2 d-block"
+              style={{ "font-size": "10px" }}
+            ></small>
           </div>
 
           <div className="row  form-boxes mt-1">
@@ -190,6 +234,11 @@ export default function ImmobilierForm() {
                 onChange={(e) => handleInputChange("prix", e)}
               />
             </div>
+            <small
+              ref={prixRef}
+              className="text-danger ms-2 d-block"
+              style={{ "font-size": "10px" }}
+            ></small>
           </div>
           <div className=" row mt-1 form-boxes ">
             <label htmlFor="" className="col-12 col-sm-5 col-md-3 text">
@@ -203,6 +252,11 @@ export default function ImmobilierForm() {
                 onChange={(e) => handleInputChange("nature", e)}
               />
             </div>
+            <small
+              ref={natureRef}
+              className="text-danger ms-2 d-block"
+              style={{ "font-size": "10px" }}
+            ></small>
           </div>
 
           <div className="row mt-3  pb-3 form-boxes">
@@ -254,6 +308,11 @@ export default function ImmobilierForm() {
                 onChange={(e) => handleInputChange("description", e)}
               ></textarea>
             </div>
+            <small
+              ref={descriptionRef}
+              className="text-danger ms-2 d-block"
+              style={{ "font-size": "10px" }}
+            ></small>
           </div>
           <div className="d-flex justify-content-end ">
             <button
@@ -267,17 +326,19 @@ export default function ImmobilierForm() {
 
         <div className="col-12  col-lg-5">
           <div className="row">
-            {article?.images.map((image) => {
-              return (
-                <div className="col-5 mx-2 ">
-                  <img
-                    src={`${process.env.REACT_APP_HOST_URL}/${image.path}`}
-                    width={100}
-                    alt=""
-                  />
-                </div>
-              );
-            })}
+            {article.images && article.images.length
+              ? article?.images.map((image) => {
+                  return (
+                    <div className="col-5 mx-2 ">
+                      <img
+                        src={`${process.env.REACT_APP_HOST_URL}/${image.path}`}
+                        width={100}
+                        alt=""
+                      />
+                    </div>
+                  );
+                })
+              : ""}
           </div>
           {index == 1 ? (
             <div className=" article mt-5 mb-4">
@@ -307,6 +368,7 @@ export default function ImmobilierForm() {
                       </p>
                     </div>{" "}
                   </div>
+
                   <div className="row mt-4">
                     <div className="d-flex">
                       <p className=" text-side col-5">Superficie</p>

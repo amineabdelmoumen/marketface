@@ -4,7 +4,12 @@ import "./styles.scss";
 import categories from "../../../../lib/constants/categories";
 import services from "../../../../lib/constants/services";
 import { setArticle, setArticles } from "../../../../store/profileSlice";
-import { saveArticle, saveDocuments, saveImages } from "../../../../lib/crud";
+import {
+  saveArticle,
+  saveDocs,
+  saveDocuments,
+  saveImages,
+} from "../../../../lib/crud";
 let uploadForm = new FormData();
 
 export default function ServiceMenu() {
@@ -71,7 +76,7 @@ export default function ServiceMenu() {
     for (let i = 0; i < files.length; i++) {
       uploadForm.append(`documents[${i}]`, files[i]);
     }
-    saveDocuments(uploadForm, token).then((res) => {
+    saveDocs(uploadForm, token).then((res) => {
       const response = res.data;
       uploadForm = new FormData();
       response.paths.map((path) => data["documents"].unshift(path));
@@ -81,11 +86,11 @@ export default function ServiceMenu() {
   };
 
   const showErrors = (errors) => {
-    nomRef.current.innerText = errors.nom ? errors.nom[0] : "";
+    nomRef.current.innerText = errors.nom ? errors?.nom[0] : "";
 
-    prixRef.current.innerText = errors.prix ? errors.prix[0] : "";
-    quantiteRef.current.innerText = errors.quantite ? errors.quantite[0] : "";
-    typeRef.current.innerText = errors.type ? errors.type[0] : "";
+    prixRef.current.innerText = errors.prix ? errors?.prix[0] : "";
+    quantiteRef.current.innerText = errors.quantite ? errors?.quantite[0] : "";
+    typeRef.current.innerText = errors.type ? errors?.type[0] : "";
   };
 
   const onSubmit = () => {
@@ -270,17 +275,19 @@ export default function ServiceMenu() {
 
         <div className="col-12 col-md-5 col-lg-5">
           <div className="row">
-            {article?.images.map((image) => {
-              return (
-                <div className="col-md-6">
-                  <img
-                    src={`${process.env.REACT_APP_HOST_URL}/${image.path}`}
-                    width={100}
-                    alt=""
-                  />
-                </div>
-              );
-            })}
+            {article.images && article.images.length
+              ? article?.images.map((image) => {
+                  return (
+                    <div className="col-md-6">
+                      <img
+                        src={`${process.env.REACT_APP_HOST_URL}/${image.path}`}
+                        width={100}
+                        alt=""
+                      />
+                    </div>
+                  );
+                })
+              : ""}
           </div>
           {index == 1 ? (
             <div className="article mt-5 mb-3">

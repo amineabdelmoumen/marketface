@@ -48,7 +48,7 @@ export default function FinancialInfo() {
       <div className="identite-form">
         <div className="col-md-8 offset-md-3 py-5 ">
           <div className="row ">
-            <div className="col-md-6 mt-2">
+            <div className="col-md-3 mt-2">
               <div>
                 <p style={style1}>capital:</p>
               </div>
@@ -68,8 +68,8 @@ export default function FinancialInfo() {
               </div>
             </div>
           </div>
-          <div className="row mt-5">
-            <div className="col-md-6 mt-2">
+          <div className="row mt-4">
+            <div className="col-md-3 mt-2">
               <div>
                 <p style={style1}>Chifre d'affaire :</p>
               </div>
@@ -91,20 +91,20 @@ export default function FinancialInfo() {
               </div>
             </div>
           </div>
-          <div className="row mt-5">
-            <div className="col-md-6 mt-2">
+          <div className="row mt-4">
+            <div className="col-md-3 mt-2">
               <div>
                 <p style={style1}>Bilan:</p>
               </div>
             </div>
-            <div className="col-md-6 mt-2">
-              <div>
+            <div className="col-md-6 mt-2 form-boxes">
+              <div className="mx-2">
                 <p>--------</p>
               </div>
             </div>
           </div>
-          <div className="row mt-5">
-            <div className="col-md-6 mt-2">
+          <div className="row mt-4">
+            <div className="col-md-3 mt-2">
               <div>
                 <p style={style1}>cote en bourse :</p>
               </div>

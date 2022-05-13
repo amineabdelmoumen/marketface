@@ -47,7 +47,7 @@ export default function ContactInfo() {
     <div className="row py-5 px-1 mt-5">
       <div className="col-md-8 offset-md-3 py-4 identite-form">
         <div className="row form-boxes">
-          <div className="col-md-6 mt-2 ">
+          <div className="col-md-5 mt-2 ">
             <div>
               <p style={style1}>Numéro du Téléphone :</p>
             </div>
@@ -63,8 +63,8 @@ export default function ContactInfo() {
             </div>
           </div>
         </div>
-        <div className="row mt-5 form-boxes">
-          <div className="col-md-6 mt-2">
+        <div className="row mt-3 form-boxes">
+          <div className="col-md-3 mt-2">
             <div>
               <p style={style1}>Site Web :</p>
             </div>
@@ -75,8 +75,8 @@ export default function ContactInfo() {
             </div>
           </div>
         </div>
-        <div className="row mt-5 form-boxes">
-          <div className="col-md-4 mt-2">
+        <div className="row mt-3 form-boxes">
+          <div className="col-md-3 mt-2">
             <div>
               <p style={style1}>Adresse:</p>
             </div>
