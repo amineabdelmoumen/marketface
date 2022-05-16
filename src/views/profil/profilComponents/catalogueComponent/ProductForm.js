@@ -26,7 +26,7 @@ export default function ProductForm({ setArticleType }) {
     images: [],
     documents: [],
   });
-  console.log(articles);
+
   const style = {
     padding: "22px",
     marginBottom: "20px",
@@ -44,7 +44,7 @@ export default function ProductForm({ setArticleType }) {
     console.log(data);
     console.log(article);
   };
-  let images = [];
+  let data = {};
   const handlePhotosUpload = (e) => {
     setIndex(1);
     const token = localStorage.getItem("token");
@@ -85,10 +85,16 @@ export default function ProductForm({ setArticleType }) {
   const onSubmit = () => {
     const token = localStorage.getItem("token");
     saveArticle(article, token)
-      .then((res) => res.data)
-      .then((data) => setArticle(data))
+      .then((data) => {
+        console.log("data", article);
+        let list = [...articles, article];
+        console.log("list is ", list);
+        dispatch(setArticles(list));
+        console.log("dispatch is done");
+      })
+
       .catch((err) => {
-        let errors = err.response.data.errors;
+        let errors = err.response?.data.errors;
         showErrors(errors);
       });
   };
@@ -96,14 +102,12 @@ export default function ProductForm({ setArticleType }) {
     nomRef.current.innerText = errors?.nom ? errors?.nom[0] : "";
 
     prixRef.current.innerText = errors?.prix ? errors.prix[0] : "";
-    quantiteRef.current.innerText = errors.quantite ? errors.quantite[0] : "";
+    quantiteRef.current.innerText = errors?.quantite ? errors?.quantite[0] : "";
 
-    categorieRef.current.innerText = errors.categorie
-      ? errors.categorie[0]
-      : "";
+    categorieRef.current.innerText = errors?.type ? errors?.type[0] : "";
 
-    descriptionRef.current.innerText = errors.description
-      ? errors.description[0]
+    descriptionRef.current.innerText = errors?.description
+      ? errors?.description[0]
       : "";
   };
   return (
@@ -299,7 +303,7 @@ export default function ProductForm({ setArticleType }) {
                     <div className="d-flex">
                       <p className=" text-side col-5">categorie</p>
                       <p className="text-side  text-primary col-7">
-                        {article.type}
+                        {article?.type}
                       </p>
                     </div>{" "}
                   </div>
@@ -307,7 +311,7 @@ export default function ProductForm({ setArticleType }) {
                     <div className="d-flex">
                       <p className=" text-side col-5">Quantite</p>
                       <p className=" text-side text-primary col-7">
-                        {article.quantite}
+                        {article?.quantite}
                       </p>
                     </div>{" "}
                   </div>

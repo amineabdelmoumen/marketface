@@ -65,7 +65,7 @@ export default function ImmobilierList({ setArticleType, articleImmobilier }) {
                     </div>
                   );
                 } else {
-                  return <div>hdgkfvf</div>;
+                  return <div></div>;
                 }
               })
             : ""}

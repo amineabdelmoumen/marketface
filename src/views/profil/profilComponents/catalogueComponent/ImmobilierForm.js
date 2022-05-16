@@ -116,7 +116,7 @@ export default function ImmobilierForm({ setArticleType }) {
     const token = localStorage.getItem("token");
     saveArticle(article, token)
       .then((res) => res.data)
-      .then((data) => setArticle(data))
+      .then((data) => dispatch(setArticle(data)))
       .catch((err) => {
         let errors = err.response.data.errors;
         showErrors(errors);

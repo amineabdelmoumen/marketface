@@ -86,7 +86,7 @@ export default function About() {
           id="textarea"
           className="text"
           value={
-            referenceAbout["description"] != null
+            referenceAbout && referenceAbout["description"] != null
               ? referenceAbout["description"]
               : ""
           }
