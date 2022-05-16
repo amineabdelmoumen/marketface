@@ -275,7 +275,7 @@ export default function ProductForm({ setArticleType }) {
                     <div className="col-6">
                       <img
                         src={`${process.env.REACT_APP_HOST_URL}/${photo.path}`}
-                        width={100}
+                        height={100}
                         alt=""
                       />
                     </div>

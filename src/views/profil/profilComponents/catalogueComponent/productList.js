@@ -6,6 +6,7 @@ export default function ProductList({ setArticleType, articleProduit }) {
     backgroundColor: "white",
     resize: "none",
     textTransform: "none",
+    wordWrap: "break-word",
   };
 
   return (

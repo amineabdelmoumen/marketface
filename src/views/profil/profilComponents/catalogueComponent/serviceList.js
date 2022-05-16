@@ -27,7 +27,7 @@ export default function ServiceList({ setArticleType, articleService }) {
                       <div className="d-flex justify-content-center mb-2">
                         <h4 className="article-nom">{article.nom}</h4>
                       </div>
-                      <div className="card-article">
+                      <div className="card-article mb-4">
                         <figure>
                           <img
                             className="card-img"
@@ -63,7 +63,7 @@ export default function ServiceList({ setArticleType, articleService }) {
                     </div>
                   );
                 } else {
-                  return <div>hdgkfvf</div>;
+                  return <div></div>;
                 }
               })
             : ""}
