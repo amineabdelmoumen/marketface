@@ -12,7 +12,7 @@ import {
 } from "../../../../lib/crud";
 let uploadForm = new FormData();
 
-export default function ServiceMenu() {
+export default function ServiceMenu({ setArticleType }) {
   const nomRef = useRef();
   const [index, setIndex] = useState(0);
   const dureeRef = useRef();
@@ -25,7 +25,7 @@ export default function ServiceMenu() {
   const articles = useSelector((state) => state.profile.articles);
   const [article, setArticle] = useState({
     type_article: "service",
-    categorie: "",
+
     images: [],
     documents: [],
   });
@@ -108,6 +108,14 @@ export default function ServiceMenu() {
   };
   return (
     <div className="container-fluid ">
+      <div className="d-flex justify-content-end">
+        <p
+          className="text-primary cursor-pointer mt-4"
+          onClick={() => setArticleType(2, 0)}
+        >
+          tous les articles services
+        </p>
+      </div>
       <div className="title d-flex justify-content-center pt-4">
         <div className="d-flex position-relative">
           <img src="/imgs/service.svg" alt="" style={{ width: "35px" }} />

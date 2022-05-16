@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
+
 import "./styles.scss";
 import categories from "../../../../lib/constants/categories";
 import { setArticle, setArticles } from "../../../../store/profileSlice";
@@ -10,7 +11,7 @@ import {
   saveImages,
 } from "../../../../lib/crud";
 let uploadForm = new FormData();
-export default function ProductForm() {
+export default function ProductForm({ setArticleType }) {
   const dispatch = useDispatch();
   const [index, setIndex] = useState(0);
   const nomRef = useRef();
@@ -57,8 +58,6 @@ export default function ProductForm() {
       const response = res.data;
       uploadForm = new FormData();
       response.paths.map((path) => data["images"].unshift(path));
-
-      console.log("data[images]", data["images"]);
 
       setArticle(data);
     });
@@ -109,6 +108,14 @@ export default function ProductForm() {
   };
   return (
     <div className="container-fluid ">
+      <div className="d-flex justify-content-end">
+        <p
+          className="text-primary cursor-pointer mt-4"
+          onClick={() => setArticleType(1, 0)}
+        >
+          tous les articles produit
+        </p>
+      </div>
       <div className="title d-flex justify-content-center pt-4">
         <div className="d-flex position-relative">
           <img src="/imgs/product12.png" alt="" style={{ width: "35px" }} />

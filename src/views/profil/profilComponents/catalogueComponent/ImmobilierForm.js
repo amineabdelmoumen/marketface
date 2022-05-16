@@ -10,7 +10,7 @@ import {
   saveImages,
 } from "../../../../lib/crud";
 let uploadForm = new FormData();
-export default function ImmobilierForm() {
+export default function ImmobilierForm({ setArticleType }) {
   const [index, setIndex] = useState(0);
   const dispatch = useDispatch();
   const nomRef = useRef();
@@ -25,9 +25,24 @@ export default function ImmobilierForm() {
   const identite = useSelector((state) => state.profile.identite);
   const articles = useSelector((state) => state.profile.articles);
   const types = ["Vente", "Location", "Vente/Location"];
+  const natures = [
+    "",
+    "Terrain agricole",
+    "terrain industriel",
+    "usine",
+    "immeuble",
+    "villa",
+    "lotissement",
+    "terrain de construction",
+    "plateau bureau",
+    "appartement",
+    "magasin",
+    "local industriel",
+    "Ferme",
+  ];
   const [article, setArticle] = useState({
-    type_article: " immobilier",
-    type: "",
+    type_article: "immobilier",
+
     images: [],
     documents: [],
   });
@@ -110,6 +125,14 @@ export default function ImmobilierForm() {
   };
   return (
     <div className="container-fluid ">
+      <div className="d-flex justify-content-end">
+        <p
+          className="text-primary cursor-pointer mt-4"
+          onClick={() => setArticleType(3, 0)}
+        >
+          tous les articles Immobilier
+        </p>
+      </div>
       <div className="title d-flex justify-content-center pt-4">
         <div className="d-flex position-relative">
           <img src="/imgs/house.svg" alt="" style={{ width: "33px" }} />
@@ -245,13 +268,17 @@ export default function ImmobilierForm() {
               Nature:
             </label>
             <div className="col-12 col-sm-5 col-md-9">
-              <input
-                type="text"
-                id="quantite"
-                name="quantite"
+              <select
+                name="nature"
+                id="nature"
                 onChange={(e) => handleInputChange("nature", e)}
-              />
+              >
+                {natures.map((nature) => (
+                  <option value={nature}>{nature}</option>
+                ))}
+              </select>
             </div>
+
             <small
               ref={natureRef}
               className="text-danger ms-2 d-block"

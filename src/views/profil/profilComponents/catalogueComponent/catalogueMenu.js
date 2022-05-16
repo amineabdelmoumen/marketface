@@ -1,10 +1,17 @@
 import React, { useState } from "react";
+import ArticlesList from "./articlesList";
 import ImmobilierForm from "./ImmobilierForm";
 import ProductForm from "./ProductForm";
 import ServiceMenu from "./ServiceMenu";
 
 export default function CatalogueMenu() {
   const [productComponent, setProductComponent] = useState(1);
+  const [article, setArticle] = useState(0);
+  const setArticleType = (number, article) => {
+    setArticle(article);
+    setProductComponent(number);
+  };
+
   const style1 = {
     marginLeft: "120px",
     marginBottom: "40px",
@@ -82,10 +89,18 @@ export default function CatalogueMenu() {
 
       {
         {
-          1: <ProductForm />,
-          2: <ServiceMenu />,
-          3: <ImmobilierForm />,
-        }[productComponent]
+          0: (
+            <ArticlesList
+              setArticleType={setArticleType}
+              productComponent={productComponent}
+            />
+          ),
+          1: {
+            1: <ProductForm setArticleType={setArticleType} />,
+            2: <ServiceMenu setArticleType={setArticleType} />,
+            3: <ImmobilierForm setArticleType={setArticleType} />,
+          }[productComponent],
+        }[article]
       }
     </div>
   );
