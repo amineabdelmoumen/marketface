@@ -15,6 +15,7 @@ import {
 let uploadForm = new FormData();
 
 export default function ServiceMenu({ setArticleType }) {
+  const toastId = useRef(null);
   const nomRef = useRef();
   const [index, setIndex] = useState(0);
   const dureeRef = useRef();
@@ -40,13 +41,6 @@ export default function ServiceMenu({ setArticleType }) {
 
   const validate = (element) => {
     return element !== "";
-  };
-  const renderSubmit = () => {
-    toast.success("Article Service a été ajouté avec succés", {
-      position: toast.POSITION.TOP_CENTER,
-      autoClose: 1500,
-    });
-    console.log("toast was executed succesfully");
   };
 
   const handleInputChange = (field, e) => {
@@ -101,19 +95,32 @@ export default function ServiceMenu({ setArticleType }) {
     quantiteRef.current.innerText = errors.quantite ? errors?.quantite[0] : "";
     typeRef.current.innerText = errors.type ? errors?.type[0] : "";
   };
+  const toastPending = () =>
+    (toastId.current = toast("L'ajout de l'article est en cours ......", {
+      autoClose: false,
+      type: toast.TYPE.INFO,
+      position: toast.POSITION.TOP_CENTER,
+    }));
+  const toastSuccess = () =>
+    (toastId.current = toast.update(toastId.current, {
+      render: "Article Produit a été ajouté  avec succés",
+      autoClose: 1500,
+      type: toast.TYPE.SUCCESS,
+      position: toast.POSITION.TOP_CENTER,
+    }));
 
   const onSubmit = () => {
     const token = localStorage.getItem("token");
-
+    toastPending();
     saveArticle(article, token)
       .then((res) => res.data)
       .then((data) => {
+        toastSuccess();
         let data2 = { ...data, images: [article.images[0]] };
         console.log("data", data2);
         let list = [...articles, data2];
         console.log("list is ", list);
         dispatch(setArticles(list));
-        renderSubmit();
       })
       .catch((err) => {
         let errors = err.response?.data.errors;

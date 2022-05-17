@@ -15,6 +15,7 @@ import {
 } from "../../../../lib/crud";
 let uploadForm = new FormData();
 export default function ProductForm({ setArticleType }) {
+  const toastId = useRef(null);
   const dispatch = useDispatch();
   const [index, setIndex] = useState(0);
   const nomRef = useRef();
@@ -85,25 +86,38 @@ export default function ProductForm({ setArticleType }) {
     });
   };
 
-  const renderSubmit = () => {
-    toast.success("Article Produit a été ajouté  avec succés", {
+  /*  toast.success("Article Produit a été ajouté  avec succés", {
       position: toast.POSITION.TOP_CENTER,
       autoClose: 1500,
     });
-    console.log("toast was executed succesfully");
-  };
+    console.log("toast was executed succesfully"); */
+
+  const toastPending = () =>
+    (toastId.current = toast("L'ajout de l'article est en cours ......", {
+      autoClose: false,
+      type: toast.TYPE.INFO,
+      position: toast.POSITION.TOP_CENTER,
+    }));
+  const toastSuccess = () =>
+    (toastId.current = toast.update(toastId.current, {
+      render: "Article Produit a été ajouté  avec succés",
+      autoClose: 1500,
+      type: toast.TYPE.SUCCESS,
+      position: toast.POSITION.TOP_CENTER,
+    }));
 
   const onSubmit = () => {
     const token = localStorage.getItem("token");
+    toastPending();
     saveArticle(article, token)
       .then((res) => res.data)
       .then((data) => {
+        toastSuccess();
         let data2 = { ...data, images: [article.images[0]] };
         console.log("data", data2);
         let list = [...articles, data2];
         console.log("list is ", list);
         dispatch(setArticles(list));
-        renderSubmit();
       })
 
       .catch((err) => {
