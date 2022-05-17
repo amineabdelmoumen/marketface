@@ -4,7 +4,6 @@ export default function ProductList({ setArticleType }) {
   const [articleProduct, setArticleProduct] = useState([]);
   const articles = useSelector((state) => state.profile.articles);
 
-  console.log("articles in product list are", articles);
   const styleText = {
     border: "none",
     backgroundColor: "white",
@@ -15,14 +14,13 @@ export default function ProductList({ setArticleType }) {
   };
 
   useLayoutEffect(() => {
-    console.log("articles are in product list ", articles);
     const articleProd = articles.filter(
       (article) => article.type_article == "produit"
     );
 
     setArticleProduct(articleProd);
   }, [articles]);
-  console.log("articleProduct", articleProduct);
+
   return (
     <div>
       <div className="d-flex justify-content-end m-3">

@@ -115,7 +115,7 @@ export default function ImmobilierForm({ setArticleType }) {
     categorieRef.current.innerText = errors.type ? errors.type[0] : "";
   };
   const renderSubmit = () => {
-    toast.success("Article Immobilier a ete ajouter avec succes", {
+    toast.success("Article Immobilier a été ajouté avec succés", {
       position: toast.POSITION.TOP_CENTER,
       autoClose: 1500,
     });

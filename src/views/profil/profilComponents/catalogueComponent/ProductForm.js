@@ -86,7 +86,7 @@ export default function ProductForm({ setArticleType }) {
   };
 
   const renderSubmit = () => {
-    toast.success("Article Produit a été ajouter avec succés", {
+    toast.success("Article Produit a été ajouté  avec succés", {
       position: toast.POSITION.TOP_CENTER,
       autoClose: 1500,
     });
