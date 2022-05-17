@@ -4,6 +4,8 @@ import "./styles.scss";
 import categories from "../../../../lib/constants/categories";
 import services from "../../../../lib/constants/services";
 import { setArticle, setArticles } from "../../../../store/profileSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   saveArticle,
   saveDocs,
@@ -38,6 +40,13 @@ export default function ServiceMenu({ setArticleType }) {
 
   const validate = (element) => {
     return element !== "";
+  };
+  const renderSubmit = () => {
+    toast.success("Article Service a été ajouté avec succés", {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 1500,
+    });
+    console.log("toast was executed succesfully");
   };
 
   const handleInputChange = (field, e) => {
@@ -98,9 +107,16 @@ export default function ServiceMenu({ setArticleType }) {
 
     saveArticle(article, token)
       .then((res) => res.data)
-      .then((data) => dispatch(setArticle(data)))
+      .then((data) => {
+        let data2 = { ...data, images: [article.images[0]] };
+        console.log("data", data2);
+        let list = [...articles, data2];
+        console.log("list is ", list);
+        dispatch(setArticles(list));
+        renderSubmit();
+      })
       .catch((err) => {
-        let errors = err.response.data.errors;
+        let errors = err.response?.data.errors;
         showErrors(errors);
       });
 
@@ -279,6 +295,8 @@ export default function ServiceMenu({ setArticleType }) {
               Enregistrer
             </button>
           </div>
+
+          <ToastContainer />
         </div>
 
         <div className="col-12 col-md-5 col-lg-5">

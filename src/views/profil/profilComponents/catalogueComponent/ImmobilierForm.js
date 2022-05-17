@@ -3,6 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import "./styles.scss";
 import categories from "../../../../lib/constants/categories";
 import { setArticle, setArticles } from "../../../../store/profileSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import {
   saveArticle,
   saveDocs,
@@ -111,14 +114,27 @@ export default function ImmobilierForm({ setArticleType }) {
 
     categorieRef.current.innerText = errors.type ? errors.type[0] : "";
   };
-
+  const renderSubmit = () => {
+    toast.success("Article Immobilier a ete ajouter avec succes", {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 1500,
+    });
+    console.log("toast was executed succesfully");
+  };
   const onSubmit = () => {
     const token = localStorage.getItem("token");
     saveArticle(article, token)
       .then((res) => res.data)
-      .then((data) => dispatch(setArticle(data)))
+      .then((data) => {
+        let data2 = { ...data, images: [article.images[0]] };
+        console.log("data", data2);
+        let list = [...articles, data2];
+        console.log("list is ", list);
+        dispatch(setArticles(list));
+        renderSubmit();
+      })
       .catch((err) => {
-        let errors = err.response.data.errors;
+        let errors = err.response?.data.errors;
         showErrors(errors);
       });
     console.log("article saved");
@@ -349,6 +365,7 @@ export default function ImmobilierForm({ setArticleType }) {
               Enregistrer
             </button>
           </div>
+          <ToastContainer />
         </div>
 
         <div className="col-12  col-lg-5">

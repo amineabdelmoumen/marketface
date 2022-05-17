@@ -43,7 +43,8 @@ const profileSlice = createSlice({
     articles: [],
     article: {
       type_article: "produit",
-
+      images: [],
+      documents: [],
       nom: "",
       description: "",
       prix: "",

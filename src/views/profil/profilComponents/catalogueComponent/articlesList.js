@@ -15,18 +15,8 @@ export default function ArticlesList({ setArticleType, productComponent }) {
       {
         {
           1: <ProductList setArticleType={setArticleType} />,
-          2: (
-            <ServiceList
-              setArticleType={setArticleType}
-              articleService={articleService}
-            />
-          ),
-          3: (
-            <ImmobilierList
-              setArticleType={setArticleType}
-              articleImmobiler={articleImmobiler}
-            />
-          ),
+          2: <ServiceList setArticleType={setArticleType} />,
+          3: <ImmobilierList setArticleType={setArticleType} />,
         }[productComponent]
       }
     </div>

@@ -4,6 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import "./styles.scss";
 import categories from "../../../../lib/constants/categories";
 import { setArticle, setArticles } from "../../../../store/profileSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import {
   saveArticle,
   saveDocs,
@@ -82,15 +85,25 @@ export default function ProductForm({ setArticleType }) {
     });
   };
 
+  const renderSubmit = () => {
+    toast.success("Article Produit a été ajouter avec succés", {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 1500,
+    });
+    console.log("toast was executed succesfully");
+  };
+
   const onSubmit = () => {
     const token = localStorage.getItem("token");
     saveArticle(article, token)
+      .then((res) => res.data)
       .then((data) => {
-        console.log("data", article);
-        let list = [...articles, article];
+        let data2 = { ...data, images: [article.images[0]] };
+        console.log("data", data2);
+        let list = [...articles, data2];
         console.log("list is ", list);
         dispatch(setArticles(list));
-        console.log("dispatch is done");
+        renderSubmit();
       })
 
       .catch((err) => {
@@ -167,7 +180,7 @@ export default function ProductForm({ setArticleType }) {
           </div>
           <div className="row mt-1 form-boxes">
             <label htmlFor="" className="col-12 col-sm-5 col-md-3 text">
-              quantite:
+              quantité:
             </label>
             <div className="col-12 col-sm-5 col-md-9">
               <input
@@ -269,6 +282,7 @@ export default function ProductForm({ setArticleType }) {
               Enregistrer
             </button>
           </div>
+          <ToastContainer />
         </div>
 
         <div className="col-12  col-lg-5">
