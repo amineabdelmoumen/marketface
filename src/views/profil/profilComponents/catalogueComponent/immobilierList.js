@@ -1,17 +1,25 @@
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 export default function ImmobilierList({ setArticleType }) {
   const [articleImmobilier, setArticleImmobilier] = useState([]);
-  const articles = useSelector((state) => state.profile.articles);
+
+  const unsortedArticles = useSelector((state) => state.profile.articles);
+  const [articles, setArticles] = useState([]);
   const styleText = {
     border: "none",
     backgroundColor: "white",
     resize: "none",
     textTransform: "none",
   };
+  useEffect(() => {
+    const sortedArticles = unsortedArticles
+      .slice()
+      .sort((a, b) => Date.parse(b.updated_at) - Date.parse(a.updated_at));
+    setArticles(sortedArticles);
+  }, []);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     console.log("articles are in product list ", articles);
     const articleImmo = articles.filter(
       (article) => article.type_article == "immobilier"
@@ -54,7 +62,7 @@ export default function ImmobilierList({ setArticleType }) {
                       <div className="d-flex ">
                         <div className="d-flex me-auto mt-2">
                           <p className=" type-article me-2">{article.type}</p>
-                          <p className="prix">{article.prix}</p>
+                          <p className="prix">{`${article.prix} Dhs`}</p>
                         </div>
                         <div className="d-flex justify-content-end">
                           <button className="btn pointer btn-success text-white rounded-pill px-3">

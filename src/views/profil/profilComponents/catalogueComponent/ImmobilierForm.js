@@ -28,7 +28,7 @@ export default function ImmobilierForm({ setArticleType }) {
   const categorieRef = useRef();
   const identite = useSelector((state) => state.profile.identite);
   const articles = useSelector((state) => state.profile.articles);
-  const types = ["Vente", "Location", "Vente/Location"];
+  const types = ["", "Vente", "Location", "Vente/Location"];
   const natures = [
     "",
     "Terrain agricole",
@@ -136,33 +136,44 @@ export default function ImmobilierForm({ setArticleType }) {
       type: toast.TYPE.SUCCESS,
       position: toast.POSITION.TOP_CENTER,
     }));
-  const onSubmit = () => {
-    toastPending();
+
+  const toastError = () =>
+    (toastId.current = toast.update(toastId.current, {
+      render: "Echec d'ajout du produit !",
+      autoClose: 1500,
+      type: toast.TYPE.ERROR,
+      position: toast.POSITION.TOP_CENTER,
+    }));
+
+  const onSubmit = async () => {
     const token = localStorage.getItem("token");
-    saveArticle(article, token)
-      .then((res) => res.data)
-      .then((data) => {
-        toastSuccess();
-        let data2 = { ...data, images: [article.images[0]] };
-        console.log("data", data2);
-        let list = [...articles, data2];
-        console.log("list is ", list);
-        dispatch(setArticles(list));
-      })
-      .catch((err) => {
-        let errors = err.response?.data.errors;
-        showErrors(errors);
-      });
-    console.log("article saved");
+
+    try {
+      toastPending();
+      const res = await saveArticle(article, token);
+      toastSuccess();
+      const data = await res.data;
+      let data2 = { ...data, images: [article.images[0]] };
+      console.log("data", data2);
+      let list = [...articles, data2];
+      console.log("list is ", list);
+      dispatch(setArticles(list));
+      setTimeout(() => setArticleType(3, 0), 1500);
+    } catch (err) {
+      let errors = err.response?.data.errors;
+      showErrors(errors);
+      toastError();
+    }
   };
+
   return (
     <div className="container-fluid ">
       <div className="d-flex justify-content-end">
         <p
-          className="text-primary cursor-pointer mt-4"
+          className="display cursor-pointer mt-4"
           onClick={() => setArticleType(3, 0)}
         >
-          tous les articles Immobilier
+          Tous les biens Immobilier
         </p>
       </div>
       <div className="title d-flex justify-content-center pt-4">
@@ -215,7 +226,7 @@ export default function ImmobilierForm({ setArticleType }) {
               <input
                 type="text"
                 id="titre"
-                name="nom"
+                name="adresse"
                 onChange={(e) => handleInputChange("adresse", e)}
               />
             </div>
@@ -226,12 +237,12 @@ export default function ImmobilierForm({ setArticleType }) {
             ></small>
           </div>
           <div className="row  form-boxes mt-2">
-            <label className="col-12 col-sm-5 col-md-3 text">Quantite:</label>
+            <label className="col-12 col-sm-5 col-md-3 text">Quantité:</label>
             <div className="col-12 col-sm-5 col-md-9">
               <input
-                type="text"
+                type="number"
                 id="titre"
-                name="nom"
+                name="quantite"
                 onChange={(e) => handleInputChange("quantite", e)}
               />
             </div>
@@ -265,6 +276,10 @@ export default function ImmobilierForm({ setArticleType }) {
                 id="type"
                 onChange={(e) => handleInputChange("type", e)}
               >
+                <option value="" disabled selected hidden>
+                  {" "}
+                  Seléctionner un type
+                </option>
                 {types.map((type) => {
                   return <option value={type}>{type}</option>;
                 })}
@@ -305,6 +320,10 @@ export default function ImmobilierForm({ setArticleType }) {
                 id="nature"
                 onChange={(e) => handleInputChange("nature", e)}
               >
+                <option value="" disabled selected hidden>
+                  {" "}
+                  Seléctionner une nature
+                </option>
                 {natures.map((nature) => (
                   <option value={nature}>{nature}</option>
                 ))}
@@ -319,10 +338,10 @@ export default function ImmobilierForm({ setArticleType }) {
           </div>
 
           <div className="row mt-3  pb-3 form-boxes">
-            <label htmlFor="photos" className="col-12 col-sm-5 col-md-4 text">
-              Join des documents:
+            <label htmlFor="photos" className="col-12 col-sm-5 col-md-3 text">
+              Documents:
             </label>
-            <div className="col-12 col-sm-5 col-md-8">
+            <div className=" col-12 col-sm-5 col-md-9">
               <label htmlFor="documents" className="text-center upload">
                 Choisir un fichier
                 <input
@@ -337,10 +356,10 @@ export default function ImmobilierForm({ setArticleType }) {
             </div>
           </div>
           <div className="row mt-1  pb-3 form-boxes">
-            <label htmlFor="photos" className="col-12 col-sm-5 col-md-4 text">
-              Join des photos de l'article:
+            <label htmlFor="photos" className="col-12 col-sm-5 col-md-3 text">
+              Photos:
             </label>
-            <div className="col-12 col-sm-5 col-md-8">
+            <div className="col-12 col-sm-5 col-md-9">
               <label htmlFor="photos" className="text-center upload">
                 Choisir un fichier
                 <input
@@ -363,7 +382,7 @@ export default function ImmobilierForm({ setArticleType }) {
               <textarea
                 rows={5}
                 id="titre"
-                name="titre"
+                name="description"
                 onChange={(e) => handleInputChange("description", e)}
               ></textarea>
             </div>
@@ -392,7 +411,7 @@ export default function ImmobilierForm({ setArticleType }) {
                     <div className="col-5 mx-2 ">
                       <img
                         src={`${process.env.REACT_APP_HOST_URL}/${image.path}`}
-                        width={100}
+                        style={{ width: "100%", margin: "20px 30px 20px 30px" }}
                         alt=""
                       />
                     </div>
@@ -465,7 +484,7 @@ export default function ImmobilierForm({ setArticleType }) {
                     <div className="d-flex">
                       <p className=" text-side col-5"> Prix:</p>
                       <p className=" text-side text-primary col-7">
-                        {article.prix}
+                        {article?.prix ? `${article.prix} Dhs` : ""}
                       </p>
                     </div>{" "}
                   </div>

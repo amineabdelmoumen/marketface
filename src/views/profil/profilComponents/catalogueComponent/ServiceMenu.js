@@ -89,11 +89,14 @@ export default function ServiceMenu({ setArticleType }) {
   };
 
   const showErrors = (errors) => {
-    nomRef.current.innerText = errors.nom ? errors?.nom[0] : "";
+    nomRef.current.innerText = errors?.nom ? errors.nom[0] : "";
 
-    prixRef.current.innerText = errors.prix ? errors?.prix[0] : "";
-    quantiteRef.current.innerText = errors.quantite ? errors?.quantite[0] : "";
-    typeRef.current.innerText = errors.type ? errors?.type[0] : "";
+    prixRef.current.innerText = errors?.prix ? errors.prix[0] : "";
+    quantiteRef.current.innerText = errors?.quantite ? errors.quantite[0] : "";
+    typeRef.current.innerText = errors?.type ? errors.type[0] : "";
+    descriptionRef.current.innerText = errors?.description
+      ? errors.description[0]
+      : "";
   };
   const toastPending = () =>
     (toastId.current = toast("L'ajout de l'article est en cours ......", {
@@ -101,42 +104,51 @@ export default function ServiceMenu({ setArticleType }) {
       type: toast.TYPE.INFO,
       position: toast.POSITION.TOP_CENTER,
     }));
-  const toastSuccess = () =>
+  const toastSuccess = async () =>
     (toastId.current = toast.update(toastId.current, {
       render: "Article Produit a été ajouté  avec succés",
       autoClose: 1500,
       type: toast.TYPE.SUCCESS,
       position: toast.POSITION.TOP_CENTER,
     }));
+  const toastError = () =>
+    (toastId.current = toast.update(toastId.current, {
+      render: "Echec d'ajout du produit !",
+      autoClose: 1500,
+      type: toast.TYPE.ERROR,
+      position: toast.POSITION.TOP_CENTER,
+    }));
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     const token = localStorage.getItem("token");
-    toastPending();
-    saveArticle(article, token)
-      .then((res) => res.data)
-      .then((data) => {
-        toastSuccess();
-        let data2 = { ...data, images: [article.images[0]] };
-        console.log("data", data2);
-        let list = [...articles, data2];
-        console.log("list is ", list);
-        dispatch(setArticles(list));
-      })
-      .catch((err) => {
-        let errors = err.response?.data.errors;
-        showErrors(errors);
-      });
 
-    console.log("article saved");
+    try {
+      toastPending();
+      const res = await saveArticle(article, token);
+
+      const data = await res.data;
+      toastSuccess();
+
+      let data2 = { ...data, images: [article.images[0]] };
+      console.log("data", data2);
+      let list = [...articles, data2];
+      console.log("list is ", list);
+      dispatch(setArticles(list));
+      setTimeout(() => setArticleType(2, 0), 1500);
+    } catch (err) {
+      let errors = err.response?.data.errors;
+      showErrors(errors);
+      toastError();
+    }
   };
   return (
     <div className="container-fluid ">
       <div className="d-flex justify-content-end">
         <p
-          className="text-primary cursor-pointer mt-4"
+          className="display cursor-pointer mt-4"
           onClick={() => setArticleType(2, 0)}
         >
-          tous les articles services
+          Tous les services
         </p>
       </div>
       <div className="title d-flex justify-content-center pt-4">
@@ -186,7 +198,7 @@ export default function ServiceMenu({ setArticleType }) {
             </label>
             <div className="col-12  col-sm-5 col-md-9">
               <input
-                type="text"
+                type="number"
                 id="titre"
                 name="duree"
                 onChange={(e) => handleInputChange("prix", e)}
@@ -204,7 +216,7 @@ export default function ServiceMenu({ setArticleType }) {
             </label>
             <div className="col-12 col-sm-5 col-md-9">
               <input
-                type="text"
+                type="number"
                 id="quantite"
                 name="quantite"
                 onChange={(e) => handleInputChange("quantite", e)}
@@ -227,6 +239,10 @@ export default function ServiceMenu({ setArticleType }) {
                 id="type"
                 onChange={(e) => handleInputChange("type", e)}
               >
+                <option value="" disabled selected hidden>
+                  {" "}
+                  Seléctionner un Service
+                </option>
                 {services.map((service) => {
                   return <option value={service}>{service}</option>;
                 })}
@@ -240,10 +256,10 @@ export default function ServiceMenu({ setArticleType }) {
           </div>
 
           <div className="row mt-3  pb-3 form-boxes">
-            <label htmlFor="" className="col-12 col-sm-5 col-md-4 text">
-              Join des documents:
+            <label htmlFor="" className="col-12 col-sm-5  col-md-3 text">
+              Documents:
             </label>
-            <div className="col-12 col-sm-5 col-md-8">
+            <div className="col-12 col-sm-5 col-md-9">
               <label htmlFor="documents" className="text-center upload">
                 Choisir un fichier
                 <input
@@ -258,10 +274,10 @@ export default function ServiceMenu({ setArticleType }) {
             </div>
           </div>
           <div className="row mt-1  pb-3 form-boxes">
-            <label htmlFor="" className="col-12 col-sm-5 col-md-4 text">
-              Join des photos de l'article:
+            <label htmlFor="" className="col-12 col-sm-5 col-md-3 text">
+              Photos:
             </label>
-            <div className="col-12 col-sm-5 col-md-8">
+            <div className="col-12 col-sm-5 col-md-9">
               <label htmlFor="photos" className="text-center upload">
                 Choisir un fichier
                 <input
@@ -314,7 +330,7 @@ export default function ServiceMenu({ setArticleType }) {
                     <div className="col-md-6">
                       <img
                         src={`${process.env.REACT_APP_HOST_URL}/${image.path}`}
-                        width={100}
+                        style={{ width: "100%", margin: "20px 30px 20px 30px" }}
                         alt=""
                       />
                     </div>
@@ -362,7 +378,7 @@ export default function ServiceMenu({ setArticleType }) {
                     <div className="d-flex">
                       <p className=" text-side col-5">Prix :</p>
                       <p className=" text-side text-primary col-7">
-                        {article.prix}
+                        {article?.prix ? `${article.prix} Dhs` : ""}
                       </p>
                     </div>{" "}
                   </div>

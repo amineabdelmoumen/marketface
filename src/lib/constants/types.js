@@ -1,4 +1,5 @@
 const types = [
+  " ",
   "Entreprise",
   "Auto-entrepreneur",
   "Coopérative",
@@ -11,4 +12,4 @@ const types = [
   "Autorité/Gouvernement",
 ];
 
-export default types
+export default types;

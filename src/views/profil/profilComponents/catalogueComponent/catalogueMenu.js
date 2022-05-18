@@ -25,10 +25,20 @@ export default function CatalogueMenu() {
   };
   return (
     <div style={style2}>
-      <div className="row suggest-block">
-        <p className="col-12 col-md-2  mt-4 me-2 suggest">
-          Vous Voulez Ajouter :
-        </p>
+      <div
+        className={
+          article != 0
+            ? "row suggest-block"
+            : "d-flex justify-content-around mb-3"
+        }
+      >
+        {article != 0 ? (
+          <p className="col-12 col-md-2  mt-4 me-2 suggest">
+            Vous Voulez Ajouter :
+          </p>
+        ) : (
+          ""
+        )}
 
         <div className="col-12  col-md-3 mt-3 me-2 ">
           <div

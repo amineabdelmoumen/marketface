@@ -386,9 +386,11 @@ function Identite() {
                 defaultValue={identite.ville}
                 onChange={(e) => handleInputChange("ville", e)}
               >
-                {villes[identite.region].map((ville) => {
-                  return <option value={ville}>{ville}</option>;
-                })}
+                {typeof villes[identite.region] != "undefined"
+                  ? villes[identite.region].map((ville) => {
+                      return <option value={ville}>{ville}</option>;
+                    })
+                  : ""}
               </select>
             </div>
             <small
