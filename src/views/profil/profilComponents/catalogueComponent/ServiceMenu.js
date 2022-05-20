@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./styles.scss";
 import categories from "../../../../lib/constants/categories";
@@ -15,6 +15,7 @@ import {
 let uploadForm = new FormData();
 
 export default function ServiceMenu({ setArticleType }) {
+  const selectedArticle = useSelector((state) => state.article.selectedArticle);
   const toastId = useRef(null);
   const nomRef = useRef();
   const [index, setIndex] = useState(0);
@@ -39,6 +40,39 @@ export default function ServiceMenu({ setArticleType }) {
   };
   const style1 = {};
 
+  useEffect(() => {
+    if (Object.keys(selectedArticle).length != 0) {
+      const images_to_upload = [];
+      const documents_to_upload = [];
+      if (selectedArticle.images && selectedArticle.images.length != 0) {
+        selectedArticle.images.map((image) =>
+          images_to_upload.push({ path: image.path })
+        );
+      }
+      if (selectedArticle.documents && selectedArticle.documents.length != 0) {
+        selectedArticle.documents.map((doc) =>
+          images_to_upload.push({ path: doc.path, nom: doc.nom })
+        );
+      }
+      setIndex(1);
+      setArticle({
+        id: selectedArticle.id,
+        nom: selectedArticle.nom,
+        company_id: selectedArticle.company_id,
+        type_article: selectedArticle.type_article,
+        type: selectedArticle.type,
+        prix: selectedArticle.prix,
+        duree: selectedArticle.duree,
+        quantite: selectedArticle.quantite,
+        description: selectedArticle.description,
+        images: images_to_upload,
+
+        documents: documents_to_upload,
+      });
+    }
+    console.log("id", selectedArticle.id);
+  }, []);
+
   const validate = (element) => {
     return element !== "";
   };
@@ -46,12 +80,9 @@ export default function ServiceMenu({ setArticleType }) {
   const handleInputChange = (field, e) => {
     setIndex(1);
     let data = { ...article };
-    if (validate(e.target.value)) {
-      data[field] = e.target.value;
-      setArticle(data);
-      console.log(data);
-      console.log(article);
-    }
+
+    data[field] = e.target.value;
+    setArticle(data);
   };
   const handlePhotosUpload = (e) => {
     setIndex(1);
@@ -111,6 +142,13 @@ export default function ServiceMenu({ setArticleType }) {
       type: toast.TYPE.SUCCESS,
       position: toast.POSITION.TOP_CENTER,
     }));
+  const toastSuccessUpdate = () =>
+    (toastId.current = toast.update(toastId.current, {
+      render: "Article Produit a été Modifié  avec succés",
+      autoClose: 1500,
+      type: toast.TYPE.SUCCESS,
+      position: toast.POSITION.TOP_CENTER,
+    }));
   const toastError = () =>
     (toastId.current = toast.update(toastId.current, {
       render: "Echec d'ajout du produit !",
@@ -121,18 +159,49 @@ export default function ServiceMenu({ setArticleType }) {
 
   const onSubmit = async () => {
     const token = localStorage.getItem("token");
+    const element = document.getElementById("submitBtn");
+    element.disabled = true;
+    setTimeout(function () {
+      element.disabled = false;
+    }, 5000);
+    toastPending();
+    console.log("+++++article before submit", article);
+    if ("id" in article) {
+      console.log("update exec+_++++++++++++");
+      update(article.id, token);
+    } else {
+      register(token);
+    }
+  };
 
+  const register = async (token) => {
     try {
-      toastPending();
       const res = await saveArticle(article, token);
-
-      const data = await res.data;
       toastSuccess();
+      const data = await res.data;
+      let data2 = { ...data, images: article.images };
 
-      let data2 = { ...data, images: [article.images[0]] };
-      console.log("data", data2);
       let list = [...articles, data2];
-      console.log("list is ", list);
+
+      dispatch(setArticles(list));
+      setTimeout(() => setArticleType(2, 0), 1500);
+    } catch (err) {
+      let errors = err.response?.data.errors;
+      showErrors(errors);
+      toastError();
+    }
+  };
+  const update = async (id, token) => {
+    try {
+      const res = await saveArticle(article, token);
+      toastSuccessUpdate();
+      const data = await res.data;
+      const list = articles.map((arti) =>
+        arti.id === id
+          ? { ...data, images: article.images, documents: article.documents }
+          : arti
+      );
+
       dispatch(setArticles(list));
       setTimeout(() => setArticleType(2, 0), 1500);
     } catch (err) {
@@ -170,6 +239,7 @@ export default function ServiceMenu({ setArticleType }) {
                 type="text"
                 id="titre"
                 name="nom"
+                value={article ? article?.nom : ""}
                 onChange={(e) => handleInputChange("nom", e)}
               />
             </div>
@@ -188,6 +258,7 @@ export default function ServiceMenu({ setArticleType }) {
                 type="text"
                 id="titre"
                 name="duree"
+                value={article ? article?.duree : ""}
                 onChange={(e) => handleInputChange("duree", e)}
               />
             </div>
@@ -200,7 +271,8 @@ export default function ServiceMenu({ setArticleType }) {
               <input
                 type="number"
                 id="titre"
-                name="duree"
+                name="prix"
+                value={article ? article?.prix : ""}
                 onChange={(e) => handleInputChange("prix", e)}
               />
             </div>
@@ -219,6 +291,7 @@ export default function ServiceMenu({ setArticleType }) {
                 type="number"
                 id="quantite"
                 name="quantite"
+                value={article ? article?.quantite : ""}
                 onChange={(e) => handleInputChange("quantite", e)}
               />
             </div>
@@ -237,6 +310,7 @@ export default function ServiceMenu({ setArticleType }) {
                 name="type"
                 type="text"
                 id="type"
+                value={article ? article?.type : ""}
                 onChange={(e) => handleInputChange("type", e)}
               >
                 <option value="" disabled selected hidden>
@@ -301,6 +375,7 @@ export default function ServiceMenu({ setArticleType }) {
                 rows={5}
                 id="titre"
                 name="titre"
+                value={article ? article?.description : ""}
                 onChange={(e) => handleInputChange("description", e)}
               ></textarea>
             </div>
@@ -312,6 +387,7 @@ export default function ServiceMenu({ setArticleType }) {
           </div>
           <div className="d-flex justify-content-end ">
             <button
+              id="submitBtn"
               className="btn pointer btn-success text-white rounded-pill px-5 text-f"
               onClick={() => onSubmit()}
             >

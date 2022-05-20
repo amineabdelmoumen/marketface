@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setSelectedArticle } from "../../../../store/ArticleSlice";
+
 import "./styles.scss";
 export default function ProductList({ setArticleType }) {
   const [articleProduct, setArticleProduct] = useState([]);
-  const unsortedArticles = useSelector((state) => state.profile.articles);
-  const [articles, setArticles] = useState([]);
+  const articles = useSelector((state) => state.profile.articles);
 
+  const dispatch = useDispatch();
+  console.log("articles", articles);
   const styleText = {
     border: "none",
     backgroundColor: "white",
@@ -14,25 +17,30 @@ export default function ProductList({ setArticleType }) {
     wordWrap: "break-word",
     innerWidth: "fit-content",
   };
+  const ModifyArticle = (article) => {
+    console.log("article", article);
+    dispatch(setSelectedArticle(article));
+    console.log("article updated  succesfully");
+    setArticleType(1, 1);
+  };
 
   useEffect(() => {
-    const sortedArticles = unsortedArticles
-      .slice()
-      .sort((a, b) => Date.parse(b.updated_at) - Date.parse(a.updated_at));
-    setArticles(sortedArticles);
-  }, []);
-
-  useEffect(() => {
-    const articleProd = articles.filter(
+    const articlesProd = articles.filter(
       (article) => article.type_article == "produit"
     );
 
-    setArticleProduct(articleProd);
+    const sortedArticles = articlesProd
+      .slice()
+      .sort((a, b) => Date.parse(b.updated_at) - Date.parse(a.updated_at));
+    setArticleProduct(sortedArticles);
   }, [articles]);
 
   return (
     <div>
-      <div className="d-flex justify-content-end m-3">
+      <div
+        className="d-flex justify-content-end"
+        style={{ marginTop: "40px", marginRight: "30px" }}
+      >
         <button
           className="add-btn btn pointer btn-success text-white rounded-pill px-3"
           onClick={() => setArticleType(1, 1)}
@@ -41,7 +49,10 @@ export default function ProductList({ setArticleType }) {
         </button>
       </div>
 
-      <div className="articles row d-flex justify-content-around mb-4">
+      <div
+        className="articles row d-flex justify-content-around mb-4"
+        style={{ marginTop: "20px" }}
+      >
         {articleProduct && articleProduct.length
           ? articleProduct.map((article) => {
               return (
@@ -55,7 +66,7 @@ export default function ProductList({ setArticleType }) {
                       <figure>
                         <img
                           className="card-img"
-                          src={`${process.env.REACT_APP_HOST_URL}/${article.images[0].path}`}
+                          src={`${process.env.REACT_APP_HOST_URL}/${article?.images[0]?.path}`}
                           alt="article produit"
                         />
                       </figure>
@@ -69,8 +80,11 @@ export default function ProductList({ setArticleType }) {
                         <p className="prix">{`${article.prix} Dhs`}</p>
                       </div>
                       <div className="d-flex justify-content-end">
-                        <button className="btn pointer btn-success text-white rounded-pill px-3">
-                          Contacter
+                        <button
+                          onClick={() => ModifyArticle(article)}
+                          className="btn pointer btn-success text-white rounded-pill px-3"
+                        >
+                          Modifier
                         </button>
                       </div>
                     </div>

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import regions from "../../../lib/constants/regions";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import "./styles.scss";
 import { saveCompany, saveReference } from "../../../lib/crud";
 
 export default function About() {

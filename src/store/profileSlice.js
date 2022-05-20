@@ -50,6 +50,7 @@ const profileSlice = createSlice({
       prix: "",
       quantite: "",
     },
+
     cible: {
       cherche: "Clients",
       regions: [],
@@ -125,6 +126,7 @@ const profileSlice = createSlice({
     setCatalogue: (state, action) => {
       state.catalogue = action.payload;
     },
+
     setArticles: (state, action) => {
       state.articles = action.payload;
     },

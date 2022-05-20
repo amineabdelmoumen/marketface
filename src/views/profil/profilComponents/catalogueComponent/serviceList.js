@@ -1,37 +1,45 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setSelectedArticle } from "../../../../store/ArticleSlice";
 
 export default function ServiceList({ setArticleType }) {
   const [articleService, setArticleService] = useState([]);
 
-  const unsortedArticles = useSelector((state) => state.profile.articles);
-  const [articles, setArticles] = useState([]);
+  const articles = useSelector((state) => state.profile.articles);
+  const dispatch = useDispatch();
   const styleText = {
     border: "none",
     backgroundColor: "white",
     resize: "none",
     textTransform: "none",
   };
+  const ModifyArticle = (article) => {
+    console.log("article", article);
+    dispatch(setSelectedArticle(article));
+    console.log("article updated  succesfully");
+    setArticleType(2, 1);
+  };
+
+  useEffect(() => {}, []);
 
   useEffect(() => {
-    const sortedArticles = unsortedArticles
-      .slice()
-      .sort((a, b) => Date.parse(b.updated_at) - Date.parse(a.updated_at));
-    setArticles(sortedArticles);
-  }, []);
-
-  useEffect(() => {
-    console.log("articles are in product list ", articles);
     const articleServ = articles.filter(
       (article) => article.type_article == "service"
     );
 
-    setArticleService(articleServ);
+    const sortedArticles = articleServ
+      .slice()
+      .sort((a, b) => Date.parse(b.updated_at) - Date.parse(a.updated_at));
+
+    setArticleService(sortedArticles);
   }, [articles]);
   return (
     <div>
       <div>
-        <div className="d-flex justify-content-end m-3">
+        <div
+          className="d-flex justify-content-end"
+          style={{ marginTop: "40px", marginRight: "30px" }}
+        >
           <button
             className="btn pointer btn-success text-white rounded-pill px-3"
             onClick={() => setArticleType(2, 1)}
@@ -39,7 +47,10 @@ export default function ServiceList({ setArticleType }) {
             Ajouter un service
           </button>
         </div>
-        <div className="articles row d-flex justify-content-around mb-4">
+        <div
+          className="articles row d-flex justify-content-around mb-4"
+          style={{ marginTop: "20px" }}
+        >
           {articleService && articleService.length
             ? articleService.map((article) => {
                 return (
@@ -65,8 +76,11 @@ export default function ServiceList({ setArticleType }) {
                           <p className="prix">{`${article.prix} Dhs`}</p>
                         </div>
                         <div className="d-flex justify-content-end">
-                          <button className="btn pointer btn-success text-white rounded-pill px-3">
-                            Contacter
+                          <button
+                            onClick={() => ModifyArticle(article)}
+                            className="btn pointer btn-success text-white rounded-pill px-3"
+                          >
+                            Modifier
                           </button>
                         </div>
                       </div>

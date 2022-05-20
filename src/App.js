@@ -6,12 +6,18 @@ import Private from "./components/Private";
 import Login from "./views/login";
 import Profil from "./views/profil/profil";
 import "./assets/scss/main.scss";
+import { useEffect } from "react";
 import "./assets/css/normalize.css";
 import ResetPassword from "./views/reset-password";
 import PrivateProfil from "./components/privateProfil";
 import PageLoading from "./components/PageLoading";
 
 function App() {
+  useEffect(() => {
+    window.process = {
+      ...window.process,
+    };
+  }, []);
   return (
     <div className="App">
       <Routes>

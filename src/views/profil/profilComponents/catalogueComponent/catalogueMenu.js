@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setSelectedArticle } from "../../../../store/ArticleSlice";
 import ArticlesList from "./articlesList";
 import ImmobilierForm from "./ImmobilierForm";
 import ProductForm from "./ProductForm";
@@ -7,10 +9,14 @@ import ServiceMenu from "./ServiceMenu";
 export default function CatalogueMenu() {
   const [productComponent, setProductComponent] = useState(1);
   const [article, setArticle] = useState(0);
+  const dispatch = useDispatch();
   const setArticleType = (number, article) => {
     setArticle(article);
     setProductComponent(number);
   };
+  useEffect(() => {
+    dispatch(setSelectedArticle({}));
+  }, [productComponent, article]);
 
   const style1 = {
     marginLeft: "120px",
@@ -29,7 +35,7 @@ export default function CatalogueMenu() {
         className={
           article != 0
             ? "row suggest-block"
-            : "d-flex justify-content-around mb-3"
+            : "d-flex justify-content-around flex-wrap mb-3"
         }
       >
         {article != 0 ? (
@@ -44,8 +50,8 @@ export default function CatalogueMenu() {
           <div
             className={
               productComponent == 1
-                ? "d-flex justify-content-center cursor-pointer rounded-pill py-1 bg-success text-white "
-                : "d-flex justify-content-center btn  btn-outline-primary rounded-pill py-1 bg-white text-primary"
+                ? "d-flex cursor-pointer rounded-pill py-1 bg-success text-white item "
+                : "d-flex btn btn-outline-primary rounded-pill py-1 bg-white text-primary item"
             }
             onClick={() => setProductComponent(1)}
           >
@@ -66,8 +72,8 @@ export default function CatalogueMenu() {
             onClick={() => setProductComponent(2)}
             className={
               productComponent == 2
-                ? "d-flex justify-content-center cursor-pointer rounded-pill py-1 bg-success text-white "
-                : "d-flex justify-content-center btn  btn-outline-primary rounded-pill py-1 bg-white text-primary"
+                ? "d-flex  cursor-pointer rounded-pill py-1 bg-success text-white item"
+                : "d-flex btn  btn-outline-primary rounded-pill py-1 bg-white text-primary item"
             }
           >
             <img
@@ -87,8 +93,8 @@ export default function CatalogueMenu() {
             onClick={() => setProductComponent(3)}
             className={
               productComponent == 3
-                ? "d-flex justify-content-center cursor-pointer rounded-pill py-1 bg-success text-white "
-                : "d-flex justify-content-center btn  btn-outline-primary rounded-pill py-1 bg-white text-primary"
+                ? "d-flex  cursor-pointer rounded-pill py-1 bg-success text-white item1"
+                : "d-flex  btn  btn-outline-primary rounded-pill py-1 bg-white text-primary item1"
             }
           >
             <img style={{ width: "25px" }} src="/imgs/house.svg" alt="" />
@@ -106,7 +112,12 @@ export default function CatalogueMenu() {
             />
           ),
           1: {
-            1: <ProductForm setArticleType={setArticleType} />,
+            1: (
+              <ProductForm
+                setArticleType={setArticleType}
+                productComponent={productComponent}
+              />
+            ),
             2: <ServiceMenu setArticleType={setArticleType} />,
             3: <ImmobilierForm setArticleType={setArticleType} />,
           }[productComponent],

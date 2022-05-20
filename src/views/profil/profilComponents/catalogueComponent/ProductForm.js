@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import "./styles.scss";
@@ -15,6 +15,8 @@ import {
 } from "../../../../lib/crud";
 let uploadForm = new FormData();
 export default function ProductForm({ setArticleType }) {
+  const selectedArticle = useSelector((state) => state.article.selectedArticle);
+
   const toastId = useRef(null);
   const dispatch = useDispatch();
   const [index, setIndex] = useState(0);
@@ -25,11 +27,44 @@ export default function ProductForm({ setArticleType }) {
   const categorieRef = useRef();
   const identite = useSelector((state) => state.profile.identite);
   const articles = useSelector((state) => state.profile.articles);
+  const [showToast, setShowToast] = useState(0);
   const [article, setArticle] = useState({
-    type_article: " produit",
+    type_article: "produit",
     images: [],
     documents: [],
   });
+  console.log("+++++react article from DB", selectedArticle);
+  useEffect(() => {
+    if (Object.keys(selectedArticle).length != 0) {
+      const images_to_upload = [];
+      const documents_to_upload = [];
+      if (selectedArticle.images && selectedArticle.images.length != 0) {
+        selectedArticle.images.map((image) =>
+          images_to_upload.push({ path: image.path })
+        );
+      }
+      if (selectedArticle.documents && selectedArticle.documents.length != 0) {
+        selectedArticle.documents.map((doc) =>
+          documents_to_upload.push({ path: doc.path, nom: doc.nom })
+        );
+      }
+      setIndex(1);
+      setArticle({
+        id: selectedArticle.id,
+        nom: selectedArticle.nom,
+        company_id: selectedArticle.company_id,
+        type_article: selectedArticle.type_article,
+        type: selectedArticle.type,
+        prix: selectedArticle.prix,
+        quantite: selectedArticle.quantite,
+        description: selectedArticle.description,
+        images: images_to_upload,
+
+        documents: documents_to_upload,
+      });
+    }
+    console.log("id", selectedArticle.id);
+  }, []);
 
   const style = {
     padding: "22px",
@@ -45,7 +80,6 @@ export default function ProductForm({ setArticleType }) {
 
     data[field] = e.target.value;
     setArticle(data);
-    console.log(data);
     console.log(article);
   };
   let data = {};
@@ -61,7 +95,7 @@ export default function ProductForm({ setArticleType }) {
     saveImages(uploadForm, token).then((res) => {
       const response = res.data;
       uploadForm = new FormData();
-      response.paths.map((path) => data["images"].unshift(path));
+      response.paths.map((path) => data["images"]?.unshift(path));
 
       setArticle(data);
     });
@@ -70,7 +104,7 @@ export default function ProductForm({ setArticleType }) {
     setIndex(1);
     const token = localStorage.getItem("token");
     let files = e.target.files;
-    console.log("files", files);
+
     let data = { ...article };
     for (let i = 0; i < files.length; i++) {
       uploadForm.append(`documents[${i}]`, files[i]);
@@ -79,8 +113,6 @@ export default function ProductForm({ setArticleType }) {
       const response = res.data;
       uploadForm = new FormData();
       response.paths.map((path) => data["documents"].unshift(path));
-
-      console.log("documents are", data["documents"]);
 
       setArticle(data);
     });
@@ -94,13 +126,20 @@ export default function ProductForm({ setArticleType }) {
 
   const toastPending = () =>
     (toastId.current = toast("L'ajout de l'article est en cours ......", {
-      autoClose: false,
+      autoClose: 10000,
       type: toast.TYPE.INFO,
       position: toast.POSITION.TOP_CENTER,
     }));
   const toastSuccess = () =>
     (toastId.current = toast.update(toastId.current, {
       render: "Article Produit a été ajouté  avec succés",
+      autoClose: 1500,
+      type: toast.TYPE.SUCCESS,
+      position: toast.POSITION.TOP_CENTER,
+    }));
+  const toastSuccessUpdate = () =>
+    (toastId.current = toast.update(toastId.current, {
+      render: "Article Produit a été Modifié  avec succés",
       autoClose: 1500,
       type: toast.TYPE.SUCCESS,
       position: toast.POSITION.TOP_CENTER,
@@ -115,16 +154,50 @@ export default function ProductForm({ setArticleType }) {
 
   const onSubmit = async () => {
     const token = localStorage.getItem("token");
+    const element = document.getElementById("submitBtn");
+    element.disabled = true;
+    setTimeout(function () {
+      element.disabled = false;
+    }, 5000);
+    toastPending();
 
+    console.log("+++++article before submit", article);
+    if ("id" in article) {
+      console.log("update exec+_++++++++++++");
+      update(article.id, token);
+    } else {
+      register(token);
+    }
+  };
+
+  const register = async (token) => {
     try {
-      toastPending();
       const res = await saveArticle(article, token);
       toastSuccess();
       const data = await res.data;
-      let data2 = { ...data, images: [article.images[0]] };
-      console.log("data", data2);
+      let data2 = { ...data, images: article.images };
+
       let list = [...articles, data2];
-      console.log("list is ", list);
+
+      dispatch(setArticles(list));
+      setTimeout(() => setArticleType(1, 0), 1500);
+    } catch (err) {
+      let errors = err.response?.data.errors;
+      showErrors(errors);
+      toastError();
+    }
+  };
+  const update = async (id, token) => {
+    try {
+      const res = await saveArticle(article, token);
+      toastSuccessUpdate();
+      const data = await res.data;
+      const list = articles.map((arti) =>
+        arti.id === id
+          ? { ...data, images: article.images, documents: article.documents }
+          : arti
+      );
+
       dispatch(setArticles(list));
       setTimeout(() => setArticleType(1, 0), 1500);
     } catch (err) {
@@ -174,6 +247,7 @@ export default function ProductForm({ setArticleType }) {
                 type="text"
                 id="titre"
                 name="nom"
+                value={article ? article?.nom : ""}
                 onChange={(e) => handleInputChange("nom", e)}
               />
             </div>
@@ -192,6 +266,7 @@ export default function ProductForm({ setArticleType }) {
                 type="number"
                 id="prix"
                 name="prix"
+                value={article ? article?.prix : ""}
                 onChange={(e) => handleInputChange("prix", e)}
               />
             </div>
@@ -210,6 +285,7 @@ export default function ProductForm({ setArticleType }) {
                 type="number"
                 id="quantite"
                 name="quantite"
+                value={article ? article?.quantite : ""}
                 onChange={(e) => handleInputChange("quantite", e)}
               />
             </div>
@@ -228,6 +304,8 @@ export default function ProductForm({ setArticleType }) {
                 name="categorie"
                 type="text"
                 id="categorie"
+                className="text-left"
+                value={article ? article?.type : ""}
                 onChange={(e) => handleInputChange("type", e)}
               >
                 <option value="" disabled selected hidden>
@@ -292,6 +370,7 @@ export default function ProductForm({ setArticleType }) {
                 rows={5}
                 id="titre"
                 name="titre"
+                value={article ? article?.description : ""}
                 onChange={(e) => handleInputChange("description", e)}
               ></textarea>
             </div>
@@ -303,13 +382,14 @@ export default function ProductForm({ setArticleType }) {
           </div>
           <div className="d-flex justify-content-end ">
             <button
-              className="btn pointer btn-success text-white rounded-pill px-5 text-f"
+              id="submitBtn"
+              className="btn pointer btn-success text-white rounded-pill px-5 "
               onClick={() => onSubmit()}
             >
               Enregistrer
             </button>
           </div>
-          <ToastContainer />
+          <ToastContainer limit={1} />
         </div>
 
         <div className="col-12  col-lg-5">
@@ -319,8 +399,8 @@ export default function ProductForm({ setArticleType }) {
                   return (
                     <div className="col-6">
                       <img
-                        src={`${process.env.REACT_APP_HOST_URL}/${photo.path}`}
-                        style={{ width: "100%", margin: "20px 30px 20px 30px" }}
+                        src={`${process.env.REACT_APP_HOST_URL}/${photo?.path}`}
+                        style={{ width: "100%", margin: "20px 30px" }}
                         alt=""
                         className="img-prev"
                       />

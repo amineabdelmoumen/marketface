@@ -13,6 +13,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { PersistGate } from "redux-persist/integration/react";
+import { ArticleReducer } from "./ArticleSlice";
 
 const persistConfig = {
   key: "root",
@@ -26,6 +27,7 @@ export const store = configureStore({
   reducer: {
     root: rootReducer,
     profile: persistedReducer,
+    article: ArticleReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

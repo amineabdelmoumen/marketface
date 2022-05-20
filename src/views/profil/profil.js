@@ -24,6 +24,7 @@ function Profil() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const profil = useSelector((state) => state.profile);
+
   useEffect(async () => {
     const token = localStorage.getItem("token");
 

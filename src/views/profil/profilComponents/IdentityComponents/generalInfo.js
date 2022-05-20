@@ -61,7 +61,9 @@ function Catalogue() {
   };
 
   const findElement = (element, list) => {
-    return list.find((el) => element === el);
+    if (list) {
+      return list.find((el) => element === el);
+    }
   };
   const handleMultiSelect = (field, e) => {
     setShaowOnSaveButton(1);
