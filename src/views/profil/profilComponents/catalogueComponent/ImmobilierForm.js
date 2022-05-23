@@ -487,7 +487,7 @@ export default function ImmobilierForm({ setArticleType }) {
               Enregistrer
             </button>
           </div>
-          <ToastContainer />
+          <ToastContainer limit={1} />
         </div>
 
         <div className="col-12  col-lg-5">

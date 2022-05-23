@@ -128,6 +128,7 @@ export default function ServiceMenu({ setArticleType }) {
     descriptionRef.current.innerText = errors?.description
       ? errors.description[0]
       : "";
+    dureeRef.current.innerText = errors?.duree ? errors.duree[0] : "";
   };
   const toastPending = () =>
     (toastId.current = toast("L'ajout de l'article est en cours ......", {
@@ -262,6 +263,11 @@ export default function ServiceMenu({ setArticleType }) {
                 onChange={(e) => handleInputChange("duree", e)}
               />
             </div>
+            <small
+              ref={dureeRef}
+              className="text-danger ms-2 d-block"
+              style={{ "font-size": "10px" }}
+            ></small>
           </div>
           <div className="row mt-1 form-boxes">
             <label htmlFor="" className="col-12 col-sm-5 col-md-3 text">
@@ -395,7 +401,7 @@ export default function ServiceMenu({ setArticleType }) {
             </button>
           </div>
 
-          <ToastContainer />
+          <ToastContainer limit={1} />
         </div>
 
         <div className="col-12 col-md-5 col-lg-5">

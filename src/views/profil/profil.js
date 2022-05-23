@@ -14,16 +14,10 @@ import "./styles.scss";
 import { setProfil, setReferences } from "../../store/profileSlice";
 
 function Profil() {
-  const getprofile = async () => {
-    const token = localStorage.getItem("token");
-    const profile = await getProfile(token);
-    console.log(profil);
-  };
   const dispatch = useDispatch();
   const [sideBarColumns, setSideBarColumns] = useState(0);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
-  const profil = useSelector((state) => state.profile);
 
   useEffect(async () => {
     const token = localStorage.getItem("token");
@@ -34,15 +28,12 @@ function Profil() {
         getProfile(token)
           .then((res) => res.data)
           .then((data) => {
-            console.log(data);
             dispatch(setProfil(data));
 
             setLoading(false);
           });
       });
   }, []);
-
-  console.log("profil", profil);
 
   return (
     <>
