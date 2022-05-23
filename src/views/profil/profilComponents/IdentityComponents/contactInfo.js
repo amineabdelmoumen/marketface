@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { saveCompany } from "../../../../lib/crud";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function ContactInfo() {
+  const toastId = useRef(null);
   const profil = useSelector((state) => state.profile);
   const [showButton, setShowButton] = useState(0);
   const [identitie, setIdentitie] = useState(profil.identite);
+
   const style1 = {
     font: "normal normal normal 14px/11px Montserrat",
     letterspacing: "0px",
@@ -27,10 +31,39 @@ export default function ContactInfo() {
     setIdentitie(identite);
   };
 
-  const handleOnSave = () => {
-    const token = localStorage.getItem("token");
-    saveCompany(identitie, token);
-    console.log("compay updated");
+  const toastPending = () =>
+    (toastId.current = toast("L'ajout de l'article est en cours ......", {
+      autoClose: 10000,
+      type: toast.TYPE.INFO,
+      position: toast.POSITION.TOP_CENTER,
+    }));
+
+  const toastSuccessUpdate = () =>
+    (toastId.current = toast.update(toastId.current, {
+      render: "Vos Infos financiéres ont été Modifié  avec succés",
+      autoClose: 1500,
+      type: toast.TYPE.SUCCESS,
+      position: toast.POSITION.TOP_CENTER,
+    }));
+  const toastError = () =>
+    (toastId.current = toast.update(toastId.current, {
+      render: "Echec de Modification !",
+      autoClose: 1500,
+      type: toast.TYPE.ERROR,
+      position: toast.POSITION.TOP_CENTER,
+    }));
+
+  const handleOnSave = async () => {
+    try {
+      toastPending();
+      const token = localStorage.getItem("token");
+      const res = await saveCompany(identitie, token);
+      toastSuccessUpdate();
+      console.log("compay updated");
+    } catch (err) {
+      toastError();
+    }
+
     //Make api request with saveCompany
   };
 
@@ -70,9 +103,14 @@ export default function ContactInfo() {
             </div>
           </div>
           <div className="col-md-6 mt-2">
-            <div>
-              <p>----------</p>
-            </div>
+            <input
+              onChange={(e) => handleInputChange("website", e)}
+              value={
+                identitie?.website != null
+                  ? `${identitie?.website.toLowerCase()}`
+                  : ""
+              }
+            />
           </div>
         </div>
         <div className="row mt-3 form-boxes">
@@ -106,6 +144,7 @@ export default function ContactInfo() {
           )}
         </div>
       </div>
+      <ToastContainer limit={1} />
     </div>
   );
 }

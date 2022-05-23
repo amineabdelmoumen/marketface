@@ -1,12 +1,41 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { setFormStage } from "../../../../store/rootSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setCatalogue } from "../../../../store/profileSlice";
 import { saveCatalogue } from "../../../../lib/crud";
-
-import "./styles.scss";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Catalogue() {
+  const toastId = useRef(null);
+  const toastPending = () =>
+    (toastId.current = toast("L'ajout de l'article est en cours ......", {
+      autoClose: 10000,
+      type: toast.TYPE.INFO,
+      position: toast.POSITION.TOP_CENTER,
+    }));
+  const toastSuccess = () =>
+    (toastId.current = toast.update(toastId.current, {
+      render: "Article Produit a été ajouté  avec succés",
+      autoClose: 1500,
+      type: toast.TYPE.SUCCESS,
+      position: toast.POSITION.TOP_CENTER,
+    }));
+  const toastSuccessUpdate = () =>
+    (toastId.current = toast.update(toastId.current, {
+      render: "Article Produit a été Modifié  avec succés",
+      autoClose: 1500,
+      type: toast.TYPE.SUCCESS,
+      position: toast.POSITION.TOP_CENTER,
+    }));
+  const toastError = () =>
+    (toastId.current = toast.update(toastId.current, {
+      render: "Echec d'ajout du produit !",
+      autoClose: 1500,
+      type: toast.TYPE.ERROR,
+      position: toast.POSITION.TOP_CENTER,
+    }));
+
   const [screenWidth, setScreenWidth] = useState(window.screen.width);
   const getWindowWidth = () => {
     return Math.max(
@@ -49,15 +78,24 @@ function Catalogue() {
     data[field] = e.target.value;
     dispatch(setCatalogue(data));
   };
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    const element = document.getElementById("submitBtn");
+    element.disabled = true;
+    setTimeout(function () {
+      element.disabled = false;
+    }, 5000);
+
     const token = localStorage.getItem("token");
-    saveCatalogue(catalogue, token)
-      .then(() => {
-        dispatch(setFormStage(4));
-      })
-      .catch((err) => {
-        let data = err.response.data;
-      });
+    toastPending();
+    try {
+      const res = await saveCatalogue(catalogue, token);
+
+      dispatch(setFormStage(4));
+      toastSuccessUpdate();
+    } catch (err) {
+      let data = err.response.data;
+      toastError();
+    }
   };
 
   const findElement = (element, list) => {
@@ -640,6 +678,7 @@ function Catalogue() {
                 {showOnSaveButton == 1 ? (
                   <button
                     type="button"
+                    id="submitBtn"
                     className="btn pointer btn-success text-white m-4 rounded-pill px-4"
                     onClick={handleSubmit}
                   >
@@ -649,6 +688,7 @@ function Catalogue() {
                   ""
                 )}
               </div>
+              <ToastContainer limit={1} />
             </div>
           </div>
         </div>

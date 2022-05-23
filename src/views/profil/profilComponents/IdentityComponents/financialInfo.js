@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { saveCompany } from "../../../../lib/crud";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "../../styles.scss";
 export default function FinancialInfo() {
+  const toastId = useRef(null);
   const style2 = {
     bottom: "0",
     right: "300px",
@@ -35,10 +38,37 @@ export default function FinancialInfo() {
     identite[field] = e.target.value;
     setIdentitie(identite);
   };
+  const toastPending = () =>
+    (toastId.current = toast("L'ajout de l'article est en cours ......", {
+      autoClose: 10000,
+      type: toast.TYPE.INFO,
+      position: toast.POSITION.TOP_CENTER,
+    }));
 
-  const handleOnSave = () => {
-    const token = localStorage.getItem("token");
-    saveCompany(identitie, token);
+  const toastSuccessUpdate = () =>
+    (toastId.current = toast.update(toastId.current, {
+      render: "Vos Infos financiéres ont été Modifié  avec succés",
+      autoClose: 1500,
+      type: toast.TYPE.SUCCESS,
+      position: toast.POSITION.TOP_CENTER,
+    }));
+  const toastError = () =>
+    (toastId.current = toast.update(toastId.current, {
+      render: "Echec de Modification !",
+      autoClose: 1500,
+      type: toast.TYPE.ERROR,
+      position: toast.POSITION.TOP_CENTER,
+    }));
+
+  const handleOnSave = async () => {
+    try {
+      toastPending();
+      const token = localStorage.getItem("token");
+      const res = await saveCompany(identitie, token);
+      toastSuccessUpdate();
+    } catch (err) {
+      toastError();
+    }
 
     //Make api request with saveCompany
   };
@@ -140,6 +170,7 @@ export default function FinancialInfo() {
               ""
             )}
           </div>
+          <ToastContainer limit={1} />
         </div>
       </div>
     </div>

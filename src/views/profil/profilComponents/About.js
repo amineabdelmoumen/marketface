@@ -1,12 +1,48 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import regions from "../../../lib/constants/regions";
 import { useNavigate } from "react-router-dom";
+
 import { Link } from "react-router-dom";
-import "./styles.scss";
-import { saveCompany, saveReference } from "../../../lib/crud";
+import "./../styles.scss";
+import { saveCompany, saveReference, getProfile } from "../../../lib/crud";
+import { setProfil, setReferences } from "../../../store/profileSlice";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function About() {
+  const dispatch = useDispatch();
+  const toastId = useRef(null);
+  const toastPending = (field) =>
+    (toastId.current = toast(
+      `La modification de ${field} est en cours ......`,
+      {
+        autoClose: 10000,
+        type: toast.TYPE.INFO,
+        position: toast.POSITION.TOP_CENTER,
+      }
+    ));
+  const toastSuccess = () =>
+    (toastId.current = toast.update(toastId.current, {
+      render: "Article Produit a été ajouté  avec succés",
+      autoClose: 1500,
+      type: toast.TYPE.SUCCESS,
+      position: toast.POSITION.TOP_CENTER,
+    }));
+  const toastSuccessUpdate = (field) =>
+    (toastId.current = toast.update(toastId.current, {
+      render: `${field} a été Modifié  avec succés`,
+      autoClose: 1500,
+      type: toast.TYPE.SUCCESS,
+      position: toast.POSITION.TOP_CENTER,
+    }));
+  const toastError = (error) =>
+    (toastId.current = toast.update(toastId.current, {
+      render: `${error}`,
+      autoClose: 1500,
+      type: toast.TYPE.ERROR,
+      position: toast.POSITION.TOP_CENTER,
+    }));
   const about = useSelector((state) => state.profile);
   const id = about.identite.id;
   const navigate = useNavigate();
@@ -47,13 +83,24 @@ export default function About() {
   };
   const handleOnsaveAbout = async () => {
     const token = localStorage.getItem("token");
-    if (ChangedState.identite == 1) {
-      await saveCompany(aboutIdentite, token);
-      console.log("company updated");
-    }
-    if (ChangedState.reference == 1) {
-      await saveReference(referenceAbout, token);
-      console.log("reference updated");
+
+    try {
+      toastPending();
+      if (ChangedState.identite == 1) {
+        await saveCompany(aboutIdentite, token);
+        const profil = await getProfile(token);
+        dispatch(setProfil(profil));
+
+        toastSuccessUpdate("identite");
+      }
+      if (ChangedState.reference == 1) {
+        await saveReference(referenceAbout, token);
+
+        console.log("reference updated");
+        toastSuccessUpdate("identite");
+      }
+    } catch (error) {
+      toastError(error);
     }
   };
   const formatPhoneNumber = (phoneNumber) => {
@@ -133,7 +180,7 @@ export default function About() {
 
                   <input
                     value={
-                      aboutIdentite?.website != null
+                      aboutIdentite && aboutIdentite.website != null
                         ? `${aboutIdentite?.website.toLowerCase()}`
                         : ""
                     }
@@ -188,6 +235,7 @@ export default function About() {
                 </div>
               </div>
             </div>
+            <ToastContainer />
           </div>
         </div>
       </div>

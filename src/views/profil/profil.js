@@ -42,6 +42,8 @@ function Profil() {
       });
   }, []);
 
+  console.log("profil", profil);
+
   return (
     <>
       <div>

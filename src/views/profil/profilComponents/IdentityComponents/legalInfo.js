@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import regions from "../../../../lib/constants/regions";
 import villes from "../../../../lib/constants/villes";
@@ -6,8 +6,11 @@ import types from "../../../../lib/constants/types";
 import years from "../../../../lib/constants/years";
 import statusList from "../../../../lib/constants/status";
 import { saveCompany } from "../../../../lib/crud";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Navigate } from "react-router-dom";
 export default function LegalInfo({ setLegalcomponent }) {
+  const toastId = useRef(null);
   const style1 = {
     font: "normal normal normal 14px/11px Montserrat",
     letterSpacing: "0px",
@@ -44,10 +47,40 @@ export default function LegalInfo({ setLegalcomponent }) {
     identite[field] = e.target.value;
     setIdentitie(identite);
   };
-  const handleOnSave = () => {
-    const token = localStorage.getItem("token");
-    saveCompany(identitie, token);
-    console.log("compay updated");
+  const toastPending = () =>
+    (toastId.current = toast("L'ajout de l'article est en cours ......", {
+      autoClose: 10000,
+      type: toast.TYPE.INFO,
+      position: toast.POSITION.TOP_CENTER,
+    }));
+
+  const toastSuccessUpdate = () =>
+    (toastId.current = toast.update(toastId.current, {
+      render: "Vos Infos financiéres ont été Modifié  avec succés",
+      autoClose: 1500,
+      type: toast.TYPE.SUCCESS,
+      position: toast.POSITION.TOP_CENTER,
+    }));
+  const toastError = () =>
+    (toastId.current = toast.update(toastId.current, {
+      render: "Echec de Modification !",
+      autoClose: 1500,
+      type: toast.TYPE.ERROR,
+      position: toast.POSITION.TOP_CENTER,
+    }));
+
+  const handleOnSave = async () => {
+    try {
+      toastPending();
+      const token = localStorage.getItem("token");
+
+      const res = await saveCompany(identitie, token);
+      toastSuccessUpdate();
+      console.log("compay updated");
+    } catch (error) {
+      toastError();
+    }
+
     Navigate("/profil");
     //Make api request with saveCompany
   };
@@ -286,6 +319,7 @@ export default function LegalInfo({ setLegalcomponent }) {
           ""
         )}
       </div>
+      <ToastContainer limit={1} />
     </div>
   );
 }
