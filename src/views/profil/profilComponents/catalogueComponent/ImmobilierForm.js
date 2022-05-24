@@ -92,7 +92,7 @@ export default function ImmobilierForm({ setArticleType }) {
         documents: documents_to_upload,
       });
     }
-    console.log("id", selectedArticle.id);
+    console.log(`article to update ${article}`);
   }, []);
 
   const handleInputChange = (field, e) => {
@@ -578,14 +578,16 @@ export default function ImmobilierForm({ setArticleType }) {
                   <div className="row mt-4">
                     <div className="d-flex">
                       <p className=" text-side col-5">Documents :</p>
-                      {article?.documents &&
-                        article?.documents.map((doc) => {
-                          return (
-                            <p className="text-side text-primary col-7">
-                              {doc.nom}
-                            </p>
-                          );
-                        })}
+                      <div className="col-7">
+                        {article?.documents &&
+                          article?.documents.map((doc) => {
+                            return (
+                              <p className="row text-side text-primary">
+                                {doc.nom}
+                              </p>
+                            );
+                          })}
+                      </div>
                     </div>{" "}
                   </div>
                   <div className="row mt-4">

@@ -100,11 +100,11 @@ export default function ProductForm({ setArticleType }) {
       setArticle(data);
     });
   };
+
   const handleDocumentUpload = (e) => {
     setIndex(1);
     const token = localStorage.getItem("token");
     let files = e.target.files;
-
     let data = { ...article };
     for (let i = 0; i < files.length; i++) {
       uploadForm.append(`documents[${i}]`, files[i]);
@@ -117,12 +117,6 @@ export default function ProductForm({ setArticleType }) {
       setArticle(data);
     });
   };
-
-  /*  toast.success("Article Produit a été ajouté  avec succés", {
-      position: toast.POSITION.TOP_CENTER,
-      autoClose: 1500,
-    });
-    console.log("toast was executed succesfully"); */
 
   const toastPending = () =>
     (toastId.current = toast("L'ajout de l'article est en cours ......", {
@@ -448,14 +442,16 @@ export default function ProductForm({ setArticleType }) {
                   <div className="row mt-4">
                     <div className="d-flex">
                       <p className=" text-side col-5">Documents :</p>
-                      {article?.documents &&
-                        article?.documents.map((doc) => {
-                          return (
-                            <p className="text-side text-primary col-7">
-                              {doc.nom}
-                            </p>
-                          );
-                        })}
+                      <div className=" text-side text-primary col-7">
+                        {article?.documents &&
+                          article?.documents.map((doc) => {
+                            return (
+                              <p className="row text-side text-primary ">
+                                {doc.nom}
+                              </p>
+                            );
+                          })}
+                      </div>
                     </div>{" "}
                   </div>
                   <div className="row mt-4">

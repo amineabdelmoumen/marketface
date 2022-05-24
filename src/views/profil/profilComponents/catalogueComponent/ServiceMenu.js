@@ -51,7 +51,7 @@ export default function ServiceMenu({ setArticleType }) {
       }
       if (selectedArticle.documents && selectedArticle.documents.length != 0) {
         selectedArticle.documents.map((doc) =>
-          images_to_upload.push({ path: doc.path, nom: doc.nom })
+          documents_to_upload.push({ path: doc.path, nom: doc.nom })
         );
       }
       setIndex(1);
@@ -114,7 +114,7 @@ export default function ServiceMenu({ setArticleType }) {
       const response = res.data;
       uploadForm = new FormData();
       response.paths.map((path) => data["documents"].unshift(path));
-      console.log(data["documents"]);
+
       setArticle(data);
     });
   };
@@ -467,16 +467,16 @@ export default function ServiceMenu({ setArticleType }) {
                   <div className="row mt-4">
                     <div className="d-flex">
                       <p className=" text-side col-5">Documents :</p>
-                      <p className=" text-side text-primary col-7">
+                      <div className=" text-side text-primary col-7">
                         {article?.documents &&
                           article?.documents.map((doc) => {
                             return (
-                              <p className="text-side text-primary col-7">
+                              <p className="row text-side text-primary ">
                                 {doc.nom}
                               </p>
                             );
                           })}
-                      </p>
+                      </div>
                     </div>{" "}
                   </div>
                   <div className="row mt-4">
