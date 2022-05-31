@@ -88,10 +88,9 @@ export default function About() {
       toastPending();
       if (ChangedState.identite == 1) {
         await saveCompany(aboutIdentite, token);
+        toastSuccessUpdate("identite");
         const profil = await getProfile(token);
         dispatch(setProfil(profil));
-
-        toastSuccessUpdate("identite");
       }
       if (ChangedState.reference == 1) {
         await saveReference(referenceAbout, token);
@@ -121,121 +120,216 @@ export default function About() {
     resize: "none",
     textTransform: "none",
   };
+  const style = {
+    marginRight: "10px",
+  };
+  const styleClicked = {
+    background: "linear-gradient(90deg, #36a9e1 0%, #092d58 100%)",
+  };
 
   return (
-    <div className="about position-relative">
-      <i class="fa-solid fa-ellipsis eclipse"></i>
-      <div className="about-flex">
-        <div>
-          <p className="title">A propos</p>{" "}
-        </div>
-        <textarea
-          style={styleText}
-          id="textarea"
-          className="text"
-          value={
-            referenceAbout && referenceAbout["description"] != null
-              ? referenceAbout["description"]
-              : ""
-          }
-          onChange={(e) => handleOnChange(["references", "description"], e)}
-        ></textarea>
-        <p className="activite-title">Activities</p>
-        <div className="px-4 mt-2">
-          <div className="row">
-            <p className="activite col-12 col-md-4 mt-3 me-4 px-4">
-              {about.identite?.activite}
-            </p>
-          </div>
-          <div className="form-area">
-            <div className="row d-flex align-items-center mt-3">
-              <div className="col-12 col-lg-4 address mt-2 ">
-                <div className="d-flex">
-                  <img className="local-image" src="/imgs/cafe.svg" alt="" />
-                  <select
-                    name="region"
-                    id="region"
-                    defaultValue={aboutIdentite?.region}
-                    className="local-text"
-                    style={styleText}
-                    onChange={(e) => handleOnChange(["identite", "region"], e)}
-                  >
-                    {regions.map((region) => {
-                      return <option value={region}>{region}</option>;
-                    })}
-                  </select>
-                </div>
-              </div>
+    <div>
+      <div className="row" style={{ marginLeft: "7px", marginTop: "56px" }}>
+        {" "}
+        <div className="about position-relative">
+          <i class="fa-solid fa-ellipsis eclipse"></i>
+          <div className="about-flex">
+            <div className="d-flex">
+              <p className="title position-relative">
+                Description de l'entreprise
+              </p>{" "}
+            </div>
+            <div className="xline-about"></div>
+            <div style={{ marginBottom: "70px" }} className="xline-about"></div>
+            <textarea
+              style={styleText}
+              id="textarea"
+              className="text mt-2 position-relative"
+              value={
+                referenceAbout && referenceAbout["description"] != null
+                  ? referenceAbout["description"]
+                  : ""
+              }
+              onChange={(e) => handleOnChange(["references", "description"], e)}
+            ></textarea>
 
-              <div className="col-12 col-lg-4 address mt-2">
-                {" "}
-                <div className="d-flex align-items-center">
-                  <a href="#">
-                    <img
-                      className="local-image"
-                      src="/imgs/communications.svg"
-                      alt=""
-                    />
-                  </a>
-
-                  <input
-                    value={
-                      aboutIdentite && aboutIdentite.website != null
-                        ? `${aboutIdentite?.website.toLowerCase()}`
-                        : ""
-                    }
-                    type="text"
-                    style={styleText}
-                    className="local-text"
-                    onChange={(e) => handleOnChange(["identite", "website"], e)}
-                  />
-                </div>
+            <div style={{ marginTop: "60px" }}>
+              <div className=" d-flex title">
+                <p
+                  style={{ fontSize: "16px" }}
+                  className="xfg xfg-clicked position-relative"
+                >
+                  Activité{" "}
+                </p>{" "}
               </div>
-              <div className="col-12 col-lg-4 address mt-2">
-                <div className="d-flex align-items-center">
-                  <img className="local-image" src="/imgs/job.svg" alt="" />
-                  {changePhoneNumber == 1 ? (
-                    <textarea
-                      type="number"
-                      col={2}
-                      rows={1}
-                      onChange={(e) =>
-                        handleOnChange(["identite", "telephone"], e)
-                      }
-                      style={styleText}
-                      className="local-text"
-                      value={aboutIdentite?.telephone}
-                    ></textarea>
-                  ) : (
-                    <textarea
-                      type="number"
-                      col={2}
-                      onClick={() => setChangePhoneNumber(1)}
-                      rows={1}
-                      style={styleText}
-                      className="local-text"
-                      value={formatPhoneNumber(aboutIdentite.telephone)}
-                    ></textarea>
-                  )}
-                </div>
-              </div>
-              <div className="row">
-                <div className="d-flex mt-3 justify-content-end mt-3">
-                  {showOnSaveButton == 1 ? (
-                    <button
-                      type="button"
-                      className="btn pointer btn-success text-white m-4 rounded-pill px-4"
-                      onClick={() => handleOnsaveAbout()}
-                    >
-                      Save Changes
-                    </button>
-                  ) : (
-                    ""
-                  )}
+              <div className="row " style={{ marginLeft: "22px" }}>
+                <div className="row  wrapper col-12 col-md-4 mt-3 me-4 px-4">
+                  <p style={{ fontSize: "16px" }} className="activite ">
+                    {about.identite?.activite}
+                  </p>
                 </div>
               </div>
             </div>
-            <ToastContainer limit={1} />
+            <div style={{ marginTop: "50px" }}>
+              <div className=" d-flex title">
+                <p
+                  style={{ fontSize: "16px" }}
+                  className="xfg xfg-clicked position-relative"
+                >
+                  Contacts{" "}
+                </p>{" "}
+              </div>
+              <div className="d-flex justify-content-around m-2">
+                <div className="con-info  me-3 mt-3 ">
+                  <div className="d-flex" style={{ padding: "20px 13px" }}>
+                    <div className="me-auto">
+                      <p className="title-info">Adresse</p>
+                      <p className="info">{aboutIdentite?.region}</p>
+                    </div>
+                    <div className="icon-info1">
+                      <img src="/imgs/local.png" alt="" />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="con-info   mt-3 me-2 ">
+                  {" "}
+                  <div className="d-flex" style={{ padding: "20px 13px" }}>
+                    <div className="me-auto">
+                      <p className="title-info">Website</p>
+                      <p className="info">{aboutIdentite?.website}</p>
+                    </div>
+                    <div
+                      className="icon-info1"
+                      style={{
+                        backgroundColor:
+                          "linear-gradient(0deg, rgba(244, 190, 94, 0.1), rgba(244, 190, 94, 0.1)), #FFFFFF",
+                      }}
+                    >
+                      <img src="/imgs/website.png" alt="" />
+                    </div>
+                  </div>
+                </div>
+                <div className="con-info  mt-3 ">
+                  {" "}
+                  <div className="d-flex" style={{ padding: "20px 13px" }}>
+                    <div className="me-auto">
+                      <p className="title-info">Telephone</p>
+                      <p className="info">
+                        {formatPhoneNumber(aboutIdentite?.telephone)}
+                      </p>
+                    </div>
+                    <div className="icon-info1">
+                      <img src="/imgs/phone12.png" alt="" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* <div className="px-4 mt-2 ">
+              
+
+              <div className="form-area">
+                <div className="row d-flex align-items-center mt-3">
+                  <div className="col-12 col-lg-4 address mt-2 ">
+                    <div className="d-flex">
+                      <img
+                        className="local-image"
+                        src="/imgs/cafe.svg"
+                        alt=""
+                      />
+                      <select
+                        name="region"
+                        id="region"
+                        defaultValue={aboutIdentite?.region}
+                        className="local-text"
+                        style={styleText}
+                        onChange={(e) =>
+                          handleOnChange(["identite", "region"], e)
+                        }
+                      >
+                        {regions.map((region) => {
+                          return <option value={region}>{region}</option>;
+                        })}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="col-12 col-lg-4 address mt-2">
+                    {" "}
+                    <div className="d-flex align-items-center">
+                      <a href="#">
+                        <img
+                          className="local-image"
+                          src="/imgs/communications.svg"
+                          alt=""
+                        />
+                      </a>
+
+                      <input
+                        value={
+                          aboutIdentite && aboutIdentite.website != null
+                            ? `${aboutIdentite?.website.toLowerCase()}`
+                            : ""
+                        }
+                        type="text"
+                        style={styleText}
+                        className="local-text"
+                        onChange={(e) =>
+                          handleOnChange(["identite", "website"], e)
+                        }
+                      />
+                    </div>
+                  </div>
+                  <div className="col-12 col-lg-4 address mt-2">
+                    <div className="d-flex align-items-center">
+                      <img className="local-image" src="/imgs/job.svg" alt="" />
+                      {changePhoneNumber == 1 ? (
+                        <textarea
+                          type="number"
+                          col={2}
+                          rows={1}
+                          onChange={(e) =>
+                            handleOnChange(["identite", "telephone"], e)
+                          }
+                          style={styleText}
+                          className="local-text"
+                          value={aboutIdentite?.telephone}
+                        ></textarea>
+                      ) : (
+                        <textarea
+                          type="number"
+                          col={2}
+                          onClick={() => setChangePhoneNumber(1)}
+                          rows={1}
+                          style={styleText}
+                          className="local-text"
+                          value={formatPhoneNumber(aboutIdentite.telephone)}
+                        ></textarea>
+                      )}
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="d-flex mt-3 justify-content-end mt-3">
+                      {showOnSaveButton == 1 ? (
+                        <button
+                          type="button"
+                          className="btn pointer btn-success text-white m-4 rounded-pill px-4"
+                          onClick={() => handleOnsaveAbout()}
+                        >
+                          Save Changes
+                        </button>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                  </div>
+                </div>
+                <ToastContainer limit={1} />
+              </div>
+            </div>
+          </div>{" "} */}
           </div>
         </div>
       </div>

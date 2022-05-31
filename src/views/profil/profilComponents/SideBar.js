@@ -1,97 +1,236 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-
-export default function SideBar({ setSideBarColumns, sideBarColumns }) {
+import "./../styles.scss";
+export default function SideBar({
+  setSideBarColumns,
+  sideBarColumns,
+  setProfilSection,
+}) {
   console.log(setSideBarColumns, sideBarColumns);
   const navigate = useNavigate();
   const [sideLinks, setSideLinks] = useState(0);
+  const [bgcolor, setBgcolor] = useState(1);
+
+  const style = {
+    height: "20px",
+    width: "106%",
+    paddingTop: "25px",
+    paddingBottom: "25px",
+    borderRadius: "4px",
+  };
+  const setData = (id) => {
+    setBgcolor(id);
+    setProfilSection(id);
+  };
+
   return (
-    <div className="sidebar">
-      <div
-        className="sidebar-container"
-        onMouseMove={() => setSideBarColumns(1)}
-        onMouseLeave={() => setSideBarColumns(0)}
-      >
-        <div className="items">
-          <div className="d-flex">
-            <Link to="ciblage">
-              <img className=" icon1" src="/imgs/ciblage.png" alt="" />
-            </Link>
-            {sideBarColumns == 1 ? (
-              <Link to="ciblage">
-                <span className="side-text p-1 d-none d-lg-block">Ciblage</span>
-              </Link>
-            ) : (
-              ""
-            )}
-          </div>
-          <div className="d-flex">
-            <Link to="Enregistrement">
-              <img className=" icon1" src="/imgs/enreg.png" alt="" />
-            </Link>
-            {sideBarColumns == 1 ? (
-              <Link to="Enregistrement">
-                <span className="side-text p-1 d-none d-lg-block">
-                  Enregistrement
-                </span>
-              </Link>
-            ) : (
-              ""
-            )}
-          </div>
-          <div className="d-flex">
-            <Link to="Achat">
-              <img className=" icon1" src="/imgs/achat.png" alt="" />
-            </Link>
+    <div
+      className="sidebar-container"
+      onMouseMove={() => setSideBarColumns(1)}
+      onMouseLeave={() => setSideBarColumns(0)}
+    >
+      <div className="items">
+        <div
+          onClick={() => setData(1)}
+          className="elem1 d-flex align-items-center position-relative"
+          style={bgcolor == 1 ? { ...style, background: "#36A9E1" } : style}
+          /* */
+        >
+          {bgcolor == 1 ? <p className="line-s"></p> : ""}
 
-            {sideBarColumns == 1 ? (
-              <Link to="Achat">
-                <span className="side-text p-1 d-none d-lg-block ">Achat</span>
-              </Link>
-            ) : (
-              ""
-            )}
+          <div
+            className="d-flex align-items-center"
+            style={{ height: "20px", width: "30px", marginLeft: "16px" }}
+          >
+            <img
+              className=""
+              src={bgcolor == 1 ? "/imgs/apercu12.png" : "/imgs/aperc10.png"}
+              alt=""
+            />
           </div>
-          <div className="d-flex">
-            <Link to="Vente">
-              <img className=" icon1" src="/imgs/vente.png" alt="" />{" "}
-            </Link>
 
-            {sideBarColumns == 1 ? (
-              <Link to="Vente">
-                <span className="side-text p-1 d-none d-lg-block">Vente</span>
-              </Link>
-            ) : (
-              ""
-            )}
+          <div style={{ height: "20px" }}>
+            <span
+              className={
+                bgcolor == 1
+                  ? " side-text text-white d-none d-lg-block "
+                  : "side-text  d-none d-lg-block"
+              }
+            >
+              Aperçu
+            </span>
           </div>
-          <div className="d-flex">
-            <Link to="portefeuille">
-              <img className="icon1" src="/imgs/porte.png" alt="" />
-            </Link>
-            {sideBarColumns == 1 ? (
-              <Link to="portefeuille">
-                <span className="side-text p-1 d-none d-lg-block">
-                  Portefeuille
-                </span>
-              </Link>
-            ) : (
-              ""
-            )}
+        </div>
+
+        <div
+          onClick={() => setBgcolor(2)}
+          className="elem1 d-flex align-items-center "
+          style={bgcolor == 2 ? { ...style, background: "#36A9E1" } : style}
+          /* */
+        >
+          {bgcolor == 2 ? <p className="line-s"></p> : ""}
+          <div className="auc ">
+            <img
+              className=""
+              src={bgcolor == 2 ? "/imgs/icon-auc.png" : "/imgs/auction2.png"}
+              alt=""
+            />
           </div>
-          <div className="d-flex">
-            <Link to="statistiques">
-              <img className=" icon1" src="/imgs/stat.png" alt="" />
-            </Link>
-            {sideBarColumns == 1 ? (
-              <Link to="statistiques">
-                <span className="side-text p-1 d-none d-lg-block ">
-                  Statiques generales
-                </span>
-              </Link>
-            ) : (
-              ""
-            )}
+          <div
+            className="d-flex align-items-center"
+            style={{ height: "20px", width: "30px", marginLeft: "16px" }}
+          >
+            <img
+              className=""
+              src={bgcolor == 2 ? "/imgs/shape12.png" : "/imgs/shape11.png"}
+              alt=""
+            />
+          </div>
+          <div style={{ height: "20px" }}>
+            <span
+              className={
+                bgcolor == 2
+                  ? " side-text text-white  d-none d-lg-block "
+                  : "side-text d-none d-lg-block"
+              }
+            >
+              Mon entreprise
+            </span>
+          </div>
+        </div>
+        <div
+          onClick={() => setBgcolor(3)}
+          className="elem1 d-flex align-items-center "
+          style={bgcolor == 3 ? { ...style, background: "#36A9E1" } : style}
+          /* */
+        >
+          {bgcolor == 3 ? <p className="line-s"></p> : ""}
+          <div className="auc">
+            <img
+              className=""
+              src={bgcolor == 3 ? "/imgs/icon-auc.png" : "/imgs/auction2.png"}
+              alt=""
+            />
+          </div>
+          <div
+            className="d-flex align-items-center"
+            style={{ height: "20px", width: "30px", marginLeft: "16px" }}
+          >
+            <img className="" src="/imgs/cat.png" alt="" />
+          </div>
+          <div style={{ height: "20px" }}>
+            <span
+              className={
+                bgcolor == 3
+                  ? " side-text text-white  d-none d-lg-block "
+                  : "side-text  d-none d-lg-block"
+              }
+            >
+              Mon catalogue
+            </span>
+          </div>
+        </div>
+        <div
+          onClick={() => setBgcolor(4)}
+          className="elem1 d-flex align-items-center "
+          style={bgcolor == 4 ? { ...style, background: "#36A9E1" } : style}
+          /* */
+        >
+          {bgcolor == 4 ? <p className="line-s"></p> : ""}
+
+          <div
+            className="d-flex align-items-center"
+            style={{ height: "20px", width: "30px", marginLeft: "16px" }}
+          >
+            <img className="" src="/imgs/Status1.png" alt="" />
+          </div>
+          <div style={{ height: "20px" }}>
+            <span
+              className={
+                bgcolor == 4
+                  ? " side-text text-white d-none d-lg-block "
+                  : "side-text  d-none d-lg-block"
+              }
+            >
+              Mes notifications
+            </span>
+          </div>
+        </div>
+        <div
+          onClick={() => setBgcolor(5)}
+          className="elem1 d-flex align-items-center "
+          style={bgcolor == 5 ? { ...style, background: "#36A9E1" } : style}
+          /* */
+        >
+          {bgcolor == 5 ? <p className="line-s"></p> : ""}
+          <div
+            className="d-flex align-items-center"
+            style={{ height: "20px", width: "30px", marginLeft: "16px" }}
+          >
+            <img className="" src="/imgs/echange.png" alt="" />
+          </div>
+          <div style={{ height: "20px" }}>
+            <span
+              className={
+                bgcolor == 5
+                  ? " side-text text-white  d-none d-lg-block "
+                  : "side-text  d-none d-lg-block"
+              }
+            >
+              Mes echange
+            </span>
+          </div>
+        </div>
+        <div
+          onClick={() => setBgcolor(6)}
+          className="elem1 d-flex align-items-center "
+          style={bgcolor == 6 ? { ...style, background: "#36A9E1" } : style}
+          /* */
+        >
+          {bgcolor == 6 ? <p className="line-s"></p> : ""}
+
+          <div
+            className="d-flex align-items-center"
+            style={{ height: "20px", width: "30px", marginLeft: "16px" }}
+          >
+            <img className="" src="/imgs/phone.png" alt="" />
+          </div>
+          <div style={{ height: "20px" }}>
+            <span
+              className={
+                bgcolor == 6
+                  ? " side-text text-white d-none d-lg-block "
+                  : "side-text d-none d-lg-block"
+              }
+            >
+              Contacter nous
+            </span>
+          </div>
+        </div>
+        <div
+          onClick={() => setBgcolor(7)}
+          className="elem1 d-flex align-items-center "
+          style={bgcolor == 7 ? { ...style, background: "#36A9E1" } : style}
+          /* */
+        >
+          {bgcolor == 7 ? <p className="line-s"></p> : ""}
+
+          <div
+            className="d-flex align-items-center"
+            style={{ height: "20px", width: "30px", marginLeft: "16px" }}
+          >
+            <img className="" src="" alt="" />
+          </div>
+          <div style={{ height: "20px" }}>
+            <span
+              className={
+                bgcolor == 7
+                  ? " side-text text-white  d-none d-lg-block "
+                  : "side-text  d-none d-lg-block"
+              }
+            >
+              Mon Centre d'aide
+            </span>
           </div>
         </div>
       </div>

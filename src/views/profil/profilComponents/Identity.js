@@ -23,163 +23,73 @@ export default function Identity() {
   };
 
   return (
-    <div className="row mt-2">
-      <div className="col-12 col-md-4">
-        <div className="d-flex flex-column">
-          <div
-            className={
-              selectedComponent == 1
-                ? "border-details clicked py-4"
-                : "border-details py-4"
-            }
-            onClick={() => setSelectedComponent(1)}
-          >
-            <div
-              className="d-flex align-items-center"
-              style={{ padding: "0 55px  " }}
-            >
-              <div style={{ width: "75px" }}>
-                <img
-                  src={
-                    selectedComponent == 1
-                      ? "/imgs/greenGeneral.png"
-                      : "/imgs/generale.png"
-                  }
-                  alt=""
-                />
+    <div className="row" style={{ marginLeft: "7px", marginTop: "56px" }}>
+      {" "}
+      <div className="about position-relative">
+        <i class="fa-solid fa-ellipsis eclipse"></i>
+        <div className="about-flex">
+          <div className="col-md-5 position-relative">
+            <div className="d-flex  ">
+              <div className="circles" style={{ width: "90px" }}>
+                <div className="circle1">
+                  <div className="circle2">
+                    <div className="d-flex justify-content-center align-items-center circle3">
+                      <img src="/imgs/user.png" alt="" />
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div
-                className={
-                  selectedComponent == 1
-                    ? " text-select cursor-pointer  text-success"
-                    : " text-select cursor-pointer  text-primary"
-                }
-              >
-                <p>Informations Generales</p>
+              <div className="d-flex  align-items-center">
+                <p className="txg">Information generales</p>
               </div>
             </div>
-          </div>
-
-          <div
-            className={
-              selectedComponent == 2
-                ? "border-details clicked py-4"
-                : "border-details py-4"
-            }
-            onClick={() => setSelectedComponent(2)}
-          >
-            <div
-              className="d-flex align-items-center"
-              style={{ padding: "0 55px  " }}
-            >
-              <div style={{ width: "75px" }}>
-                <img
-                  src={
-                    selectedComponent == 2
-                      ? "/imgs/greenLegal.png"
-                      : "/imgs/legal.png"
-                  }
-                  alt=""
-                />
+            <div className="iden-line"></div>
+            <div className="d-flex" style={{ marginTop: "40px" }}>
+              <div className="circles" style={{ width: "90px" }}>
+                <div className="circle1">
+                  <div className="circle2">
+                    <div className="d-flex justify-content-center align-items-center circle3">
+                      <img src="/imgs/legal21.png" alt="" />
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div>
-                <p
-                  className={
-                    selectedComponent == 2
-                      ? " text-select cursor-pointer  text-success"
-                      : " text-select cursor-pointer  text-primary"
-                  }
-                >
-                  Informations Legals
-                </p>
+              <div className="d-flex  align-items-center">
+                <p className="txg">Informations légales</p>
               </div>
             </div>
-          </div>
-          <div
-            className={
-              selectedComponent == 3
-                ? "border-details clicked py-4"
-                : "border-details py-4"
-            }
-            onClick={() => setSelectedComponent(3)}
-          >
-            <div
-              className="d-flex align-items-center "
-              style={{ padding: "0 55px  " }}
-            >
-              <div style={{ width: "75px" }}>
-                <img
-                  src={
-                    selectedComponent == 3
-                      ? "/imgs/greenFinance.png"
-                      : "/imgs/finance.png"
-                  }
-                  alt=""
-                />
+            <div className="iden-line" style={{ top: "183px" }}></div>
+            <div className="d-flex " style={{ marginTop: "40px" }}>
+              <div className="circles" style={{ width: "90px" }}>
+                <div className="circle1">
+                  <div className="circle2">
+                    <div className="d-flex justify-content-center align-items-center circle3">
+                      <img src="/imgs/finance21.png" alt="" />
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div>
-                <p
-                  className={
-                    selectedComponent == 3
-                      ? " text-select cursor-pointer  text-success "
-                      : " text-select cursor-pointer  text-primary"
-                  }
-                >
-                  Informations Financieres
-                </p>
+              <div className="d-flex  align-items-center">
+                <p className="txg">Informations financières </p>
               </div>
             </div>
-          </div>
-          <div
-            className={
-              selectedComponent == 4
-                ? "border-details clicked py-4"
-                : "border-details py-4"
-            }
-            onClick={() => setSelectedComponent(4)}
-          >
-            <div
-              className="d-flex align-items-center
-            "
-              style={{ padding: "0 55px  " }}
-            >
-              <div style={{ width: "75px" }}>
-                <img
-                  src={
-                    selectedComponent == 4
-                      ? "/imgs/greenContact.png"
-                      : "/imgs/contact.png"
-                  }
-                  alt=""
-                />
+            <div className="iden-line" style={{ top: "296px" }}></div>
+            <div className="d-flex " style={{ marginTop: "40px" }}>
+              <div className="circles" style={{ width: "90px" }}>
+                <div className="circle1">
+                  <div className="circle2">
+                    <div className="d-flex justify-content-center align-items-center circle3">
+                      <img src="/imgs/contact21.png" alt="" />
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div>
-                <p
-                  className={
-                    selectedComponent == 4
-                      ? " text-select  cursor-pointer  text-success "
-                      : " text-select cursor-pointer  text-primary"
-                  }
-                >
-                  Contact
-                </p>
+              <div className="d-flex  align-items-center">
+                <p className="txg">Contact</p>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className="col-12 col-md-8 form-box position-relative">
-        {
-          {
-            1: <GeneralInfo />,
-            2: {
-              0: <LegalInfo setLegalcomponent={setLegalcomponent} />,
-              1: <LegalInformPat2 setLegalcomponent={setLegalcomponent} />,
-            }[legalComponent],
-            3: <FinancialInfo />,
-            4: <ContactInfo />,
-          }[selectedComponent]
-        }
       </div>
     </div>
   );

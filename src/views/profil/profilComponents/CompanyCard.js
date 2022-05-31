@@ -3,48 +3,129 @@ import { useSelector } from "react-redux";
 
 export default function CompanyCard() {
   const company = useSelector((state) => state.profile.identite);
+
   return (
-    <div className="flex-profile">
-      <i class="fa-solid fa-ellipsis eclipse"></i>
-      <img
-        className="comp-logo"
-        src={`${process.env.REACT_APP_HOST_URL}/${company.logo}`}
-        alt=""
-      />
-      <img className="office" src="/imgs/office-building.svg" alt="" />
-
-      <p className="nom-entreprise">{company.raison_ou_nom}</p>
-
-      <p className="slogan">
-        Le slogan peut se definir comme une phrase percutante
-      </p>
-      <div className="badges">
-        <div className="badges-container">
-          <div className="elem">
-            <img className="img-element" src="/imgs/medal.svg" alt="" />
-          </div>
-
-          <span className="badge rounded-pill bg-success">3</span>
+    <div>
+      <div className="row mb-2">
+        <div className=" col-6 col-md-8">
+          <p className="fty">Mon profile</p>
         </div>
-        <div className="badges-container">
-          <div className="elem">
-            <img className="img-element" src="/imgs/contract.svg" alt="" />
-          </div>
-          <span className="badge rounded-pill bg-orange-500">3</span>
-        </div>
-        <div className="badges-container">
-          <div className="elem">
-            <img className="img-element" src="/imgs/men.svg" alt="" />
-          </div>
+      </div>
 
-          <span className="badge rounded-pill bg-indigo-600 ">3</span>
-        </div>
-        <div className="badges-container">
-          <div className="elem">
-            <img className="img-element" src="/imgs/money.svg" alt="" />
-          </div>
+      <div className="row  " style={{ marginTop: "39px" }}>
+        {" "}
+        <div className="flex-profile position-relative">
+          <div className="xline"></div>
+          <i class="fa-solid fa-ellipsis eclipse"></i>
+          <img
+            className="comp-logo"
+            src={`${process.env.REACT_APP_HOST_URL}/${company.logo}`}
+            alt=""
+          />
 
-          <span className="badge rounded-pill bg-danger">3</span>
+          <div className="d-flex justify-content-center ">
+            <p className="nom-entreprise gradient ">{company.raison_ou_nom}</p>
+          </div>
+          <div className="anx d-flex justify-content-center">Depuis 1929</div>
+
+          <p className="slogan">
+            Le slogan peut se definir comme une phrase percutante
+          </p>
+          <div className="d-flex justify-content-around">
+            <div
+              className="d-flex flex-column align-items-center"
+              style={{ width: "30px" }}
+            >
+              <div
+                style={{ width: "50px" }}
+                className="outer-circle d-flex justify-content-center align-items-center p-2"
+              >
+                <img
+                  style={{ padding: "1px" }}
+                  src="/imgs/medal21.png"
+                  alt=""
+                />
+              </div>
+              <div>
+                <p className="any">lorem ipsum</p>
+              </div>
+              <div>
+                <p className="numfg gradient align-item-center">3</p>
+              </div>
+            </div>
+            <div
+              className="d-flex flex-column align-items-center"
+              style={{ width: "30px" }}
+            >
+              <div
+                style={{ width: "50px" }}
+                className="outer-circle d-flex justify-content-center align-items-center p-2"
+              >
+                <img
+                  style={{ padding: "1px" }}
+                  src="/imgs/contract21.png"
+                  alt=""
+                />
+              </div>
+              <div>
+                <p className="any">lorem ipsum</p>
+              </div>
+              <div>
+                {" "}
+                <p className=" numfg gradient  align-item-center">9</p>
+              </div>
+            </div>
+            <div
+              className="d-flex flex-column align-items-center"
+              style={{ width: "30px" }}
+            >
+              <div
+                style={{ width: "50px" }}
+                className="outer-circle d-flex justify-content-center align-items-center p-2"
+              >
+                <img style={{ padding: "1px" }} src="/imgs/men21.png" alt="" />
+              </div>
+              <div>
+                <p className="any">lorem ipsum</p>
+              </div>
+              <div>
+                {" "}
+                <p className="numfg gradient align-item-center">40</p>
+              </div>
+            </div>
+            <div
+              className="d-flex flex-column align-items-center"
+              style={{ width: "30px" }}
+            >
+              <div
+                style={{ width: "50px" }}
+                className="outer-circle d-flex justify-content-center align-items-center p-2"
+              >
+                <img
+                  style={{ padding: "1px" }}
+                  src="/imgs/money21.png"
+                  alt=""
+                />
+              </div>
+              <div>
+                <p className="any">lorem ipsum</p>
+              </div>
+              <div>
+                {" "}
+                <p className="numfg  gradient align-item-center">+99k</p>
+              </div>
+            </div>
+
+            {/* <div className="outer-circle d-flex justify-content-center align-items-center p-2">
+              <img style={{ padding: "3px" }} src="/imgs/medal21.png" alt="" />
+            </div>
+            <div className="outer-circle d-flex justify-content-center align-items-center p-2">
+              <img style={{ padding: "3px" }} src="/imgs/medal21.png" alt="" />
+            </div>
+            <div className="outer-circle d-flex justify-content-center align-items-center p-2">
+              <img style={{ padding: "3px" }} src="/imgs/medal21.png" alt="" />
+            </div> */}
+          </div>
         </div>
       </div>
     </div>

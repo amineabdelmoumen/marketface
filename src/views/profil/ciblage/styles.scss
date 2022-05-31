@@ -1,0 +1,85 @@
+@use "../../../assets/scss/variables" as *;
+
+.ciblage {
+  color: #00b5ff;
+  font-family: $font-default1;
+  font-size: 20px;
+  font-weight: bold;
+}
+.localisation {
+  border-bottom: 1px solid #00b5ff;
+  box-shadow: 20px #00b5ff;
+  padding-bottom: 10px;
+}
+.local-text {
+  font-family: $font-default1;
+  color: #707070;
+  margin-top: 10px;
+  text-align: left;
+}
+.local-cible {
+  font-family: $font-default1;
+  font-size: 14px;
+}
+.ciblage-info {
+  background: #ffffff 0% 0% no-repeat padding-box;
+  box-shadow: 3px 3px 12px #8e8f8f8c;
+  border-radius: 11px;
+  opacity: 1;
+
+  padding-left: 6px;
+}
+
+.form-boxes {
+  margin-top: 1em;
+  display: flex;
+  justify-content: space-between;
+
+  select {
+    border-radius: 16px;
+    border: 1px solid silver;
+    color: gray;
+    background-color: white;
+    padding: 0 12px;
+    font-size: 14px;
+    text-align: left;
+    width: 90%;
+    height: 30px;
+  }
+  input {
+    border-radius: 16px;
+    border: 1px solid silver;
+    color: gray;
+
+    padding: 12px 22px;
+    font-size: 14px;
+    height: 30px;
+    width: 90%;
+  }
+
+  textarea {
+    border-radius: 16px;
+    border: 1px solid silver;
+    color: gray;
+
+    padding: 10px 17px;
+    font-size: 14px;
+    width: 90%;
+  }
+  textarea {
+    resize: unset;
+  }
+
+  textarea:focus {
+    outline: none;
+    border: 2px solid #00b5ff;
+  }
+  .text {
+    font-family: $font-default1;
+  }
+  label {
+    font-family: $font-default1;
+    color: #b2b2b2;
+    font-size: 13px;
+  }
+}

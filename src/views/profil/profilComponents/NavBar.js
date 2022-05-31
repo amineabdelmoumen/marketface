@@ -29,7 +29,9 @@ export default function NavBar() {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="col-5 col-lg-4 offset-lg-1  d-none d-lg-block">
+
+          <div className="col-5 col-lg-4 offset-lg-1  d-none d-lg-block"></div>
+          {/* <div className="col-5 col-lg-4 offset-lg-1  d-none d-lg-block">
             <div className="d-flex justify-content-end mt-3">
               <form className="input-form">
                 <input className="text-input" type="text" />
@@ -39,14 +41,35 @@ export default function NavBar() {
                 </span>
               </form>
             </div>
-          </div>
+          </div> */}
 
-          <div className="col-7 col-lg-6 links d-none d-lg-block">
-            <div className="d-flex justify-content-end">
-              <img className="icon" src="/imgs/add-user.svg" alt="" />
-              <img className="  icon" src="/imgs/email.svg" alt="" />
-              <img className="icon" src="/imgs/bell.svg" alt="" />
-              <img className=" icon" src="/imgs/profile.svg" alt="" />
+          <div
+            className="col-7 col-lg-6 d-none d-lg-block"
+            style={{ marginBottom: "-11px" }}
+          >
+            <div
+              className="d-flex justify-content-end "
+              style={{ marginTop: "-12px", marginRight: "20px" }}
+            >
+              <div className="d-flex me-4 justify-content-center align-items-center search">
+                <img src="/imgs/Search.png" alt="" />
+              </div>
+              <div className="d-flex me-4 justify-content-center align-items-center search">
+                <img src="/imgs/notification21.png" alt="" />
+              </div>
+
+              <div className="d-flex align-items-center ph-icon">
+                <div className="me-3">
+                  <img
+                    src="/imgs/ph-icon.png"
+                    alt=""
+                    style={{ minHeight: "100%", marginLeft: "6px" }}
+                  />
+                </div>
+                <div>
+                  <p className="nom-pro">Ahmed</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
