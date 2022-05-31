@@ -7,9 +7,9 @@ export default function Layout({ children, setProfilSection }) {
   return (
     <div>
       <div className="row">
-        <div className="col-md-2 d-none d-lg-block position-relative ">
+        <div className="col-md-2 logo-marketface  d-none d-lg-block position-relative ">
           <img
-            className="logo position-fixed"
+            className="position-fixed"
             src="/imgs/marketface.png"
             alt="marketface image"
           />
