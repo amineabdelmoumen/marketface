@@ -4,11 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { setRegister } from "../../store/profileSlice";
 import { checkAuth, register } from "../../lib/auth";
 import PageLoading from "../../components/PageLoading";
-
+import "./styles.scss";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 const Signup = () => {
+  const [value, setValue] = useState();
   const styleImage = {
     maxWidth: "100%",
   };
+
+  console.log("value", value);
   const titreRef = useRef();
   const prenomRef = useRef();
   const nomRef = useRef();
@@ -40,16 +45,17 @@ const Signup = () => {
   };
   const handleAgreementConditions = (e) => {
     let data = { ...registerForm };
-    data.terms = e.target.checked;
+    data.legal = !!data.legal;
+
     dispatch(setRegister(data));
   };
   const handleClick = async () => {
-    if (registerForm.terms) {
+    if (registerForm.legal) {
       try {
         await register(registerForm);
         navigate("/");
       } catch (e) {
-        let data = e.response.data;
+        let data = e.response?.data;
         showErrors(data.errors);
       }
     } else {
@@ -86,169 +92,304 @@ const Signup = () => {
   };
 
   return (
-    <>
-      <div className="background"></div>
-      {loading ? (
-        <PageLoading />
-      ) : (
-        <div className="container pt-5">
-          <div className="text-center">
-            <h1 className="text-secondary">Accédez au marché en temps réel!</h1>
-            <p className="text-primary">
-              Ne ratez pas aucune opportunité d'affaires! Créez votre compte dès
-              aujourd'hui!
-            </p>
+    <div>
+      <div className="row" style={{ margin: "10px" }}>
+        <div className="col-md-5 me-4 d-none d-lg-block">
+          <img src="/imgs/background.png" alt="" className="img-xfg" />
+        </div>
+        <div className="col-md-6">
+          <div className="d-flex flex-column align-items-center justify-content-center ">
+            <div className="sign-xfl">
+              <p style={{ marginTop: "60px" }}>
+                Accédez au marché en temps réel!
+              </p>
+            </div>{" "}
+            <div className="">
+              <p className="oppor">
+                Ne ratez aucune opportunité d’affaires ! Créez votre compte dès
+                aujourd’hui !
+              </p>
+            </div>
           </div>
-          <div className="row mt-4">
-            <div className="col-md-6 d-flex justify-content-center align-items-start">
-              {/*<img src="https://via.placeholder.com/300" alt="" />*/}
-              <img
-                src="/imgs/business-bag.png"
-                alt=""
-                width={400}
-                style={styleImage}
+          <div className="row  " style={{ marginTop: "20px" }}>
+            <div className="col-md-5 offset-lg-1">
+              <input
+                type="text"
+                className="input-xfl"
+                defaultValue={registerForm.nom}
+                onChange={(e) => handleInputUpdate("nom", e)}
+                placeholder="Nom"
               />
             </div>
-            <div className="col-md-6">
-              <div className="form-group mb-4">
-                <select
-                  name="titre"
-                  className="form-control rounded-pill border-0"
-                  placeholder="Titre"
-                  defaultValue={registerForm.titre}
-                  onChange={(e) => handleInputUpdate("titre", e)}
-                >
-                  <option value="m">M</option>
-                  <option value="mme">Mme</option>
-                  <option value="dr">Dr</option>
-                  <option value="pr">Pr</option>
-                </select>
-                <small ref={titreRef} className="text-danger ms-2"></small>
-              </div>
-              <div className="row mb-4">
-                <div className="col-6">
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      className="form-control rounded-pill border-0"
-                      placeholder="Prénom"
-                      defaultValue={registerForm.prenom}
-                      onChange={(e) => handleInputUpdate("prenom", e)}
-                    />
-                    <small ref={prenomRef} className="text-danger ms-2"></small>
-                  </div>
-                </div>
-                <div className="col-6">
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      className="form-control rounded-pill border-0"
-                      placeholder="Nom"
-                      defaultValue={registerForm.nom}
-                      onChange={(e) => handleInputUpdate("nom", e)}
-                    />
-                    <small ref={nomRef} className="text-danger ms-2"></small>
-                  </div>
-                </div>
-              </div>
-              <div className="form-group mb-4">
-                <select
-                  name="poste"
-                  className="form-control rounded-pill border-0"
-                  placeholder="Poste Occupé"
-                  defaultValue={registerForm.poste}
-                  onChange={(e) => handleInputUpdate("poste", e)}
-                >
-                  <option value="directeur">Directeur</option>
-                  <option value="commercial">Commercial</option>
-                  <option value="marketing">Marketing</option>
-                  <option value="finance"> Finance</option>
-                  <option value="achat"> Achat</option>
-                  <option value="communication">Communication</option>
-                  <option value="informatique">Informatique</option>
-                  <option value="ressource_humaine">Ressource humaine</option>
-                  <option value="technique">Technique</option>
-                  <option value="autre">Autre</option>
-                </select>
-                <small ref={posteRef} className="text-danger ms-2"></small>
-              </div>
-              <div className="form-group mb-4">
-                <input
-                  type="text"
-                  className="form-control rounded-pill border-0"
-                  placeholder="E-mail"
-                  defaultValue={registerForm.email}
-                  onChange={(e) => handleInputUpdate("email", e)}
-                />
-                <small ref={emailRef} className="text-danger ms-2"></small>
-              </div>
-              <div className="form-group mb-4">
-                <input
-                  type="text"
-                  className="form-control rounded-pill border-0"
-                  placeholder="Téléphone"
-                  defaultValue={registerForm.phone}
-                  onChange={(e) => handleInputUpdate("phone", e)}
-                />
-                <small ref={phoneRef} className="text-danger ms-2"></small>
-              </div>
-              <div className="form-group mb-4">
-                <input
-                  type="password"
-                  className="form-control rounded-pill border-0"
-                  placeholder="Mot de passe"
-                  defaultValue={registerForm.password}
-                  onChange={(e) => handleInputUpdate("password", e)}
-                />
-                <small ref={passwordRef} className="text-danger ms-2"></small>
-              </div>
-              <div className="form-group mb-4">
-                <input
-                  type="password"
-                  className="form-control rounded-pill border-0"
-                  placeholder="Confirmer votre mot de passe"
-                  defaultValue={registerForm.password_confirmation}
-                  onChange={(e) =>
-                    handleInputUpdate("password_confirmation", e)
-                  }
-                />
-              </div>
-              <div className="d-flex flex-column align-items-end mb-5">
-                <p>
-                  Conformément à la loi 09-08, vous disposez d'un droit d'accès,
-                  de rectifications et d'opposition au traitement de vos données
-                  personnelles. Ce traitement a été autorisé par la CNDP sous le
-                  n°XXXXX
+            <div className="col-md-5">
+              <input
+                type="text"
+                className="input-xfl"
+                defaultValue={registerForm.prenom}
+                onChange={(e) => handleInputUpdate("prenom", e)}
+                placeholder="Prenom"
+              />
+            </div>
+          </div>
+          <div className="row  " style={{ marginTop: "20px" }}>
+            <div className="col-md-5 offset-lg-1">
+              <select
+                name="titre"
+                className="input-xfl"
+                placeholder="Genre"
+                style={{ backgroundColor: "white" }}
+                defaultValue={registerForm.titre}
+                onChange={(e) => handleInputUpdate("titre", e)}
+              >
+                <option value="m">M</option>
+                <option value="mme">Mme</option>
+                <option value="dr">Dr</option>
+                <option value="pr">Pr</option>
+              </select>
+              <small ref={titreRef} className="text-danger ms-2"></small>
+            </div>
+            <div className="col-md-5">
+              <select
+                name="poste"
+                style={{ backgroundColor: "white" }}
+                className="input-xfl"
+                placeholder="Poste Occupé"
+                defaultValue={registerForm.poste}
+                onChange={(e) => handleInputUpdate("poste", e)}
+              >
+                <option value="directeur">Directeur</option>
+                <option value="commercial">Commercial</option>
+                <option value="marketing">Marketing</option>
+                <option value="finance"> Finance</option>
+                <option value="achat"> Achat</option>
+                <option value="communication">Communication</option>
+                <option value="informatique">Informatique</option>
+                <option value="ressource_humaine">Ressource humaine</option>
+                <option value="technique">Technique</option>
+                <option value="autre">Autre</option>
+              </select>
+            </div>
+          </div>
+          <div className="row" style={{ marginTop: "20px" }}>
+            <div className="col-md-10 offset-lg-1">
+              {" "}
+              <input
+                type="text"
+                className="input-xfl"
+                defaultValue={registerForm.email}
+                onChange={(e) => handleInputUpdate("email", e)}
+                placeholder="Email"
+              />
+            </div>
+          </div>
+          <div className="row" style={{ marginTop: "20px" }}>
+            <div className="col-md-10 offset-lg-1">
+              <PhoneInput
+                international
+                country={"us"}
+                value={value}
+                onChange={setValue}
+                inputClass="input-xfl"
+                inputStyle={{
+                  border: "1px solid #E4E6E8",
+                  borderRadius: "10px",
+                  overflow: "none",
+                  resize: "none",
+                  width: "100%",
+                  height: "60px",
+                }}
+              />
+            </div>
+          </div>
+          <div className="row" style={{ marginTop: "20px" }}>
+            <div className="col-md-10 offset-lg-1">
+              {" "}
+              <input
+                type="text"
+                className="input-xfl"
+                placeholder="Mot de passe"
+                defaultValue={registerForm.password}
+                onChange={(e) => handleInputUpdate("password", e)}
+              />
+            </div>
+          </div>
+          <div className="row" style={{ marginTop: "20px" }}>
+            <div className="col-md-10 offset-lg-1">
+              {" "}
+              <input
+                type="text"
+                className="input-xfl"
+                placeholder="Confirmer le mot de passe"
+                defaultValue={registerForm.password_confirmation}
+                onChange={(e) => handleInputUpdate("password_confirmation", e)}
+              />
+            </div>
+          </div>
+          <div className="row" style={{ marginTop: "20px" }}>
+            <div className="col-md-11 offset-lg-1">
+              <label class="container">
+                <p className="cred-des">
+                  En cliquant sur S'inscrire, vous acceptez nos Conditions
+                  d’utilisation.{" "}
                 </p>
-                <div className="form-check">
-                  <input
-                    className="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id="flexCheckDefault"
-                    checked={registerForm.terms}
-                    onChange={(e) => handleAgreementConditions(e)}
-                  />
-                  <label className={style} for="flexCheckDefault">
-                    J'ai lu et j'accepte les conditions générales d'utilisation,
-                    notamment la mention relative à la protection des données
-                    personnelles
-                  </label>
-                </div>
-
-                <button
-                  onClick={handleClick}
-                  className="btn btn-success text-white rounded-pill px-4"
-                >
-                  Envoyer
-                </button>
-              </div>
+                <input
+                  className="plg"
+                  type="radio"
+                  name="radio"
+                  checked={registerForm.legal}
+                  onChange={(e) => handleAgreementConditions(e)}
+                />
+                <span class="checkmark"></span>
+              </label>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-11 offset-lg-1">
+              <button onClick={handleClick} className="pnl-xl">
+                Confirmer
+              </button>
             </div>
           </div>
         </div>
-      )}
-    </>
+      </div>
+    </div>
   );
 };
 
 export default Signup;
+
+/* <>
+<div className="background"></div>
+{loading ? (
+  <PageLoading />
+) : (
+  
+  
+  <div className="container pt-5">
+    <div className="text-center">
+      <h1 className="text-secondary">Accédez au marché en temps réel!</h1>
+      <p className="text-primary">
+        Ne ratez pas aucune opportunité d'affaires! Créez votre compte dès
+        aujourd'hui!
+      </p>
+    </div>
+    <div className="row mt-4">
+      <div className="col-md-6 d-flex justify-content-center align-items-start">
+       
+        <img
+          src="/imgs/business-bag.png"
+          alt=""
+          width={400}
+          style={styleImage}
+        />
+      </div>
+      <div className="col-md-6">
+        <div className="form-group mb-4">
+          
+        </div>
+        <div className="row mb-4">
+          <div className="col-6">
+            <div className="form-group">
+              <input
+                type="text"
+                className="form-control rounded-pill border-0"
+                placeholder="Prénom"
+                defaultValue={registerForm.prenom}
+                onChange={(e) => handleInputUpdate("prenom", e)}
+              />
+              <small ref={prenomRef} className="text-danger ms-2"></small>
+            </div>
+          </div>
+          <div className="col-6">
+            <div className="form-group">
+              <input
+                type="text"
+                className="form-control rounded-pill border-0"
+                placeholder="Nom"
+                defaultValue={registerForm.nom}
+                onChange={(e) => handleInputUpdate("nom", e)}
+              />
+              <small ref={nomRef} className="text-danger ms-2"></small>
+            </div>
+          </div>
+        </div>
+        <div className="form-group mb-4">
+          
+          <small ref={posteRef} className="text-danger ms-2"></small>
+        </div>
+        <div className="form-group mb-4">
+          <input
+            type="text"
+            className="form-control rounded-pill border-0"
+            placeholder="E-mail"
+            defaultValue={registerForm.email}
+            onChange={(e) => handleInputUpdate("email", e)}
+          />
+          <small ref={emailRef} className="text-danger ms-2"></small>
+        </div>
+        <div className="form-group mb-4">
+          <input
+            type="text"
+            className="form-control rounded-pill border-0"
+            placeholder="Téléphone"
+            defaultValue={registerForm.phone}
+            onChange={(e) => handleInputUpdate("phone", e)}
+          />
+          <small ref={phoneRef} className="text-danger ms-2"></small>
+        </div>
+        <div className="form-group mb-4">
+          <input
+            type="password"
+            className="form-control rounded-pill border-0"
+            placeholder="Mot de passe"
+            defaultValue={registerForm.password}
+            onChange={(e) => handleInputUpdate("password", e)}
+          />
+          <small ref={passwordRef} className="text-danger ms-2"></small>
+        </div>
+        <div className="form-group mb-4">
+          <input
+            type="password"
+            className="form-control rounded-pill border-0"
+            placeholder="Confirmer votre mot de passe"
+            defaultValue={registerForm.password_confirmation}
+            onChange={(e) =>
+              handleInputUpdate("password_confirmation", e)
+            }
+          />
+        </div>
+        <div className="d-flex flex-column align-items-end mb-5">
+          <p>
+            Conformément à la loi 09-08, vous disposez d'un droit d'accès,
+            de rectifications et d'opposition au traitement de vos données
+            personnelles. Ce traitement a été autorisé par la CNDP sous le
+            n°XXXXX
+          </p>
+          <div className="form-check">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value=""
+              id="flexCheckDefault"
+              checked={registerForm.terms}
+              onChange={(e) => handleAgreementConditions(e)}
+            />
+            <label className={style} for="flexCheckDefault">
+              J'ai lu et j'accepte les conditions générales d'utilisation,
+              notamment la mention relative à la protection des données
+              personnelles
+            </label>
+          </div>
+
+          <button
+            onClick={handleClick}
+            className="btn btn-success text-white rounded-pill px-4"
+          >
+            Envoyer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+</> */

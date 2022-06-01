@@ -1,3 +1,171 @@
+@use "../../assets/scss/variables" as *;
+
 .image {
   max-width: 100%;
+}
+.oppor {
+  margin-top: 10px;
+  font-family: $font-public-sans;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 21px;
+
+  text-align: center;
+
+  color: #36a9e1;
+}
+.sign-xfl {
+  font-family: $font-public-sans;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 48px;
+
+  text-align: center;
+
+  background: linear-gradient(90deg, #36a9e1 0%, #092d58 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+.img-xfg {
+  height: 650px;
+  padding: 10px;
+}
+.input-xfl {
+  padding-left: 20px;
+  height: 60px;
+  width: 100%;
+  resize: none;
+  border: 1px solid rgba(228, 230, 232, 0.85);
+  border-radius: 10px;
+  font-family: $font-public-sans;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 21px;
+}
+.input-xfl::placeholder {
+  font-family: $font-public-sans;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 21px;
+
+  color: #8083a3;
+}
+.pnl-xl {
+  margin-bottom: 15px;
+  margin-top: 20px;
+  width: 100%;
+  height: 50px;
+  outline: none;
+  border: none;
+  background: #3e7eff;
+  border-radius: 10px;
+  font-family: $font-public-sans;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 21px;
+  /* identical to box height, or 175% */
+
+  text-align: center;
+
+  /* #FFFFFF */
+
+  color: #ffffff;
+}
+.cred-des {
+  margin-left: 17px;
+  font-family: $font-public-sans;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 18px;
+  /* identical to box height, or 150% */
+
+  /* #171721/Primary */
+
+  color: #171721;
+}
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container .plg {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover .plg ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196f3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container .checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
 }

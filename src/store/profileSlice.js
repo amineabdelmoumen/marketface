@@ -61,7 +61,7 @@ const profileSlice = createSlice({
     register: {
       titre: "m",
       poste: "directeur_general",
-      terms: false,
+      legal: false,
     },
   },
   reducers: {
