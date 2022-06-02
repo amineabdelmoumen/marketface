@@ -144,7 +144,7 @@
 }
 
 /* When the radio button is checked, add a blue background */
-.container input:checked ~ .checkmark {
+.container .plg:checked ~ .checkmark {
   background-color: #2196f3;
 }
 
@@ -156,7 +156,7 @@
 }
 
 /* Show the indicator (dot/circle) when checked */
-.container input:checked ~ .checkmark:after {
+.container .plg:checked ~ .checkmark:after {
   display: block;
 }
 

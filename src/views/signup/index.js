@@ -13,7 +13,6 @@ const Signup = () => {
     maxWidth: "100%",
   };
 
-  console.log("value", value);
   const titreRef = useRef();
   const prenomRef = useRef();
   const nomRef = useRef();
@@ -45,7 +44,7 @@ const Signup = () => {
   };
   const handleAgreementConditions = (e) => {
     let data = { ...registerForm };
-    data.legal = !!data.legal;
+    data.legal = !data.legal;
 
     dispatch(setRegister(data));
   };
@@ -136,11 +135,20 @@ const Signup = () => {
               <select
                 name="titre"
                 className="input-xfl"
-                placeholder="Genre"
                 style={{ backgroundColor: "white" }}
                 defaultValue={registerForm.titre}
                 onChange={(e) => handleInputUpdate("titre", e)}
               >
+                <option
+                  style={{ color: "#8083a3" }}
+                  value=""
+                  disabled
+                  selected
+                  hidden
+                >
+                  {" "}
+                  Genre
+                </option>
                 <option value="m">M</option>
                 <option value="mme">Mme</option>
                 <option value="dr">Dr</option>
@@ -157,6 +165,10 @@ const Signup = () => {
                 defaultValue={registerForm.poste}
                 onChange={(e) => handleInputUpdate("poste", e)}
               >
+                <option value="" disabled selected hidden>
+                  {" "}
+                  Poste Occupé
+                </option>
                 <option value="directeur">Directeur</option>
                 <option value="commercial">Commercial</option>
                 <option value="marketing">Marketing</option>
@@ -205,7 +217,7 @@ const Signup = () => {
             <div className="col-md-10 offset-lg-1">
               {" "}
               <input
-                type="text"
+                type="password"
                 className="input-xfl"
                 placeholder="Mot de passe"
                 defaultValue={registerForm.password}
@@ -217,7 +229,7 @@ const Signup = () => {
             <div className="col-md-10 offset-lg-1">
               {" "}
               <input
-                type="text"
+                type="password"
                 className="input-xfl"
                 placeholder="Confirmer le mot de passe"
                 defaultValue={registerForm.password_confirmation}
@@ -228,13 +240,14 @@ const Signup = () => {
           <div className="row" style={{ marginTop: "20px" }}>
             <div className="col-md-11 offset-lg-1">
               <label class="container">
-                <p className="cred-des">
+                <p className={`${style} cred-des `}>
                   En cliquant sur S'inscrire, vous acceptez nos Conditions
                   d’utilisation.{" "}
                 </p>
                 <input
-                  className="plg"
-                  type="radio"
+                  className="plg form-check-input"
+                  type="checkbox"
+                  value=""
                   name="radio"
                   checked={registerForm.legal}
                   onChange={(e) => handleAgreementConditions(e)}
