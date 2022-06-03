@@ -6,8 +6,11 @@ import { checkAuth, register } from "../../lib/auth";
 import PageLoading from "../../components/PageLoading";
 import "./styles.scss";
 import PhoneInput from "react-phone-input-2";
+
 import "react-phone-input-2/lib/style.css";
 const Signup = () => {
+  const [selectedTitle, setSelectedTitle] = useState("input-xfl selected");
+  const [selectedPoste, setSelectedPoste] = useState("input-xfl selected");
   const [value, setValue] = useState();
   const styleImage = {
     maxWidth: "100%",
@@ -21,7 +24,7 @@ const Signup = () => {
   const phoneRef = useRef();
   const passwordRef = useRef();
   const dispatch = useDispatch();
-  const registerForm = useSelector((state) => state.profile.register);
+  const [registerForm, setRegisterForm] = useState({ legal: false, phone: "" });
   const [loading, setLoading] = useState(true);
   const [style, setStyle] = useState("form-check-label");
   const navigate = useNavigate();
@@ -38,15 +41,25 @@ const Signup = () => {
       });
   }, []);
   const handleInputUpdate = (field, e) => {
+    if (e.target.value != "Genre" && field == "titre") {
+      setSelectedTitle("input-xfl border border-none");
+    }
+    if (e.target.value != "poste" && field == "poste") {
+      setSelectedPoste("input-xfl");
+    }
     let data = { ...registerForm };
     data[field] = e.target.value;
-    dispatch(setRegister(data));
+    setRegisterForm(data);
   };
   const handleAgreementConditions = (e) => {
     let data = { ...registerForm };
     data.legal = !data.legal;
-
-    dispatch(setRegister(data));
+    console.log(`data.legal ${!data.legal}`);
+    data.phone = value;
+    setRegisterForm(data);
+  };
+  const handleConnect = () => {
+    navigate("/");
   };
   const handleClick = async () => {
     if (registerForm.legal) {
@@ -93,8 +106,22 @@ const Signup = () => {
   return (
     <div>
       <div className="row" style={{ margin: "10px" }}>
-        <div className="col-md-5 me-4 d-none d-lg-block">
+        <div className="col-md-5 me-4 d-none d-lg-block position-relative">
           <img src="/imgs/background.png" alt="" className="img-xfg" />
+          <div className="sign-text">
+            <p className="bienv-text">
+              Bienvenue dans la premiere marketplace B2B au maroc
+            </p>
+          </div>
+          <div className="d-flex align-items-center position-absolute qs-l">
+            <div className="sug me-auto">Vous avez deja un compte ?</div>
+            <div style={{ marginLeft: "180px" }}>
+              <button className="connect-btn" onClick={(e) => handleConnect(e)}>
+                {" "}
+                Se Connecter
+              </button>
+            </div>
+          </div>
         </div>
         <div className="col-md-6">
           <div className="d-flex flex-column align-items-center justify-content-center ">
@@ -110,7 +137,7 @@ const Signup = () => {
               </p>
             </div>
           </div>
-          <div className="row  " style={{ marginTop: "20px" }}>
+          <div className="row  " style={{ marginTop: "12px" }}>
             <div className="col-md-5 offset-lg-1">
               <input
                 type="text"
@@ -124,29 +151,25 @@ const Signup = () => {
               <input
                 type="text"
                 className="input-xfl"
-                defaultValue={registerForm.prenom}
+                value={registerForm.prenom}
                 onChange={(e) => handleInputUpdate("prenom", e)}
                 placeholder="Prenom"
               />
             </div>
           </div>
-          <div className="row  " style={{ marginTop: "20px" }}>
+          <div className="row  " style={{ marginTop: "12px" }}>
             <div className="col-md-5 offset-lg-1">
               <select
                 name="titre"
-                className="input-xfl"
+                className={selectedTitle}
                 style={{ backgroundColor: "white" }}
-                defaultValue={registerForm.titre}
+                value={registerForm.titre}
                 onChange={(e) => handleInputUpdate("titre", e)}
               >
-                <option
-                  style={{ color: "#8083a3" }}
-                  value=""
-                  disabled
-                  selected
-                  hidden
-                >
+                {/* <option value="Genre" disabled selected hidden>
                   {" "}
+                </option> */}
+                <option value="Genre" disabled selected hidden>
                   Genre
                 </option>
                 <option value="m">M</option>
@@ -160,12 +183,18 @@ const Signup = () => {
               <select
                 name="poste"
                 style={{ backgroundColor: "white" }}
-                className="input-xfl"
+                className={selectedPoste}
                 placeholder="Poste Occupé"
-                defaultValue={registerForm.poste}
+                value={registerForm.poste}
                 onChange={(e) => handleInputUpdate("poste", e)}
               >
-                <option value="" disabled selected hidden>
+                <option
+                  className="text-red"
+                  value="poste"
+                  disabled
+                  selected
+                  hidden
+                >
                   {" "}
                   Poste Occupé
                 </option>
@@ -182,26 +211,27 @@ const Signup = () => {
               </select>
             </div>
           </div>
-          <div className="row" style={{ marginTop: "20px" }}>
+          <div className="row" style={{ marginTop: "12px" }}>
             <div className="col-md-10 offset-lg-1">
               {" "}
               <input
                 type="text"
                 className="input-xfl"
-                defaultValue={registerForm.email}
+                value={registerForm.email}
                 onChange={(e) => handleInputUpdate("email", e)}
                 placeholder="Email"
               />
             </div>
           </div>
-          <div className="row" style={{ marginTop: "20px" }}>
+          <div className="row" style={{ marginTop: "12px" }}>
             <div className="col-md-10 offset-lg-1">
               <PhoneInput
                 international
-                country={"us"}
+                country={"ma"}
                 value={value}
+                containerStyle={{ backgroundColor: "white" }}
+                defaultValue={registerForm.phone}
                 onChange={setValue}
-                inputClass="input-xfl"
                 inputStyle={{
                   border: "1px solid #E4E6E8",
                   borderRadius: "10px",
@@ -213,19 +243,19 @@ const Signup = () => {
               />
             </div>
           </div>
-          <div className="row" style={{ marginTop: "20px" }}>
+          <div className="row" style={{ marginTop: "12px" }}>
             <div className="col-md-10 offset-lg-1">
               {" "}
               <input
                 type="password"
                 className="input-xfl"
                 placeholder="Mot de passe"
-                defaultValue={registerForm.password}
+                value={registerForm.password}
                 onChange={(e) => handleInputUpdate("password", e)}
               />
             </div>
           </div>
-          <div className="row" style={{ marginTop: "20px" }}>
+          <div className="row" style={{ marginTop: "12px" }}>
             <div className="col-md-10 offset-lg-1">
               {" "}
               <input
@@ -237,7 +267,7 @@ const Signup = () => {
               />
             </div>
           </div>
-          <div className="row" style={{ marginTop: "20px" }}>
+          <div className="row" style={{ marginTop: "12px" }}>
             <div className="col-md-11 offset-lg-1">
               <label class="container">
                 <p className={`${style} cred-des `}>

@@ -38,7 +38,7 @@
 }
 .input-xfl {
   padding-left: 20px;
-  height: 60px;
+  height: 52px;
   width: 100%;
   resize: none;
   border: 1px solid rgba(228, 230, 232, 0.85);
@@ -49,6 +49,17 @@
   font-size: 14px;
   line-height: 21px;
 }
+input[type="password"]:focus {
+  outline-color: #25a9e0 !important;
+}
+.react-tel-input .selected-flag {
+  outline: none;
+  position: relative;
+  width: 89px;
+  height: 100%;
+  padding: 0 0 0 8px;
+  border-radius: 3px 0 0 3px;
+}
 .input-xfl::placeholder {
   font-family: $font-public-sans;
   font-style: normal;
@@ -57,6 +68,68 @@
   line-height: 21px;
 
   color: #8083a3;
+}
+.qs-l {
+  position: absolute;
+  bottom: 28px;
+}
+.connect-btn {
+  font-family: $font-public-sans;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 21px;
+  /* identical to box height, or 175% */
+  padding: 9px 20px;
+  text-align: center;
+
+  /* #FFFFFF */
+
+  color: #ffffff;
+  border: none;
+  background: #3e7eff;
+  border-radius: 10px;
+}
+
+.sug {
+  font-family: $font-public-sans;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 10px;
+  margin-left: 68px;
+
+  /* or 122% */
+
+  /* #FFFFFF */
+
+  color: #ffffff;
+}
+.selected {
+  font-family: $font-public-sans;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 21px;
+
+  color: #8083a3;
+}
+.sign-text {
+  position: absolute;
+  top: 273px;
+  left: 15%;
+  width: 406px;
+}
+.bienv-text {
+  font-family: $font-public-sans;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 34px;
+
+  /* or 122% */
+
+  /* #FFFFFF */
+
+  color: #ffffff;
 }
 .pnl-xl {
   margin-bottom: 15px;

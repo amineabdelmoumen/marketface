@@ -7,6 +7,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { store } from "./store";
 import { persistStore } from "redux-persist";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+import "./styles.scss";
 let persistor = persistStore(store);
 ReactDOM.render(
   <React.StrictMode>
