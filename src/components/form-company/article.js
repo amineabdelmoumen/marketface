@@ -200,7 +200,14 @@ function Article(props) {
     <>
       <form className="container" name="form-identite" id="form-identite">
         <div className="page_number">2/2</div>
-        <h4 className="ms-5 text-primary">Créez votre E-catalogue</h4>
+
+        <div className="row " style={{ marginLeft: "22px" }}>
+          <div className="row  wrapper col-12 col-md-4 mt-3 me-4 px-4">
+            <p style={{ fontSize: "16px" }} className="activite ">
+              Créez votre E-catalogue
+            </p>
+          </div>
+        </div>
         {articles.length
           ? articles.map((el, i) => {
               return (
