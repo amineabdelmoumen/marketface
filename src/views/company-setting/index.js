@@ -22,21 +22,16 @@ function CompanySetting() {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const token = localStorage.getItem("token");
-    try {
-      checkAuth(token)
-        .then((res) => res.data)
-        .then((data) => {
-          getProfile(token)
-            .then((res) => res.data)
-            .then((data) => {
-              dispatch(setProfil(data));
-              setLoading(false);
-            });
-        });
-    } catch (error) {
-      console.log("errors");
-      setLoading(false);
-    }
+    checkAuth(token)
+      .then((res) => res.data)
+      .then((data) => {
+        getProfile(token)
+          .then((res) => res.data)
+          .then((data) => {
+            dispatch(setProfil(data));
+            setLoading(false);
+          });
+      });
   }, []);
 
   const handleDisconnect = () => {
