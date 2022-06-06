@@ -138,7 +138,7 @@ const Signup = () => {
             </div>
           </div>
           <div className="row  " style={{ marginTop: "12px" }}>
-            <div className="col-md-5 offset-lg-1">
+            <div className="col-md-4 offset-lg-2">
               <input
                 type="text"
                 className="input-xfl"
@@ -147,7 +147,7 @@ const Signup = () => {
                 placeholder="Nom"
               />
             </div>
-            <div className="col-md-5">
+            <div className="col-md-4">
               <input
                 type="text"
                 className="input-xfl"
@@ -158,7 +158,7 @@ const Signup = () => {
             </div>
           </div>
           <div className="row  " style={{ marginTop: "12px" }}>
-            <div className="col-md-5 offset-lg-1">
+            <div className="col-md-4 offset-lg-2">
               <select
                 name="titre"
                 className={selectedTitle}
@@ -179,7 +179,7 @@ const Signup = () => {
               </select>
               <small ref={titreRef} className="text-danger ms-2"></small>
             </div>
-            <div className="col-md-5">
+            <div className="col-md-4">
               <select
                 name="poste"
                 style={{ backgroundColor: "white" }}
@@ -212,7 +212,7 @@ const Signup = () => {
             </div>
           </div>
           <div className="row" style={{ marginTop: "12px" }}>
-            <div className="col-md-10 offset-lg-1">
+            <div className="col-md-8 offset-lg-2">
               {" "}
               <input
                 type="text"
@@ -224,7 +224,7 @@ const Signup = () => {
             </div>
           </div>
           <div className="row" style={{ marginTop: "12px" }}>
-            <div className="col-md-10 offset-lg-1">
+            <div className="col-md-8 offset-lg-2">
               <PhoneInput
                 international
                 country={"ma"}
@@ -244,7 +244,7 @@ const Signup = () => {
             </div>
           </div>
           <div className="row" style={{ marginTop: "12px" }}>
-            <div className="col-md-10 offset-lg-1">
+            <div className="col-md-8 offset-lg-2">
               {" "}
               <input
                 type="password"
@@ -256,7 +256,7 @@ const Signup = () => {
             </div>
           </div>
           <div className="row" style={{ marginTop: "12px" }}>
-            <div className="col-md-10 offset-lg-1">
+            <div className="col-md-8 offset-lg-2">
               {" "}
               <input
                 type="password"
@@ -268,7 +268,7 @@ const Signup = () => {
             </div>
           </div>
           <div className="row" style={{ marginTop: "12px" }}>
-            <div className="col-md-11 offset-lg-1">
+            <div className="col-md-9 offset-lg-2">
               <label class="container">
                 <p className={`${style} cred-des `}>
                   En cliquant sur S'inscrire, vous acceptez nos Conditions
@@ -287,7 +287,7 @@ const Signup = () => {
             </div>
           </div>
           <div className="row">
-            <div className="col-md-11 offset-lg-1">
+            <div className="col-md-8 offset-lg-2">
               <button onClick={handleClick} className="pnl-xl">
                 Confirmer
               </button>
