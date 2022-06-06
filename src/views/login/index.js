@@ -91,6 +91,15 @@ const Login = () => {
               </button>
             </div>
           </div>
+          <div className="row mt-1">
+            <div className="col-md-8 offset-lg-2">
+              <div className="d-flex justify-content-end ">
+                <Link to="/reset-password">
+                  <small className="pas-oub">Mot de passe oublié?</small>
+                </Link>
+              </div>
+            </div>
+          </div>
           <ToastContainer />
         </div>
       </div>
