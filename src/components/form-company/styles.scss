@@ -37,11 +37,24 @@ form#form-identite {
     color: #1578a2;
   }
   .section-title {
-    color: #0abc8a;
+    font-family: $font-default1;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+
+    /* Primary 1 */
+
+    color: #36a9e1;
   }
   label {
-    color: #00b6ff;
-    font-size: 14px;
+    font-family: $font-default1;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 18px;
+
+    color: #092d58;
   }
   .info-obg {
     font-size: 12px;
@@ -49,11 +62,7 @@ form#form-identite {
     margin-top: 5em;
   }
   .buttons {
-    float: right;
-    margin-top: 1.4em;
-    .btn {
-      margin: 0 10px;
-    }
+    margin-top: 40px;
   }
 
   .logo {
@@ -97,7 +106,7 @@ form#form-identite {
   }
 
   .form-identite-info {
-    margin-top: 4em;
+    margin-top: 2em;
     display: flex;
 
     .form-boxes {
@@ -106,9 +115,11 @@ form#form-identite {
       justify-content: space-between;
 
       select {
-        border-radius: 16px;
-        border: 1px solid silver;
-        color: grey;
+        background: #ffffff;
+        /* Dark color / Shade 3 */
+
+        border: 1px solid #e6e8f0;
+        border-radius: 6px;
         padding: 0 6px;
         font-size: 14px;
         text-align: center;
@@ -117,9 +128,11 @@ form#form-identite {
 
       input,
       textarea {
-        border-radius: 16px;
-        border: 1px solid silver;
-        color: grey;
+        background: #ffffff;
+        /* Dark color / Shade 3 */
+
+        border: 1px solid #e6e8f0;
+        border-radius: 6px;
         text-align: center;
         padding: 0 6px;
         font-size: 14px;
@@ -136,8 +149,20 @@ form#form-identite {
       width: 50%;
     }
     .line {
-      border: 1px solid grey;
       margin: 0 2%;
+      height: 450px;
+
+      color: black;
+
+      border: solid 1px transparent;
+      background-image: linear-gradient(
+          rgba(54, 169, 225, 1),
+          rgba(9, 45, 88, 1)
+        ),
+        linear-gradient(101deg, rgba(54, 169, 225, 1), rgba(9, 45, 88, 1));
+      background-origin: border-box;
+      background-clip: content-box, border-box;
+      box-shadow: 2px 1000px 1px #fff inset;
     }
   }
 }
@@ -156,7 +181,7 @@ form#form-identite {
   width: 170px;
 }
 .texet {
-  height: 200px;
+  height: 100px;
 
   overflow-y: scroll;
   scroll-behavior: smooth;
@@ -164,4 +189,159 @@ form#form-identite {
     word-wrap: break-word;
     padding-right: 22px;
   }
+}
+.title-identite {
+  font-family: $font-manrope;
+  margin-top: 7px;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 150%;
+  /* identical to box height, or 24px */
+
+  letter-spacing: 0.4px;
+
+  /* Gradient 1 */
+
+  background: linear-gradient(90deg, #36a9e1 0%, #092d58 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+.fl-up {
+  font-family: $font-manrope;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 13px;
+  line-height: 150%;
+  /* identical to box height, or 20px */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.4px;
+
+  /* Primary 2 */
+
+  color: #092d58;
+}
+.wrapper-ident {
+  border-radius: 7px;
+  padding: 1rem;
+  font-family: "Avenir Next";
+  font-size: 1rem;
+  padding: 0.6rem 4rem;
+  color: black;
+
+  border: solid 3px transparent;
+  background-image: linear-gradient(rgba(54, 169, 225, 1), rgba(9, 45, 88, 1)),
+    linear-gradient(101deg, rgba(54, 169, 225, 1), rgba(9, 45, 88, 1));
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  box-shadow: 2px 1000px 1px #fff inset;
+  /*  background-color: #ffffff 0% 0% no-repeat padding-box;
+  
+    padding: 13px 60px 11px 60px;
+    border-image: linear-gradient(90deg,  0%, #092d58 100%) 1;
+    border-style: solid;
+    border-width: 4px;
+    border-radius: 20px;
+    
+    background: linear-gradient(90deg, #36a9e1 0%, #092d58 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent; */
+}
+
+.sv-btn {
+  background: linear-gradient(90deg, #36a9e1 0%, #092d58 100%);
+  border-radius: 8px;
+  padding: 0.5rem 4rem;
+}
+.suivant-iden {
+  font-family: $font-manrope;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 150%;
+  /* identical to box height, or 18px */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.4px;
+
+  /* bg */
+
+  color: #e8f0f9;
+}
+.rg-iden {
+  font-family: $font-manrope;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.384615px;
+
+  /* Gradient 1 */
+
+  background: linear-gradient(90deg, #36a9e1 0%, #092d58 100%);
+  -webkit-background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.txt-pr {
+  font-family: $font-default1;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+
+  /* Primary 2 */
+
+  color: #092d58;
+}
+
+.nm-cat {
+  width: 2px;
+  height: 450px;
+  background: linear-gradient(90deg, #36a9e1 0%, #092d58 100%);
+  position: absolute;
+  top: 10%;
+  left: -190%;
+}
+.aj-tx {
+  font-family: $font-default1;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+
+  /* Primary 1 */
+
+  color: #36a9e1;
+}
+.tx-ap {
+  font-family: $font-default1;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+
+  /* Primary 1 */
+
+  color: #36a9e1;
+}
+.elem-cible {
+  font-family: $font-manrope;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 9.69767px;
+  line-height: 12px;
+  /* identical to box height */
+
+  color: #000000;
 }

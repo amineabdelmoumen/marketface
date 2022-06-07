@@ -120,9 +120,14 @@ function Identite() {
         id="form-identite"
         onSubmit={handleSubmit}
       >
-        <h3>Dites-nous plus sur vous</h3>
+        <div className="d-flex ">
+          <p className="title-identite" style={{ fontSize: "25px" }}>
+            Dites-nous plus sur vous
+          </p>
+        </div>
+
         <div className="logo">
-          <p>*Inserez votre logo</p>
+          <p className="title">*Inserez votre logo</p>
           <p className="icon-img">
             {identite.logo ? (
               <img
@@ -140,9 +145,16 @@ function Identite() {
             id="logo-input"
             type="file"
           />
-          <button onClick={handleChooseFile} className="pointer">
-            Choisir un fichier
-          </button>
+          <div
+            onClick={handleChooseFile}
+            className="d-flex justify-content-between"
+            style={{ cursor: "pointer" }}
+          >
+            <img src="/imgs/file1.png" alt="" />
+            <p className="fl-up" style={{ fontSize: "12px" }}>
+              choisir un fichier
+            </p>
+          </div>
           <small
             ref={logoRef}
             className="text-danger ms-2 d-block"
@@ -428,14 +440,23 @@ function Identite() {
               className="text-danger ms-2 d-block"
               style={{ "font-size": "10px" }}
             ></small>
-            <div className="buttons">
-              <button
-                type="button"
-                className="btn pointer ml-4 btn-success text-white rounded-pill px-4"
+            <div className="buttons d-flex justify-content-end">
+              <div
+                className=" d-flex justify-content-center  wrapper-ident  col-12 col-md-2 me-3"
+                onClick={() => save()}
+              >
+                <p style={{ fontSize: "16px" }} className="rg-iden">
+                  Enregistrer
+                </p>
+              </div>
+              <div
+                className=" d-flex justify-content-center  sv-btn col-12 col-md-2 "
                 onClick={() => nextPage()}
               >
-                Suivant
-              </button>
+                <p style={{ fontSize: "16px" }} className="suivant-iden">
+                  Suivant
+                </p>
+              </div>
             </div>
           </section>
         </div>

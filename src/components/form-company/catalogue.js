@@ -74,29 +74,30 @@ function Catalogue() {
   return (
     <>
       <form className="container" name="form-identite" id="form-identite">
-        <div className="page_number">1/2</div>
-        <h4 className="ms-5 text-primary">Créez votre E-Catalogue</h4>
+        {/* <div className="page_number">1/2</div> */}
+        <div className="d-flex">
+          {" "}
+          <p className="title-identite" style={{ fontSize: "25px" }}>
+            Créez votre E-Catalogue 1/2
+          </p>
+        </div>
+
         <div className="form-identite-info d-block mt-3">
           <div className="row">
-            <div className="col-10 offset-2">
-              <h5 style={accrochStyle}>
+            <div className="col-md-9">
+              <h5 className="section-title" style={{ marginTop: "10px" }}>
                 Parlez nous de votre activité et attirez plus de prospect
               </h5>
               <div className="row form-boxes">
-                <div className="col-md-3">
-                  <label htmlFor="vous_etes">Vous êtes:</label>
+                <div className="col-md-6">
+                  <label htmlFor="vous_etes" style={{ fontSize: "13px" }}>
+                    Vous êtes:
+                  </label>
                 </div>
-                <div className="col-md-9">
+                <div className="col-md-6">
                   <select
                     name="vous_etes"
                     id="vous_etes"
-                    style={{
-                      ...InputStyle,
-                      width: "30%",
-                      paddingTop: "5px",
-                      paddingBottom: "5px",
-                      backgroundColor: "white",
-                    }}
                     value={catalogue.vous_etes}
                     onChange={(e) => handleInputUpdate("vous_etes", e)}
                   >
@@ -106,78 +107,29 @@ function Catalogue() {
                   </select>
                 </div>
               </div>
+
               <div className=" row form-boxes">
-                <div className="col-lg-3">
-                  <label htmlFor="activite">
+                <div className="col-lg-6">
+                  <label htmlFor="activite" style={{ fontSize: "13px" }}>
                     Quelle est votre activité opérationnelle?
                   </label>
                 </div>
-                <div className="col-6 col-lg-3">
-                  <label
-                    htmlFor="matiere"
-                    style={InputStyle}
-                    className={`px-2 py-2 cursor-pointer ${
-                      findElement("matière première", catalogue.matiere)
-                        ? "bg-secondary text-white"
-                        : "text-black-50"
-                    }`}
+                <div className="col-6 col-lg-6 ">
+                  <select
+                    name="matiere"
+                    id="matiere"
+                    value={catalogue.matiere}
+                    onChange={(e) => handleMultiSelect("matiere", e)}
                   >
-                    Matière première
-                    <input
-                      type="checkbox"
-                      name="matiere"
-                      id="matiere"
-                      value="matière première"
-                      className="d-none"
-                      onChange={(e) => handleMultiSelect("matiere", e)}
-                    />
-                  </label>
+                    <option value="matière première">Matière première</option>
+                    <option value="transformation">Transformation</option>
+                    <option value="distribution">Distribution</option>
+                    <option value="revendeur">Revendeur</option>
+                    Revendeur
+                  </select>
                 </div>
 
-                <div className=" col-6 col-lg-2">
-                  <label
-                    htmlFor="transformation"
-                    style={InputStyle}
-                    className={`px-2 py-2 cursor-pointer ${
-                      findElement("transformation", catalogue.matiere)
-                        ? "bg-secondary text-white"
-                        : "text-black-50"
-                    }`}
-                  >
-                    Transformation
-                    <input
-                      type="checkbox"
-                      name="matiere"
-                      id="transformation"
-                      value="transformation"
-                      className="d-none"
-                      onChange={(e) => handleMultiSelect("matiere", e)}
-                    />
-                  </label>
-                </div>
-
-                <div className=" col-6 col-lg-2">
-                  <label
-                    htmlFor="distribution"
-                    style={InputStyle}
-                    className={`px-2 py-2 cursor-pointer ${
-                      findElement("distribution", catalogue.matiere)
-                        ? "bg-secondary text-white"
-                        : "text-black-50"
-                    }`}
-                  >
-                    Distribution
-                    <input
-                      type="checkbox"
-                      name="matiere"
-                      id="distribution"
-                      value="distribution"
-                      className="d-none"
-                      onChange={(e) => handleMultiSelect("matiere", e)}
-                    />
-                  </label>
-                </div>
-                <div className="col-6 col-lg-2">
+                {/* <div className="col-6 col-lg-2">
                   <label
                     htmlFor="revendeur"
                     style={InputStyle}
@@ -197,380 +149,157 @@ function Catalogue() {
                       onChange={(e) => handleMultiSelect("matiere", e)}
                     />
                   </label>
-                </div>
+                </div> */}
               </div>
 
               <div className=" row form-boxes">
-                <div className="col-md-5">
-                  <label htmlFor="prenom_nome">
+                <div className="col-md-6">
+                  <label htmlFor="prenom_nome" style={{ fontSize: "13px" }}>
                     Quel est le type de business que vous entreprenez?
                   </label>
                 </div>
-
-                <div className="col-md-2">
-                  <label
-                    htmlFor="b2b"
-                    style={InputStyle}
-                    className={`px-2 py-2 cursor-pointer ${
-                      findElement("B2B", catalogue.business)
-                        ? "bg-secondary text-white"
-                        : "text-black-50"
-                    }`}
+                <div className="col-6 col-lg-6 ">
+                  <select
+                    name="matiere"
+                    id="matiere"
+                    value={catalogue.business}
+                    onChange={(e) => handleMultiSelect("business", e)}
                   >
-                    B2B
-                    <input
-                      type="checkbox"
-                      name="type"
-                      id="b2b"
-                      value="B2B"
-                      className="d-none"
-                      onChange={(e) => handleMultiSelect("business", e)}
-                    />
-                  </label>
-                </div>
-                <div className="col-md-2">
-                  <label
-                    htmlFor="b2c"
-                    style={InputStyle}
-                    className={`px-2 py-2 cursor-pointer ${
-                      findElement("B2C", catalogue.business)
-                        ? "bg-secondary text-white"
-                        : "text-black-50"
-                    }`}
-                  >
-                    B2C
-                    <input
-                      type="checkbox"
-                      name="type"
-                      id="b2c"
-                      value="B2C"
-                      className="d-none"
-                      onChange={(e) => handleMultiSelect("business", e)}
-                    />
-                  </label>
-                </div>
-                <div className="col-md-2">
-                  <label
-                    htmlFor="b2g"
-                    style={InputStyle}
-                    className={`px-2 py-2 cursor-pointer ${
-                      findElement("B2G", catalogue.business)
-                        ? "bg-secondary text-white"
-                        : "text-black-50"
-                    }`}
-                  >
-                    B2G
-                    <input
-                      type="checkbox"
-                      name="type"
-                      id="b2g"
-                      value="B2G"
-                      className="d-none"
-                      onChange={(e) => handleMultiSelect("business", e)}
-                    />
-                  </label>
+                    <option value="B2B">B2B</option>
+                    <option value="B2C">B2C</option>
+                    <option value="B2G">B2G</option>
+                  </select>
                 </div>
               </div>
               <div className=" row form-boxes">
                 <div className="col-md-5">
-                  <label htmlFor="prenom_nome">
+                  <label htmlFor="prenom_nome" style={{ fontSize: "13px" }}>
                     Où sont localisées vos activités?
                   </label>
                 </div>
-
-                <div className="col-md-2">
-                  <label
-                    htmlFor="offshore"
-                    style={InputStyle}
-                    className={`px-2 py-2 cursor-pointer ${
-                      findElement("Offshore", catalogue.location)
-                        ? "bg-secondary text-white"
-                        : "text-black-50"
-                    }`}
+                <div className="col-6 col-lg-6 ">
+                  <select
+                    name="location"
+                    id="location"
+                    value={catalogue.location}
+                    onChange={(e) => handleMultiSelect("location", e)}
                   >
-                    Offshore
-                    <input
-                      type="checkbox"
-                      name="location"
-                      id="offshore"
-                      value="Offshore"
-                      className="d-none"
-                      onChange={(e) => handleMultiSelect("location", e)}
-                    />
-                  </label>
-                </div>
-                <div className="col-md-2">
-                  <label
-                    htmlFor="onshore"
-                    style={InputStyle}
-                    className={`px-2 py-2 cursor-pointer ${
-                      findElement("Onshore", catalogue.location)
-                        ? "bg-secondary text-white"
-                        : "text-black-50"
-                    }`}
-                  >
-                    Onshore
-                    <input
-                      type="checkbox"
-                      name="location"
-                      id="onshore"
-                      value="Onshore"
-                      className="d-none"
-                      onChange={(e) => handleMultiSelect("location", e)}
-                    />
-                  </label>
-                </div>
-                <div className="col-md-2">
-                  <label
-                    htmlFor="nearshore"
-                    style={InputStyle}
-                    className={`px-2 py-2 cursor-pointer ${
-                      findElement("Nearshore", catalogue.location)
-                        ? "bg-secondary text-white"
-                        : "text-black-50"
-                    }`}
-                  >
-                    Nearshore
-                    <input
-                      type="checkbox"
-                      name="location"
-                      id="nearshore"
-                      value="Nearshore"
-                      className="d-none"
-                      onChange={(e) => handleMultiSelect("location", e)}
-                    />
-                  </label>
+                    <option value="offshore"> Offshore</option>
+                    <option value="onshore"> Onshore</option>
+                    <option value="nearshore">Nearshore</option>
+                  </select>
                 </div>
               </div>
               <div className=" row form-boxes">
                 <div className="col-md-5">
-                  <label htmlFor="organisme_type">
+                  <label htmlFor="organisme_type " style={{ fontSize: "13px" }}>
                     Quel moyen utilisez-vous pour vendre vos services?
                   </label>
                 </div>
-
-                <div className="col-md-2">
-                  <label
-                    htmlFor="online"
-                    style={InputStyle}
-                    className={`px-2 py-2 cursor-pointer ${
-                      findElement("En ligne", catalogue.moyen)
-                        ? "bg-secondary text-white"
-                        : "text-black-50"
-                    }`}
+                <div className="col-6 col-lg-6 ">
+                  <select
+                    name="moyen"
+                    id="moyen"
+                    value={catalogue.location}
+                    onChange={(e) => handleMultiSelect("moyen", e)}
                   >
-                    En ligne
-                    <input
-                      type="checkbox"
-                      name="moyen"
-                      id="online"
-                      value="En ligne"
-                      className="d-none"
-                      onChange={(e) => handleMultiSelect("moyen", e)}
-                    />
-                  </label>
-                </div>
-                <div className="col-md-2">
-                  <label
-                    htmlFor="magasin"
-                    style={InputStyle}
-                    className={`px-2 py-2 cursor-pointer ${
-                      findElement("En magasin", catalogue.moyen)
-                        ? "bg-secondary text-white"
-                        : "text-black-50"
-                    }`}
-                  >
-                    En magasin
-                    <input
-                      type="checkbox"
-                      name="moyen"
-                      id="magasin"
-                      value="En magasin"
-                      className="d-none"
-                      onChange={(e) => handleMultiSelect("moyen", e)}
-                    />
-                  </label>
-                </div>
-                <div className="col-md-2">
-                  <label
-                    htmlFor="usine"
-                    style={InputStyle}
-                    className={`px-2 py-2 cursor-pointer ${
-                      findElement("En usine", catalogue.moyen)
-                        ? "bg-secondary text-white"
-                        : "text-black-50"
-                    }`}
-                  >
-                    En usine
-                    <input
-                      type="checkbox"
-                      name="moyen"
-                      id="usine"
-                      value="En usine"
-                      className="d-none"
-                      onChange={(e) => handleMultiSelect("moyen", e)}
-                    />
-                  </label>
+                    <option value="En ligne"> En ligne</option>
+                    <option value=" En magasin"> En magasin</option>
+                    <option value="En usine">En usine</option>
+                  </select>
                 </div>
               </div>
               <div className="row form-boxes">
                 <div className="col-md-5">
                   {" "}
-                  <label htmlFor="organisme_taille">
+                  <label
+                    htmlFor="organisme_taille"
+                    style={{ fontSize: "13px" }}
+                  >
                     De quelle façon vendez-vous vos produits?
                   </label>
                 </div>
-
-                <div className="col-md-2">
-                  <label
-                    htmlFor="detaillant"
-                    style={InputStyle}
-                    className={`px-2 py-2 cursor-pointer ${
-                      findElement("Détaillant", catalogue.type_vente)
-                        ? "bg-secondary text-white"
-                        : "text-black-50"
-                    }`}
+                <div className="col-6 col-lg-6 ">
+                  <select
+                    name="type_vente"
+                    id="type_vente"
+                    value={catalogue.type_vente}
+                    onChange={(e) => handleMultiSelect("type_vente", e)}
                   >
-                    Détaillant
-                    <input
-                      type="checkbox"
-                      name="moyen"
-                      id="detaillant"
-                      value="Détaillant"
-                      className="d-none"
-                      onChange={(e) => handleMultiSelect("type_vente", e)}
-                    />
-                  </label>
+                    <option value="Détaillant">Détaillant</option>
+                    <option value=" Grossiste"> Grossiste</option>
+                  </select>
                 </div>
-                <div className="col-md-2">
-                  <label
-                    htmlFor="grossiste"
-                    style={InputStyle}
-                    className={`px-2 py-2 cursor-pointer ${
-                      findElement("Grossiste", catalogue.type_vente)
-                        ? "bg-secondary text-white"
-                        : "text-black-50"
-                    }`}
-                  >
-                    Grossiste
-                    <input
-                      type="checkbox"
-                      name="moyen"
-                      id="grossiste"
-                      value="Grossiste"
-                      className="d-none"
-                      onChange={(e) => handleMultiSelect("type_vente", e)}
-                    />
-                  </label>
-                </div>
-                <div className="col-md-2"></div>
               </div>
               <div className="row form-boxes">
                 <div className="col-md-5">
                   {" "}
-                  <label htmlFor="nombre_employés">
+                  <label htmlFor="nombre_employés" style={{ fontSize: "13px" }}>
                     Les produits que vous achetez sont:
                   </label>
                 </div>
-
-                <div className="col-md-2">
-                  <label
-                    htmlFor="importes"
-                    style={InputStyle}
-                    className={`px-2 py-2 cursor-pointer ${
-                      findElement("Importés", catalogue.produit_achete)
-                        ? "bg-secondary text-white"
-                        : "text-black-50"
-                    }`}
+                <div className="col-6 col-lg-6 ">
+                  <select
+                    name="produit_achete"
+                    id="produit_achete"
+                    value={catalogue.type_vente}
+                    onChange={(e) => handleMultiSelect("produit_achete", e)}
                   >
-                    Importés
-                    <input
-                      type="checkbox"
-                      name="moyen"
-                      id="importes"
-                      value="Importés"
-                      className="d-none"
-                      onChange={(e) => handleMultiSelect("produit_achete", e)}
-                    />
-                  </label>
+                    <option value="Importés"> Importés</option>
+                    <option value=" Locaux"> Locaux</option>
+                  </select>
                 </div>
-                <div className="col-md-2">
-                  <label
-                    htmlFor="locaux"
-                    style={InputStyle}
-                    className={`px-2 py-2 cursor-pointer ${
-                      findElement("Locaux", catalogue.produit_achete)
-                        ? "bg-secondary text-white"
-                        : "text-black-50"
-                    }`}
-                  >
-                    Locaux
-                    <input
-                      type="checkbox"
-                      name="moyen"
-                      id="locaux"
-                      value="Locaux"
-                      className="d-none"
-                      onChange={(e) => handleMultiSelect("produit_achete", e)}
-                    />
-                  </label>
-                </div>
-                <div className="col-md-2"></div>
               </div>
               <div className=" row form-boxes">
                 <div className="col-md-5">
-                  <label htmlFor="nombre_employés">
+                  <label htmlFor="nombre_employés" style={{ fontSize: "13px" }}>
                     De quelle façon distribuez-vous vos produits?
                   </label>
                 </div>
-
-                <div className="col-md-2">
-                  <label
-                    htmlFor="local"
-                    style={InputStyle}
-                    className={`px-2 py-2 cursor-pointer ${
-                      findElement("Local", catalogue.distribution)
-                        ? "bg-secondary text-white"
-                        : "text-black-50"
-                    }`}
+                <div className="col-6 col-lg-6 ">
+                  <select
+                    name="distribution"
+                    id="distribution"
+                    value={catalogue.type_vente}
+                    onChange={(e) => handleMultiSelect("distribution", e)}
                   >
-                    Local
-                    <input
-                      type="checkbox"
-                      name="distribution"
-                      id="local"
-                      value="Local"
-                      className="d-none"
-                      onChange={(e) => handleMultiSelect("distribution", e)}
-                    />
-                  </label>
+                    <option value="Local"> Local</option>
+                    <option value="Export"> Export</option>
+                  </select>
                 </div>
-                <div className="col-md-2">
-                  <label
-                    htmlFor="export"
-                    style={InputStyle}
-                    className={`px-2 py-2 cursor-pointer ${
-                      findElement("Export", catalogue.distribution)
-                        ? "bg-secondary text-white"
-                        : "text-black-50"
-                    }`}
-                  >
-                    Export
-                    <input
-                      type="checkbox"
-                      name="distribution"
-                      id="export"
-                      value="Export"
-                      className="d-none"
-                      onChange={(e) => handleMultiSelect("distribution", e)}
-                    />
-                  </label>
-                </div>
-                <div className="col-md-2"></div>
               </div>
             </div>
+            <div className="col-md-1 d-none d-lg-block position-relative">
+              <p className="nm-cat"></p>
+            </div>
+            <div className="col-md-2 d-none d-lg-block">
+              <img
+                style={{ marginLeft: "-246px", marginTop: "100px" }}
+                src="/imgs/Img.png"
+                alt=""
+              />
+            </div>
           </div>
-          <div className="d-flex mt-3 justify-content-end">
+
+          <div className="buttons d-flex justify-content-end">
+            <div
+              className=" d-flex justify-content-center  wrapper-ident  col-12 col-md-2 me-3"
+              onClick={() => dispatch(setFormStage(2))}
+            >
+              <p style={{ fontSize: "16px" }} className="rg-iden">
+                Précédent
+              </p>
+            </div>
+            <div
+              className=" d-flex justify-content-center  sv-btn col-12 col-md-2 "
+              onClick={() => handleSubmit()}
+            >
+              <p style={{ fontSize: "16px" }} className="suivant-iden">
+                Suivant
+              </p>
+            </div>
+          </div>
+          {/* <div className="d-flex mt-3 justify-content-end">
             <button
               type="button"
               className="btn pointer btn-outline-secondary rounded-pill px-4"
@@ -586,7 +315,7 @@ function Catalogue() {
               Suivant
             </button>
             <ToastContainer />
-          </div>
+          </div> */}
         </div>
       </form>
     </>

@@ -172,9 +172,16 @@ function Marque() {
   return (
     <>
       <form className="container" name="form-identite" id="form-identite">
-        <h3>Mettez en avant votre image marque</h3>
-        <p>Démarquez-vous grâce aux projets que vous avez réalisés</p>
-        {references.length
+        <div className="d-flex">
+          <p className="title-identite" style={{ fontSize: "25px" }}>
+            Mettez en avant votre image marque
+          </p>
+        </div>
+
+        <p className="section-title" style={{ marginTop: "10px" }}>
+          Démarquez-vous grâce aux projets que vous avez réalisés
+        </p>
+        {/*  {references.length
           ? references.map((el, i) => {
               return (
                 <span className="badge bg-primary cursor-pointer">
@@ -186,7 +193,7 @@ function Marque() {
                 </span>
               );
             })
-          : ""}
+          : ""} */}
         <div className="form-identite-info d-block">
           <div className="d-flex">
             {/*Information legal */}
@@ -314,39 +321,40 @@ function Marque() {
             <p className="line"></p>
             <section>
               <div className="row">
-                <div className="col-6">
-                  <h4 className="text-secondary">
-                    {marque.titre} | {marque.annee}
-                  </h4>
-                  {marque.description?.length < 256 ? (
-                    <div className="texet">
-                      {" "}
-                      <p className="text-black-50 h6 mt-4">
-                        {marque.description}
-                      </p>
-                    </div>
-                  ) : isFullDescription ? (
-                    <div className="texet">
-                      {" "}
-                      <p className="text-black-50 h6 mt-4">
-                        {marque.description}
-                      </p>
-                    </div>
-                  ) : (
-                    <div className="texet">
-                      <p className="text-black-50 h6 mt-4">
-                        {marque.description.slice(0, 256)}
-                        {"... "}
-                        <a
-                          onClick={() => setIsFullDescription(true)}
-                          href="#"
-                          className="pointer"
-                        >
-                          Voir plus
-                        </a>
-                      </p>
-                    </div>
-                  )}
+                <h4 className="txt-pr">
+                  {marque.titre} | {marque.annee}
+                </h4>
+                {marque.description?.length < 256 ? (
+                  <div className="texet">
+                    {" "}
+                    <p className="text-black-50 h6 mt-4">
+                      {marque.description}
+                    </p>
+                  </div>
+                ) : isFullDescription ? (
+                  <div className="texet">
+                    {" "}
+                    <p className="text-black-50 h6 mt-4">
+                      {marque.description}
+                    </p>
+                  </div>
+                ) : (
+                  <div className="texet">
+                    <p className="text-black-50 h6 mt-4">
+                      {marque.description.slice(0, 256)}
+                      {"... "}
+                      <a
+                        onClick={() => setIsFullDescription(true)}
+                        href="#"
+                        className="pointer"
+                      >
+                        Voir plus
+                      </a>
+                    </p>
+                  </div>
+                )}
+                <div>
+                  <p className="txt-pr">Categorie</p>
                   <p className="text-secondary h6 mt-4">{marque.categorie}</p>
                   <p className="d-flex gap-2 mt-5">
                     {marque.logo ? (
@@ -361,27 +369,53 @@ function Marque() {
                     <span className="text-secondary">{marque.nom_client}</span>
                   </p>
                 </div>
-                <div className="col-6">
-                  <div className="row">
-                    {marque.images && marque.images.length
-                      ? marque.images.map((photo) => {
-                          return (
-                            <div className="col-6">
-                              <img
-                                src={`${process.env.REACT_APP_HOST_URL}/${photo.path}`}
-                                width={100}
-                                alt=""
-                              />
-                            </div>
-                          );
-                        })
-                      : ""}
-                  </div>
+
+                <div className="row mt-2">
+                  <p className="txt-pr mb-2">Photos</p>
+                  {marque.images && marque.images.length
+                    ? marque.images.map((photo) => {
+                        return (
+                          <div className="col-6">
+                            <img
+                              src={`${process.env.REACT_APP_HOST_URL}/${photo.path}`}
+                              width={100}
+                              alt=""
+                            />
+                          </div>
+                        );
+                      })
+                    : ""}
                 </div>
               </div>
             </section>
           </div>
-          <div className="d-flex justify-content-end">
+          <div className="buttons d-flex justify-content-end">
+            <div
+              className=" d-flex justify-content-center  wrapper-ident  col-12 col-md-2 me-3"
+              onClick={() => dispatch(setFormStage(1))}
+            >
+              <p style={{ fontSize: "16px" }} className="rg-iden">
+                Précédent
+              </p>
+            </div>
+            <div
+              className=" d-flex justify-content-center  wrapper-ident  col-12 col-md-2 me-3"
+              onClick={() => save()}
+            >
+              <p style={{ fontSize: "16px" }} className="rg-iden">
+                Enregistrer
+              </p>
+            </div>
+            <div
+              className=" d-flex justify-content-center  sv-btn col-12 col-md-2 "
+              onClick={() => handleSave()}
+            >
+              <p style={{ fontSize: "16px" }} className="suivant-iden">
+                Suivant
+              </p>
+            </div>
+          </div>
+          {/* <div className="d-flex justify-content-end">
             <button
               type="button"
               className="btn pointer btn-outline-secondary rounded-pill px-4"
@@ -403,7 +437,7 @@ function Marque() {
             >
               Suivant
             </button>
-          </div>
+          </div> */}
         </div>
       </form>
     </>

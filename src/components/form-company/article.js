@@ -14,6 +14,7 @@ import services from "../../lib/constants/services";
 let uploadForm = new FormData();
 const areaScrollStyle = {
   border: "none",
+  color: "#092D58",
   outline: "none",
   boxShadow: "none",
   overflow: "auto",
@@ -22,6 +23,7 @@ const areaScrollStyle = {
 };
 const areaStyle = {
   border: "none",
+  color: "#092D58",
   outline: "none",
   boxShadow: "none",
   overflow: "hidden",
@@ -199,9 +201,14 @@ function Article(props) {
   return (
     <>
       <form className="container" name="form-identite" id="form-identite">
-        <div className="page_number">2/2</div>
-        <h4 className="ms-5 text-primary">Créez votre E-catalogue</h4>
-        {articles.length
+        {/*  <div className="page_number">2/2</div> */}
+        <div className="d-flex">
+          <p className="title-identite" style={{ fontSize: "25px" }}>
+            Créez votre E-catalogue 2/2
+          </p>
+        </div>
+
+        {/* {articles.length
           ? articles.map((el, i) => {
               return (
                 <span className="badge bg-primary cursor-pointer">
@@ -213,12 +220,17 @@ function Article(props) {
                 </span>
               );
             })
-          : ""}
-        <h5 className="text-center text-secondary">Ajouter un article</h5>
+          : ""} */}
+
         <div className="form-identite-info d-block">
           <div className="d-flex">
             {/*Information legal */}
             <section>
+              <div className="row">
+                <p className="aj-tx " style={{ marginBottom: "20px" }}>
+                  Ajouter un article
+                </p>
+              </div>
               <div className="form-boxes">
                 <label htmlFor="titre">Il s'agit d'un</label>
                 <select
@@ -423,24 +435,84 @@ function Article(props) {
             </section>
 
             <p className="line"></p>
-            <section>
+            <section style={{ marginLeft: "15px" }}>
               <div className="row">
-                <div className="col-6">
-                  <h4 className="text-secondary">{article.nom}</h4>
+                <p
+                  className="aj-tx "
+                  style={{ marginBottom: "20px", marginLeft: "30px" }}
+                >
+                  Apercu de votre article
+                </p>
+              </div>
+              <div className="row">
+                <div
+                  className="col-6"
+                  style={{ marginLeft: "30px", marginTop: "40px" }}
+                >
+                  {article.nom ? (
+                    <p className="row ">
+                      <p className="tx-ap col-md-4 me-2">Nom:</p>{" "}
+                      <p
+                        className="col-md-3 tx-ap"
+                        style={{ fontSize: "14px", color: "#092D58" }}
+                      >
+                        {article.nom}
+                      </p>
+                    </p>
+                  ) : (
+                    ""
+                  )}
+
                   {/*<p>Categorie: {categorie}</p>*/}
-                  <p>Quantite: {article.quantite}</p>
-                  <p>{article.type}</p>
-                  <p>
-                    {article.prix}dh/{article.quantite}
-                  </p>
+                  {article.quantite ? (
+                    <p className="row mt-2 ">
+                      <p className="col-md-4 tx-ap me-2"> Quantite: </p>{" "}
+                      <p
+                        className="col-md-3 tx-ap"
+                        style={{ fontSize: "14px", color: "#092D58" }}
+                      >
+                        {article.quantite}
+                      </p>
+                    </p>
+                  ) : (
+                    ""
+                  )}
+                  {article.type_article ? (
+                    <p className="row mt-2 ">
+                      <p className="col-md-4 tx-ap me-2"> Type: </p>{" "}
+                      <p
+                        className="col-md-3 tx-ap"
+                        style={{ fontSize: "14px", color: "#092D58" }}
+                      >
+                        {article.type_article}
+                      </p>
+                    </p>
+                  ) : (
+                    ""
+                  )}
+
+                  {article.prix ? (
+                    <p className="row mt-2 ">
+                      <p className="col-md-4 tx-ap me-2"> Prix: </p>{" "}
+                      <p
+                        className="col-md-4 tx-ap"
+                        style={{ fontSize: "14px", color: "#092D58" }}
+                      >
+                        {` ${article.prix} dhs`}
+                      </p>
+                    </p>
+                  ) : (
+                    ""
+                  )}
+
                   {article.description?.length < 256 ? (
                     <textarea
                       style={areaScrollStyle}
                       name=""
                       id=""
-                      cols="50"
+                      cols="40"
                       rows="10"
-                      className="text-black-50 h6 mt-4"
+                      className=" tx-ap mt-4"
                       value={article.description}
                     />
                   ) : isFullDescription ? (
@@ -448,9 +520,9 @@ function Article(props) {
                       style={areaScrollStyle}
                       name=""
                       id=""
-                      cols="50"
+                      cols="40"
                       rows="10"
-                      className="text-black-50 h6 mt-4"
+                      className="tx-ap mt-4"
                       value={article.description}
                     />
                   ) : (
@@ -459,48 +531,78 @@ function Article(props) {
                         style={areaStyle}
                         name=""
                         id=""
-                        cols="50"
+                        cols="40"
                         rows="6"
-                        className="text-black-50 h6 mt-4 mb-0"
+                        className="tx-ap h6 mt-4 mb-0"
                         value={article.description.slice(0, 256) + "..."}
                       />
                       <a
                         onClick={() => setIsFullDescription(true)}
                         href="#"
-                        className="pointer"
+                        className="pointer tx-ap"
+                        style={{ color: "#092D58" }}
                       >
                         Voir plus
                       </a>
                     </>
                   )}
                 </div>
-                <div className="col-6">
-                  <div className="row">
-                    {article.images && article.images.length
-                      ? article.images.map((photo) => {
-                          return (
-                            <div className="col-6">
-                              <img
-                                src={`${process.env.REACT_APP_HOST_URL}/${photo.path}`}
-                                width={100}
-                                alt=""
-                              />
-                            </div>
-                          );
-                        })
-                      : ""}
-                  </div>
-                  <div className="row mt-2">
-                    {article?.documents &&
-                      article?.documents.map((doc) => {
-                        return <div className="col-6 mt-2">{doc.nom}</div>;
-                      })}
-                  </div>
+
+                <div
+                  className="d-flex align-items-center mb-2 mt-3"
+                  style={{ marginLeft: "15px" }}
+                >
+                  <p className="tx-ap me-4">Photos:</p>
+                  {article.images && article.images.length
+                    ? article.images.map((photo) => {
+                        return (
+                          <div className="col-6">
+                            <img
+                              src={`${process.env.REACT_APP_HOST_URL}/${photo.path}`}
+                              width={100}
+                              alt=""
+                            />
+                          </div>
+                        );
+                      })
+                    : ""}
+                </div>
+                <div className="row mt-2">
+                  {article?.documents &&
+                    article?.documents.map((doc) => {
+                      return <div className="col-6 mt-2">{doc.nom}</div>;
+                    })}
                 </div>
               </div>
             </section>
           </div>
-          <div className="d-flex justify-content-end">
+          <div className="buttons d-flex justify-content-end">
+            <div
+              className=" d-flex justify-content-center  wrapper-ident  col-12 col-md-2 me-3"
+              onClick={() => dispatch(setFormStage(3))}
+            >
+              <p style={{ fontSize: "16px" }} className="rg-iden">
+                Précédent
+              </p>
+            </div>
+            <div
+              className=" d-flex justify-content-center  wrapper-ident  col-12 col-md-2 me-3"
+              onClick={() => appendArticle()}
+            >
+              <p style={{ fontSize: "16px" }} className="rg-iden">
+                Enregistrer
+              </p>
+            </div>
+            <div
+              className=" d-flex justify-content-center  sv-btn col-12 col-md-2 "
+              onClick={() => save()}
+            >
+              <p style={{ fontSize: "16px" }} className="suivant-iden">
+                Suivant
+              </p>
+            </div>
+          </div>
+          {/* <div className="d-flex justify-content-end">
             <button
               type="button"
               className="btn pointer btn-outline-secondary rounded-pill px-4"
@@ -522,7 +624,7 @@ function Article(props) {
             >
               Suivant
             </button>
-          </div>
+          </div> */}
         </div>
       </form>
     </>

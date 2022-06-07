@@ -423,7 +423,6 @@ export default Signup;
               personnelles
             </label>
           </div>
-
           <button
             onClick={handleClick}
             className="btn btn-success text-white rounded-pill px-4"

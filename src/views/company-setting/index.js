@@ -46,52 +46,66 @@ function CompanySetting() {
       ) : (
         <div>
           <div className="background"></div>
-          <section className="company-steps-icons">
-            <h2>Création de votre profil</h2>
+          <section className="company-steps-icons container position-relative">
+            <div className="row">
+              <div className="col-2">
+                <div className="d-flex " onClick={handleDisconnect}>
+                  <img
+                    src="/imgs/logout.png"
+                    alt=""
+                    style={{ marginRight: "10px" }}
+                  />
+                  <p className="lg-out" style={{ fontSize: "14px" }}>
+                    Déconnexion
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="row  ">
+              <div className=" wrapper col-12 col-md-3 offset-md-5">
+                <p style={{ fontSize: "16px" }} className="activite ">
+                  Création de votre Profil
+                </p>
+              </div>
+            </div>
+
             <div className="steps-icons">
-              {/* <p className="line"></p> */}
               <div className={pageStage === 1 ? `step step-active` : `step`}>
                 <p
-                  className="step-icon"
+                  className=" d-flex justify-content-center align-items-center step-icon"
                   onClick={() => dispatch(setFormStage(1))}
                 >
-                  <Icon id="icon" icon="bi:fingerprint" />
+                  <img src="/imgs/search1.png" alt="" />
                 </p>
                 <p className="title">Identité</p>
               </div>
-              <div className="line"></div>
+              <p className="line"></p>
               <div className={pageStage === 2 ? `step step-active` : `step`}>
                 <p
-                  className="step-icon"
+                  className=" d-flex justify-content-center align-items-center step-icon"
                   onClick={() => dispatch(setFormStage(2))}
                 >
-                  <Icon id="icon" icon="fa-solid:bullhorn" />
+                  <img src="/imgs/marque.png" alt="" />
                 </p>
                 <p className="title">Image de marque</p>
               </div>
 
-              <div
-                className={
-                  pageStage === 3 || pageStage === 4
-                    ? `step step-active`
-                    : `step`
-                }
-              >
+              <div className={pageStage === 3 ? `step step-active` : `step`}>
                 <p
-                  className="step-icon"
+                  className=" d-flex justify-content-center align-items-center step-icon"
                   onClick={() => dispatch(setFormStage(3))}
                 >
-                  <Icon id="icon" icon="iconoir:open-in-browser" />
+                  <img src="/imgs/catalogue.png" alt="" />
                 </p>
                 <p className="title">E-Catalogue</p>
               </div>
 
               <div className={pageStage === 5 ? `step step-active` : `step`}>
                 <p
-                  className="step-icon"
+                  className=" d-flex justify-content-center align-items-center step-icon"
                   onClick={() => dispatch(setFormStage(5))}
                 >
-                  <Icon id="icon" icon="fluent:target-arrow-16-filled" />
+                  <img src="/imgs/target.png" alt="" />
                 </p>
                 <p className="title">Cible</p>
               </div>
@@ -105,16 +119,10 @@ function CompanySetting() {
                 1: <Identite />,
                 2: <Marque />,
                 3: <Catalogue />,
-                4: <Article />,
                 5: <Cible />,
+                4: <Article />,
               }[pageStage]
             }
-          </div>
-
-          <div className="d-flex justify-content-center pb-5">
-            <a href="#" onClick={handleDisconnect}>
-              Se déconnecter
-            </a>
           </div>
         </div>
       )}
