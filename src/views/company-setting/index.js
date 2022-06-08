@@ -44,7 +44,7 @@ function CompanySetting() {
       {loading ? (
         <PageLoading />
       ) : (
-        <div>
+        <div style={{ background: "#FAFBFF", zIndex: "-3" }}>
           <div className="background"></div>
           <section className="company-steps-icons container position-relative">
             <div className="row">
@@ -61,7 +61,7 @@ function CompanySetting() {
                 </div>
               </div>
             </div>
-            <div className="row  ">
+            <div className="row mt-4 ">
               <div className=" wrapper col-12 col-md-3 offset-md-5">
                 <p style={{ fontSize: "16px" }} className="activite ">
                   Création de votre Profil

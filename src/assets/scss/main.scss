@@ -34,11 +34,12 @@ body {
   width: 100%;
   min-height: 100vh;
   height: 100%;
-  z-index: -10;
-  background-image: url("/assets/imgs/bg.png");
+  position: fixed;
+  background-image: url("/assets/imgs/Vector49.png");
   background-size: cover;
   background-repeat: no-repeat;
-  background-position-x: center;
+  top: 13%;
+  right: -2%;
 }
 
 #root {

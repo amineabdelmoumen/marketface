@@ -232,3 +232,35 @@
 
   color: #092d58;
 }
+.title-identite-des {
+  font-family: $font-manrope;
+  margin-top: 7px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 150%;
+  /* identical to box height, or 24px */
+
+  letter-spacing: 0.4px;
+  color: #707070;
+  text-align: center;
+  margin: 1px 10px;
+}
+
+#form-identite {
+  background-color: white;
+  min-width: 100px;
+  padding: 14px 60px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 8px;
+  margin-bottom: 1.5em;
+}
+
+.cmp-ls {
+  font-family: $font-default1;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 18px;
+  color: #092d58;
+}

@@ -345,3 +345,15 @@ form#form-identite {
 
   color: #000000;
 }
+.sg-nm {
+  font-family: $font-default1;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 269.9%;
+  /* identical to box height, or 49px */
+
+  text-align: center;
+
+  color: rgba(0, 0, 0, 0.26);
+}

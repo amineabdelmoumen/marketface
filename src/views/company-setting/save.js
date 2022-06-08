@@ -36,78 +36,180 @@ function Save(props) {
   };
 
   return (
-    <div className="container mt-5">
-      <img src="/imgs/logo.png" alt="logo" width={100} />
+    <div className="container mt-5" id="form-identite">
+      <div className="d-flex justify-content-center">
+        <img src="/imgs/logo.png" alt="logo" width={100} />
+      </div>
       <div className="row">
-        <div className="col-8 offset-2">
+        <div className="col-10 offset-2">
           {location.state && location.state?.auth === 1 ? (
-            <h5 className="text-secondary">
+            <p className="title-identite" style={{ fontSize: "27px" }}>
               Félicitation! vous avez complété votre profil avec succès !
-            </h5>
+            </p>
           ) : (
-            <h5 className="text-secondary">Vérification de votre compte</h5>
+            <p
+              className="title-identite"
+              style={{ color: "#707070", fontSize: "18px" }}
+            >
+              Vérification de votre compte
+            </p>
           )}
-          <p>
-            Le document ci-après nous permet de vérifier l’identité de votre
-            entreprise et garantir votre sécurité. Vous pourrez alors accéder à
-            un réseau de confiance et de fiabilité !
-          </p>
-          <p className="my-4 text-primary">
-            Votre demande de vérification de votre compte à Marketface est
-            gratuite.
-          </p>
-          <img src="/imgs/stepper.png" alt="" height={140} />
-          <label
-            htmlFor="docs"
-            className="border border-success w-50 py-3 mx-auto mt-5 d-flex justify-content-center gap-5"
-            style={{ borderRadius: "14px" }}
+          <div className="row">
+            <div className="col-md-11 ">
+              <p
+                className="title-identite-des"
+                style={{
+                  fontSize: "17px",
+                  textAlign: "center",
+                }}
+              >
+                Le document ci-après nous permet de vérifier l’identité de votre
+                entreprise et garantir votre sécurité. Vous pourrez alors
+                accéder à un réseau de confiance et de fiabilité !
+              </p>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-9">
+              <p
+                className="title-identite-des my-3"
+                style={{
+                  fontSize: "14px",
+                  color: "#36A9E1",
+                  marginLeft: "52px",
+                }}
+              >
+                Votre demande de vérification de votre compte à Marketface est
+                gratuite.
+              </p>
+            </div>
+          </div>
+          <div
+            className="row company-steps-icons"
+            style={{ marginTop: "-36px", marginLeft: "-62px" }}
           >
-            <img src="/imgs/clip.png" width={30} alt="clip" />
-
-            <p className="text-primary">Joindre votre demande</p>
-            <input
-              id="docs"
-              type="file"
-              name="documents[]"
-              multiple
-              className="d-none"
-              onChange={(e) => handleDocsUpload(e)}
-            />
-          </label>
+            <div
+              className="   steps-icons"
+              style={{ width: "84%", margin: "1px" }}
+            >
+              <div className=" col-md-3 step step-active">
+                <p
+                  className="d-flex justify-content-center align-items-center step-icon"
+                  style={{ width: "70px", height: "70px" }}
+                >
+                  <img src="/imgs/printer.png" alt="" />
+                </p>
+                <p className="cmp-ls mt-2">Rédigez et imprimez la demande </p>
+              </div>
+              <div className="col-md-3 step step-active">
+                <p
+                  className="d-flex justify-content-center align-items-center step-icon"
+                  style={{ width: "70px", height: "70px" }}
+                >
+                  <img src="/imgs/contract2.png" alt="" />
+                </p>
+                <p className="cmp-ls mt-2">Signez* et cachetez la demande </p>
+              </div>
+              <div className="col-md-3 step step-active">
+                <p
+                  className="d-flex justify-content-center align-items-center step-icon"
+                  style={{ width: "70px", height: "70px" }}
+                >
+                  <img src="/imgs/barcode.png" alt="" />
+                </p>
+                <p className="cmp-ls mt-2">Scannez et joignez la demande </p>
+              </div>
+              <div className="col-md-3 step step-active">
+                <p
+                  className="d-flex justify-content-center align-items-center step-icon"
+                  style={{ width: "70px", height: "70px" }}
+                >
+                  <img src="/imgs/checMark.png" alt="" />
+                </p>
+                <p className="cmp-ls mt-2">Compte verifié </p>
+              </div>
+            </div>
+          </div>
+          <div className="row mt-3">
+            <div
+              className="col-md-6 offset-lg-2"
+              style={{ marginLeft: "170px" }}
+            >
+              <label
+                htmlFor="docs"
+                className="wrapper-ident  d-flex justify-content-center "
+                style={{
+                  borderRadius: "14px",
+                  border: "1px solid tfransparent",
+                }}
+              >
+                <p className="title-identite me-4" style={{ fontSize: "15px" }}>
+                  Joindre votre demande
+                </p>
+                <input
+                  id="docs"
+                  type="file"
+                  name="documents[]"
+                  multiple
+                  className="d-none"
+                  onChange={(e) => handleDocsUpload(e)}
+                />
+                <img src="/imgs/clip.png" width={30} alt="clip" />
+              </label>
+            </div>
+          </div>
           <div className="d-flex justify-content-center mt-2">
             <a
               href={`${process.env.REACT_APP_HOST_URL}/../Demande.pdf`}
               target="_blank"
             >
-              <small>
-                <span className="fas fa-download mr-2"></span>Téléchargez le
-                modèle de la demande de vérification
+              <small
+                className="cmp-ls"
+                style={{ fontSize: "16px", marginLeft: "-92px" }}
+              >
+                Téléchargez le modèle de la demande de vérification
               </small>
             </a>
           </div>
-          <div className="row">
-            <div className="col-6 offset-3">
-              <div className="d-flex justify-content-center my-5">
-                <button
+          <div className="row mt-4" style={{ marginLeft: "-92px" }}>
+            <div className="col-7 offset-3">
+              <div className="d-flex justify-content-center">
+                <div
+                  className=" d-flex justify-content-center  wrapper-ident  col-12 col-md-6 me-3"
+                  onClick={() => navigate("/profil")}
+                >
+                  <p style={{ fontSize: "16px" }} className="rg-iden">
+                    Plus tard
+                  </p>
+                </div>
+
+                <div
+                  className=" d-flex justify-content-center  sv-btn col-12 col-md-6 "
+                  onClick={() => sendDocs()}
+                >
+                  <p style={{ fontSize: "16px" }} className="suivant-iden">
+                    Suivant
+                  </p>
+                </div>
+                {/* <button
                   className="btn pointer btn-outline-success rounded-pill me-3 px-4"
                   onClick={() => navigate("/profil")}
                 >
                   Plus tard
-                </button>
-                <button
+                </button> */}
+                {/* <button
                   className="btn btn-success text-white rounded-pill px-5"
                   onClick={() => sendDocs()}
                 >
                   Envoyer
-                </button>
+                </button> */}
                 <ToastContainer />
               </div>
             </div>
-            <div className="col-3 d-flex justify-content-end align-items-baseline">
-              <img src="/imgs/logo-lg.png" alt="logo" width={160} />
-            </div>
           </div>
-          <small>*La signature numérique est autorisée</small>
+          <small className="sg-nm" style={{ marginLeft: "-217px" }}>
+            *La signature numérique est autorisée
+          </small>
         </div>
       </div>
     </div>
