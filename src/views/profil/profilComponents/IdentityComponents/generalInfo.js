@@ -3,108 +3,282 @@ import { setFormStage } from "../../../../store/rootSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setCatalogue } from "../../../../store/profileSlice";
 import { saveCatalogue } from "../../../../lib/crud";
+import Select from "react-select";
+import "./styles.scss";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Catalogue() {
   const toastId = useRef(null);
   const toastPending = () =>
-    (toastId.current = toast("L'ajout de l'article est en cours ......", {
-      autoClose: 10000,
-      type: toast.TYPE.INFO,
-      position: toast.POSITION.TOP_CENTER,
-    }));
-  const toastSuccess = () =>
-    (toastId.current = toast.update(toastId.current, {
-      render: "Article Produit a été ajouté  avec succés",
-      autoClose: 1500,
-      type: toast.TYPE.SUCCESS,
-      position: toast.POSITION.TOP_CENTER,
-    }));
+    (toastId.current = toast(
+      "L'Enregistrement des modification est en cours ......",
+      {
+        autoClose: 10000,
+        type: toast.TYPE.INFO,
+        position: toast.POSITION.TOP_CENTER,
+      }
+    ));
+
   const toastSuccessUpdate = () =>
     (toastId.current = toast.update(toastId.current, {
-      render: "Article Produit a été Modifié  avec succés",
+      render: "Vos Infos generales ont été Modifié  avec succés",
       autoClose: 1500,
       type: toast.TYPE.SUCCESS,
       position: toast.POSITION.TOP_CENTER,
     }));
   const toastError = () =>
     (toastId.current = toast.update(toastId.current, {
-      render: "Echec d'ajout du produit !",
+      render: "Echec de Modification !",
       autoClose: 1500,
       type: toast.TYPE.ERROR,
       position: toast.POSITION.TOP_CENTER,
     }));
+  const customStyles = {
+    option: (provided, state) => ({
+      ...provided,
 
-  const [screenWidth, setScreenWidth] = useState(window.screen.width);
-  const getWindowWidth = () => {
-    return Math.max(
-      document.documentElement.clientWidth,
-      window.innerWidth || 0
-    );
-  };
-  const onResize = () => {
-    window.requestAnimationFrame(() => {
-      const width = getWindowWidth();
-
-      setScreenWidth(width);
-    });
-  };
-  useEffect(() => {
-    window.addEventListener("resize", onResize);
-  }, []);
-  const style = "fw-bold";
-  let InputStyle = {
-    letterspacing: "0px",
-    color: "#707070",
-    opacity: 1,
-    border: "1px solid #A4A4A4",
-    width: "100%",
-    borderRadius: "36px",
-    paddingLeft: "3px",
-    textAlign: "center",
-  };
-  const style1 = {
-    letterspacing: "0px",
-    color: "#707070",
-    opacity: 1,
-    marginTop: "13px",
+      padding: 20,
+      fontSize: "14px",
+      fontFamily: "Lato",
+      color: "#092d58",
+    }),
   };
   const dispatch = useDispatch();
   const catalogue = useSelector((state) => state.profile.catalogue);
-  const [showOnSaveButton, setShaowOnSaveButton] = useState(0);
+  const [defaultBusiness, setDefaultBusiness] = useState([]);
+  const [defaultBusiness2, setDefaultBusiness2] = useState([]);
+
+  const [defaultMatieres, setDefaultMatieres] = useState([]);
+  const [defaultMatieres2, setDefaultMatieres2] = useState([]);
+  const [defaultLocations, setDefaultLocations] = useState([]);
+  const [defaultLocations2, setDefaultLocations2] = useState([]);
+
+  const [defaultMoyens, setDefaultMoyens] = useState([]);
+  const [defaultMoyens2, setDefaultMoyens2] = useState([]);
+  const [defaultTypes, setDefaultTypes] = useState([]);
+  const [defaultTypes2, setDefaultTypes2] = useState([]);
+
+  const [defaultProduits, setDefaultProduits] = useState([]);
+  const [defaultProduits2, setDefaultProduits2] = useState([]);
+
+  const [defaultDistribution, setDefaultDistribution] = useState([]);
+  const [defaultDistribution2, setDefaultDistribution2] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const business = [
+    { value: "B2B", label: "B2B" },
+    { value: "B2C", label: "B2C" },
+    { value: "B2G", label: "B2G" },
+  ];
+  const matieres = [
+    { value: "Matière première", label: "Matière première" },
+    { value: "Distribution", label: "Distribution" },
+    { value: "Revendeur", label: "Revendeur" },
+    { value: "Transformation", label: "Transformation" },
+  ];
+  const locations = [
+    { value: "offshore", label: "Offshore" },
+    { value: "onshore", label: "Onshore" },
+    { value: "nearshore", label: "Nearshore" },
+  ];
+  const moyens = [
+    { value: "En ligne", label: "En ligne" },
+    { value: "En magasin", label: "En magasin" },
+    { value: "En usine", label: "En usine" },
+  ];
+  const typesVents = [
+    { value: "Détaillant", label: "Détaillant" },
+    { value: "Grossiste", label: "Grossiste" },
+  ];
+
+  const produits = [
+    { value: "Importés", label: "Importés" },
+    { value: "Locaux", label: "Locaux" },
+  ];
+  const distribution = [
+    { value: "Local", label: "Local" },
+    { value: "Export", label: "Export" },
+  ];
+  useEffect(() => {
+    let data = [];
+    if (catalogue.business && catalogue.business.length) {
+      catalogue.business.forEach((business) => {
+        data.push({
+          label: business,
+          value: business,
+        });
+      });
+      setDefaultBusiness2(data);
+      data = [];
+    } else {
+      setDefaultBusiness2([]);
+    }
+  }, [defaultBusiness]);
+  useEffect(() => {
+    let data = [];
+    if (catalogue.matiere && catalogue.matiere.length) {
+      catalogue.matiere.forEach((matiere) => {
+        data.push({
+          label: matiere,
+          value: matiere,
+        });
+      });
+      setDefaultMatieres2(data);
+      data = [];
+    } else {
+      setDefaultMatieres2([]);
+    }
+  }, [defaultMatieres]);
+  useEffect(() => {
+    let data = [];
+    if (catalogue.location && catalogue.location.length) {
+      catalogue.location.forEach((location) => {
+        data.push({
+          label: location,
+          value: location,
+        });
+      });
+      setDefaultLocations2(data);
+      data = [];
+    } else {
+      setDefaultLocations2([]);
+    }
+  }, [defaultLocations]);
+  useEffect(() => {
+    let data = [];
+    if (catalogue.moyen && catalogue.moyen.length) {
+      catalogue.moyen.forEach((moyen) => {
+        data.push({
+          label: moyen,
+          value: moyen,
+        });
+      });
+      setDefaultMoyens2(data);
+      data = [];
+    } else {
+      setDefaultMoyens2([]);
+    }
+  }, [defaultMoyens]);
+
+  useEffect(() => {
+    let data = [];
+    if (catalogue.type_vente && catalogue.type_vente.length) {
+      catalogue.type_vente.forEach((type) => {
+        data.push({
+          label: type,
+          value: type,
+        });
+      });
+      setDefaultTypes2(data);
+      data = [];
+    } else {
+      setDefaultTypes2([]);
+    }
+  }, [defaultTypes]);
+
+  useEffect(() => {
+    let data = [];
+    if (catalogue.produit_achete && catalogue.produit_achete.length) {
+      catalogue.produit_achete.forEach((prod) => {
+        data.push({
+          label: prod,
+          value: prod,
+        });
+      });
+      setDefaultProduits2(data);
+      data = [];
+    } else {
+      setDefaultProduits2([]);
+    }
+  }, [defaultProduits]);
+  useEffect(() => {
+    let data = [];
+    if (catalogue.distribution && catalogue.distribution.length) {
+      catalogue.distribution.forEach((distr) => {
+        data.push({
+          label: distr,
+          value: distr,
+        });
+      });
+      setDefaultDistribution2(data);
+      data = [];
+    } else {
+      setDefaultDistribution2([]);
+    }
+  }, [defaultDistribution]);
+
   const handleInputUpdate = (field, e) => {
     let data = { ...catalogue };
     data[field] = e.target.value;
     dispatch(setCatalogue(data));
   };
-  const handleSubmit = async () => {
-    const element = document.getElementById("submitBtn");
-    element.disabled = true;
-    setTimeout(function () {
-      element.disabled = false;
-    }, 5000);
-
+  const handleSubmit = () => {
     const token = localStorage.getItem("token");
     toastPending();
-    try {
-      const res = await saveCatalogue(catalogue, token);
+    saveCatalogue(catalogue, token)
+      .then(() => {
+        toastSuccessUpdate();
+        dispatch(setFormStage(4));
+      })
+      .catch((err) => {
+        let data = err.response.data;
+        toastError();
+      });
+  };
+  const handleMultiSelect = (field, values) => {
+    let data = { ...catalogue };
+    let elements = [];
+    // eslint-disable-next-line array-callback-return
 
-      dispatch(setFormStage(4));
-      toastSuccessUpdate();
-    } catch (err) {
-      let data = err.response.data;
-      toastError();
+    values.map((val) => {
+      elements.push(val.value);
+    });
+
+    data[field] = elements;
+    dispatch(setCatalogue(data));
+    let selectedElements = [];
+    catalogue[field].forEach((elem) => {
+      selectedElements.push({
+        label: elem,
+        value: elem,
+      });
+    });
+    if (field == "business") {
+      setDefaultBusiness(selectedElements);
+      console.log(defaultBusiness);
+      selectedElements = [];
+    }
+
+    if (field == "matiere") {
+      setDefaultMatieres(selectedElements);
+      selectedElements = [];
+    }
+    if (field == "location") {
+      setDefaultLocations(selectedElements);
+      selectedElements = [];
+    }
+    if (field == "moyen") {
+      setDefaultMoyens(selectedElements);
+      selectedElements = [];
+    }
+    if (field == "type_vente") {
+      setDefaultTypes(selectedElements);
+      selectedElements = [];
+    }
+    if (field == "produit_achete") {
+      setDefaultProduits(selectedElements);
+      selectedElements = [];
+    }
+    if (field == "distribution") {
+      setDefaultDistribution(selectedElements);
+      selectedElements = [];
     }
   };
 
   const findElement = (element, list) => {
-    if (list) {
-      return list.find((el) => element === el);
-    }
+    return list.find((el) => element === el);
   };
-  const handleMultiSelect = (field, e) => {
-    setShaowOnSaveButton(1);
+  /*  const handleMultiSelect = (field, e) => {
     let data = { ...catalogue };
     let val = e.target.value;
     if (findElement(val, data[field])) {
@@ -118,580 +292,239 @@ function Catalogue() {
       data[field] = [...data[field], val];
     }
     dispatch(setCatalogue(data));
+  }; */
+  let InputStyle = {
+    font: "normal normal normal 14px/11px Montserrat",
+    letterspacing: "0px",
+    color: "#707070",
+    opacity: 1,
+    border: "1px solid #A4A4A4",
+    width: "100%",
+    borderRadius: "36px",
+    paddingLeft: "3px",
+    textAlign: "center",
+  };
+  const accrochStyle = {
+    fontFamily: "Montserrat",
+    letterSpacing: "0px",
+    color: "#00B5FF",
+    opacity: 1,
+    textAlign: "center",
+    marginBottom: "35px",
+  };
+  const areaScrollStyle = {
+    border: "none",
+    outline: "none",
+    boxShadow: "none",
+    overflow: "auto",
+    resize: "none",
+    display: "block",
   };
   return (
     <>
-      <form name="form-identite" id="form-identitie">
-        <div className="identite-form d-block">
+      <form className="container" name="form-identite" id="form-identite-gen">
+        {/* <div className="page_number">1/2</div> */}
+
+        <div className="form-identite-info d-block mt-3">
           <div className="row">
-            <div className="col-12">
+            <div className="col-md-12">
               <div className="row form-boxes">
-                <div className="col-md-5">
-                  <label htmlFor="vous_etes" style={style1}>
+                <div className="col-md-6">
+                  <label htmlFor="vous_etes" style={{ fontSize: "13px" }}>
                     Vous êtes:
                   </label>
                 </div>
-                <div className="col-md-7 ">
+                <div className="col-md-6">
                   <select
                     name="vous_etes"
                     id="vous_etes"
-                    style={{
-                      ...InputStyle,
-                      width: screenWidth <= 768 ? "100%" : "40%",
-                      backgroundColor: "white",
-                    }}
                     value={catalogue.vous_etes}
                     onChange={(e) => handleInputUpdate("vous_etes", e)}
                   >
-                    <option value="franchisé">franchisé</option>
-                    <option value="franchiseur">franchiseur</option>
-                    <option value="aucun">aucun</option>
+                    <option value="franchisé">Franchisé</option>
+                    <option value="franchiseur">Franchiseur</option>
+                    <option value="aucun">Aucun</option>
                   </select>
                 </div>
               </div>
-              <div className="row form-boxes mt-4">
-                <div className="col-6 col-md-5">
-                  <label htmlFor="" style={style1}>
-                    Quelle est votre activité opérationnelle ?
+
+              <div className=" row form-boxes">
+                <div className="col-lg-6">
+                  <label htmlFor="activite" style={{ fontSize: "13px" }}>
+                    Quelle est votre activité opérationnelle?
                   </label>
                 </div>
-                <div className="col-md-7">
-                  <div className="row">
-                    <div className="col-12 col-md-12">
-                      <label
-                        style={{
-                          ...InputStyle,
-                          width: screenWidth <= 768 ? "100%" : "40%",
-                        }}
-                        htmlFor="matiere"
-                        className={`px-2 py-2 cursor-pointer ${
-                          findElement("matière première", catalogue.matiere)
-                            ? "bg-secondary text-white"
-                            : "text-black-50"
-                        }`}
-                      >
-                        Matière première
-                        <input
-                          type="checkbox"
-                          name="matiere"
-                          id="matiere"
-                          value="matière première"
-                          className="d-none"
-                          onChange={(e) => handleMultiSelect("matiere", e)}
-                        />
-                      </label>
-                    </div>
-                    <div className="col-12 col-md-12 mt-2">
-                      <label
-                        htmlFor="transformation"
-                        style={{
-                          ...InputStyle,
-                          width: screenWidth <= 768 ? "100%" : "40%",
-                        }}
-                        className={`px-2 py-2 cursor-pointer ${
-                          findElement("transformation", catalogue.matiere)
-                            ? "bg-secondary text-white"
-                            : "text-black-50"
-                        }`}
-                      >
-                        Transformation
-                        <input
-                          type="checkbox"
-                          name="matiere"
-                          id="transformation"
-                          value="transformation"
-                          className="d-none"
-                          onChange={(e) => handleMultiSelect("matiere", e)}
-                        />
-                      </label>
-                    </div>
-
-                    <div className="col-12 mt-2">
-                      <label
-                        htmlFor="distribution"
-                        style={{
-                          ...InputStyle,
-                          width: screenWidth <= 768 ? "100%" : "40%",
-                        }}
-                        className={`px-2 py-2 cursor-pointer ${
-                          findElement("distribution", catalogue.matiere)
-                            ? "bg-secondary text-white"
-                            : "text-black-50"
-                        }`}
-                      >
-                        Distribution
-                        <input
-                          type="checkbox"
-                          name="matiere"
-                          id="distribution"
-                          value="distribution"
-                          className="d-none"
-                          onChange={(e) => handleMultiSelect("matiere", e)}
-                        />
-                      </label>
-                    </div>
-                    <div className="col-12 col-md-12 mt-2">
-                      <label
-                        htmlFor="revendeur"
-                        style={{
-                          ...InputStyle,
-                          width: screenWidth <= 768 ? "100%" : "40%",
-                        }}
-                        className={`px-2 py-2 cursor-pointer ${
-                          findElement("revendeur", catalogue.matiere)
-                            ? "bg-secondary text-white"
-                            : "text-black-50"
-                        }`}
-                      >
-                        Revendeur
-                        <input
-                          type="checkbox"
-                          name="matiere"
-                          id="revendeur"
-                          value="revendeur"
-                          className="d-none"
-                          onChange={(e) => handleMultiSelect("matiere", e)}
-                        />
-                      </label>
-                    </div>
-                  </div>
+                <div className="col-6 col-lg-6 ">
+                  <Select
+                    isMulti
+                    styles={customStyles}
+                    options={matieres}
+                    value={defaultMatieres2 == [] ? [{}] : defaultMatieres2}
+                    onChange={(vals) => handleMultiSelect("matiere", vals)}
+                  />
                 </div>
-              </div>
-            </div>
-            <div className="row form-boxes mt-4">
-              <div className="col-md-5">
-                <label htmlFor="prenom_nome" style={style1}>
-                  Quel est le type de business que vous entreprenez ?
-                </label>
-              </div>
-              <div className="col-md-7">
-                <div className="row">
-                  <div className="col-md-3">
-                    <label
-                      htmlFor="b2b"
-                      style={{
-                        ...InputStyle,
-                        marginTop: screenWidth <= 768 ? "10px" : "",
-                      }}
-                      className={`px-2 py-2 cursor-pointer ${
-                        findElement("B2B", catalogue.business)
-                          ? "bg-secondary text-white"
-                          : "text-black-50"
-                      }`}
-                    >
-                      B2B
-                      <input
-                        type="checkbox"
-                        name="type"
-                        id="b2b"
-                        value="B2B"
-                        className="d-none"
-                        onChange={(e) => handleMultiSelect("business", e)}
-                      />
-                    </label>
-                  </div>
-                  <div className="col-md-3">
-                    <label
-                      htmlFor="b2c"
-                      style={{
-                        ...InputStyle,
-                        marginTop: screenWidth <= 768 ? "10px" : "",
-                      }}
-                      className={`px-2 py-2 cursor-pointer ${
-                        findElement("B2C", catalogue.business)
-                          ? "bg-secondary text-white"
-                          : "text-black-50"
-                      }`}
-                    >
-                      B2C
-                      <input
-                        type="checkbox"
-                        name="type"
-                        id="b2c"
-                        value="B2C"
-                        className="d-none"
-                        onChange={(e) => handleMultiSelect("business", e)}
-                      />
-                    </label>
-                  </div>
-                  <div className="col-md-3">
-                    <label
-                      htmlFor="b2g"
-                      style={{
-                        ...InputStyle,
-                        marginTop: screenWidth <= 768 ? "10px" : "",
-                      }}
-                      className={`px-2 py-2 cursor-pointer ${
-                        findElement("B2G", catalogue.business)
-                          ? "bg-secondary text-white"
-                          : "text-black-50"
-                      }`}
-                    >
-                      B2G
-                      <input
-                        type="checkbox"
-                        name="type"
-                        id="b2g"
-                        value="B2G"
-                        className="d-none"
-                        onChange={(e) => handleMultiSelect("business", e)}
-                      />
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="row mt-4 form-boxes">
-              <div className="col-md-5 ">
-                <label style={style1}>Où sont localisées vos activités ?</label>
-              </div>
-              <div className="col-md-2">
-                <label
-                  htmlFor="offshore"
-                  style={{
-                    ...InputStyle,
-                    marginTop: screenWidth <= 768 ? "10px" : "",
-                  }}
-                  className={`px-2 py-2 cursor-pointer ${
-                    findElement("Offshore", catalogue.location)
-                      ? "bg-secondary text-white"
-                      : "text-black-50"
-                  }`}
-                >
-                  Offshore
-                  <input
-                    type="checkbox"
-                    name="location"
-                    id="offshore"
-                    value="Offshore"
-                    className="d-none"
-                    onChange={(e) => handleMultiSelect("location", e)}
-                  />
-                </label>
-              </div>
-              <div className="col-md-2">
-                <label
-                  htmlFor="onshore"
-                  style={{
-                    ...InputStyle,
-                    marginTop: screenWidth <= 768 ? "10px" : "",
-                  }}
-                  className={`px-2 py-2 cursor-pointer ${
-                    findElement("Onshore", catalogue.location)
-                      ? "bg-secondary text-white"
-                      : "text-black-50"
-                  }`}
-                >
-                  Onshore
-                  <input
-                    type="checkbox"
-                    name="location"
-                    id="onshore"
-                    value="Onshore"
-                    className="d-none"
-                    onChange={(e) => handleMultiSelect("location", e)}
-                  />
-                </label>
-              </div>
-              <div className="col-md-2">
-                <label
-                  htmlFor="nearshore"
-                  style={{
-                    ...InputStyle,
-                    marginTop: screenWidth <= 768 ? "10px" : "",
-                  }}
-                  className={`px-2 py-2 cursor-pointer ${
-                    findElement("Nearshore", catalogue.location)
-                      ? "bg-secondary text-white"
-                      : "text-black-50"
-                  }`}
-                >
-                  Nearshore
-                  <input
-                    type="checkbox"
-                    name="location"
-                    id="nearshore"
-                    value="Nearshore"
-                    className="d-none"
-                    onChange={(e) => handleMultiSelect("location", e)}
-                  />
-                </label>
-              </div>
-              <div className="col-md-1"></div>
-            </div>
 
-            <div className="row mt-4 form-boxes">
-              <div className="col-md-5">
-                <label style={style1}>
-                  Quel moyen utilisez-vous pour vendre vos services ?
-                </label>
-              </div>
-              <div className="col-md-2">
-                <label
-                  htmlFor="online"
-                  style={{
-                    ...InputStyle,
-                    marginTop: screenWidth <= 768 ? "10px" : "",
-                  }}
-                  className={`px-2 py-2 cursor-pointer ${
-                    findElement("En ligne", catalogue.moyen)
-                      ? "bg-secondary text-white"
-                      : "text-black-50"
-                  }`}
-                >
-                  En ligne
-                  <input
-                    type="checkbox"
-                    name="moyen"
-                    id="online"
-                    value="En ligne"
-                    className="d-none"
-                    onChange={(e) => handleMultiSelect("moyen", e)}
-                  />
-                </label>
-              </div>
-              <div className="col-md-2">
-                <label
-                  htmlFor="magasin"
-                  style={{
-                    ...InputStyle,
-                    marginTop: screenWidth <= 768 ? "10px" : "",
-                  }}
-                  className={`px-2 py-2 cursor-pointer ${
-                    findElement("En magasin", catalogue.moyen)
-                      ? "bg-secondary text-white"
-                      : "text-black-50"
-                  }`}
-                >
-                  En magasin
-                  <input
-                    type="checkbox"
-                    name="moyen"
-                    id="magasin"
-                    value="En magasin"
-                    className="d-none"
-                    onChange={(e) => handleMultiSelect("moyen", e)}
-                  />
-                </label>
-              </div>
-              <div className="col-md-2">
-                <label
-                  htmlFor="usine"
-                  style={{
-                    ...InputStyle,
-                    marginTop: screenWidth <= 768 ? "10px" : "",
-                  }}
-                  className={`px-2 py-2 cursor-pointer ${
-                    findElement("En usine", catalogue.moyen)
-                      ? "bg-secondary text-white"
-                      : "text-black-50"
-                  }`}
-                >
-                  En usine
-                  <input
-                    type="checkbox"
-                    name="moyen"
-                    id="usine"
-                    value="En usine"
-                    className="d-none"
-                    onChange={(e) => handleMultiSelect("moyen", e)}
-                  />
-                </label>
-              </div>
-              <div className="col-md-1"></div>
-            </div>
-            <div className="row form-boxes mt-4">
-              <div className="col-md-5">
-                <label htmlFor="" style={style1}>
-                  De quelle façon vendez-vous vos produits ?
-                </label>
-              </div>
-              <div className="col-md-2">
-                <label
-                  htmlFor="detaillant"
-                  style={{
-                    ...InputStyle,
-                    marginTop: screenWidth <= 768 ? "10px" : "",
-                  }}
-                  className={`px-2 py-2 cursor-pointer ${
-                    findElement("Détaillant", catalogue.type_vente)
-                      ? "bg-secondary text-white"
-                      : "text-black-50"
-                  }`}
-                >
-                  Détaillant
-                  <input
-                    type="checkbox"
-                    name="moyen"
-                    id="detaillant"
-                    value="Détaillant"
-                    className="d-none"
-                    onChange={(e) => handleMultiSelect("type_vente", e)}
-                  />
-                </label>
-              </div>
-              <div className="col-md-2">
-                <label
-                  htmlFor="grossiste"
-                  style={{
-                    ...InputStyle,
-                    marginTop: screenWidth <= 768 ? "10px" : "",
-                  }}
-                  className={`px-2 py-2 cursor-pointer ${
-                    findElement("Grossiste", catalogue.type_vente)
-                      ? "bg-secondary text-white"
-                      : "text-black-50"
-                  }`}
-                >
-                  Grossiste
-                  <input
-                    type="checkbox"
-                    name="moyen"
-                    id="grossiste"
-                    value="Grossiste"
-                    className="d-none"
-                    onChange={(e) => handleMultiSelect("type_vente", e)}
-                  />
-                </label>
-              </div>
-
-              <div className="col-md-3"></div>
-            </div>
-            <div className="row form-boxes mt-4">
-              <div className="col-md-5">
-                <label htmlFor="importes" style={style1}>
-                  {" "}
-                  Les produits que vous achetez sont :
-                </label>
-              </div>
-
-              <div className="col-md-2">
-                <label
-                  htmlFor="importes"
-                  style={{
-                    ...InputStyle,
-                    marginTop: screenWidth <= 768 ? "10px" : "",
-                  }}
-                  className={`px-2 py-2 cursor-pointer ${
-                    findElement("Importés", catalogue.produit_achete)
-                      ? "bg-secondary text-white"
-                      : "text-black-50"
-                  }`}
-                >
-                  Importés
-                  <input
-                    type="checkbox"
-                    name="moyen"
-                    id="importes"
-                    value="Importés"
-                    className="d-none"
-                    onChange={(e) => handleMultiSelect("produit_achete", e)}
-                  />
-                </label>
-              </div>
-
-              <div className="col-md-2">
-                <label
-                  htmlFor="locaux"
-                  style={{
-                    ...InputStyle,
-                    marginTop: screenWidth <= 768 ? "10px" : "",
-                  }}
-                  className={`px-2 py-2 cursor-pointer ${
-                    findElement("Locaux", catalogue.produit_achete)
-                      ? "bg-secondary text-white"
-                      : "text-black-50"
-                  }`}
-                >
-                  Locaux
-                  <input
-                    type="checkbox"
-                    name="moyen"
-                    id="locaux"
-                    value="Locaux"
-                    className="d-none"
-                    onChange={(e) => handleMultiSelect("produit_achete", e)}
-                  />
-                </label>
-              </div>
-              <div className="col-md-3"></div>
-            </div>
-
-            <div className="row form-boxes mt-4">
-              <div className="col-md-5">
-                <label htmlFor="nombre_employés" style={style1}>
-                  De quelle façon distribuez-vous vos produits ?
-                </label>
-              </div>
-              <div className="col-md-2">
-                <label
-                  htmlFor="local"
-                  style={{
-                    ...InputStyle,
-                    marginTop: screenWidth <= 768 ? "10px" : "",
-                  }}
-                  className={`px-2 py-2 cursor-pointer ${
-                    findElement("Local", catalogue.distribution)
-                      ? "bg-secondary text-white"
-                      : "text-black-50"
-                  }`}
-                >
-                  Local
-                  <input
-                    type="checkbox"
-                    name="distribution"
-                    id="local"
-                    value="Local"
-                    className="d-none"
-                    onChange={(e) => handleMultiSelect("distribution", e)}
-                  />
-                </label>
-              </div>
-              <div className="col-md-2">
-                <label
-                  htmlFor="export"
-                  style={{
-                    ...InputStyle,
-                    marginTop: screenWidth <= 768 ? "10px" : "",
-                  }}
-                  className={`px-2 py-2 cursor-pointer ${
-                    findElement("Export", catalogue.distribution)
-                      ? "bg-secondary text-white"
-                      : "text-black-50"
-                  }`}
-                >
-                  Export
-                  <input
-                    type="checkbox"
-                    name="distribution"
-                    id="export"
-                    value="Export"
-                    className="d-none"
-                    onChange={(e) => handleMultiSelect("distribution", e)}
-                  />
-                </label>
-              </div>
-              <div className="col-md-3"></div>
-            </div>
-            <div className="row">
-              <div className="d-flex mt-3 justify-content-end mt-3">
-                {showOnSaveButton == 1 ? (
-                  <button
-                    type="button"
-                    id="submitBtn"
-                    className="btn pointer btn-success text-white m-4 rounded-pill px-4"
-                    onClick={handleSubmit}
+                {/* <div className="col-6 col-lg-2">
+                  <label
+                    htmlFor="revendeur"
+                    style={InputStyle}
+                    className={`px-2 py-2 cursor-pointer ${
+                      findElement("revendeur", catalogue.matiere)
+                        ? "bg-secondary text-white"
+                        : "text-black-50"
+                    }`}
                   >
-                    Save Changes
-                  </button>
-                ) : (
-                  ""
-                )}
+                    Revendeur
+                    <input
+                      type="checkbox"
+                      name="matiere"
+                      id="revendeur"
+                      value="revendeur"
+                      className="d-none"
+                      onChange={(e) => handleMultiSelect("matiere", e)}
+                    />
+                  </label>
+                </div> */}
               </div>
-              <ToastContainer limit={1} />
+
+              <div className=" row form-boxes">
+                <div className="col-md-6">
+                  <label htmlFor="prenom_nome" style={{ fontSize: "13px" }}>
+                    Quel est le type de business que vous entreprenez?
+                  </label>
+                </div>
+                <div className="col-6 col-lg-6 ">
+                  <Select
+                    isMulti
+                    styles={customStyles}
+                    options={business}
+                    value={defaultBusiness2 == [] ? [{}] : defaultBusiness2}
+                    onChange={(vals) => handleMultiSelect("business", vals)}
+                  />
+                </div>
+              </div>
+              <div className=" row form-boxes">
+                <div className="col-md-5">
+                  <label htmlFor="prenom_nome" style={{ fontSize: "13px" }}>
+                    Où sont localisées vos activités?
+                  </label>
+                </div>
+                <div className="col-6 col-lg-6 ">
+                  <Select
+                    styles={customStyles}
+                    isMulti
+                    options={locations}
+                    value={defaultLocations2 == [] ? [{}] : defaultLocations2}
+                    onChange={(vals) => handleMultiSelect("location", vals)}
+                  />
+                </div>
+              </div>
+              <div className=" row form-boxes">
+                <div className="col-md-5">
+                  <label htmlFor="organisme_type " style={{ fontSize: "13px" }}>
+                    Quel moyen utilisez-vous pour vendre vos services?
+                  </label>
+                </div>
+                <div className="col-6 col-lg-6 ">
+                  <Select
+                    styles={customStyles}
+                    isMulti
+                    options={moyens}
+                    value={defaultMoyens2 == [] ? [{}] : defaultMoyens2}
+                    onChange={(vals) => handleMultiSelect("moyen", vals)}
+                  />
+                </div>
+              </div>
+
+              <div className="row form-boxes">
+                <div className="col-md-5">
+                  {" "}
+                  <label
+                    htmlFor="organisme_taille"
+                    style={{ fontSize: "13px" }}
+                  >
+                    De quelle façon vendez-vous vos produits?
+                  </label>
+                </div>
+                <div className="col-6 col-lg-6 ">
+                  <Select
+                    styles={customStyles}
+                    isMulti
+                    options={typesVents}
+                    value={defaultTypes2 == [] ? [{}] : defaultTypes2}
+                    onChange={(vals) => handleMultiSelect("type_vente", vals)}
+                  />
+                </div>
+              </div>
+              <div className="row form-boxes">
+                <div className="col-md-5">
+                  {" "}
+                  <label htmlFor="nombre_employés" style={{ fontSize: "13px" }}>
+                    Les produits que vous achetez sont:
+                  </label>
+                </div>
+                <div className="col-6 col-lg-6 ">
+                  <Select
+                    styles={customStyles}
+                    isMulti
+                    options={produits}
+                    value={defaultProduits2 == [] ? [{}] : defaultProduits2}
+                    onChange={(vals) =>
+                      handleMultiSelect("produit_achete", vals)
+                    }
+                  />
+                </div>
+              </div>
+              <div className=" row form-boxes">
+                <div className="col-md-5">
+                  <label htmlFor="nombre_employés" style={{ fontSize: "13px" }}>
+                    De quelle façon distribuez-vous vos produits?
+                  </label>
+                </div>
+                <div className="col-6 col-lg-6 ">
+                  <Select
+                    styles={customStyles}
+                    isMulti
+                    options={distribution}
+                    value={
+                      defaultDistribution2 == [] ? [{}] : defaultDistribution2
+                    }
+                    onChange={(vals) => handleMultiSelect("distribution", vals)}
+                  />
+                </div>
+              </div>
             </div>
           </div>
+
+          <div className="buttons d-flex justify-content-end">
+            <div
+              className=" d-flex justify-content-center  sv-btn col-12 col-md-2 "
+              onClick={() => handleSubmit()}
+            >
+              <p style={{ fontSize: "16px" }} className="suivant-iden">
+                Enregistrer
+              </p>
+            </div>
+          </div>
+          {/* <div className="d-flex mt-3 justify-content-end">
+            <button
+              type="button"
+              className="btn pointer btn-outline-secondary rounded-pill px-4"
+              onClick={() => dispatch(setFormStage(2))}
+            >
+              Précédent
+            </button>
+            <button
+              type="button"
+              className="btn pointer ml-4 btn-success text-white rounded-pill px-4 ms-5"
+              onClick={() => handleSubmit()}
+            >
+              Suivant
+            </button>
+            <ToastContainer />
+          </div> */}
         </div>
+        <ToastContainer />
       </form>
     </>
   );

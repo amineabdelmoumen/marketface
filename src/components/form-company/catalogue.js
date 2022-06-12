@@ -1,15 +1,187 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { setFormStage } from "../../store/rootSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setCatalogue } from "../../store/profileSlice";
 import { saveCatalogue } from "../../lib/crud";
+import Select from "react-select";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Catalogue() {
+  const customStyles = {
+    option: (provided, state) => ({
+      ...provided,
+
+      padding: 20,
+      fontSize: "14px",
+      fontFamily: "Lato",
+      color: "#092d58",
+    }),
+  };
   const dispatch = useDispatch();
   const catalogue = useSelector((state) => state.profile.catalogue);
+  const [defaultBusiness, setDefaultBusiness] = useState([]);
+  const [defaultBusiness2, setDefaultBusiness2] = useState([]);
+
+  const [defaultMatieres, setDefaultMatieres] = useState([]);
+  const [defaultMatieres2, setDefaultMatieres2] = useState([]);
+  const [defaultLocations, setDefaultLocations] = useState([]);
+  const [defaultLocations2, setDefaultLocations2] = useState([]);
+
+  const [defaultMoyens, setDefaultMoyens] = useState([]);
+  const [defaultMoyens2, setDefaultMoyens2] = useState([]);
+  const [defaultTypes, setDefaultTypes] = useState([]);
+  const [defaultTypes2, setDefaultTypes2] = useState([]);
+
+  const [defaultProduits, setDefaultProduits] = useState([]);
+  const [defaultProduits2, setDefaultProduits2] = useState([]);
+
+  const [defaultDistribution, setDefaultDistribution] = useState([]);
+  const [defaultDistribution2, setDefaultDistribution2] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const business = [
+    { value: "B2B", label: "B2B" },
+    { value: "B2C", label: "B2C" },
+    { value: "B2G", label: "B2G" },
+  ];
+  const matieres = [
+    { value: "Matière première", label: "Matière première" },
+    { value: "Distribution", label: "Distribution" },
+    { value: "Revendeur", label: "Revendeur" },
+    { value: "Transformation", label: "Transformation" },
+  ];
+  const locations = [
+    { value: "offshore", label: "Offshore" },
+    { value: "onshore", label: "Onshore" },
+    { value: "nearshore", label: "Nearshore" },
+  ];
+  const moyens = [
+    { value: "En ligne", label: "En ligne" },
+    { value: "En magasin", label: "En magasin" },
+    { value: "En usine", label: "En usine" },
+  ];
+  const typesVents = [
+    { value: "Détaillant", label: "Détaillant" },
+    { value: "Grossiste", label: "Grossiste" },
+  ];
+
+  const produits = [
+    { value: "Importés", label: "Importés" },
+    { value: "Locaux", label: "Locaux" },
+  ];
+  const distribution = [
+    { value: "Local", label: "Local" },
+    { value: "Export", label: "Export" },
+  ];
+  useEffect(() => {
+    let data = [];
+    if (catalogue.business && catalogue.business.length) {
+      catalogue.business.forEach((business) => {
+        data.push({
+          label: business,
+          value: business,
+        });
+      });
+      setDefaultBusiness2(data);
+      data = [];
+    } else {
+      setDefaultBusiness2([]);
+    }
+  }, [defaultBusiness]);
+  useEffect(() => {
+    let data = [];
+    if (catalogue.matiere && catalogue.matiere.length) {
+      catalogue.matiere.forEach((matiere) => {
+        data.push({
+          label: matiere,
+          value: matiere,
+        });
+      });
+      setDefaultMatieres2(data);
+      data = [];
+    } else {
+      setDefaultMatieres2([]);
+    }
+  }, [defaultMatieres]);
+  useEffect(() => {
+    let data = [];
+    if (catalogue.location && catalogue.location.length) {
+      catalogue.location.forEach((location) => {
+        data.push({
+          label: location,
+          value: location,
+        });
+      });
+      setDefaultLocations2(data);
+      data = [];
+    } else {
+      setDefaultLocations2([]);
+    }
+  }, [defaultLocations]);
+  useEffect(() => {
+    let data = [];
+    if (catalogue.moyen && catalogue.moyen.length) {
+      catalogue.moyen.forEach((moyen) => {
+        data.push({
+          label: moyen,
+          value: moyen,
+        });
+      });
+      setDefaultMoyens2(data);
+      data = [];
+    } else {
+      setDefaultMoyens2([]);
+    }
+  }, [defaultMoyens]);
+
+  useEffect(() => {
+    let data = [];
+    if (catalogue.type_vente && catalogue.type_vente.length) {
+      catalogue.type_vente.forEach((type) => {
+        data.push({
+          label: type,
+          value: type,
+        });
+      });
+      setDefaultTypes2(data);
+      data = [];
+    } else {
+      setDefaultTypes2([]);
+    }
+  }, [defaultTypes]);
+
+  useEffect(() => {
+    let data = [];
+    if (catalogue.produit_achete && catalogue.produit_achete.length) {
+      catalogue.produit_achete.forEach((prod) => {
+        data.push({
+          label: prod,
+          value: prod,
+        });
+      });
+      setDefaultProduits2(data);
+      data = [];
+    } else {
+      setDefaultProduits2([]);
+    }
+  }, [defaultProduits]);
+  useEffect(() => {
+    let data = [];
+    if (catalogue.distribution && catalogue.distribution.length) {
+      catalogue.distribution.forEach((distr) => {
+        data.push({
+          label: distr,
+          value: distr,
+        });
+      });
+      setDefaultDistribution2(data);
+      data = [];
+    } else {
+      setDefaultDistribution2([]);
+    }
+  }, [defaultDistribution]);
+
   const handleInputUpdate = (field, e) => {
     let data = { ...catalogue };
     data[field] = e.target.value;
@@ -25,11 +197,60 @@ function Catalogue() {
         let data = err.response.data;
       });
   };
+  const handleMultiSelect = (field, values) => {
+    let data = { ...catalogue };
+    let elements = [];
+    // eslint-disable-next-line array-callback-return
+
+    values.map((val) => {
+      elements.push(val.value);
+    });
+
+    data[field] = elements;
+    dispatch(setCatalogue(data));
+    let selectedElements = [];
+    catalogue[field].forEach((elem) => {
+      selectedElements.push({
+        label: elem,
+        value: elem,
+      });
+    });
+    if (field == "business") {
+      setDefaultBusiness(selectedElements);
+      console.log(defaultBusiness);
+      selectedElements = [];
+    }
+
+    if (field == "matiere") {
+      setDefaultMatieres(selectedElements);
+      selectedElements = [];
+    }
+    if (field == "location") {
+      setDefaultLocations(selectedElements);
+      selectedElements = [];
+    }
+    if (field == "moyen") {
+      setDefaultMoyens(selectedElements);
+      selectedElements = [];
+    }
+    if (field == "type_vente") {
+      setDefaultTypes(selectedElements);
+      selectedElements = [];
+    }
+    if (field == "produit_achete") {
+      setDefaultProduits(selectedElements);
+      selectedElements = [];
+    }
+    if (field == "distribution") {
+      setDefaultDistribution(selectedElements);
+      selectedElements = [];
+    }
+  };
 
   const findElement = (element, list) => {
     return list.find((el) => element === el);
   };
-  const handleMultiSelect = (field, e) => {
+  /*  const handleMultiSelect = (field, e) => {
     let data = { ...catalogue };
     let val = e.target.value;
     if (findElement(val, data[field])) {
@@ -43,7 +264,7 @@ function Catalogue() {
       data[field] = [...data[field], val];
     }
     dispatch(setCatalogue(data));
-  };
+  }; */
   let InputStyle = {
     font: "normal normal normal 14px/11px Montserrat",
     letterspacing: "0px",
@@ -84,7 +305,7 @@ function Catalogue() {
 
         <div className="form-identite-info d-block mt-3">
           <div className="row">
-            <div className="col-md-9">
+            <div className="col-md-7">
               <h5 className="section-title" style={{ marginTop: "10px" }}>
                 Parlez nous de votre activité et attirez plus de prospect
               </h5>
@@ -115,18 +336,13 @@ function Catalogue() {
                   </label>
                 </div>
                 <div className="col-6 col-lg-6 ">
-                  <select
-                    name="matiere"
-                    id="matiere"
-                    value={catalogue.matiere}
-                    onChange={(e) => handleMultiSelect("matiere", e)}
-                  >
-                    <option value="matière première">Matière première</option>
-                    <option value="transformation">Transformation</option>
-                    <option value="distribution">Distribution</option>
-                    <option value="revendeur">Revendeur</option>
-                    Revendeur
-                  </select>
+                  <Select
+                    isMulti
+                    styles={customStyles}
+                    options={matieres}
+                    value={defaultMatieres2 == [] ? [{}] : defaultMatieres2}
+                    onChange={(vals) => handleMultiSelect("matiere", vals)}
+                  />
                 </div>
 
                 {/* <div className="col-6 col-lg-2">
@@ -159,16 +375,13 @@ function Catalogue() {
                   </label>
                 </div>
                 <div className="col-6 col-lg-6 ">
-                  <select
-                    name="matiere"
-                    id="matiere"
-                    value={catalogue.business}
-                    onChange={(e) => handleMultiSelect("business", e)}
-                  >
-                    <option value="B2B">B2B</option>
-                    <option value="B2C">B2C</option>
-                    <option value="B2G">B2G</option>
-                  </select>
+                  <Select
+                    isMulti
+                    styles={customStyles}
+                    options={business}
+                    value={defaultBusiness2 == [] ? [{}] : defaultBusiness2}
+                    onChange={(vals) => handleMultiSelect("business", vals)}
+                  />
                 </div>
               </div>
               <div className=" row form-boxes">
@@ -178,16 +391,13 @@ function Catalogue() {
                   </label>
                 </div>
                 <div className="col-6 col-lg-6 ">
-                  <select
-                    name="location"
-                    id="location"
-                    value={catalogue.location}
-                    onChange={(e) => handleMultiSelect("location", e)}
-                  >
-                    <option value="offshore"> Offshore</option>
-                    <option value="onshore"> Onshore</option>
-                    <option value="nearshore">Nearshore</option>
-                  </select>
+                  <Select
+                    styles={customStyles}
+                    isMulti
+                    options={locations}
+                    value={defaultLocations2 == [] ? [{}] : defaultLocations2}
+                    onChange={(vals) => handleMultiSelect("location", vals)}
+                  />
                 </div>
               </div>
               <div className=" row form-boxes">
@@ -197,18 +407,16 @@ function Catalogue() {
                   </label>
                 </div>
                 <div className="col-6 col-lg-6 ">
-                  <select
-                    name="moyen"
-                    id="moyen"
-                    value={catalogue.location}
-                    onChange={(e) => handleMultiSelect("moyen", e)}
-                  >
-                    <option value="En ligne"> En ligne</option>
-                    <option value=" En magasin"> En magasin</option>
-                    <option value="En usine">En usine</option>
-                  </select>
+                  <Select
+                    styles={customStyles}
+                    isMulti
+                    options={moyens}
+                    value={defaultMoyens2 == [] ? [{}] : defaultMoyens2}
+                    onChange={(vals) => handleMultiSelect("moyen", vals)}
+                  />
                 </div>
               </div>
+
               <div className="row form-boxes">
                 <div className="col-md-5">
                   {" "}
@@ -220,15 +428,13 @@ function Catalogue() {
                   </label>
                 </div>
                 <div className="col-6 col-lg-6 ">
-                  <select
-                    name="type_vente"
-                    id="type_vente"
-                    value={catalogue.type_vente}
-                    onChange={(e) => handleMultiSelect("type_vente", e)}
-                  >
-                    <option value="Détaillant">Détaillant</option>
-                    <option value=" Grossiste"> Grossiste</option>
-                  </select>
+                  <Select
+                    styles={customStyles}
+                    isMulti
+                    options={typesVents}
+                    value={defaultTypes2 == [] ? [{}] : defaultTypes2}
+                    onChange={(vals) => handleMultiSelect("type_vente", vals)}
+                  />
                 </div>
               </div>
               <div className="row form-boxes">
@@ -239,15 +445,15 @@ function Catalogue() {
                   </label>
                 </div>
                 <div className="col-6 col-lg-6 ">
-                  <select
-                    name="produit_achete"
-                    id="produit_achete"
-                    value={catalogue.type_vente}
-                    onChange={(e) => handleMultiSelect("produit_achete", e)}
-                  >
-                    <option value="Importés"> Importés</option>
-                    <option value=" Locaux"> Locaux</option>
-                  </select>
+                  <Select
+                    styles={customStyles}
+                    isMulti
+                    options={produits}
+                    value={defaultProduits2 == [] ? [{}] : defaultProduits2}
+                    onChange={(vals) =>
+                      handleMultiSelect("produit_achete", vals)
+                    }
+                  />
                 </div>
               </div>
               <div className=" row form-boxes">
@@ -257,15 +463,15 @@ function Catalogue() {
                   </label>
                 </div>
                 <div className="col-6 col-lg-6 ">
-                  <select
-                    name="distribution"
-                    id="distribution"
-                    value={catalogue.type_vente}
-                    onChange={(e) => handleMultiSelect("distribution", e)}
-                  >
-                    <option value="Local"> Local</option>
-                    <option value="Export"> Export</option>
-                  </select>
+                  <Select
+                    styles={customStyles}
+                    isMulti
+                    options={distribution}
+                    value={
+                      defaultDistribution2 == [] ? [{}] : defaultDistribution2
+                    }
+                    onChange={(vals) => handleMultiSelect("distribution", vals)}
+                  />
                 </div>
               </div>
             </div>
@@ -274,7 +480,7 @@ function Catalogue() {
             </div>
             <div className="col-md-2 d-none d-lg-block">
               <img
-                style={{ marginLeft: "-246px", marginTop: "100px" }}
+                style={{ marginLeft: "-52px", marginTop: "149px" }}
                 src="/imgs/Img.png"
                 alt=""
               />

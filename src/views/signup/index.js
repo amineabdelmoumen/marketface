@@ -24,7 +24,7 @@ const Signup = () => {
   const phoneRef = useRef();
   const passwordRef = useRef();
   const dispatch = useDispatch();
-  const [registerForm, setRegisterForm] = useState({ legal: false, phone: "" });
+  const registerForm = useSelector((state) => state.profile.register);
   const [loading, setLoading] = useState(true);
   const [style, setStyle] = useState("form-check-label");
   const navigate = useNavigate();
@@ -49,30 +49,28 @@ const Signup = () => {
     }
     let data = { ...registerForm };
     data[field] = e.target.value;
-    setRegisterForm(data);
+    dispatch(setRegister(data));
   };
   const handleAgreementConditions = (e) => {
     let data = { ...registerForm };
     data.legal = !data.legal;
     console.log(`data.legal ${!data.legal}`);
-    data.phone = value;
-    setRegisterForm(data);
+
+    data["phone"] = value;
+    console.log(data);
+
+    dispatch(setRegister(data));
   };
   const handleConnect = () => {
     navigate("/");
   };
   const handleClick = async () => {
-    if (registerForm.legal) {
-      try {
-        await register(registerForm);
-        navigate("/");
-      } catch (e) {
-        let data = e.response?.data;
-        showErrors(data.errors);
-      }
-    } else {
-      console.log("You should agree about about the terms");
-      setStyle((prev) => "form-check-label text-danger");
+    try {
+      await register(registerForm);
+      navigate("/");
+    } catch (e) {
+      let data = e.response?.data;
+      showErrors(data.errors);
     }
   };
 

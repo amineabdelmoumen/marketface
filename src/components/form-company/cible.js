@@ -5,7 +5,7 @@ import Select from "react-select";
 import { setCible } from "../../store/profileSlice";
 import { useNavigate } from "react-router-dom";
 import { saveCibles } from "../../lib/crud";
-
+import "./styles.scss";
 const regions = [
   {
     value: "Tangier-Tétouan-Al Houceima",
@@ -157,6 +157,16 @@ const activites = [
 ];
 
 function Cible() {
+  const customStyles = {
+    option: (provided, state) => ({
+      ...provided,
+
+      padding: 20,
+      fontSize: "14px",
+      fontFamily: "Lato",
+      color: "#092d58",
+    }),
+  };
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cible = useSelector((state) => state.profile.cible);
@@ -288,6 +298,7 @@ function Cible() {
                 <div className="w-50">
                   <Select
                     isMulti
+                    styles={customStyles}
                     options={regions}
                     defaultValue={defaultRegions}
                     onChange={(vals) => handleMultiSelect("regions", vals)}
@@ -304,6 +315,7 @@ function Cible() {
                 <div className="w-50">
                   <Select
                     isMulti
+                    styles={customStyles}
                     options={activites}
                     defaultValue={defaultActivites}
                     onChange={(vals) => handleMultiSelect("activites", vals)}

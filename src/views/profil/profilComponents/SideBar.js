@@ -5,6 +5,8 @@ export default function SideBar({
   setSideBarColumns,
   sideBarColumns,
   setProfilSection,
+  setCompanySection,
+  companySection,
 }) {
   console.log(setSideBarColumns, sideBarColumns);
   const navigate = useNavigate();
@@ -63,7 +65,7 @@ export default function SideBar({
         </div>
 
         <div
-          onClick={() => setBgcolor(2)}
+          onClick={() => setData(2)}
           className="elem1 d-flex align-items-center "
           style={bgcolor == 2 ? { ...style, background: "#36A9E1" } : style}
           /* */
@@ -96,12 +98,35 @@ export default function SideBar({
             >
               Mon entreprise
             </span>
+
+            {bgcolor == 2 ? (
+              <div style={{ marginTop: "28px", marginLeft: "-8px" }}>
+                <p
+                  className={
+                    companySection == 1 ? "if-grn xfg-clicked" : "if-grn "
+                  }
+                  onClick={() => setCompanySection(1)}
+                >
+                  {" "}
+                  Identite
+                </p>
+                <p className="if-grn">Image de marque</p>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
         <div
           onClick={() => setBgcolor(3)}
           className="elem1 d-flex align-items-center "
-          style={bgcolor == 3 ? { ...style, background: "#36A9E1" } : style}
+          style={
+            bgcolor == 3
+              ? { ...style, background: "#36A9E1" }
+              : bgcolor == 2
+              ? { ...style, marginTop: "70px" }
+              : style
+          }
           /* */
         >
           {bgcolor == 3 ? <p className="line-s"></p> : ""}

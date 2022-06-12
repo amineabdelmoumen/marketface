@@ -304,18 +304,9 @@
   border-radius: 10px;
   padding: 10px;
 }
-.circle1 {
-  position: relative;
-  width: 74px;
-  height: 72px;
-  border-radius: 50%;
-  background: linear-gradient(
-    90deg,
-    rgba(54, 169, 225, 0.1) 0%,
-    rgba(9, 45, 88, 0.1) 100%
-  );
-}
+
 .txg {
+  margin-top: 7px;
   font-family: $font-manrope;
   font-style: normal;
   font-weight: 800;
@@ -334,7 +325,24 @@
 
   background: linear-gradient(90deg, rgba(54, 169, 225, 0.68) 0%, #092d58 100%);
 }
-
+.circle1 {
+  position: relative;
+  width: 74px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(
+    90deg,
+    rgba(54, 169, 225, 0.1) 0%,
+    rgba(9, 45, 88, 0.1) 100%
+  );
+}
+.circle11 {
+  position: relative;
+  width: 74px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(232, 240, 249, 0.3);
+}
 .circle2 {
   transform: translate(17%, 17%);
   width: 56px;
@@ -346,6 +354,13 @@
     rgba(9, 45, 88, 0.21) 100%
   );
 }
+.circle22 {
+  transform: translate(17%, 17%);
+  width: 56px;
+  border-radius: 50%;
+  height: 55px;
+  background: rgba(232, 240, 249, 0.7);
+}
 
 .circle3 {
   transform: translate(15%, 13%);
@@ -353,6 +368,13 @@
   border-radius: 50%;
   height: 43px;
   background-color: #36a9e1;
+}
+.circle33 {
+  transform: translate(15%, 13%);
+  width: 43px;
+  border-radius: 50%;
+  height: 43px;
+  background: #e8f0f9;
 }
 .xline-about {
   position: absolute;
@@ -865,4 +887,15 @@ input[type="text"]:focus {
   position: absolute;
   left: 26px;
   top: 10px;
+}
+.if-grn {
+  margin-top: 8px;
+  font-family: $font-lato;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 21px;
+  /* identical to box height, or 150% */
+
+  color: #8181a5;
 }

@@ -1,14 +1,15 @@
 import React, { useState, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { saveCompany } from "../../../../lib/crud";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { setIdentite } from "../../../../store/profileSlice";
 
 export default function ContactInfo() {
+  const dispatch = useDispatch();
   const toastId = useRef(null);
-  const profil = useSelector((state) => state.profile);
+  const identitie = useSelector((state) => state.profile.identite);
   const [showButton, setShowButton] = useState(0);
-  const [identitie, setIdentitie] = useState(profil.identite);
 
   const style1 = {
     font: "normal normal normal 14px/11px Montserrat",
@@ -28,7 +29,7 @@ export default function ContactInfo() {
     setShowButton(1);
     let identite = { ...identitie };
     identite[field] = e.target.value;
-    setIdentitie(identite);
+    dispatch(setIdentite(identite));
   };
 
   const toastPending = () =>
@@ -77,12 +78,14 @@ export default function ContactInfo() {
 
   const style = "fw-bold";
   return (
-    <div className="row py-5 px-1 mt-5">
-      <div className="col-md-8 offset-md-3 py-4 identite-form">
+    <form className="container" name="form-identite" id="form-identite-gen">
+      {/* <div className="page_number">1/2</div> */}
+
+      <div className="form-identite-info d-block mt-3">
         <div className="row form-boxes">
           <div className="col-md-5 mt-2 ">
             <div>
-              <p style={style1}>Numéro du Téléphone :</p>
+              <label>Numéro du Téléphone :</label>
             </div>
           </div>
           <div className="col-md-6 mt-2">
@@ -90,7 +93,6 @@ export default function ContactInfo() {
               <input
                 type="text"
                 value={identitie.telephone}
-                style={InputStyle}
                 onChange={(e) => handleInputChange("telephone", e)}
               />
             </div>
@@ -99,7 +101,7 @@ export default function ContactInfo() {
         <div className="row mt-3 form-boxes">
           <div className="col-md-3 mt-2">
             <div>
-              <p style={style1}>Site Web :</p>
+              <label>Site Web :</label>
             </div>
           </div>
           <div className="col-md-6 mt-2">
@@ -116,7 +118,7 @@ export default function ContactInfo() {
         <div className="row mt-3 form-boxes">
           <div className="col-md-3 mt-2">
             <div>
-              <p style={style1}>Adresse:</p>
+              <label>Adresse:</label>
             </div>
           </div>
           <div className="col-md-6 offset-md-2 mt-2">
@@ -124,27 +126,27 @@ export default function ContactInfo() {
               <input
                 type="text"
                 value={identitie.siege_social}
-                style={InputStyle}
                 onChange={(e) => handleInputChange("siege_social", e)}
               />
             </div>
           </div>
         </div>
-        <div className="d-flex justify-content-end mt-3">
-          {showButton == 1 ? (
-            <button
-              type="button"
-              className="btn pointer btn-success text-white m-4 rounded-pill px-4"
+        {showButton == 1 ? (
+          <div className="buttons d-flex justify-content-end">
+            <div
+              className=" d-flex justify-content-center  sv-btn col-12 col-md-2 "
               onClick={handleOnSave}
             >
-              Save Changes
-            </button>
-          ) : (
-            ""
-          )}
-        </div>
+              <p style={{ fontSize: "16px" }} className="suivant-iden">
+                Enregistrer
+              </p>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
       <ToastContainer limit={1} />
-    </div>
+    </form>
   );
 }

@@ -327,20 +327,16 @@ function Marque() {
                 {marque.description?.length < 256 ? (
                   <div className="texet">
                     {" "}
-                    <p className="text-black-50 h6 mt-4">
-                      {marque.description}
-                    </p>
+                    <p className=" h6 mt-4">{marque.description}</p>
                   </div>
                 ) : isFullDescription ? (
                   <div className="texet">
                     {" "}
-                    <p className="text-black-50 h6 mt-4">
-                      {marque.description}
-                    </p>
+                    <p className=" h6 mt-4">{marque.description}</p>
                   </div>
                 ) : (
                   <div className="texet">
-                    <p className="text-black-50 h6 mt-4">
+                    <p className=" h6 mt-4">
                       {marque.description.slice(0, 256)}
                       {"... "}
                       <a

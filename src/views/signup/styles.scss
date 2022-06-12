@@ -3,7 +3,7 @@
 .image {
   max-width: 100%;
 }
-.oppor {
+.oppor-a {
   margin-top: 10px;
   font-family: $font-public-sans;
   font-style: normal;
@@ -160,17 +160,17 @@ input[type="password"]:focus {
   background: #4c7ad4;
 }
 .cred-des {
-  margin-left: 17px;
-  font-family: $font-public-sans;
+  margin-left: 17px !important;
+  font-family: $font-public-sans !important;
   font-style: normal;
-  font-weight: 700;
-  font-size: 12px;
-  line-height: 18px;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  line-height: 18px !important;
   /* identical to box height, or 150% */
 
   /* #171721/Primary */
 
-  color: #171721;
+  color: #171721 !important;
 }
 .container {
   display: block;

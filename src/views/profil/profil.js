@@ -14,6 +14,11 @@ import "./styles.scss";
 import { setProfil, setReferences } from "../../store/profileSlice";
 import Layout from "./Layout";
 import Identity from "./profilComponents/Identity";
+import AbouIdentity from "./profilComponents/IdentityComponents/AbouIdentity";
+import Catalogue from "./profilComponents/IdentityComponents/generalInfo";
+import LegalInfo from "./profilComponents/IdentityComponents/legalInfo";
+import FinancialInfo from "./profilComponents/IdentityComponents/financialInfo";
+import ContactInfo from "./profilComponents/IdentityComponents/contactInfo";
 
 function Profil() {
   const dispatch = useDispatch();
@@ -21,6 +26,8 @@ function Profil() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [profilSection, setProfilSection] = useState(1);
+  const [identitySection, setIdentitySection] = useState(1);
+  const [companySection, setCompanySection] = useState(1);
 
   useEffect(async () => {
     const token = localStorage.getItem("token");
@@ -31,6 +38,7 @@ function Profil() {
         getProfile(token)
           .then((res) => res.data)
           .then((data) => {
+            console.log("profil", data);
             dispatch(setProfil(data));
 
             setLoading(false);
@@ -47,13 +55,16 @@ function Profil() {
         <PageLoading />
       ) : (
         <div>
-          <Layout setProfilSection={setProfilSection}>
-            <div className="row">
-              <div className="col-12 col-md-3">
-                <CompanyCard />
-              </div>
-
-              {profilSection == 1 ? (
+          <Layout
+            setProfilSection={setProfilSection}
+            setCompanySection={setCompanySection}
+            companySection={companySection}
+          >
+            {profilSection == 1 ? (
+              <div className="row">
+                <div className="col-12 col-md-3">
+                  <CompanyCard />
+                </div>
                 <div className="col-12 col-md-9">
                   <div className="row mb-4 mt-2 ">
                     <div className="d-flex  flex-wrap position-relative">
@@ -165,11 +176,35 @@ function Profil() {
                     }[tab]
                   }
                 </div>
-              ) : (
-                ""
-              )}
-            </div>
-            <div className="row mt-2">
+              </div>
+            ) : (
+              ""
+            )}
+            {profilSection == 2 && companySection == 1 ? (
+              <div className="row">
+                <div className="col-12 col-md-4">
+                  <AbouIdentity
+                    identitySection={identitySection}
+                    setIdentitySection={setIdentitySection}
+                  />
+                </div>
+
+                <div className="col-12 col-md-8" style={{ marginTop: "62px" }}>
+                  {
+                    {
+                      1: <Catalogue />,
+                      2: <LegalInfo />,
+                      3: <FinancialInfo />,
+                      4: <ContactInfo />,
+                    }[identitySection]
+                  }
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
+
+            {/*  <div className="row mt-2">
               <div className="col-12 col-md-12">
                 <CompanyDetails />
               </div>
@@ -178,7 +213,7 @@ function Profil() {
               <div className="col-12 col-md-12 about1">
                 <CompanyTeam />
               </div>
-            </div>
+            </div> */}
           </Layout>
         </div>
       )}

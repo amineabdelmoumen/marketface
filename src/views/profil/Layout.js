@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import NavBar from "./profilComponents/NavBar";
 import SideBar from "./profilComponents/SideBar";
 
-export default function Layout({ children, setProfilSection }) {
+export default function Layout({
+  children,
+  setProfilSection,
+  setCompanySection,
+  companySection,
+}) {
   const [sideBarColumns, setSideBarColumns] = useState(0);
   return (
     <div>
@@ -32,6 +37,8 @@ export default function Layout({ children, setProfilSection }) {
             setSideBarColumns={setSideBarColumns}
             sideBarColumns={sideBarColumns}
             setProfilSection={setProfilSection}
+            setCompanySection={setCompanySection}
+            companySection={companySection}
           />
         </div>
 

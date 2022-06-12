@@ -25,7 +25,7 @@ export default function Identity() {
   return (
     <div className="row" style={{ marginLeft: "7px", marginTop: "56px" }}>
       {" "}
-      <div className="about position-relative">
+      {/* <div className="about position-relative">
         <i class="fa-solid fa-ellipsis eclipse"></i>
         <div className="about-flex">
           <div className="col-md-5 position-relative">
@@ -90,7 +90,7 @@ export default function Identity() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

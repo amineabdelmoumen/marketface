@@ -121,9 +121,10 @@ form#form-identite {
         border: 1px solid #e6e8f0;
         border-radius: 6px;
         padding: 0 6px;
-        font-size: 14px;
+        font-size: 16px;
         text-align: center;
         width: 170px;
+        font-family: $font-manrope;
       }
 
       input,
@@ -170,6 +171,10 @@ form#form-identite {
 .cursor-pointer {
   cursor: pointer;
 }
+.Select-value-label {
+  background-color: white;
+  color: #111;
+}
 
 .upload {
   border-radius: 16px;
@@ -182,7 +187,9 @@ form#form-identite {
 }
 .texet {
   height: 100px;
-
+  color: #092d58 !important;
+  font-family: $font-default1;
+  font-size: 15px;
   overflow-y: scroll;
   scroll-behavior: smooth;
   p {
@@ -277,6 +284,40 @@ form#form-identite {
 
   color: #e8f0f9;
 }
+.css-319lph-ValueContainer {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: grid;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding: 2px 8px;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.css-12jo7m5 {
+  border-radius: 2px;
+  color: #092d58 !important;
+  font-size: 78% !important;
+  overflow: hidden;
+  padding: 3px;
+  padding-left: 6px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-sizing: border-box;
+
+  font-family: $font-manrope !important;
+}
+
 .rg-iden {
   font-family: $font-manrope;
   font-style: normal;
@@ -307,11 +348,11 @@ form#form-identite {
 
 .nm-cat {
   width: 2px;
-  height: 450px;
+  height: 533px;
   background: linear-gradient(90deg, #36a9e1 0%, #092d58 100%);
   position: absolute;
-  top: 10%;
-  left: -190%;
+  top: 15%;
+  left: 15%;
 }
 .aj-tx {
   font-family: $font-default1;
