@@ -11,6 +11,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function About() {
+  const marque = useSelector((state) => state.profile.marque);
   const dispatch = useDispatch();
   const toastId = useRef(null);
   const toastPending = (field) =>
@@ -45,6 +46,8 @@ export default function About() {
     }));
   const about = useSelector((state) => state.profile);
   const id = about.identite.id;
+  console.log("id", id);
+  console.log("about is", about);
   const navigate = useNavigate();
   const [changePhoneNumber, setChangePhoneNumber] = useState(0);
   const [ChangedState, setChangedState] = useState({
@@ -55,8 +58,12 @@ export default function About() {
 
   const [aboutIdentite, setAboutIdentite] = useState(about.identite);
   console.log(aboutIdentite.website);
-  const [referenceAbout, setReferenceAbout] = useState(about.references[id]);
 
+  const [referenceAbout, setReferenceAbout] = useState(
+    about.references[about.references.length - 1]
+  );
+  console.log("referenceAbout id", referenceAbout);
+  /* console.log("+++++++++++++++", referenceAbout["description"]); */
   useEffect(() => {
     let text = document.getElementById("textarea").value;
     let lines = text.split(/\r|\r\n|\n/);
