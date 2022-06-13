@@ -167,9 +167,16 @@ function Cible() {
       color: "#092d58",
     }),
   };
+  const matieres = [
+    { value: "Matière première", label: "Matière première" },
+    { value: "Distribution", label: "Distribution" },
+    { value: "Revendeur", label: "Revendeur" },
+    { value: "Transformation", label: "Transformation" },
+  ];
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cible = useSelector((state) => state.profile.cible);
+  const [defaultMatieres, setDefaultMatieres] = useState([]);
 
   const [defaultRegions, setDefaultRegions] = useState([]);
   const [defaultActivites, setDefaultActivites] = useState([]);
@@ -199,6 +206,17 @@ function Cible() {
           });
         });
         setDefaultActivites(data);
+        data = [];
+      }
+      if (cible.matiere && cible.matiere.length) {
+        cible.activites.forEach((activite) => {
+          data.push({
+            label: activite,
+            value: activite,
+          });
+        });
+        setDefaultMatieres(data);
+        data = [];
       }
       setLoading(false);
     }
@@ -343,24 +361,18 @@ function Cible() {
                   <option value="GE">GE</option>
                 </select>
               </div>
-              <div className="form-boxes ">
+              <div className="form-boxes">
                 <label htmlFor="activite_oprationnelle">
                   Activité opérationnelle:
                 </label>
-                <select
-                  name="cherche"
-                  id="cherche"
-                  className="w-50 py-1"
-                  defaultValue={cible.activite_oprationnelle}
-                  onChange={(e) =>
-                    handleMultiChoice("activite_oprationnelle", e)
-                  }
-                >
-                  <option value="matière première">Matière première</option>
-                  <option value="transformation"> Transformation</option>
-                  <option value="distribution">Distribution</option>
-                  <option value="revendeur">Revendeur</option>
-                </select>
+                <Select
+                  className="w-50"
+                  isMulti
+                  styles={customStyles}
+                  options={matieres}
+                  defaultValue={defaultMatieres}
+                  onChange={(vals) => handleMultiSelect("matiere", vals)}
+                />
               </div>
             </div>
             <div className="col-md-4 offset-lg-2 d-none d-lg-block">
