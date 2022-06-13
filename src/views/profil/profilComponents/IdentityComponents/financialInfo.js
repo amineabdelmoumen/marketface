@@ -32,6 +32,11 @@ export default function FinancialInfo() {
   const dispatch = useDispatch();
   const identitie = useSelector((state) => state.profile.identite);
   const [showButton, setShowButton] = useState(0);
+  const [Ischecked, setIsChecked] = useState(false);
+
+  const handleOnChange = () => {
+    setIsChecked(!Ischecked);
+  };
 
   const handleInputChange = (field, e) => {
     setShowButton(1);
@@ -137,7 +142,8 @@ export default function FinancialInfo() {
                   id="todo"
                   name="todo"
                   value="todo"
-                  checked
+                  checked={Ischecked}
+                  onChange={(e) => handleOnChange(e)}
                 />
                 <label
                   className="form-check-label"

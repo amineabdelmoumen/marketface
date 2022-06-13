@@ -12,6 +12,7 @@ const Signup = () => {
   const [selectedTitle, setSelectedTitle] = useState("input-xfl selected");
   const [selectedPoste, setSelectedPoste] = useState("input-xfl selected");
   const [value, setValue] = useState();
+  const [legal, setLegal] = useState(false);
   const styleImage = {
     maxWidth: "100%",
   };
@@ -28,6 +29,13 @@ const Signup = () => {
   const [loading, setLoading] = useState(true);
   const [style, setStyle] = useState("form-check-label");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    let data = { ...registerForm };
+    data.phone = value;
+    dispatch(setRegister(data));
+    console.log("++++++++++++++", data.phone);
+  }, [value]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -52,19 +60,15 @@ const Signup = () => {
     dispatch(setRegister(data));
   };
   const handleAgreementConditions = (e) => {
-    let data = { ...registerForm };
-    data.legal = !data.legal;
-    console.log(`data.legal ${!data.legal}`);
-
-    data["phone"] = value;
-    console.log(data);
-
-    dispatch(setRegister(data));
+    setLegal(!legal);
+    console.log(`data.legal ${legal}`);
   };
   const handleConnect = () => {
     navigate("/");
   };
   const handleClick = async () => {
+    const data = { ...registerForm };
+    console.log("data to send", data);
     try {
       await register(registerForm);
       navigate("/");
@@ -277,7 +281,7 @@ const Signup = () => {
                   type="checkbox"
                   value=""
                   name="radio"
-                  checked={registerForm.legal}
+                  checked={legal}
                   onChange={(e) => handleAgreementConditions(e)}
                 />
                 <span class="checkmark"></span>

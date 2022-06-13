@@ -18,7 +18,7 @@ let uploadForm = new FormData();
 function Identite() {
   const dispatch = useDispatch();
   const identite = useSelector((state) => state.profile.identite);
-
+  const webRef = useRef();
   const raisonRef = useRef();
   const activiteRef = useRef();
   const statutRef = useRef();
@@ -110,6 +110,7 @@ function Identite() {
     paysRef.current.innerText = errors.pays ? errors.pays[0] : "";
     phoneRef.current.innerText = errors.telephone ? errors.telephone[0] : "";
     logoRef.current.innerText = errors.logo ? errors.logo[0] : "";
+    webRef.current.innerText = errors.website ? errors.website[0] : "";
   };
 
   return (
@@ -436,7 +437,22 @@ function Identite() {
               />
             </div>
             <small
-              ref={phoneRef}
+              ref={webRef}
+              className="text-danger ms-2 d-block"
+              style={{ "font-size": "10px" }}
+            ></small>
+            <div className="form-boxes">
+              <label htmlFor="website">*Website:</label>
+              <input
+                type="text"
+                id="website"
+                name="website"
+                defaultValue={identite.website}
+                onChange={(e) => handleInputChange("website", e)}
+              />
+            </div>
+            <small
+              ref={webRef}
               className="text-danger ms-2 d-block"
               style={{ "font-size": "10px" }}
             ></small>

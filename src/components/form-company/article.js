@@ -316,7 +316,7 @@ function Article(props) {
                   name="categorie"
                   id="categorie"
                   value={article.type}
-                  onChange={(e) => handleInputUpdate("categorie", e)}
+                  onChange={(e) => handleInputUpdate("type", e)}
                 >
                   {
                     {
@@ -495,7 +495,7 @@ function Article(props) {
                     <p className="row mt-2 ">
                       <p className="col-md-4 tx-ap me-2"> Prix: </p>{" "}
                       <p
-                        className="col-md-4 tx-ap"
+                        className="col-md-7 tx-ap"
                         style={{ fontSize: "14px", color: "#092D58" }}
                       >
                         {` ${article.prix} dhs`}
