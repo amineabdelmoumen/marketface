@@ -10,7 +10,7 @@ import Cible from "../../components/form-company/cible";
 import Article from "../../components/form-company/article";
 import "./styles.scss";
 import { getProfile } from "../../lib/crud";
-import { setCatalogue, setProfil } from "../../store/profileSlice";
+import { setCatalogue, setProfil, setRegister } from "../../store/profileSlice";
 import { checkAuth } from "../../lib/auth";
 import { useNavigate, Link } from "react-router-dom";
 import PageLoading from "../../components/PageLoading";
@@ -36,9 +36,10 @@ function CompanySetting() {
   }, []);
 
   const handleDisconnect = () => {
+    dispatch(setProfil({}));
     dispatch(setCatalogue({}));
+    dispatch(setRegister({}));
     localStorage.removeItem("token");
-    const token = localStorage.getItem("token");
 
     //persist:root = is profile slice key
     navigate("/");

@@ -137,14 +137,14 @@ const Signup = () => {
   return (
     <div>
       <div className="row" style={{ margin: "10px" }}>
-        <div className="col-md-5 me-4 d-none d-lg-block position-relative">
+        <div className="col-md-5  me-4 d-none d-lg-block position-relative">
           <img src="/imgs/background.png" alt="" className="img-xfg" />
           <div className="sign-text">
             <p className="bienv-text">
               Bienvenue dans la premiere marketplace B2B au maroc
             </p>
           </div>
-          <div className="d-flex qs-l">
+          <div className="d-flex align-items-center qs-l">
             <div className="sug me-auto">Vous avez deja un compte ?</div>
             <div style={{ marginLeft: "180px" }}>
               <button className="connect-btn" onClick={(e) => handleConnect(e)}>
