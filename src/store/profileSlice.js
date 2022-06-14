@@ -71,7 +71,9 @@ const profileSlice = createSlice({
 
         state.identite = profile;
       }
-
+      if (!action.payload.taille) {
+        state.identite = {};
+      }
       let cible = {};
       if (action.payload.cibles && action.payload.cibles.length) {
         cible = { ...action.payload.cibles[0] };
