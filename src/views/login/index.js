@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { login } from "../../lib/auth";
 import { ToastContainer, toast } from "react-toastify";
@@ -6,6 +6,28 @@ import "react-toastify/dist/ReactToastify.css";
 import "./styles.scss";
 
 const Login = () => {
+  const toastId = useRef(null);
+  const toastPending = () =>
+    (toastId.current = toast("Login en cours ......", {
+      autoClose: 10000,
+      type: toast.TYPE.INFO,
+      position: toast.POSITION.TOP_CENTER,
+    }));
+
+  const toastSuccessUpdate = () =>
+    (toastId.current = toast.update(toastId.current, {
+      render: "Login En cours .....",
+      autoClose: 1500,
+      type: toast.TYPE.SUCCESS,
+      position: toast.POSITION.TOP_CENTER,
+    }));
+  const toastError = () =>
+    (toastId.current = toast.update(toastId.current, {
+      render: "Vous devez verifier votre adresse mail!",
+      autoClose: 1800,
+      type: toast.TYPE.ERROR,
+      position: toast.POSITION.TOP_CENTER,
+    }));
   const styleImage = {
     maxWidth: "100%",
   };
@@ -15,12 +37,15 @@ const Login = () => {
 
   const handleClick = async () => {
     try {
+      toastPending();
       const response = await login(email, password);
       console.log("response: ", response);
       const user = response.data.data;
       localStorage.setItem("token", user.token);
       if (user.email_verified_at) {
         navigate("/company-setting");
+      } else {
+        toastError();
       }
     } catch (e) {
       toast(e.response.data.msg);

@@ -6,9 +6,13 @@ import {
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-export default function AbouIdentity({ identitySection, setIdentitySection }) {
+export default function AbouIdentity({
+  identitySection,
+  setIdentitySection,
+  progress,
+}) {
   const percentage = 66;
-
+  console.log("progress is", progress);
   return (
     <div>
       <div className="row mb-2">
@@ -42,9 +46,9 @@ export default function AbouIdentity({ identitySection, setIdentitySection }) {
                   style={{ width: "80%" }}
                 >
                   <CircularProgressbar
-                    value={3}
-                    text={`${percentage}%`}
-                    maxValue={4}
+                    value={progress}
+                    text={`${Math.floor((progress * 100) / 8)}%`}
+                    maxValue={8}
                     circleRatio={1}
                     strokeWidth={6}
                     styles={buildStyles({

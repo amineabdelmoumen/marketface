@@ -26,7 +26,12 @@ export default function CompanyCard() {
           <div className="d-flex justify-content-center ">
             <p className="nom-entreprise gradient ">{company.raison_ou_nom}</p>
           </div>
-          <div className="anx d-flex justify-content-center">Depuis 1929</div>
+          <div className="anx d-flex justify-content-center">
+            {""}
+            {company.annee_creation
+              ? `Depuis ${company.annee_creation.substring(0, 4)}`
+              : ""}
+          </div>
 
           <p className="slogan">
             Le slogan peut se definir comme une phrase percutante

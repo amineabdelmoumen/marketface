@@ -111,15 +111,18 @@ export default function About() {
   };
   const formatPhoneNumber = (phoneNumber) => {
     let FormatedPhoneNumber = "";
-    for (let i = 0; i < phoneNumber.length; i++) {
-      if (i % 2 == 0) {
-        FormatedPhoneNumber += phoneNumber[i];
-      } else {
-        FormatedPhoneNumber += phoneNumber[i] + " ";
+    if (phoneNumber !== undefined) {
+      for (let i = 0; i < phoneNumber.length; i++) {
+        if (i % 2 == 0) {
+          FormatedPhoneNumber += phoneNumber[i];
+        } else {
+          FormatedPhoneNumber += phoneNumber[i] + " ";
+        }
       }
+      return FormatedPhoneNumber;
+    } else {
+      return "";
     }
-
-    return FormatedPhoneNumber;
   };
   const styleText = {
     border: "none",

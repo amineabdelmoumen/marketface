@@ -35,6 +35,7 @@ export default function FinancialInfo() {
   const [Ischecked, setIsChecked] = useState(false);
 
   const handleOnChange = () => {
+    setShowButton(1);
     setIsChecked(!Ischecked);
   };
 
@@ -108,7 +109,7 @@ export default function FinancialInfo() {
         <div className="row mt-4 form-boxes">
           <div className="col-md-3 mt-2">
             <div>
-              <label>Chifre d'affaire :</label>
+              <label>Chiffre d'affaires :</label>
             </div>
           </div>
           <div className=" col-md-9 mt-2 ">

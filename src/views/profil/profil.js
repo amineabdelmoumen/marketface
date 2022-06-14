@@ -26,8 +26,34 @@ function Profil() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [profilSection, setProfilSection] = useState(1);
+  const profil = useSelector((state) => state.profile);
   const [identitySection, setIdentitySection] = useState(1);
   const [companySection, setCompanySection] = useState(1);
+  const [progress, setProgress] = useState(1);
+
+  useEffect(() => {
+    if (Object.keys(profil.identite).length !== 0) {
+      setProgress((old) => old + 1);
+    }
+    if (profil.articles.length !== 0) {
+      setProgress((old) => old + 1);
+    }
+    if (Object.keys(profil.catalogue).length !== 0) {
+      setProgress((old) => old + 1);
+    }
+    if (profil.marque.length !== 0) {
+      setProgress((old) => old + 1);
+    }
+    if (profil.references.length !== 0) {
+      setProgress((old) => old + 1);
+    }
+    if (profil.cible.length !== 0) {
+      setProgress((old) => old + 1);
+    }
+    if (profil.register.length !== 0) {
+      setProgress((old) => old + 1);
+    }
+  }, []);
 
   useEffect(async () => {
     const token = localStorage.getItem("token");
@@ -186,6 +212,7 @@ function Profil() {
                   <AbouIdentity
                     identitySection={identitySection}
                     setIdentitySection={setIdentitySection}
+                    progress={progress}
                   />
                 </div>
 
