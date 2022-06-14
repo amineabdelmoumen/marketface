@@ -350,8 +350,16 @@ function Marque() {
                   </div>
                 )}
                 <div>
-                  <p className="txt-pr">Categorie</p>
-                  <p className="text-secondary h6 mt-4">{marque.categorie}</p>
+                  <div className="d-flex align-items-center mb-3">
+                    <p className="txt-pr me-4">Categorie :</p>
+                    <p
+                      className="txt-pr"
+                      style={{ fontSize: "16px", fontWeight: "500" }}
+                    >
+                      {marque.categorie}
+                    </p>
+                  </div>
+                  <p className="txt-pr mb-2">Logo:</p>
                   <p className="d-flex gap-2 mt-5">
                     {marque.logo ? (
                       <img
@@ -362,8 +370,16 @@ function Marque() {
                     ) : (
                       ""
                     )}
-                    <span className="text-secondary">{marque.nom_client}</span>
                   </p>
+                  <div className="d-flex align-items-center mb-3">
+                    <div className="txt-pr me-4 ">Nom du client :</div>
+                    <div
+                      className="txt-pr"
+                      style={{ fontSize: "16px", fontWeight: "500" }}
+                    >
+                      {marque.nom_client}
+                    </div>
+                  </div>
                 </div>
 
                 <div className="row mt-2">

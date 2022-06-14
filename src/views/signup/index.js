@@ -8,7 +8,32 @@ import "./styles.scss";
 import PhoneInput from "react-phone-input-2";
 
 import "react-phone-input-2/lib/style.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Signup = () => {
+  const toastId = useRef(null);
+  const toastPending = () =>
+    (toastId.current = toast("Création de Votre compte est en cours ......", {
+      autoClose: 10000,
+      type: toast.TYPE.INFO,
+      position: toast.POSITION.TOP_CENTER,
+    }));
+
+  const toastSuccessUpdate = () =>
+    (toastId.current = toast.update(toastId.current, {
+      render:
+        "Votre Compte est créer  avec succés ,Vérifier Votre Boite mail..",
+      autoClose: 1500,
+      type: toast.TYPE.SUCCESS,
+      position: toast.POSITION.TOP_CENTER,
+    }));
+  const toastError = () =>
+    (toastId.current = toast.update(toastId.current, {
+      render: "Echec de Création du compte !",
+      autoClose: 1500,
+      type: toast.TYPE.ERROR,
+      position: toast.POSITION.TOP_CENTER,
+    }));
   const [selectedTitle, setSelectedTitle] = useState("input-xfl selected");
   const [selectedPoste, setSelectedPoste] = useState("input-xfl selected");
   const [value, setValue] = useState();
@@ -67,14 +92,18 @@ const Signup = () => {
     navigate("/");
   };
   const handleClick = async () => {
+    toastPending();
     const data = { ...registerForm };
     console.log("data to send", data);
     try {
       await register(registerForm);
+      dispatch(setRegister({}));
+      toastSuccessUpdate();
       navigate("/");
     } catch (e) {
       let data = e.response?.data;
       showErrors(data.errors);
+      toastError();
     }
   };
 
@@ -115,7 +144,7 @@ const Signup = () => {
               Bienvenue dans la premiere marketplace B2B au maroc
             </p>
           </div>
-          <div className="d-flex align-items-center position-absolute qs-l">
+          <div className="d-flex qs-l">
             <div className="sug me-auto">Vous avez deja un compte ?</div>
             <div style={{ marginLeft: "180px" }}>
               <button className="connect-btn" onClick={(e) => handleConnect(e)}>
@@ -148,6 +177,7 @@ const Signup = () => {
                 onChange={(e) => handleInputUpdate("nom", e)}
                 placeholder="Nom"
               />
+              <small ref={nomRef} className="text-danger ms-2"></small>
             </div>
             <div className="col-md-4">
               <input
@@ -157,6 +187,7 @@ const Signup = () => {
                 onChange={(e) => handleInputUpdate("prenom", e)}
                 placeholder="Prenom"
               />
+              <small ref={prenomRef} className="text-danger ms-2"></small>
             </div>
           </div>
           <div className="row  " style={{ marginTop: "12px" }}>
@@ -165,13 +196,13 @@ const Signup = () => {
                 name="titre"
                 className={selectedTitle}
                 style={{ backgroundColor: "white" }}
-                value={registerForm.titre}
+                value={registerForm ? registerForm.titre : ""}
                 onChange={(e) => handleInputUpdate("titre", e)}
               >
                 {/* <option value="Genre" disabled selected hidden>
                   {" "}
                 </option> */}
-                <option value="Genre" disabled selected hidden>
+                <option value="" disabled selected hidden>
                   Genre
                 </option>
                 <option value="m">M</option>
@@ -186,17 +217,10 @@ const Signup = () => {
                 name="poste"
                 style={{ backgroundColor: "white" }}
                 className={selectedPoste}
-                placeholder="Poste Occupé"
-                value={registerForm.poste}
+                value={registerForm ? registerForm.poste : ""}
                 onChange={(e) => handleInputUpdate("poste", e)}
               >
-                <option
-                  className="text-red"
-                  value="poste"
-                  disabled
-                  selected
-                  hidden
-                >
+                <option value="" disabled selected hidden>
                   {" "}
                   Poste Occupé
                 </option>
@@ -211,6 +235,7 @@ const Signup = () => {
                 <option value="technique">Technique</option>
                 <option value="autre">Autre</option>
               </select>
+              <small ref={posteRef} className="text-danger ms-2"></small>
             </div>
           </div>
           <div className="row" style={{ marginTop: "12px" }}>
@@ -223,6 +248,7 @@ const Signup = () => {
                 onChange={(e) => handleInputUpdate("email", e)}
                 placeholder="Email"
               />
+              <small ref={emailRef} className="text-danger ms-2"></small>
             </div>
           </div>
           <div className="row" style={{ marginTop: "12px" }}>
@@ -243,6 +269,7 @@ const Signup = () => {
                   height: "60px",
                 }}
               />
+              <small ref={phoneRef} className="text-danger ms-2"></small>
             </div>
           </div>
           <div className="row" style={{ marginTop: "12px" }}>
@@ -255,6 +282,7 @@ const Signup = () => {
                 value={registerForm.password}
                 onChange={(e) => handleInputUpdate("password", e)}
               />
+              <small ref={passwordRef} className="text-danger ms-2"></small>
             </div>
           </div>
           <div className="row" style={{ marginTop: "12px" }}>
@@ -295,6 +323,7 @@ const Signup = () => {
               </button>
             </div>
           </div>
+          <ToastContainer limit={1} />
         </div>
       </div>
     </div>

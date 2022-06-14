@@ -208,8 +208,8 @@ function Cible() {
         setDefaultActivites(data);
         data = [];
       }
-      if (cible.matiere && cible.matiere.length) {
-        cible.activites.forEach((activite) => {
+      if (cible.activite_oprationnelle && cible.activite_oprationnelle.length) {
+        cible.activite_oprationnelle.forEach((activite) => {
           data.push({
             label: activite,
             value: activite,
@@ -371,7 +371,9 @@ function Cible() {
                   styles={customStyles}
                   options={matieres}
                   defaultValue={defaultMatieres}
-                  onChange={(vals) => handleMultiSelect("matiere", vals)}
+                  onChange={(vals) =>
+                    handleMultiSelect("activite_oprationnelle", vals)
+                  }
                 />
               </div>
             </div>

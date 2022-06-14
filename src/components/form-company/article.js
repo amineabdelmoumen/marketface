@@ -511,7 +511,7 @@ function Article(props) {
                       name=""
                       id=""
                       cols="40"
-                      rows="10"
+                      rows="6"
                       className=" tx-ap mt-4"
                       value={article.description}
                     />
@@ -521,7 +521,7 @@ function Article(props) {
                       name=""
                       id=""
                       cols="40"
-                      rows="10"
+                      rows="6"
                       className="tx-ap mt-4"
                       value={article.description}
                     />
@@ -567,6 +567,9 @@ function Article(props) {
                       })
                     : ""}
                 </div>
+                <p className="tx-ap me-4 " style={{ marginLeft: "15px" }}>
+                  Documents:
+                </p>
                 <div className="row mt-2">
                   {article?.documents &&
                     article?.documents.map((doc) => {

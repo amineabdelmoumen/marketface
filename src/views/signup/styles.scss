@@ -33,7 +33,7 @@
   display: block;
 }
 .img-xfg {
-  height: 650px;
+  min-width: 100%;
   padding: 10px;
 }
 .input-xfl {
@@ -70,8 +70,9 @@ input[type="password"]:focus {
   color: #8083a3;
 }
 .qs-l {
-  position: absolute;
-  bottom: 43px;
+  position: relative;
+  top: -65px;
+  margin-right: 27px;
 }
 .connect-btn {
   font-family: $font-public-sans;

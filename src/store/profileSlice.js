@@ -65,16 +65,21 @@ const profileSlice = createSlice({
   },
   reducers: {
     setProfil: (state, action) => {
+      console.log("setting profile");
       if (action.payload.taille) {
         let profile = { ...action.payload };
 
         state.identite = profile;
       }
+
       let cible = {};
       if (action.payload.cibles && action.payload.cibles.length) {
         cible = { ...action.payload.cibles[0] };
+        console.log("++++++++++++++++++1");
       }
+
       if (Object.keys(cible).length) {
+        console.log("++++++++++++++++++1");
         state.cible = { ...cible };
         state.cible.regions = cible.regions.split(", ");
         state.cible.activites = cible.activites.split(", ");
@@ -83,16 +88,20 @@ const profileSlice = createSlice({
           cible.activite_oprationnelle.split(", ");
       }
       if (action.payload.articles) {
+        console.log("++++++++++++++++++1");
         state.articles = [...action.payload.articles];
       }
       if (action.payload.references) {
+        console.log("++++++++++++++++++1");
         state.references = [...action.payload.references];
       }
       let catalogue = {};
       if (action.payload.catalogues && action.payload.catalogues.length) {
         catalogue = { ...action.payload.catalogues[0] };
       }
+
       if (Object.keys(catalogue).length) {
+        console.log("++++++++++++++++++1");
         state.catalogue = {
           id: catalogue.id,
           vous_etes: catalogue.vous_etes,

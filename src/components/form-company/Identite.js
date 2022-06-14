@@ -415,10 +415,10 @@ function Identite() {
               <label htmlFor="pays">*Pays:</label>
               <input
                 type="text"
-                readOnly
                 id="pays"
                 name="pays"
                 defaultValue={identite.pays}
+                onChange={(e) => handleInputChange("pays", e)}
               />
             </div>
             <small
@@ -437,7 +437,7 @@ function Identite() {
               />
             </div>
             <small
-              ref={webRef}
+              ref={phoneRef}
               className="text-danger ms-2 d-block"
               style={{ "font-size": "10px" }}
             ></small>

@@ -10,7 +10,7 @@ import Cible from "../../components/form-company/cible";
 import Article from "../../components/form-company/article";
 import "./styles.scss";
 import { getProfile } from "../../lib/crud";
-import { setProfil } from "../../store/profileSlice";
+import { setCatalogue, setProfil } from "../../store/profileSlice";
 import { checkAuth } from "../../lib/auth";
 import { useNavigate, Link } from "react-router-dom";
 import PageLoading from "../../components/PageLoading";
@@ -29,14 +29,18 @@ function CompanySetting() {
           .then((res) => res.data)
           .then((data) => {
             dispatch(setProfil(data));
+            console.log("profile was dispached");
             setLoading(false);
           });
       });
   }, []);
 
   const handleDisconnect = () => {
+    dispatch(setCatalogue({}));
     localStorage.removeItem("token");
-    localStorage.removeItem("persist:root"); //persist:root = is profile slice key
+    const token = localStorage.getItem("token");
+
+    //persist:root = is profile slice key
     navigate("/");
   };
   return (
@@ -49,7 +53,7 @@ function CompanySetting() {
           <section className="company-steps-icons container position-relative">
             <div className="row">
               <div className="col-2">
-                <div className="d-flex " onClick={handleDisconnect}>
+                <div className="d-flex " onClick={() => handleDisconnect()}>
                   <img
                     src="/imgs/logout.png"
                     alt=""

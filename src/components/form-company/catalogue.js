@@ -209,12 +209,14 @@ function Catalogue() {
     data[field] = elements;
     dispatch(setCatalogue(data));
     let selectedElements = [];
-    catalogue[field].forEach((elem) => {
-      selectedElements.push({
-        label: elem,
-        value: elem,
+    if (catalogue.field && catalogue.field.length) {
+      catalogue[field].forEach((elem) => {
+        selectedElements.push({
+          label: elem,
+          value: elem,
+        });
       });
-    });
+    }
     if (field == "business") {
       setDefaultBusiness(selectedElements);
       console.log(defaultBusiness);
@@ -317,6 +319,7 @@ function Catalogue() {
                 </div>
                 <div className="col-md-6">
                   <select
+                    style={{ width: "100%", height: "40px" }}
                     name="vous_etes"
                     id="vous_etes"
                     value={catalogue.vous_etes}
