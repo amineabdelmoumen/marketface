@@ -19,6 +19,12 @@ import Catalogue from "./profilComponents/IdentityComponents/generalInfo";
 import LegalInfo from "./profilComponents/IdentityComponents/legalInfo";
 import FinancialInfo from "./profilComponents/IdentityComponents/financialInfo";
 import ContactInfo from "./profilComponents/IdentityComponents/contactInfo";
+import ProductList from "./profilComponents/catalogueComponent/productList";
+import ProductForm from "./profilComponents/catalogueComponent/ProductForm";
+import ServiceList from "./profilComponents/catalogueComponent/serviceList";
+import ServiceMenu from "./profilComponents/catalogueComponent/ServiceMenu";
+import ImmobilierForm from "./profilComponents/catalogueComponent/ImmobilierForm";
+import ImmobilierList from "./profilComponents/catalogueComponent/immobilierList";
 
 function Profil() {
   const dispatch = useDispatch();
@@ -30,7 +36,7 @@ function Profil() {
   const [identitySection, setIdentitySection] = useState(1);
   const [companySection, setCompanySection] = useState(1);
   const [progress, setProgress] = useState(1);
-
+  const [action, setAction] = useState(1);
   useEffect(() => {
     if (Object.keys(profil.identite).length !== 0) {
       setProgress((old) => old + 1);
@@ -89,6 +95,11 @@ function Profil() {
             {profilSection == 1 ? (
               <div className="row">
                 <div className="col-12 col-md-3">
+                  <div className="row mb-2">
+                    <div className=" col-6 col-md-8">
+                      <p className="fty">Mon profile</p>
+                    </div>
+                  </div>
                   <CompanyCard />
                 </div>
                 <div className="col-12 col-md-9">
@@ -216,7 +227,7 @@ function Profil() {
                   />
                 </div>
 
-                <div className="col-12 col-md-8" style={{ marginTop: "62px" }}>
+                <div className="col-12 col-md-8" style={{ marginTop: "41px" }}>
                   {
                     {
                       1: <Catalogue />,
@@ -225,6 +236,118 @@ function Profil() {
                       4: <ContactInfo />,
                     }[identitySection]
                   }
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
+            {profilSection == 3 && companySection == 1 ? (
+              <div className="row">
+                {/* <div className="row">
+                  <div className=" col-6 col-md-3">
+                    <p className="fty">Produit</p>
+                  </div>
+
+                  <div className=" col-6 col-md-3">
+                    <p className="fty">Service</p>
+                  </div>
+
+                  <div className=" col-6 col-md-3">
+                    <p className="fty">Immobilier</p>
+                  </div>
+                </div> */}
+
+                <div className="row">
+                  <div className=" col-6 col-md-3">
+                    <CompanyCard />
+                  </div>
+
+                  <div
+                    className="col-12 col-md-9"
+                    style={{ marginTop: "41px" }}
+                  >
+                    {
+                      {
+                        1: <ProductList setAction={setAction} />,
+                        2: <ProductForm setAction={setAction} />,
+                      }[action]
+                    }
+                  </div>
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
+            {profilSection == 3 && companySection == 2 ? (
+              <div className="row">
+                {/* <div className="row">
+                  <div className=" col-6 col-md-3">
+                    <p className="fty">Produit</p>
+                  </div>
+
+                  <div className=" col-6 col-md-3">
+                    <p className="fty">Service</p>
+                  </div>
+
+                  <div className=" col-6 col-md-3">
+                    <p className="fty">Immobilier</p>
+                  </div>
+                </div> */}
+
+                <div className="row">
+                  <div className=" col-6 col-md-3">
+                    <CompanyCard />
+                  </div>
+
+                  <div
+                    className="col-12 col-md-9"
+                    style={{ marginTop: "41px" }}
+                  >
+                    {
+                      {
+                        1: <ServiceList setAction={setAction} />,
+                        2: <ServiceMenu setAction={setAction} />,
+                      }[action]
+                    }
+                  </div>
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
+
+            {profilSection == 3 && companySection == 3 ? (
+              <div className="row">
+                {/* <div className="row">
+                  <div className=" col-6 col-md-3">
+                    <p className="fty">Produit</p>
+                  </div>
+
+                  <div className=" col-6 col-md-3">
+                    <p className="fty">Service</p>
+                  </div>
+
+                  <div className=" col-6 col-md-3">
+                    <p className="fty">Immobilier</p>
+                  </div>
+                </div> */}
+
+                <div className="row">
+                  <div className=" col-6 col-md-3">
+                    <CompanyCard />
+                  </div>
+
+                  <div
+                    className="col-12 col-md-9"
+                    style={{ marginTop: "41px" }}
+                  >
+                    {
+                      {
+                        1: <ImmobilierList setAction={setAction} />,
+                        2: <ImmobilierForm setAction={setAction} />,
+                      }[action]
+                    }
+                  </div>
                 </div>
               </div>
             ) : (

@@ -14,7 +14,7 @@ import {
 } from "../../../../lib/crud";
 let uploadForm = new FormData();
 
-export default function ServiceMenu({ setArticleType }) {
+export default function ServiceMenu({ setAction }) {
   const selectedArticle = useSelector((state) => state.article.selectedArticle);
   const toastId = useRef(null);
   const nomRef = useRef();
@@ -185,7 +185,7 @@ export default function ServiceMenu({ setArticleType }) {
       let list = [...articles, data2];
 
       dispatch(setArticles(list));
-      setTimeout(() => setArticleType(2, 0), 1500);
+      setTimeout(() => setAction(1), 1500);
     } catch (err) {
       let errors = err.response?.data.errors;
       showErrors(errors);
@@ -204,7 +204,7 @@ export default function ServiceMenu({ setArticleType }) {
       );
 
       dispatch(setArticles(list));
-      setTimeout(() => setArticleType(2, 0), 1500);
+      setTimeout(() => setAction(1), 1500);
     } catch (err) {
       let errors = err.response?.data.errors;
       showErrors(errors);
@@ -212,289 +212,296 @@ export default function ServiceMenu({ setArticleType }) {
     }
   };
   return (
-    <div className="container-fluid ">
-      <div className="d-flex justify-content-end">
-        <p
-          className="display cursor-pointer mt-4"
-          onClick={() => setArticleType(2, 0)}
-        >
-          Tous les services
-        </p>
-      </div>
-      <div className="title d-flex justify-content-center pt-4">
-        <div className="d-flex position-relative">
-          <img src="/imgs/service.svg" alt="" style={{ width: "35px" }} />
-          <p className="title-service ">Service</p>
-          <p className="line-se"></p>
-        </div>
-      </div>
+    <form
+      className="container"
+      name="form-identite"
+      id="form-identite-gen"
+      style={{ padding: "14px 30px" }}
+    >
+      {/* <div className="page_number">1/2</div> */}
 
-      <div className="row mt-5 position-relative ">
-        <div className="col-12 col-lg-7 inputs" style={style}>
-          <div className="row form-boxes">
-            <label className="col-12 col-sm-5 col-md-3 text">
-              Nom de l'article:
-            </label>
-            <div className="col-12 col-sm-5 col-md-9">
-              <input
-                type="text"
-                id="titre"
-                name="nom"
-                value={article ? article?.nom : ""}
-                onChange={(e) => handleInputChange("nom", e)}
-              />
+      <div className="form-identite-info d-block mt-3">
+        <div className="d-flex justify-content-end">
+          <p
+            className="title-identite cursor-pointer mt-4"
+            styel={{ fontSize: "16px" }}
+            onClick={() => setAction(1)}
+          >
+            Tous les services
+          </p>
+        </div>
+
+        <div className="row  position-relative ">
+          <div className="" style={style}>
+            <div className="row form-boxes">
+              <label className="col-12 col-sm-5 col-md-3 text">
+                Nom de l'article:
+              </label>
+              <div className="col-12 col-sm-5 col-md-9">
+                <input
+                  type="text"
+                  id="titre"
+                  name="nom"
+                  value={article ? article?.nom : ""}
+                  onChange={(e) => handleInputChange("nom", e)}
+                />
+              </div>
+              <small
+                ref={nomRef}
+                className="text-danger ms-2 d-block"
+                style={{ "font-size": "10px" }}
+              ></small>
             </div>
-            <small
-              ref={nomRef}
-              className="text-danger ms-2 d-block"
-              style={{ "font-size": "10px" }}
-            ></small>
-          </div>
-          <div className="row mt-1 form-boxes">
-            <label className="col-12 col-sm-5 col-md-3 text">
-              Durée de Service:
-            </label>
-            <div className="col-12 col-sm-5 col-md-9">
-              <input
-                type="text"
-                id="titre"
-                name="duree"
-                value={article ? article?.duree : ""}
-                onChange={(e) => handleInputChange("duree", e)}
-              />
+            <div className="row mt-1 form-boxes">
+              <label className="col-12 col-sm-5 col-md-3 text">
+                Durée de Service:
+              </label>
+              <div className="col-12 col-sm-5 col-md-9">
+                <input
+                  type="text"
+                  id="titre"
+                  name="duree"
+                  value={article ? article?.duree : ""}
+                  onChange={(e) => handleInputChange("duree", e)}
+                />
+              </div>
+              <small
+                ref={dureeRef}
+                className="text-danger ms-2 d-block"
+                style={{ "font-size": "10px" }}
+              ></small>
             </div>
-            <small
-              ref={dureeRef}
-              className="text-danger ms-2 d-block"
-              style={{ "font-size": "10px" }}
-            ></small>
-          </div>
-          <div className="row mt-1 form-boxes">
-            <label htmlFor="" className="col-12 col-sm-5 col-md-3 text">
-              Prix:
-            </label>
-            <div className="col-12  col-sm-5 col-md-9">
-              <input
-                type="number"
-                id="titre"
-                name="prix"
-                value={article ? article?.prix : ""}
-                onChange={(e) => handleInputChange("prix", e)}
-              />
+            <div className="row mt-1 form-boxes">
+              <label htmlFor="" className="col-12 col-sm-5 col-md-3 text">
+                Prix:
+              </label>
+              <div className="col-12  col-sm-5 col-md-9">
+                <input
+                  type="number"
+                  id="titre"
+                  name="prix"
+                  value={article ? article?.prix : ""}
+                  onChange={(e) => handleInputChange("prix", e)}
+                />
+              </div>
+              <small
+                ref={prixRef}
+                className="text-danger ms-2 d-block"
+                style={{ "font-size": "10px" }}
+              ></small>
             </div>
-            <small
-              ref={prixRef}
-              className="text-danger ms-2 d-block"
-              style={{ "font-size": "10px" }}
-            ></small>
-          </div>
-          <div className="row mt-1 form-boxes">
-            <label htmlFor="" className="col-12 col-sm-5 col-md-3 text">
-              quantité:
-            </label>
-            <div className="col-12 col-sm-5 col-md-9">
-              <input
-                type="number"
-                id="quantite"
-                name="quantite"
-                value={article ? article?.quantite : ""}
-                onChange={(e) => handleInputChange("quantite", e)}
-              />
+            <div className="row mt-1 form-boxes">
+              <label htmlFor="" className="col-12 col-sm-5 col-md-3 text">
+                quantité:
+              </label>
+              <div className="col-12 col-sm-5 col-md-9">
+                <input
+                  type="number"
+                  id="quantite"
+                  name="quantite"
+                  value={article ? article?.quantite : ""}
+                  onChange={(e) => handleInputChange("quantite", e)}
+                />
+              </div>
+              <small
+                ref={quantiteRef}
+                className="text-danger ms-2 d-block"
+                style={{ "font-size": "10px" }}
+              ></small>
             </div>
-            <small
-              ref={quantiteRef}
-              className="text-danger ms-2 d-block"
-              style={{ "font-size": "10px" }}
-            ></small>
-          </div>
-          <div className="row mt-1 form-boxes">
-            <label htmlFor="" className="col-12 col-sm-5  col-md-3 text">
-              Catégorie:
-            </label>
-            <div className="col-12 col-sm-5 col-md-9">
-              <select
-                name="type"
-                type="text"
-                id="type"
-                value={article ? article?.type : ""}
-                onChange={(e) => handleInputChange("type", e)}
+            <div className="row mt-1 form-boxes">
+              <label htmlFor="" className="col-12 col-sm-5  col-md-3 text">
+                Catégorie:
+              </label>
+              <div className="col-12 col-sm-5 col-md-9">
+                <select
+                  name="type"
+                  type="text"
+                  id="type"
+                  value={article ? article?.type : ""}
+                  onChange={(e) => handleInputChange("type", e)}
+                >
+                  <option value="" disabled selected hidden>
+                    {" "}
+                    Seléctionner un Service
+                  </option>
+                  {services.map((service) => {
+                    return <option value={service}>{service}</option>;
+                  })}
+                </select>
+              </div>
+              <small
+                ref={typeRef}
+                className="text-danger ms-2 d-block"
+                style={{ "font-size": "10px" }}
+              ></small>
+            </div>
+
+            <div className="row mt-3  pb-3 form-boxes">
+              <label htmlFor="" className="col-12 col-sm-5  col-md-3 text">
+                Documents:
+              </label>
+              <div className="col-12 col-sm-5 col-md-9">
+                <label htmlFor="documents" className="text-center upload">
+                  Choisir un fichier
+                  <input
+                    type="file"
+                    id="documents"
+                    name="documents[]"
+                    className="d-none"
+                    multiple
+                    onChange={(e) => handleDocumentUpload(e)}
+                  />
+                </label>
+              </div>
+            </div>
+            <div className="row mt-1  pb-3 form-boxes">
+              <label htmlFor="" className="col-12 col-sm-5 col-md-3 text">
+                Photos:
+              </label>
+              <div className="col-12 col-sm-5 col-md-9">
+                <label htmlFor="photos" className="text-center upload">
+                  Choisir un fichier
+                  <input
+                    type="file"
+                    id="photos"
+                    name="photos[]"
+                    accept="image/*"
+                    className="d-none"
+                    multiple
+                    onChange={(e) => handlePhotosUpload(e)}
+                  />
+                </label>
+              </div>
+            </div>
+            <div className="row mt-1 pb-3 form-boxes">
+              <label htmlFor="" className="col-12 col-sm-5 col-md-3 text">
+                Description:
+              </label>
+              <div className="col-12 col-sm-5 col-md-9">
+                <textarea
+                  rows={5}
+                  id="titre"
+                  name="titre"
+                  value={article ? article?.description : ""}
+                  onChange={(e) => handleInputChange("description", e)}
+                ></textarea>
+              </div>
+              <small
+                ref={descriptionRef}
+                className="text-danger ms-2 d-block"
+                style={{ "font-size": "10px" }}
+              ></small>
+            </div>
+            <div className="buttons d-flex justify-content-end">
+              <div
+                id="submitBtn"
+                className=" d-flex justify-content-center  sv-btn col-12 col-md-3"
+                onClick={() => onSubmit()}
               >
-                <option value="" disabled selected hidden>
-                  {" "}
-                  Seléctionner un Service
-                </option>
-                {services.map((service) => {
-                  return <option value={service}>{service}</option>;
-                })}
-              </select>
+                <p style={{ fontSize: "16px" }} className="suivant-iden">
+                  Enregistrer
+                </p>
+              </div>
             </div>
-            <small
-              ref={typeRef}
-              className="text-danger ms-2 d-block"
-              style={{ "font-size": "10px" }}
-            ></small>
+            <ToastContainer limit={1} />
           </div>
 
-          <div className="row mt-3  pb-3 form-boxes">
-            <label htmlFor="" className="col-12 col-sm-5  col-md-3 text">
-              Documents:
-            </label>
-            <div className="col-12 col-sm-5 col-md-9">
-              <label htmlFor="documents" className="text-center upload">
-                Choisir un fichier
-                <input
-                  type="file"
-                  id="documents"
-                  name="documents[]"
-                  className="d-none"
-                  multiple
-                  onChange={(e) => handleDocumentUpload(e)}
-                />
-              </label>
-            </div>
-          </div>
-          <div className="row mt-1  pb-3 form-boxes">
-            <label htmlFor="" className="col-12 col-sm-5 col-md-3 text">
-              Photos:
-            </label>
-            <div className="col-12 col-sm-5 col-md-9">
-              <label htmlFor="photos" className="text-center upload">
-                Choisir un fichier
-                <input
-                  type="file"
-                  id="photos"
-                  name="photos[]"
-                  accept="image/*"
-                  className="d-none"
-                  multiple
-                  onChange={(e) => handlePhotosUpload(e)}
-                />
-              </label>
-            </div>
-          </div>
-          <div className="row mt-1 pb-3 form-boxes">
-            <label htmlFor="" className="col-12 col-sm-5 col-md-3 text">
-              Description:
-            </label>
-            <div className="col-12 col-sm-5 col-md-9">
-              <textarea
-                rows={5}
-                id="titre"
-                name="titre"
-                value={article ? article?.description : ""}
-                onChange={(e) => handleInputChange("description", e)}
-              ></textarea>
-            </div>
-            <small
-              ref={descriptionRef}
-              className="text-danger ms-2 d-block"
-              style={{ "font-size": "10px" }}
-            ></small>
-          </div>
-          <div className="d-flex justify-content-end ">
-            <button
-              id="submitBtn"
-              className="btn pointer btn-success text-white rounded-pill px-5 text-f"
-              onClick={() => onSubmit()}
-            >
-              Enregistrer
-            </button>
-          </div>
-
-          <ToastContainer limit={1} />
-        </div>
-
-        <div className="col-12 col-md-5 col-lg-5">
-          <div className="row">
-            {article.images && article.images.length
-              ? article?.images.map((image) => {
-                  return (
-                    <div className="col-md-6">
-                      <img
-                        src={`${process.env.REACT_APP_HOST_URL}/${image.path}`}
-                        style={{ width: "100%", margin: "20px 30px 20px 30px" }}
-                        alt=""
-                      />
-                    </div>
-                  );
-                })
-              : ""}
-          </div>
-          {index == 1 ? (
-            <div className="article mt-5 mb-3">
-              <div className="content ">
-                <div className="row">
-                  <div className="row mt-4">
-                    <div className="d-flex">
-                      <p className=" text-side col-5">Nom de l'article:</p>
-                      <p className="text-side text-primary col-7">
-                        {article.nom}
-                      </p>
-                    </div>{" "}
-                  </div>
-                  <div className="row mt-4">
-                    <div className="d-flex">
-                      <p className=" text-side col-5">Catégorie:</p>
-                      <p className="text-side  text-primary col-7">
-                        {article.type}
-                      </p>
-                    </div>{" "}
-                  </div>
-                  <div className="row mt-4">
-                    <div className="d-flex">
-                      <p className=" text-side col-5">Quantite:</p>
-                      <p className="text-side  text-primary col-7">
-                        {article.quantite}
-                      </p>
-                    </div>{" "}
-                  </div>
-                  <div className="row mt-4">
-                    <div className="d-flex">
-                      <p className=" text-side col-5">Durée de service:</p>
-                      <p className=" text-side text-primary col-7">
-                        {article.duree}
-                      </p>
-                    </div>{" "}
-                  </div>
-                  <div className="row mt-4">
-                    <div className="d-flex">
-                      <p className=" text-side col-5">Prix :</p>
-                      <p className=" text-side text-primary col-7">
-                        {article?.prix ? `${article.prix} Dhs` : ""}
-                      </p>
-                    </div>{" "}
-                  </div>
-                  <div className="row mt-4">
-                    <div className="d-flex">
-                      <p className=" text-side col-5">Documents :</p>
-                      <div className=" text-side text-primary col-7">
-                        {article?.documents &&
-                          article?.documents.map((doc) => {
-                            return (
-                              <p className="row text-side text-primary ">
-                                {doc.nom}
-                              </p>
-                            );
-                          })}
+          <div className="col-12 col-md-5 col-lg-5">
+            <div className="row">
+              {article.images && article.images.length
+                ? article?.images.map((image) => {
+                    return (
+                      <div className="col-md-6">
+                        <img
+                          src={`${process.env.REACT_APP_HOST_URL}/${image.path}`}
+                          style={{
+                            width: "100%",
+                            margin: "20px 30px 20px 30px",
+                          }}
+                          alt=""
+                        />
                       </div>
-                    </div>{" "}
-                  </div>
-                  <div className="row mt-4">
-                    <div className="d-flex">
-                      <p className=" text-side col-5">description :</p>
-                      <p className=" text-side text-primary col-7">
-                        {article.description}
-                      </p>
-                    </div>{" "}
+                    );
+                  })
+                : ""}
+            </div>
+            {index == 1 ? (
+              <div className="article mt-5 mb-3">
+                <div className="content ">
+                  <div className="row">
+                    <div className="row mt-4">
+                      <div className="d-flex">
+                        <p className=" text-side col-5">Nom de l'article:</p>
+                        <p className="text-side text-primary col-7">
+                          {article.nom}
+                        </p>
+                      </div>{" "}
+                    </div>
+                    <div className="row mt-4">
+                      <div className="d-flex">
+                        <p className=" text-side col-5">Catégorie:</p>
+                        <p className="text-side  text-primary col-7">
+                          {article.type}
+                        </p>
+                      </div>{" "}
+                    </div>
+                    <div className="row mt-4">
+                      <div className="d-flex">
+                        <p className=" text-side col-5">Quantite:</p>
+                        <p className="text-side  text-primary col-7">
+                          {article.quantite}
+                        </p>
+                      </div>{" "}
+                    </div>
+                    <div className="row mt-4">
+                      <div className="d-flex">
+                        <p className=" text-side col-5">Durée de service:</p>
+                        <p className=" text-side text-primary col-7">
+                          {article.duree}
+                        </p>
+                      </div>{" "}
+                    </div>
+                    <div className="row mt-4">
+                      <div className="d-flex">
+                        <p className=" text-side col-5">Prix :</p>
+                        <p className=" text-side text-primary col-7">
+                          {article?.prix ? `${article.prix} Dhs` : ""}
+                        </p>
+                      </div>{" "}
+                    </div>
+                    <div className="row mt-4">
+                      <div className="d-flex">
+                        <p className=" text-side col-5">Documents :</p>
+                        <div className=" text-side text-primary col-7">
+                          {article?.documents &&
+                            article?.documents.map((doc) => {
+                              return (
+                                <p className="row text-side text-primary ">
+                                  {doc.nom}
+                                </p>
+                              );
+                            })}
+                        </div>
+                      </div>{" "}
+                    </div>
+                    <div className="row mt-4">
+                      <div className="d-flex">
+                        <p className=" text-side col-5">description :</p>
+                        <p className=" text-side text-primary col-7">
+                          {article.description}
+                        </p>
+                      </div>{" "}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ) : (
-            ""
-          )}
+            ) : (
+              ""
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </form>
   );
 }

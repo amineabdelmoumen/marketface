@@ -109,7 +109,11 @@ export default function LegalInfo({ setLegalcomponent }) {
               name="annee"
               id="annee"
               onChange={(e) => handleInputChange("annee_creation", e)}
-              value={identitie.annee_creation.substring(0, 4)}
+              value={
+                identitie.annee_creation
+                  ? identitie.annee_creation.substring(0, 4)
+                  : ""
+              }
             >
               {years.map((opt) => (
                 <option value={opt}>{opt}</option>

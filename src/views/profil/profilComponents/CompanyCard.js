@@ -6,12 +6,6 @@ export default function CompanyCard() {
 
   return (
     <div>
-      <div className="row mb-2">
-        <div className=" col-6 col-md-8">
-          <p className="fty">Mon profile</p>
-        </div>
-      </div>
-
       <div className="row  " style={{ marginTop: "39px" }}>
         {" "}
         <div className="flex-profile position-relative">

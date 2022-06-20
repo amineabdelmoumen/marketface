@@ -118,7 +118,7 @@ export default function SideBar({
           </div>
         </div>
         <div
-          onClick={() => setBgcolor(3)}
+          onClick={() => setData(3)}
           className="elem1 d-flex align-items-center "
           style={
             bgcolor == 3
@@ -153,12 +153,51 @@ export default function SideBar({
             >
               Mon catalogue
             </span>
+            {bgcolor == 3 ? (
+              <div style={{ marginTop: "28px", marginLeft: "-8px" }}>
+                <p
+                  className={
+                    companySection == 1 ? "if-grn xfg-clicked" : "if-grn "
+                  }
+                  onClick={() => setCompanySection(1)}
+                >
+                  {" "}
+                  Produit
+                </p>
+                <p
+                  className={
+                    companySection == 2 ? "if-grn xfg-clicked" : "if-grn "
+                  }
+                  onClick={() => setCompanySection(2)}
+                >
+                  {" "}
+                  Service
+                </p>
+                <p
+                  className={
+                    companySection == 3 ? "if-grn xfg-clicked" : "if-grn "
+                  }
+                  onClick={() => setCompanySection(3)}
+                >
+                  {" "}
+                  Immobilier
+                </p>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
         <div
           onClick={() => setBgcolor(4)}
           className="elem1 d-flex align-items-center "
-          style={bgcolor == 4 ? { ...style, background: "#36A9E1" } : style}
+          style={
+            bgcolor == 4
+              ? { ...style, background: "#36A9E1" }
+              : bgcolor == 3
+              ? { ...style, marginTop: "90px" }
+              : style
+          }
           /* */
         >
           {bgcolor == 4 ? <p className="line-s"></p> : ""}

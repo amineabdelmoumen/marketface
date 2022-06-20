@@ -13,13 +13,29 @@ import { getProfile } from "../../lib/crud";
 import { setCatalogue, setProfil, setRegister } from "../../store/profileSlice";
 import { checkAuth } from "../../lib/auth";
 import { useNavigate, Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import PageLoading from "../../components/PageLoading";
 
 function CompanySetting() {
   const navigate = useNavigate();
   const pageStage = useSelector((state) => state.root.FormStage);
   const dispatch = useDispatch();
+  const identite = useSelector((state) => state.profile.identite);
   const [loading, setLoading] = useState(true);
+  const handleNextForm = (id) => {
+    if (Object.keys(identite).length !== 0) {
+      console.log("identite is ", identite);
+      console.log("+++++++ moving to the next form");
+      dispatch(setFormStage(id));
+    } else {
+      toast.warn("Vous devez remplir le formulaire identité d'abord  !", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      console.log("cannot move to the next form .....identitie is empty");
+    }
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     checkAuth(token)
@@ -88,7 +104,7 @@ function CompanySetting() {
               <div className={pageStage === 2 ? `step step-active` : `step`}>
                 <p
                   className=" d-flex justify-content-center align-items-center step-icon"
-                  onClick={() => dispatch(setFormStage(2))}
+                  onClick={() => handleNextForm(2)}
                 >
                   <img src="/imgs/marque.png" alt="" />
                 </p>
@@ -98,7 +114,7 @@ function CompanySetting() {
               <div className={pageStage === 3 ? `step step-active` : `step`}>
                 <p
                   className=" d-flex justify-content-center align-items-center step-icon"
-                  onClick={() => dispatch(setFormStage(3))}
+                  onClick={() => handleNextForm(3)}
                 >
                   <img src="/imgs/catalogue.png" alt="" />
                 </p>
@@ -108,7 +124,7 @@ function CompanySetting() {
               <div className={pageStage === 5 ? `step step-active` : `step`}>
                 <p
                   className=" d-flex justify-content-center align-items-center step-icon"
-                  onClick={() => dispatch(setFormStage(5))}
+                  onClick={() => handleNextForm(5)}
                 >
                   <img src="/imgs/target.png" alt="" />
                 </p>
@@ -129,6 +145,7 @@ function CompanySetting() {
               }[pageStage]
             }
           </div>
+          <ToastContainer limit={1} />
         </div>
       )}
     </>

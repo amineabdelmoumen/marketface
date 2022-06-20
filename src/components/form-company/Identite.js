@@ -36,9 +36,9 @@ function Identite() {
   const phoneRef = useRef();
   const logoRef = useRef();
 
-  const organismeSize = ["Start-up", "TPE", "PME", "PMI", "GE"];
-  const nombreEmployes = ["De 1 à 10", "De 10 à 250", "Plus de 250"];
-  const chaiffreDafaireList = ["< 10 MDhs", "< 75 MDhs", "> 75 MDhs"];
+  const organismeSize = [" ", "Start-up", "TPE", "PME", "PMI", "GE"];
+  const nombreEmployes = ["", "De 1 à 10", "De 10 à 250", "Plus de 250"];
+  const chaiffreDafaireList = ["", "< 10 MDhs", "< 75 MDhs", "> 75 MDhs"];
 
   const handleSubmit = (e) => {
     e.preventDefault(); // stop form submission
@@ -243,7 +243,11 @@ function Identite() {
                 name="annee"
                 id="annee"
                 onChange={(e) => handleInputChange("annee_creation", e)}
-                defaultValue={identite.annee_creation}
+                value={
+                  identite.annee_creation
+                    ? identite.annee_creation.substring(0, 4)
+                    : ""
+                }
               >
                 {years.map((opt) => (
                   <option value={opt}>{opt}</option>
@@ -283,7 +287,7 @@ function Identite() {
                 name="organisme_taille"
                 id="organisme_taille"
                 onChange={(e) => handleInputChange("taille", e)}
-                defaultValue={identite.taille}
+                value={identite.taille}
               >
                 {organismeSize.map((opt) => (
                   <option value={opt}>{opt}</option>
@@ -330,7 +334,7 @@ function Identite() {
                 min="0"
                 id="capital"
                 name="capital"
-                defaultValue={identite.capital}
+                value={identite.capital}
                 onChange={(e) => handleInputChange("capital", e)}
               />
             </div>
@@ -344,7 +348,7 @@ function Identite() {
               <select
                 name="chiffre_affaire"
                 id="chiffre_affaire"
-                defaultValue={identite.chiffre_affaire}
+                value={identite.chiffre_affaire}
                 onChange={(e) => handleInputChange("chiffre_affaire", e)}
               >
                 {chaiffreDafaireList.map((opt) => (
@@ -364,7 +368,7 @@ function Identite() {
                 type="text"
                 id="siege"
                 name="siege"
-                defaultValue={identite.siege_social}
+                value={identite.siege_social}
                 onChange={(e) => handleInputChange("siege_social", e)}
               />
             </div>
@@ -378,7 +382,7 @@ function Identite() {
               <select
                 name="region"
                 id="region"
-                defaultValue={identite.region}
+                value={identite.region}
                 onChange={(e) => handleInputChange("region", e)}
               >
                 {regions.map((region) => {
@@ -396,7 +400,7 @@ function Identite() {
               <select
                 name="ville"
                 id="ville"
-                defaultValue={identite.ville}
+                value={identite.ville}
                 onChange={(e) => handleInputChange("ville", e)}
               >
                 {typeof villes[identite.region] != "undefined"
@@ -417,7 +421,7 @@ function Identite() {
                 type="text"
                 id="pays"
                 name="pays"
-                defaultValue={identite.pays}
+                value={identite.pays}
                 onChange={(e) => handleInputChange("pays", e)}
               />
             </div>
@@ -432,7 +436,7 @@ function Identite() {
                 type="text"
                 id="telephone"
                 name="telephone"
-                defaultValue={identite.telephone}
+                value={identite.telephone}
                 onChange={(e) => handleInputChange("telephone", e)}
               />
             </div>

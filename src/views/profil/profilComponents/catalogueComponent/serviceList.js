@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setSelectedArticle } from "../../../../store/ArticleSlice";
 
-export default function ServiceList({ setArticleType }) {
+export default function ServiceList({ setAction }) {
   const [articleService, setArticleService] = useState([]);
 
   const articles = useSelector((state) => state.profile.articles);
@@ -17,7 +17,7 @@ export default function ServiceList({ setArticleType }) {
     console.log("article", article);
     dispatch(setSelectedArticle(article));
     console.log("article updated  succesfully");
-    setArticleType(2, 1);
+    setAction(1);
   };
 
   useEffect(() => {}, []);
@@ -34,19 +34,15 @@ export default function ServiceList({ setArticleType }) {
     setArticleService(sortedArticles);
   }, [articles]);
   return (
-    <div>
-      <div>
-        <div
-          className="d-flex justify-content-end"
-          style={{ marginTop: "40px", marginRight: "30px" }}
-        >
-          <button
-            className="btn pointer btn-success text-white rounded-pill px-3"
-            onClick={() => setArticleType(2, 1)}
-          >
-            Ajouter un service
-          </button>
-        </div>
+    <form
+      className="container"
+      name="form-identite"
+      id="form-identite-gen"
+      style={{ padding: "14px 30px" }}
+    >
+      {/* <div className="page_number">1/2</div> */}
+
+      <div className="form-identite-info d-block mt-3">
         <div
           className="articles row d-flex justify-content-around mb-4"
           style={{ marginTop: "20px" }}
@@ -54,11 +50,9 @@ export default function ServiceList({ setArticleType }) {
           {articleService && articleService.length
             ? articleService.map((article) => {
                 return (
-                  <div className="col-md-5 ">
-                    <div className="d-flex justify-content-center mb-2">
-                      <h4 className="article-nom">{article.nom}</h4>
-                    </div>
-                    <div className="card-article mb-4">
+                  <div className="col-md-6 ">
+                    <div className="card-article mb-4 position-relative">
+                      <div className="ln-crd "></div>
                       {article.images && article.images.length ? (
                         <figure>
                           <img
@@ -70,32 +64,25 @@ export default function ServiceList({ setArticleType }) {
                       ) : (
                         ""
                       )}
-                      <div className="d-flex ">
+                      <div className="items1 d-flex">
                         <div className="d-flex me-auto mt-2">
-                          <p className=" type-article me-2">{article.type}</p>
-                          <p className="prix">{`${article.prix} Dhs`}</p>
-                        </div>
-                        <div className="d-flex justify-content-end">
-                          <button
-                            onClick={() => ModifyArticle(article)}
-                            className="btn pointer btn-success text-white rounded-pill px-3"
-                          >
-                            Modifier
-                          </button>
+                          <p className=" type-article me-2">Nom de l'offre</p>
                         </div>
                       </div>
-                      <div className="mt-4">
-                        {" "}
-                        <textarea
-                          name=""
-                          id=""
-                          cols="50"
-                          rows="3"
-                          style={styleText}
-                          className="description-article"
-                        >
-                          {article.description}
-                        </textarea>
+                      <div className="d-flex" style={{ margin: "30px 16px" }}>
+                        <div className="me-auto prx">Prix</div>
+                        <div className="price">{`${article.prix} MDH`}</div>
+                      </div>
+                      <div className="d-flex" style={{ margin: "30px 16px" }}>
+                        <div className="me-auto prx">Author</div>
+                        <div className="d-flex justify-content-around mt-2">
+                          <img
+                            src="/imgs/author.png"
+                            className="auth-img me-2"
+                            alt=""
+                          />
+                          <p className="auth-nm">Jamal Y</p>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -103,7 +90,17 @@ export default function ServiceList({ setArticleType }) {
               })
             : ""}
         </div>
+        <div className="buttons d-flex justify-content-end">
+          <div
+            className=" d-flex justify-content-center  sv-btn col-12 col-md-5 "
+            onClick={() => setAction(2)}
+          >
+            <p style={{ fontSize: "16px" }} className="suivant-iden">
+              Ajouter un service
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
+    </form>
   );
 }
