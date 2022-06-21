@@ -92,18 +92,23 @@ const Signup = () => {
     navigate("/");
   };
   const handleClick = async () => {
-    toastPending();
-    const data = { ...registerForm };
-    console.log("data to send", data);
-    try {
-      await register(registerForm);
-      dispatch(setRegister({}));
-      toastSuccessUpdate();
-      navigate("/");
-    } catch (e) {
-      let data = e.response?.data;
-      showErrors(data.errors);
-      toastError();
+    if (legal === true) {
+      toastPending();
+      const data = { ...registerForm };
+      console.log("data to send", data);
+      try {
+        await register(registerForm);
+        dispatch(setRegister({}));
+        toastSuccessUpdate();
+        navigate("/");
+      } catch (e) {
+        let data = e.response?.data;
+        showErrors(data.errors);
+        toastError();
+      }
+    } else {
+      console.log("You should agree about about the terms");
+      setStyle((prev) => "form-check-label text-danger");
     }
   };
 
