@@ -77,7 +77,7 @@ export default function ProductList({ setAction, setArticleType }) {
         </div> */}
 
           <div
-            className="articles row d-flex justify-content-around mb-4"
+            className="articles row d-flex justify-content-start mb-4"
             style={{ marginTop: "20px" }}
           >
             {articleProduct && articleProduct.length

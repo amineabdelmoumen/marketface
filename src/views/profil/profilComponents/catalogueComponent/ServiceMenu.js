@@ -185,7 +185,7 @@ export default function ServiceMenu({ setAction, setArticleType }) {
       let list = [...articles, data2];
 
       dispatch(setArticles(list));
-      setTimeout(() => setAction(1), 1500);
+      setTimeout(() => setArticleType(2, 2), 1500);
     } catch (err) {
       let errors = err.response?.data.errors;
       showErrors(errors);
@@ -204,7 +204,7 @@ export default function ServiceMenu({ setAction, setArticleType }) {
       );
 
       dispatch(setArticles(list));
-      setTimeout(() => setAction(1), 1500);
+      setTimeout(() => setArticleType(2, 2), 1500);
     } catch (err) {
       let errors = err.response?.data.errors;
       showErrors(errors);
@@ -234,43 +234,50 @@ export default function ServiceMenu({ setAction, setArticleType }) {
         <div className="row  position-relative ">
           <div className="" style={style}>
             <div className="row form-boxes">
-              <label className="col-12 col-sm-5 col-md-3 text">
-                Nom de l'article:
-              </label>
-              <div className="col-12 col-sm-5 col-md-9">
-                <input
-                  type="text"
-                  id="titre"
-                  name="nom"
-                  value={article ? article?.nom : ""}
-                  onChange={(e) => handleInputChange("nom", e)}
-                />
+              <div className="col-md-6">
+                <div className="row">
+                  <label className="col-12 col-sm-5 col-md-4 text">
+                    Nom de l'article:
+                  </label>
+                  <div className="col-12 col-sm-5 col-md-8">
+                    <input
+                      type="text"
+                      id="titre"
+                      name="nom"
+                      value={article ? article?.nom : ""}
+                      onChange={(e) => handleInputChange("nom", e)}
+                    />
+                  </div>
+                  <small
+                    ref={nomRef}
+                    className="text-danger ms-2 d-block"
+                    style={{ "font-size": "10px" }}
+                  ></small>
+                </div>
               </div>
-              <small
-                ref={nomRef}
-                className="text-danger ms-2 d-block"
-                style={{ "font-size": "10px" }}
-              ></small>
-            </div>
-            <div className="row mt-3 form-boxes">
-              <label className="col-12 col-sm-5 col-md-3 text">
-                Durée de Service:
-              </label>
-              <div className="col-12 col-sm-5 col-md-9">
-                <input
-                  type="text"
-                  id="titre"
-                  name="duree"
-                  value={article ? article?.duree : ""}
-                  onChange={(e) => handleInputChange("duree", e)}
-                />
+              <div className="col-md-6">
+                <div className="row">
+                  <label className="col-12 col-sm-5 col-md-4 text">
+                    Durée de Service:
+                  </label>
+                  <div className="col-12 col-sm-5 col-md-8">
+                    <input
+                      type="text"
+                      id="titre"
+                      name="duree"
+                      value={article ? article?.duree : ""}
+                      onChange={(e) => handleInputChange("duree", e)}
+                    />
+                  </div>
+                  <small
+                    ref={dureeRef}
+                    className="text-danger ms-2 d-block"
+                    style={{ "font-size": "10px" }}
+                  ></small>
+                </div>
               </div>
-              <small
-                ref={dureeRef}
-                className="text-danger ms-2 d-block"
-                style={{ "font-size": "10px" }}
-              ></small>
             </div>
+
             <div className="row mt-3 form-boxes">
               <label htmlFor="" className="col-12 col-sm-5 col-md-3 text">
                 Prix:
@@ -411,12 +418,12 @@ export default function ServiceMenu({ setAction, setArticleType }) {
             <ToastContainer limit={1} />
           </div>
 
-          <div className="col-12 col-md-5 col-lg-5">
+          <div className="">
             <div className="row">
               {article.images && article.images.length
                 ? article?.images.map((image) => {
                     return (
-                      <div className="col-md-6">
+                      <div className="col-md-3">
                         <img
                           src={`${process.env.REACT_APP_HOST_URL}/${image.path}`}
                           style={{

@@ -44,7 +44,7 @@ export default function ServiceList({ setAction, setArticleType }) {
         </div>
       </div>
       <form
-        className="container"
+        className="container-fluid"
         name="form-identite"
         id="form-identite-gen"
         style={{ padding: "14px 30px" }}
@@ -61,7 +61,7 @@ export default function ServiceList({ setAction, setArticleType }) {
         </div>{" "}
         {/* <div className="page_number">1/2</div> */}
         <div className="form-identite-info d-block mt-3">
-          <div className="articles row d-flex justify-content-around mb-4">
+          <div className="articles row d-flex justify-content-start mb-4">
             {articleService && articleService.length
               ? articleService.map((article) => {
                   return (

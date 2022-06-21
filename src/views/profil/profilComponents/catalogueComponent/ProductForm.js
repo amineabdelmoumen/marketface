@@ -174,7 +174,7 @@ export default function ProductForm({ setAction, setArticleType }) {
       let list = [...articles, data2];
 
       dispatch(setArticles(list));
-      setTimeout(() => setAction(1, 0), 1500);
+      setTimeout(() => setArticleType(1, 2), 1500);
     } catch (err) {
       let errors = err.response?.data.errors;
       showErrors(errors);
@@ -193,7 +193,7 @@ export default function ProductForm({ setAction, setArticleType }) {
       );
 
       dispatch(setArticles(list));
-      setTimeout(() => setAction(1), 1500);
+      setTimeout(() => setArticleType(1, 2), 1500);
     } catch (err) {
       let errors = err.response?.data.errors;
       showErrors(errors);
@@ -446,7 +446,7 @@ export default function ProductForm({ setAction, setArticleType }) {
               {article.images && article.images.length
                 ? article.images.map((photo) => {
                     return (
-                      <div className="col-6">
+                      <div className="col-3">
                         <img
                           src={`${process.env.REACT_APP_HOST_URL}/${photo?.path}`}
                           style={{ width: "100%", margin: "20px 30px" }}

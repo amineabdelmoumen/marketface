@@ -61,7 +61,7 @@ export default function ImmobilierList({ setAction, setArticleType }) {
             </div>
           </div>
           <div
-            className="articles row row-cols-4 d-flex justify-content-around mb-4"
+            className="articles row row-cols-4 d-flex justify-content-start mb-4"
             style={{ marginTop: "20px" }}
           >
             {articleImmobilier && articleImmobilier.length
