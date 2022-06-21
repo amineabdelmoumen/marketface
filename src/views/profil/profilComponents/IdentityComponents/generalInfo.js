@@ -338,6 +338,7 @@ function Catalogue() {
                   <select
                     name="vous_etes"
                     id="vous_etes"
+                    style={{ width: "100%" }}
                     value={catalogue.vous_etes}
                     onChange={(e) => handleInputUpdate("vous_etes", e)}
                   >
@@ -496,7 +497,7 @@ function Catalogue() {
             </div>
           </div>
 
-          <div className="buttons d-flex justify-content-end">
+          <div className="mt-4 d-flex justify-content-end">
             <div
               className=" d-flex justify-content-center  sv-btn col-12 col-md-2 "
               onClick={() => handleSubmit()}

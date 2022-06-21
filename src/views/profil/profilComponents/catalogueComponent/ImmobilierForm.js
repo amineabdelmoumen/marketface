@@ -481,7 +481,7 @@ export default function ImmobilierForm({ setAction }) {
                 style={{ "font-size": "10px" }}
               ></small>
             </div>
-            <div className="buttons d-flex justify-content-end">
+            <div className="d-flex justify-content-end">
               <div
                 id="submitBtn"
                 className=" d-flex justify-content-center  sv-btn col-12 col-md-3"

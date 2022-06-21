@@ -154,7 +154,7 @@ export default function SideBar({
               Mon catalogue
             </span>
             {bgcolor == 3 ? (
-              <div style={{ marginTop: "28px", marginLeft: "-8px" }}>
+              <div style={{ marginTop: "28px" }}>
                 <p
                   className={
                     companySection == 1 ? "if-grn xfg-clicked" : "if-grn "

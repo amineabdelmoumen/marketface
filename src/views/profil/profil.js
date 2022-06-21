@@ -227,7 +227,7 @@ function Profil() {
                   />
                 </div>
 
-                <div className="col-12 col-md-8" style={{ marginTop: "41px" }}>
+                <div className="col-12 col-md-8" style={{ marginTop: "58px" }}>
                   {
                     {
                       1: <Catalogue />,
@@ -258,14 +258,7 @@ function Profil() {
                 </div> */}
 
                 <div className="row">
-                  <div className=" col-6 col-md-3">
-                    <CompanyCard />
-                  </div>
-
-                  <div
-                    className="col-12 col-md-9"
-                    style={{ marginTop: "41px" }}
-                  >
+                  <div className="" style={{ marginTop: "12px" }}>
                     {
                       {
                         1: <ProductList setAction={setAction} />,
@@ -295,14 +288,7 @@ function Profil() {
                 </div> */}
 
                 <div className="row">
-                  <div className=" col-6 col-md-3">
-                    <CompanyCard />
-                  </div>
-
-                  <div
-                    className="col-12 col-md-9"
-                    style={{ marginTop: "41px" }}
-                  >
+                  <div className="" style={{ marginTop: "12px" }}>
                     {
                       {
                         1: <ServiceList setAction={setAction} />,
@@ -333,14 +319,7 @@ function Profil() {
                 </div> */}
 
                 <div className="row">
-                  <div className=" col-6 col-md-3">
-                    <CompanyCard />
-                  </div>
-
-                  <div
-                    className="col-12 col-md-9"
-                    style={{ marginTop: "41px" }}
-                  >
+                  <div className="" style={{ marginTop: "12px" }}>
                     {
                       {
                         1: <ImmobilierList setAction={setAction} />,

@@ -224,7 +224,7 @@ export default function ServiceMenu({ setAction }) {
         <div className="d-flex justify-content-end">
           <p
             className="title-identite cursor-pointer mt-4"
-            styel={{ fontSize: "16px" }}
+            style={{ fontSize: "16px" }}
             onClick={() => setAction(1)}
           >
             Tous les services
@@ -252,7 +252,7 @@ export default function ServiceMenu({ setAction }) {
                 style={{ "font-size": "10px" }}
               ></small>
             </div>
-            <div className="row mt-1 form-boxes">
+            <div className="row mt-3 form-boxes">
               <label className="col-12 col-sm-5 col-md-3 text">
                 Durée de Service:
               </label>
@@ -271,7 +271,7 @@ export default function ServiceMenu({ setAction }) {
                 style={{ "font-size": "10px" }}
               ></small>
             </div>
-            <div className="row mt-1 form-boxes">
+            <div className="row mt-3 form-boxes">
               <label htmlFor="" className="col-12 col-sm-5 col-md-3 text">
                 Prix:
               </label>
@@ -290,7 +290,7 @@ export default function ServiceMenu({ setAction }) {
                 style={{ "font-size": "10px" }}
               ></small>
             </div>
-            <div className="row mt-1 form-boxes">
+            <div className="row mt-3 form-boxes">
               <label htmlFor="" className="col-12 col-sm-5 col-md-3 text">
                 quantité:
               </label>
@@ -309,7 +309,7 @@ export default function ServiceMenu({ setAction }) {
                 style={{ "font-size": "10px" }}
               ></small>
             </div>
-            <div className="row mt-1 form-boxes">
+            <div className="row mt-3 form-boxes">
               <label htmlFor="" className="col-12 col-sm-5  col-md-3 text">
                 Catégorie:
               </label>
@@ -355,12 +355,16 @@ export default function ServiceMenu({ setAction }) {
                 </label>
               </div>
             </div>
-            <div className="row mt-1  pb-3 form-boxes">
+            <div className="row mt-3  pb-3 form-boxes">
               <label htmlFor="" className="col-12 col-sm-5 col-md-3 text">
                 Photos:
               </label>
               <div className="col-12 col-sm-5 col-md-9">
-                <label htmlFor="photos" className="text-center upload">
+                <label
+                  htmlFor="photos"
+                  className="text-center upload"
+                  style={{ fontWeight: "normal", fontSize: "13px" }}
+                >
                   Choisir un fichier
                   <input
                     type="file"
@@ -374,7 +378,7 @@ export default function ServiceMenu({ setAction }) {
                 </label>
               </div>
             </div>
-            <div className="row mt-1 pb-3 form-boxes">
+            <div className="row mt-3 pb-3 form-boxes">
               <label htmlFor="" className="col-12 col-sm-5 col-md-3 text">
                 Description:
               </label>
@@ -393,7 +397,7 @@ export default function ServiceMenu({ setAction }) {
                 style={{ "font-size": "10px" }}
               ></small>
             </div>
-            <div className="buttons d-flex justify-content-end">
+            <div className=" d-flex justify-content-end">
               <div
                 id="submitBtn"
                 className=" d-flex justify-content-center  sv-btn col-12 col-md-3"
