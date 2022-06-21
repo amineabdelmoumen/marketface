@@ -13,7 +13,7 @@ import {
   saveImages,
 } from "../../../../lib/crud";
 let uploadForm = new FormData();
-export default function ImmobilierForm({ setAction }) {
+export default function ImmobilierForm({ setAction, setArticleType }) {
   const selectedArticle = useSelector((state) => state.article.selectedArticle);
   const toastId = useRef(null);
   const [index, setIndex] = useState(0);
@@ -216,7 +216,7 @@ export default function ImmobilierForm({ setAction }) {
       let list = [...articles, data2];
 
       dispatch(setArticles(list));
-      setTimeout(() => setAction(1), 1500);
+      setTimeout(() => setArticleType(3, 2), 1500);
     } catch (err) {
       let errors = err.response?.data.errors;
       showErrors(errors);
@@ -235,7 +235,7 @@ export default function ImmobilierForm({ setAction }) {
       );
 
       dispatch(setArticles(list));
-      setTimeout(() => setAction(1), 1500);
+      setTimeout(() => setArticleType(3, 2), 1500);
     } catch (err) {
       let errors = err.response?.data.errors;
       showErrors(errors);
@@ -257,7 +257,7 @@ export default function ImmobilierForm({ setAction }) {
           <p
             className=" cursor-pointer mt-4 title-identite"
             style={{ fontSize: "16px" }}
-            onClick={() => setAction(1)}
+            onClick={() => setArticleType(3, 2)}
           >
             Tous les biens Immobilier
           </p>

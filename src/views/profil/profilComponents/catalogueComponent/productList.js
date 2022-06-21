@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setSelectedArticle } from "../../../../store/ArticleSlice";
 
 import "./styles.scss";
-export default function ProductList({ setAction }) {
+export default function ProductList({ setAction, setArticleType }) {
   const [articleProduct, setArticleProduct] = useState([]);
   const articles = useSelector((state) => state.profile.articles);
 
@@ -54,6 +54,16 @@ export default function ProductList({ setAction }) {
         {/* <div className="page_number">1/2</div> */}
 
         <div className="form-identite-info d-block mt-3 position-relative">
+          <div className=" d-flex justify-content-end">
+            <div
+              className=" d-flex justify-content-center  sv-btn col-12 col-md-4 "
+              onClick={() => setArticleType(1, 1)}
+            >
+              <p style={{ fontSize: "16px" }} className="suivant-iden">
+                Ajouter un produit
+              </p>
+            </div>
+          </div>
           {/*  <div
           className="d-flex justify-content-end"
           style={{ marginTop: "40px", marginRight: "30px" }}
@@ -130,16 +140,6 @@ export default function ProductList({ setAction }) {
                   );
                 })
               : ""}
-          </div>
-          <div className=" d-flex justify-content-end">
-            <div
-              className=" d-flex justify-content-center  sv-btn col-12 col-md-4 "
-              onClick={() => setAction(2)}
-            >
-              <p style={{ fontSize: "16px" }} className="suivant-iden">
-                Ajouter un produit
-              </p>
-            </div>
           </div>
         </div>
       </form>

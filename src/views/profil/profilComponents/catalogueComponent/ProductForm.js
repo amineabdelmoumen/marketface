@@ -14,7 +14,7 @@ import {
   saveImages,
 } from "../../../../lib/crud";
 let uploadForm = new FormData();
-export default function ProductForm({ setAction }) {
+export default function ProductForm({ setAction, setArticleType }) {
   const selectedArticle = useSelector((state) => state.article.selectedArticle);
 
   const toastId = useRef(null);
@@ -227,7 +227,7 @@ export default function ProductForm({ setAction }) {
           <p
             className="title-identite cursor-pointer mt-4"
             style={{ fontSize: "16px" }}
-            onClick={() => setAction(1)}
+            onClick={() => setArticleType(1, 2)}
           >
             Tous les produit
           </p>
@@ -242,149 +242,183 @@ export default function ProductForm({ setAction }) {
         <div className="row  position-relative ">
           <div className="" style={style}>
             <div className="row form-boxes">
-              <label className="col-12 col-sm-5 col-md-3 text">
-                Nom de l'article:
-              </label>
-              <div className="col-12 col-sm-5 col-md-9">
-                <input
-                  type="text"
-                  id="titre"
-                  name="nom"
-                  value={article ? article?.nom : ""}
-                  onChange={(e) => handleInputChange("nom", e)}
-                />
+              <div className="col-md-6">
+                <div className="row">
+                  <label className="col-12 col-sm-5 col-md-4 text">
+                    Nom de l'article:
+                  </label>
+                  <div className="col-12 col-sm-5 col-md-8">
+                    <input
+                      type="text"
+                      id="titre"
+                      name="nom"
+                      value={article ? article?.nom : ""}
+                      onChange={(e) => handleInputChange("nom", e)}
+                    />
+                  </div>
+                  <small
+                    ref={nomRef}
+                    className="text-danger ms-2 d-block"
+                    style={{ "font-size": "10px" }}
+                  ></small>
+                </div>
               </div>
-              <small
-                ref={nomRef}
-                className="text-danger ms-2 d-block"
-                style={{ "font-size": "10px" }}
-              ></small>
-            </div>
-            <div className="row mt-4 form-boxes">
-              <label htmlFor="" className="col-12 col-sm-5 col-md-3 text">
-                Prix:
-              </label>
-              <div className="col-12  col-sm-5 col-md-9">
-                <input
-                  type="number"
-                  id="prix"
-                  name="prix"
-                  value={article ? article?.prix : ""}
-                  onChange={(e) => handleInputChange("prix", e)}
-                />
+
+              <div className="col-md-6">
+                {" "}
+                <div className="row">
+                  <label htmlFor="" className="col-12 col-sm-5 col-md-2 text">
+                    Prix:
+                  </label>
+                  <div className="col-12  col-sm-5 col-md-9">
+                    <input
+                      type="number"
+                      id="prix"
+                      name="prix"
+                      value={article ? article?.prix : ""}
+                      onChange={(e) => handleInputChange("prix", e)}
+                    />
+                  </div>
+                  <small
+                    ref={prixRef}
+                    className="text-danger ms-2 d-block"
+                    style={{ "font-size": "10px" }}
+                  ></small>
+                </div>
               </div>
-              <small
-                ref={prixRef}
-                className="text-danger ms-2 d-block"
-                style={{ "font-size": "10px" }}
-              ></small>
             </div>
+
             <div className="row mt-3 form-boxes">
-              <label htmlFor="" className="col-12 col-sm-5 col-md-3 text">
-                quantité:
-              </label>
-              <div className="col-12 col-sm-5 col-md-9">
-                <input
-                  type="number"
-                  id="quantite"
-                  name="quantite"
-                  value={article ? article?.quantite : ""}
-                  onChange={(e) => handleInputChange("quantite", e)}
-                />
+              <div className="col-md-6">
+                <div className="row">
+                  <label htmlFor="" className="col-12 col-sm-5 col-md-4 text">
+                    quantité:
+                  </label>
+                  <div className="col-12 col-sm-5 col-md-8">
+                    <input
+                      type="number"
+                      id="quantite"
+                      name="quantite"
+                      value={article ? article?.quantite : ""}
+                      onChange={(e) => handleInputChange("quantite", e)}
+                    />
+                  </div>
+                  <small
+                    ref={quantiteRef}
+                    className="text-danger ms-2 d-block"
+                    style={{ "font-size": "10px" }}
+                  ></small>
+                </div>
               </div>
-              <small
-                ref={quantiteRef}
-                className="text-danger ms-2 d-block"
-                style={{ "font-size": "10px" }}
-              ></small>
-            </div>
-            <div className="row mt-3 form-boxes">
-              <label htmlFor="" className="col-12 col-sm-5  col-md-3 text">
-                Catégorie:
-              </label>
-              <div className="col-12 col-sm-5 col-md-9">
-                <select
-                  name="categorie"
-                  type="text"
-                  id="categorie"
-                  className="text-left"
-                  value={article ? article?.type : ""}
-                  onChange={(e) => handleInputChange("type", e)}
-                >
-                  <option value="" disabled selected hidden>
-                    {" "}
-                    Seléctionner une Categorie
-                  </option>
-                  {categories.map((category) => {
-                    return <option value={category}>{category}</option>;
-                  })}
-                </select>
+
+              <div className="col-md-6">
+                <div className="row">
+                  <label htmlFor="" className="col-12 col-sm-5  col-md-2 text">
+                    Catégorie:
+                  </label>
+                  <div className="col-12 col-sm-5 col-md-9">
+                    <select
+                      name="categorie"
+                      type="text"
+                      id="categorie"
+                      className="text-left"
+                      value={article ? article?.type : ""}
+                      onChange={(e) => handleInputChange("type", e)}
+                    >
+                      <option value="" disabled selected hidden>
+                        {" "}
+                        Seléctionner une Categorie
+                      </option>
+                      {categories.map((category) => {
+                        return <option value={category}>{category}</option>;
+                      })}
+                    </select>
+                  </div>
+                  <small
+                    ref={categorieRef}
+                    className="text-danger ms-2 d-block"
+                    style={{ "font-size": "10px" }}
+                  ></small>
+                </div>
               </div>
-              <small
-                ref={categorieRef}
-                className="text-danger ms-2 d-block"
-                style={{ "font-size": "10px" }}
-              ></small>
             </div>
 
             <div className="row mt-3  pb-3 form-boxes">
-              <label htmlFor="photos" className="col-12 col-sm-5 col-md-3 text">
-                Documents:
-              </label>
-              <div className="col-12 col-sm-5 col-md-9">
-                <label htmlFor="documents" className="text-center upload">
-                  Choisir un fichier
-                  <input
-                    type="file"
-                    id="documents"
-                    name="documents[]"
-                    className="d-none"
-                    multiple
-                    onChange={(e) => handleDocumentUpload(e)}
-                  />
-                </label>
+              <div className="col-md-6">
+                <div className="row">
+                  <label
+                    htmlFor="photos"
+                    className="col-12 col-sm-5 col-md-4 text"
+                  >
+                    Documents:
+                  </label>
+                  <div className="col-12 col-sm-5 col-md-8">
+                    <label htmlFor="documents" className="text-center upload">
+                      Choisir un fichier
+                      <input
+                        type="file"
+                        id="documents"
+                        name="documents[]"
+                        className="d-none"
+                        multiple
+                        onChange={(e) => handleDocumentUpload(e)}
+                      />
+                    </label>
+                  </div>
+                </div>
               </div>
             </div>
             <div className="row mt-3  pb-3 form-boxes">
-              <label htmlFor="photos" className="col-12 col-sm-5 col-md-3 text">
-                Photos:
-              </label>
-              <div className="col-12 col-sm-5 col-md-9">
-                <label htmlFor="photos" className="text-center upload">
-                  Choisir un fichier
-                  <input
-                    type="file"
-                    id="photos"
-                    name="photos[]"
-                    accept="image/*"
-                    className="d-none"
-                    multiple
-                    onChange={(e) => handlePhotosUpload(e)}
-                  />
-                </label>
+              <div className="col-md-6">
+                <div className="row">
+                  <label
+                    htmlFor="photos"
+                    className="col-12 col-sm-5 col-md-4 text"
+                  >
+                    Photos:
+                  </label>
+                  <div className="col-12 col-sm-5 col-md-8">
+                    <label htmlFor="photos" className="text-center upload">
+                      Choisir un fichier
+                      <input
+                        type="file"
+                        id="photos"
+                        name="photos[]"
+                        accept="image/*"
+                        className="d-none"
+                        multiple
+                        onChange={(e) => handlePhotosUpload(e)}
+                      />
+                    </label>
+                  </div>
+                </div>
               </div>
             </div>
             <div className="row mt-3 pb-3 form-boxes">
-              <label htmlFor="" className="col-12 col-sm-5 col-md-3 text">
-                Description:
-              </label>
-              <div className="col-12 col-sm-5 col-md-9">
-                <textarea
-                  rows={5}
-                  cols={30}
-                  id="titre"
-                  name="titre"
-                  value={article ? article?.description : ""}
-                  onChange={(e) => handleInputChange("description", e)}
-                ></textarea>
+              <div className="col-md-6">
+                <div className="row">
+                  <label htmlFor="" className="col-12 col-sm-5 col-md-4 text">
+                    Description:
+                  </label>
+                  <div className="col-12 col-sm-5 col-md-8">
+                    <textarea
+                      rows={5}
+                      cols={30}
+                      id="titre"
+                      name="titre"
+                      value={article ? article?.description : ""}
+                      onChange={(e) => handleInputChange("description", e)}
+                    ></textarea>
+                  </div>
+                  <small
+                    ref={descriptionRef}
+                    className="text-danger ms-2 d-block"
+                    style={{ "font-size": "10px" }}
+                  ></small>
+                </div>
               </div>
-              <small
-                ref={descriptionRef}
-                className="text-danger ms-2 d-block"
-                style={{ "font-size": "10px" }}
-              ></small>
             </div>
-            <div className="buttons d-flex justify-content-end">
+            <div className=" d-flex justify-content-end">
               <div
                 id="submitBtn"
                 className=" d-flex justify-content-center  sv-btn col-12 col-md-3"

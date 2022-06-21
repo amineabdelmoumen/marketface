@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setSelectedArticle } from "../../../../store/ArticleSlice";
 
-export default function ImmobilierList({ setAction }) {
+export default function ImmobilierList({ setAction, setArticleType }) {
   const [articleImmobilier, setArticleImmobilier] = useState([]);
 
   const articles = useSelector((state) => state.profile.articles);
@@ -50,6 +50,16 @@ export default function ImmobilierList({ setAction }) {
         {/* <div className="page_number">1/2</div> */}
 
         <div className="form-identite-info d-block mt-3 position-relative">
+          <div className=" d-flex justify-content-end">
+            <div
+              className=" d-flex justify-content-center  sv-btn col-12 col-md-4 "
+              onClick={() => setArticleType(3, 1)}
+            >
+              <p style={{ fontSize: "15px" }} className="suivant-iden">
+                Ajouter un Immobilier
+              </p>
+            </div>
+          </div>
           <div
             className="articles row row-cols-4 d-flex justify-content-around mb-4"
             style={{ marginTop: "20px" }}
@@ -114,16 +124,6 @@ export default function ImmobilierList({ setAction }) {
                   );
                 })
               : ""}
-          </div>
-          <div className=" d-flex justify-content-end">
-            <div
-              className=" d-flex justify-content-center  sv-btn col-12 col-md-5 "
-              onClick={() => setAction(2)}
-            >
-              <p style={{ fontSize: "15px" }} className="suivant-iden">
-                Ajouter un Immobilier
-              </p>
-            </div>
           </div>
         </div>
       </form>

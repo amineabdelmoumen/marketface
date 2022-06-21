@@ -14,7 +14,7 @@ import {
 } from "../../../../lib/crud";
 let uploadForm = new FormData();
 
-export default function ServiceMenu({ setAction }) {
+export default function ServiceMenu({ setAction, setArticleType }) {
   const selectedArticle = useSelector((state) => state.article.selectedArticle);
   const toastId = useRef(null);
   const nomRef = useRef();
@@ -225,7 +225,7 @@ export default function ServiceMenu({ setAction }) {
           <p
             className="title-identite cursor-pointer mt-4"
             style={{ fontSize: "16px" }}
-            onClick={() => setAction(1)}
+            onClick={() => setArticleType(2, 2)}
           >
             Tous les services
           </p>

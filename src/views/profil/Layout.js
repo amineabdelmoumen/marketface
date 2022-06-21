@@ -5,8 +5,12 @@ import SideBar from "./profilComponents/SideBar";
 export default function Layout({
   children,
   setProfilSection,
-  setCompanySection,
+  setArticleType,
+
   companySection,
+  setCompanySection,
+  entrepriseSection,
+  setEntrepriseSection,
 }) {
   const [sideBarColumns, setSideBarColumns] = useState(0);
   return (
@@ -37,8 +41,11 @@ export default function Layout({
             setSideBarColumns={setSideBarColumns}
             sideBarColumns={sideBarColumns}
             setProfilSection={setProfilSection}
-            setCompanySection={setCompanySection}
+            setArticleType={setArticleType}
             companySection={companySection}
+            setCompanySection={setCompanySection}
+            entrepriseSection={entrepriseSection}
+            setEntrepriseSection={setEntrepriseSection}
           />
         </div>
 

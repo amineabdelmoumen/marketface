@@ -5,8 +5,11 @@ export default function SideBar({
   setSideBarColumns,
   sideBarColumns,
   setProfilSection,
-  setCompanySection,
+  setArticleType,
   companySection,
+  setCompanySection,
+  setEntrepriseSection,
+  entrepriseSection,
 }) {
   console.log(setSideBarColumns, sideBarColumns);
   const navigate = useNavigate();
@@ -103,9 +106,9 @@ export default function SideBar({
               <div style={{ marginTop: "28px", marginLeft: "-8px" }}>
                 <p
                   className={
-                    companySection == 1 ? "if-grn xfg-clicked" : "if-grn "
+                    entrepriseSection == 1 ? "if-grn xfg-clicked" : "if-grn "
                   }
-                  onClick={() => setCompanySection(1)}
+                  onClick={() => setEntrepriseSection(1)}
                 >
                   {" "}
                   Identite
@@ -159,7 +162,7 @@ export default function SideBar({
                   className={
                     companySection == 1 ? "if-grn xfg-clicked" : "if-grn "
                   }
-                  onClick={() => setCompanySection(1)}
+                  onClick={() => setArticleType(1, 2)}
                 >
                   {" "}
                   Produit
@@ -168,7 +171,7 @@ export default function SideBar({
                   className={
                     companySection == 2 ? "if-grn xfg-clicked" : "if-grn "
                   }
-                  onClick={() => setCompanySection(2)}
+                  onClick={() => setArticleType(2, 2)}
                 >
                   {" "}
                   Service
@@ -177,7 +180,7 @@ export default function SideBar({
                   className={
                     companySection == 3 ? "if-grn xfg-clicked" : "if-grn "
                   }
-                  onClick={() => setCompanySection(3)}
+                  onClick={() => setArticleType(3, 2)}
                 >
                   {" "}
                   Immobilier

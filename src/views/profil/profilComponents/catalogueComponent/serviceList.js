@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setSelectedArticle } from "../../../../store/ArticleSlice";
 
-export default function ServiceList({ setAction }) {
+export default function ServiceList({ setAction, setArticleType }) {
   const [articleService, setArticleService] = useState([]);
 
   const articles = useSelector((state) => state.profile.articles);
@@ -49,7 +49,16 @@ export default function ServiceList({ setAction }) {
         id="form-identite-gen"
         style={{ padding: "14px 30px" }}
       >
-        {" "}
+        <div className=" d-flex justify-content-end">
+          <div
+            className=" d-flex justify-content-center  sv-btn col-12 col-md-4 "
+            onClick={() => setArticleType(2, 1)}
+          >
+            <p style={{ fontSize: "16px" }} className="suivant-iden">
+              Ajouter un service
+            </p>
+          </div>
+        </div>{" "}
         {/* <div className="page_number">1/2</div> */}
         <div className="form-identite-info d-block mt-3">
           <div className="articles row d-flex justify-content-around mb-4">
@@ -104,16 +113,6 @@ export default function ServiceList({ setAction }) {
                   );
                 })
               : ""}
-          </div>
-          <div className=" d-flex justify-content-end">
-            <div
-              className=" d-flex justify-content-center  sv-btn col-12 col-md-4 "
-              onClick={() => setAction(2)}
-            >
-              <p style={{ fontSize: "16px" }} className="suivant-iden">
-                Ajouter un service
-              </p>
-            </div>
           </div>
         </div>
       </form>

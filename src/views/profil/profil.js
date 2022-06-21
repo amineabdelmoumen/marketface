@@ -35,8 +35,14 @@ function Profil() {
   const profil = useSelector((state) => state.profile);
   const [identitySection, setIdentitySection] = useState(1);
   const [companySection, setCompanySection] = useState(1);
+  const [entrepriseSection, setEntrepriseSection] = useState(1);
   const [progress, setProgress] = useState(1);
   const [action, setAction] = useState(1);
+
+  const setArticleType = (id1, id2) => {
+    setCompanySection(id1);
+    setAction(id2);
+  };
   useEffect(() => {
     if (Object.keys(profil.identite).length !== 0) {
       setProgress((old) => old + 1);
@@ -89,8 +95,11 @@ function Profil() {
         <div>
           <Layout
             setProfilSection={setProfilSection}
+            setArticleType={setArticleType}
             setCompanySection={setCompanySection}
             companySection={companySection}
+            entrepriseSection={entrepriseSection}
+            setEntrepriseSection={setEntrepriseSection}
           >
             {profilSection == 1 ? (
               <div className="row">
@@ -217,7 +226,7 @@ function Profil() {
             ) : (
               ""
             )}
-            {profilSection == 2 && companySection == 1 ? (
+            {profilSection == 2 && entrepriseSection == 1 ? (
               <div className="row">
                 <div className="col-12 col-md-4">
                   <AbouIdentity
@@ -241,7 +250,7 @@ function Profil() {
             ) : (
               ""
             )}
-            {profilSection == 3 && companySection == 1 ? (
+            {profilSection == 3 ? (
               <div className="row">
                 {/* <div className="row">
                   <div className=" col-6 col-md-3">
@@ -261,9 +270,44 @@ function Profil() {
                   <div className="" style={{ marginTop: "12px" }}>
                     {
                       {
-                        1: <ProductList setAction={setAction} />,
-                        2: <ProductForm setAction={setAction} />,
-                      }[action]
+                        1: {
+                          1: (
+                            <ProductForm
+                              setArticleType={setArticleType}
+                              companySection={companySection}
+                            />
+                          ),
+                          2: (
+                            <ProductList
+                              setArticleType={setArticleType}
+                              companySection={companySection}
+                            />
+                          ),
+                        }[action],
+                        2: {
+                          1: (
+                            <ServiceMenu
+                              setArticleType={setArticleType}
+                              companySection={companySection}
+                            />
+                          ),
+                          2: <ServiceList setArticleType={setArticleType} />,
+                        }[action],
+                        3: {
+                          1: (
+                            <ImmobilierForm
+                              setArticleType={setArticleType}
+                              companySection={companySection}
+                            />
+                          ),
+                          2: (
+                            <ImmobilierList
+                              setArticleType={setArticleType}
+                              companySection={companySection}
+                            />
+                          ),
+                        }[action],
+                      }[companySection]
                     }
                   </div>
                 </div>
@@ -271,78 +315,6 @@ function Profil() {
             ) : (
               ""
             )}
-            {profilSection == 3 && companySection == 2 ? (
-              <div className="row">
-                {/* <div className="row">
-                  <div className=" col-6 col-md-3">
-                    <p className="fty">Produit</p>
-                  </div>
-
-                  <div className=" col-6 col-md-3">
-                    <p className="fty">Service</p>
-                  </div>
-
-                  <div className=" col-6 col-md-3">
-                    <p className="fty">Immobilier</p>
-                  </div>
-                </div> */}
-
-                <div className="row">
-                  <div className="" style={{ marginTop: "12px" }}>
-                    {
-                      {
-                        1: <ServiceList setAction={setAction} />,
-                        2: <ServiceMenu setAction={setAction} />,
-                      }[action]
-                    }
-                  </div>
-                </div>
-              </div>
-            ) : (
-              ""
-            )}
-
-            {profilSection == 3 && companySection == 3 ? (
-              <div className="row">
-                {/* <div className="row">
-                  <div className=" col-6 col-md-3">
-                    <p className="fty">Produit</p>
-                  </div>
-
-                  <div className=" col-6 col-md-3">
-                    <p className="fty">Service</p>
-                  </div>
-
-                  <div className=" col-6 col-md-3">
-                    <p className="fty">Immobilier</p>
-                  </div>
-                </div> */}
-
-                <div className="row">
-                  <div className="" style={{ marginTop: "12px" }}>
-                    {
-                      {
-                        1: <ImmobilierList setAction={setAction} />,
-                        2: <ImmobilierForm setAction={setAction} />,
-                      }[action]
-                    }
-                  </div>
-                </div>
-              </div>
-            ) : (
-              ""
-            )}
-
-            {/*  <div className="row mt-2">
-              <div className="col-12 col-md-12">
-                <CompanyDetails />
-              </div>
-            </div>
-            <div className="row mt-4">
-              <div className="col-12 col-md-12 about1">
-                <CompanyTeam />
-              </div>
-            </div> */}
           </Layout>
         </div>
       )}
