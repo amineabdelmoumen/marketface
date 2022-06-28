@@ -900,3 +900,31 @@ input[type="text"]:focus {
 
   color: #8181a5;
 }
+//team element
+
+.tm-el {
+  height: 200px;
+
+  background: #fafbff;
+  border: 0.586806px solid #ececf2;
+  border-radius: 7.04167px;
+}
+.nom-pr {
+  font-family: $font-lato;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 21px;
+  /* or 150% */
+
+  text-align: center;
+
+  /* Bg / #8181A5 */
+
+  color: #8181a5;
+}
+.status-cnx {
+  position: absolute;
+  top: 64px;
+  right: 54px;
+}

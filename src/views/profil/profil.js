@@ -1,12 +1,12 @@
 import React, { useState, useEffect, use } from "react";
-import { getProfile } from "../../lib/crud";
+import { getProfile, getTeam } from "../../lib/crud";
 import { checkAuth } from "../../lib/auth";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import About from "./profilComponents/About";
 import CompanyCard from "./profilComponents/CompanyCard";
 import CompanyDetails from "./profilComponents/CompanyDetails";
-import CompanyTeam from "./profilComponents/CompanyTeam";
+
 import PageLoading from "../../components/PageLoading";
 import NavBar from "./profilComponents/NavBar";
 import SideBar from "./profilComponents/SideBar";
@@ -25,6 +25,8 @@ import ServiceList from "./profilComponents/catalogueComponent/serviceList";
 import ServiceMenu from "./profilComponents/catalogueComponent/ServiceMenu";
 import ImmobilierForm from "./profilComponents/catalogueComponent/ImmobilierForm";
 import ImmobilierList from "./profilComponents/catalogueComponent/immobilierList";
+import TeamList from "./profilComponents/TeamList";
+import CompanyTeam from "./profilComponents/CompanyTeam";
 
 function Profil() {
   const dispatch = useDispatch();
@@ -38,10 +40,21 @@ function Profil() {
   const [entrepriseSection, setEntrepriseSection] = useState(1);
   const [progress, setProgress] = useState(1);
   const [action, setAction] = useState(1);
-
+  const [membre, setMembre] = useState(0);
+  const [teamList, setTeamList] = useState();
+  useEffect(async () => {
+    const token = localStorage.getItem("token");
+    const res = await getTeam(token);
+    console.log("team response", res.data);
+    setTeamList(res.data);
+  }, []);
   const setArticleType = (id1, id2) => {
     setCompanySection(id1);
     setAction(id2);
+  };
+  const setTeam = (id1, id2) => {
+    setTab(id1);
+    setMembre(id2);
   };
   useEffect(() => {
     if (Object.keys(profil.identite).length !== 0) {
@@ -140,7 +153,7 @@ function Profil() {
                             ? "xfg xfg-clicked  position-relative"
                             : "xfg"
                         }
-                        onClick={() => setTab(3)}
+                        onClick={() => setTeam(3, 0)}
                       >
                         {" "}
                         {tab == 3 ? <div className="xfg-line-elem"></div> : ""}
@@ -219,6 +232,16 @@ function Profil() {
                     {
                       1: <About />,
                       2: <Identity />,
+                      3: {
+                        0: (
+                          <TeamList
+                            setTeam={setTeam}
+                            teamList={teamList}
+                            setTeamList={setTeamList}
+                          />
+                        ),
+                        1: <CompanyTeam setTeam={setTeam} />,
+                      }[membre],
                     }[tab]
                   }
                 </div>

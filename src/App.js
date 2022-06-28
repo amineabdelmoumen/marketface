@@ -11,13 +11,9 @@ import "./assets/css/normalize.css";
 import ResetPassword from "./views/reset-password";
 import PrivateProfil from "./components/privateProfil";
 import PageLoading from "./components/PageLoading";
+import PrivateEmpty from "./components/PrivateEmpty";
 
 function App() {
-  useEffect(() => {
-    window.process = {
-      ...window.process,
-    };
-  }, []);
   return (
     <div className="App">
       <Routes>
@@ -43,9 +39,9 @@ function App() {
         <Route
           path="/profil"
           element={
-            <Private>
+            <PrivateEmpty>
               <Profil />
-            </Private>
+            </PrivateEmpty>
           }
         />
 

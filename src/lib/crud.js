@@ -90,3 +90,20 @@ export const getProfile = async (token) => {
     },
   });
 };
+
+export const getTeam = async (token) => {
+  return await apiClient.get("/team", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export const AddMembre = async (data, token) => {
+  console.log("addMembre");
+  return await apiClient.post("/team", data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
