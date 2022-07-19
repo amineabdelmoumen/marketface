@@ -76,7 +76,7 @@ export default function ChatList() {
                     {`${getMembre(message.user_id)[0].nom}`}
                   </p>
                   <p style={{ marginLeft: "14px", fontSize: "16px" }}>
-                    vous a enyoye un message
+                    vous a envoyé un message
                   </p>
 
                   <p style={{ marginLeft: "14px", fontSize: "16px" }}>
