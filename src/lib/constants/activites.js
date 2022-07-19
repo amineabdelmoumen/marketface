@@ -1,4 +1,5 @@
 const activites = [
+  "",
   "Agriculture, Sylviculture Et Pêche",
   "Industries Extractives",
   "Industrie Manufacturière",

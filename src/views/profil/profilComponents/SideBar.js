@@ -192,7 +192,7 @@ export default function SideBar({
           </div>
         </div>
         <div
-          onClick={() => setBgcolor(4)}
+          onClick={() => setData(4)}
           className="elem1 d-flex align-items-center "
           style={
             bgcolor == 4
@@ -224,7 +224,7 @@ export default function SideBar({
           </div>
         </div>
         <div
-          onClick={() => setBgcolor(5)}
+          onClick={() => setData(5)}
           className="elem1 d-flex align-items-center "
           style={bgcolor == 5 ? { ...style, background: "#36A9E1" } : style}
           /* */

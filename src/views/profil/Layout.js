@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { setCatalogue, setProfil, setRegister } from "../../store/profileSlice";
+import { useDispatch, useSelector } from "react-redux";
 import NavBar from "./profilComponents/NavBar";
 import SideBar from "./profilComponents/SideBar";
+import { useNavigate } from "react-router-dom";
 
 export default function Layout({
   children,
@@ -12,11 +15,26 @@ export default function Layout({
   entrepriseSection,
   setEntrepriseSection,
 }) {
+  const profil = useSelector((state) => state.profile);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleDisconnect = () => {
+    localStorage.removeItem("token");
+    dispatch(setProfil({}));
+    dispatch(setCatalogue({}));
+    dispatch(setRegister({}));
+
+    //persist:root = is profile slice key
+    navigate("/");
+  };
   const [sideBarColumns, setSideBarColumns] = useState(0);
   return (
     <div>
       <div className="row">
-        <div className="col-md-2 logo-marketface  d-none d-lg-block position-relative ">
+        <div
+          className="col-md-2 logo-marketface cursor-pointer d-none d-lg-block position-relative "
+          onClick={() => handleDisconnect()}
+        >
           <img
             className="position-fixed"
             src="/imgs/marketface.png"

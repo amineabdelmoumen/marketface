@@ -17,11 +17,7 @@ const PrivateEmpty = ({ children }) => {
   }, []);
 
   if (authenticated) {
-    if (Object.keys(identite).length === 0) {
-      return <Navigate to="/company-setting" />;
-    } else {
-      return children;
-    }
+    return <Navigate to="/profil" />;
   } else {
     return <Navigate to="/" />;
   }

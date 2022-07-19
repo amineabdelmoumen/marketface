@@ -925,6 +925,16 @@ input[type="text"]:focus {
 }
 .status-cnx {
   position: absolute;
-  top: 64px;
-  right: 54px;
+  right: 31%;
+  top: 33%;
+}
+
+.conv {
+  height: 50px;
+  font-family: $font-manrope;
+  background: #8181a5;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  border-radius: 2px;
 }

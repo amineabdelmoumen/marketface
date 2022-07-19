@@ -1,171 +1,145 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./chatStyles.scss";
-import $ from "jquery";
-export default function Chat() {
+import { useSelector, useDispatch } from "react-redux";
+import { getMessages, sendMessage } from "../../../lib/crud";
+import { Members } from "pusher-js";
+import { setRealTimeMessages } from "../../../store/rootSlice";
+export default function Chat({ conversation }) {
   const style = "text-bold text-black-50 mt-2";
   const [color, setColor] = useState(1);
+  const [conversationMessages, setConversationMessages] = useState([]);
   const [hideChat, setsetHideChat] = useState(0);
+  const messages = useSelector((state) => state.root.messages);
+  const realTimeMessages = useSelector((state) => state.root.realTimeMessages);
+  const user = useSelector((state) => state.root.user);
+  const [dates, setDates] = useState([]);
   const style2 = {
     height: "50px",
     font: "normal normal normal 13px/13px Montserrat",
   };
+  console.log("conversation", conversation);
+
+  const dispatch = useDispatch();
+  const [message, setMessage] = useState(" ");
+
+  const submit = (e) => {
+    e.preventDefault();
+
+    const token = localStorage.getItem("token");
+    const reciever_id = conversation.membre.id;
+    const data = {
+      message: message,
+      reciever_id: reciever_id,
+      user_id: user.id,
+      channel: conversation.membre.channel,
+    };
+    console.log("data to send", data);
+    setMessage(" ");
+    dispatch(setRealTimeMessages([...realTimeMessages, data]));
+    sendMessage(data, token).then(() => {
+      console.log("message send");
+    });
+  };
+
+  /* const showDates = (message) => {
+    console.log("entered to sowdates");
+    if (!dates.includes(message.created_at.split(" ")[0])) {
+      const newDates = [...dates, message.created_at.split(" ")[0]];
+
+      setDates(newDates);
+      console.log("dates++++++", newDates);
+    }
+  }; */
 
   const nextStyle = {
     marginLeft: "60px",
   };
-
-  var messages = $(".messages-content"),
-    d,
-    h,
-    m,
-    i = 0;
-
-  $(window).on(function () {
-    messages.mCustomScrollbar();
-    setTimeout(function () {
-      fakeMessage();
-    }, 100);
-  });
-
-  function updateScrollbar() {
-    messages.mCustomScrollbar("update").mCustomScrollbar("scrollTo", "bottom", {
-      scrollInertia: 10,
-      timeout: 0,
-    });
-  }
-
-  function setDate() {
-    d = new Date();
-    if (m != d.getMinutes()) {
-      m = d.getMinutes();
-      $('<div class="timestamp">' + d.getHours() + ":" + m + "</div>").appendTo(
-        $(".message:last")
-      );
-      $('<div class="checkmark-sent-delivered">&check;</div>').appendTo(
-        $(".message:last")
-      );
-      $('<div class="checkmark-read">&check;</div>').appendTo(
-        $(".message:last")
-      );
-    }
-  }
-
-  function insertMessage() {
-    var msg = $(".message-input").val();
-    if ($.trim(msg) == "") {
-      return false;
-    }
-    $('<div class="message message-personal">' + msg + "</div>")
-      .appendTo($(".mCSB_container"))
-      .addClass("new");
-    setDate();
-    $(".message-input").val(null);
-    updateScrollbar();
-    setTimeout(function () {
-      fakeMessage();
-    }, 1000 + Math.random() * 20 * 100);
-  }
-
-  $(".message-submit").click(function () {
-    insertMessage();
-  });
-
-  $(window).on("keydown", function (e) {
-    if (e.which == 13) {
-      insertMessage();
-      return false;
-    }
-  });
-
-  var Fake = [
-    "Hi there, I'm Jesse and you?",
-    "Nice to meet you",
-    "How are you?",
-    "Not too bad, thanks",
-    "What do you do?",
-    "That's awesome",
-    "Codepen is a nice place to stay",
-    "I think you're a nice person",
-    "Why do you think that?",
-    "Can you explain?",
-    "Anyway I've gotta go now",
-    "It was a pleasure chat with you",
-    "Time to make a new codepen",
-    "Bye",
-    ":)",
-  ];
-
-  function fakeMessage() {
-    if ($(".message-input").val() != "") {
-      return false;
-    }
-    $(
-      '<div class="message loading new"><figure class="avatar"><img src="http://askavenue.com/img/17.jpg" /></figure><span></span></div>'
-    ).appendTo($(".mCSB_container"));
-    updateScrollbar();
-
-    setTimeout(function () {
-      $(".message.loading").remove();
-      $(
-        '<div class="message new"><figure class="avatar"><img src="http://askavenue.com/img/17.jpg" /></figure>' +
-          Fake[i] +
-          "</div>"
-      )
-        .appendTo($(".mCSB_container"))
-        .addClass("new");
-      setDate();
-      updateScrollbar();
-      i++;
-    }, 1000 + Math.random() * 20 * 100);
-  }
+  const [chats, setChats] = useState([]);
+  const [onlineUsersCount, setOnlineUsersCount] = useState();
 
   return (
     <div>
-      {" "}
-      <section className="avenue-messenger">
-        <div className="menu">
-          <div className="items">
-            <span>
-              <a href="#" title="Minimize">
-                &mdash;
-              </a>
-              <br />
-
-              <a href="#" title="End Chat">
-                &#10005;
-              </a>
-            </span>
-          </div>
-          <div className="button">...</div>
-        </div>
-        {/*  <div className="agent-face">
-          <div className="half">
-            <img
-              className="agent circle"
-              src="http://askavenue.com/img/17.jpg"
-              alt="Jesse Tino"
-            />
-          </div>
-        </div> */}
-        <div className="chat">
-          <div className="chat-title">
-            <h1>Jesse Tino</h1>
-            <h2>RE/MAX</h2>
-          </div>
-          <div className="messages">
-            <div className="messages-content"></div>
-          </div>
-          <div className="message-box">
-            <textarea
-              type="text"
-              className="message-input d-flex align-items-center"
-              placeholder="Type message..."
-            ></textarea>
-            <button type="submit" className="message-submit">
-              Send
-            </button>
-          </div>
-        </div>
+      <section className="chatbox position-relative">
+        <section className="chat-window " id="scroll" style={{ width: "100%" }}>
+          {messages
+            .concat(realTimeMessages)
+            .filter(
+              (message) =>
+                message.reciever_id == conversation.membre.id ||
+                message.user_id == conversation.membre.id
+            )
+            .map((message) => {
+              if (message.user_id === user.id) {
+                return (
+                  <div>
+                    <article className="msg-container msg-self" id="msg-0">
+                      <div className="msg-box">
+                        <div className="flr">
+                          <div className="messages">
+                            <p className="msg" id="msg-1">
+                              {message.message}
+                            </p>
+                          </div>
+                          <span className="timestamp">
+                            <span className="username">{user.nom}</span>
+                          </span>
+                        </div>
+                        {/*  <img
+                        className="user-img"
+                        id="user-0"
+                        src="//gravatar.com/avatar/56234674574535734573000000000001?d=retro"
+                      /> */}
+                      </div>
+                    </article>
+                  </div>
+                );
+              } else if (message.reciever_id === user.id) {
+                return (
+                  <div>
+                    <article class="msg-container msg-remote" id="msg-0">
+                      <div class="msg-box">
+                        {/*  <img
+                        class="user-img"
+                        id="user-0"
+                        src="//gravatar.com/avatar/00034587632094500000000000000000?d=retro"
+                      /> */}
+                        <div className="flr">
+                          <div className="messages">
+                            <p className="msg" id="msg-1">
+                              {message.message}
+                            </p>
+                          </div>
+                          <span className="timestamp">
+                            <span className="username">
+                              {conversation.membre.nom}
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+                    </article>
+                    {}
+                  </div>
+                );
+              }
+            })}
+        </section>
+        <form class="chat-input position-absolute" onsubmit="return false;">
+          <input
+            type="text"
+            value={message}
+            autocomplete="on"
+            placeholder="Type a message"
+            onChange={(e) => setMessage(e.target.value)}
+          />
+          <button onClick={(e) => submit(e)}>
+            <svg style={{ width: "24px", height: "24px" }} viewBox="0 0 24 24">
+              <path
+                fill="rgba(0,0,0,.38)"
+                d="M17,12L12,17V14H8V10H12V7L17,12M21,16.5C21,16.88 20.79,17.21 20.47,17.38L12.57,21.82C12.41,21.94 12.21,22 12,22C11.79,22 11.59,21.94 11.43,21.82L3.53,17.38C3.21,17.21 3,16.88 3,16.5V7.5C3,7.12 3.21,6.79 3.53,6.62L11.43,2.18C11.59,2.06 11.79,2 12,2C12.21,2 12.41,2.06 12.57,2.18L20.47,6.62C20.79,6.79 21,7.12 21,7.5V16.5M12,4.15L5,8.09V15.91L12,19.85L19,15.91V8.09L12,4.15Z"
+              />
+            </svg>
+          </button>
+        </form>
       </section>
     </div>
   );

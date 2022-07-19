@@ -1,4 +1,5 @@
 const statusList = [
+  "",
   "SARL",
   "SA",
   "SARLAU",
@@ -12,4 +13,4 @@ const statusList = [
   "SCIC",
 ];
 
-export default statusList
+export default statusList;

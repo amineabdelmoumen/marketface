@@ -1,5 +1,5 @@
 import React, { useState, useEffect, use } from "react";
-import { getProfile, getTeam } from "../../lib/crud";
+import { getMessages, getProfile, getTeam } from "../../lib/crud";
 import { checkAuth } from "../../lib/auth";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,8 +10,15 @@ import CompanyDetails from "./profilComponents/CompanyDetails";
 import PageLoading from "../../components/PageLoading";
 import NavBar from "./profilComponents/NavBar";
 import SideBar from "./profilComponents/SideBar";
+
 import "./styles.scss";
-import { setProfil, setReferences } from "../../store/profileSlice";
+import {
+  setCatalogue,
+  setProfil,
+  setReferences,
+  setRegister,
+} from "../../store/profileSlice";
+
 import Layout from "./Layout";
 import Identity from "./profilComponents/Identity";
 import AbouIdentity from "./profilComponents/IdentityComponents/AbouIdentity";
@@ -27,6 +34,8 @@ import ImmobilierForm from "./profilComponents/catalogueComponent/ImmobilierForm
 import ImmobilierList from "./profilComponents/catalogueComponent/immobilierList";
 import TeamList from "./profilComponents/TeamList";
 import CompanyTeam from "./profilComponents/CompanyTeam";
+import { setMembers, setMessages, setUser } from "../../store/rootSlice";
+import ChatList from "./chatList";
 
 function Profil() {
   const dispatch = useDispatch();
@@ -42,12 +51,17 @@ function Profil() {
   const [action, setAction] = useState(1);
   const [membre, setMembre] = useState(0);
   const [teamList, setTeamList] = useState();
+  const user = useSelector((state) => state.root.user);
+
+  const identite = useSelector((state) => state.profile.identite);
+
   useEffect(async () => {
     const token = localStorage.getItem("token");
     const res = await getTeam(token);
-    console.log("team response", res.data);
+
     setTeamList(res.data);
   }, []);
+
   const setArticleType = (id1, id2) => {
     setCompanySection(id1);
     setAction(id2);
@@ -82,20 +96,34 @@ function Profil() {
 
   useEffect(async () => {
     const token = localStorage.getItem("token");
+    const res = await getTeam(token);
+    console.log("team response", res.data);
+
+    dispatch(setMembers([res.data]));
+  }, []);
+
+  useEffect(async () => {
+    const token = localStorage.getItem("token");
 
     checkAuth(token)
       .then((res) => res.data)
       .then((data) => {
+        getMessages(token).then((messages) =>
+          dispatch(setMessages(messages.data.conversations))
+        );
         getProfile(token)
           .then((res) => res.data)
           .then((data) => {
-            console.log("profil", data);
             dispatch(setProfil(data));
+            if (Object.keys(data).length === 0) {
+              navigate("/company-setting");
+            }
 
             setLoading(false);
           });
       });
   }, []);
+
   const style = {
     marginRight: "10px",
   };
@@ -333,6 +361,15 @@ function Profil() {
                       }[companySection]
                     }
                   </div>
+                </div>
+              </div>
+            ) : (
+              ""
+            )}
+            {profilSection == 5 ? (
+              <div className="row">
+                <div className="col-6 offset-lg-1">
+                  <ChatList />
                 </div>
               </div>
             ) : (

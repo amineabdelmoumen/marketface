@@ -35,7 +35,7 @@ function Identite() {
   const paysRef = useRef();
   const phoneRef = useRef();
   const logoRef = useRef();
-
+  const bourceRef = useRef();
   const organismeSize = [" ", "Start-up", "TPE", "PME", "PMI", "GE"];
   const nombreEmployes = ["", "De 1 à 10", "De 10 à 250", "Plus de 250"];
   const chaiffreDafaireList = ["", "< 10 MDhs", "< 75 MDhs", "> 75 MDhs"];
@@ -95,7 +95,7 @@ function Identite() {
     iceRef.current.innerText = errors.ice ? errors.ice[0] : "";
     typeRef.current.innerText = errors.type ? errors.type[0] : "";
     tailleRef.current.innerText = errors.taille ? errors.taille[0] : "";
-    employesRef.current.innerText = errors.nombre_employes
+    employesRef.current.innerText = errors?.nombre_employes
       ? errors.nombre_employes[0]
       : "";
     capitalRef.current.innerText = errors.capital ? errors.capital[0] : "";
@@ -111,6 +111,9 @@ function Identite() {
     phoneRef.current.innerText = errors.telephone ? errors.telephone[0] : "";
     logoRef.current.innerText = errors.logo ? errors.logo[0] : "";
     webRef.current.innerText = errors.website ? errors.website[0] : "";
+    bourceRef.current.innerText = errors.cote_bourse
+      ? errors.cote_bourse[0]
+      : "";
   };
 
   return (
@@ -314,6 +317,23 @@ function Identite() {
             </div>
             <small
               ref={employesRef}
+              className="text-danger ms-2 d-block"
+              style={{ "font-size": "10px" }}
+            ></small>
+            <div className="form-boxes">
+              <label htmlFor="cote_bourse">*Coté en bource:</label>
+              <select
+                name="cote_bourse"
+                id="cote_bourse"
+                onChange={(e) => handleInputChange("cote_bourse", e)}
+                defaultValue="vrai"
+              >
+                <option value="1">oui</option>
+                <option value="0">Non</option>
+              </select>
+            </div>
+            <small
+              ref={bourceRef}
               className="text-danger ms-2 d-block"
               style={{ "font-size": "10px" }}
             ></small>

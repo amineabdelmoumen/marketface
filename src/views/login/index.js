@@ -1,11 +1,14 @@
 import React, { useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { login } from "../../lib/auth";
+import { useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./styles.scss";
+import { setUser } from "../../store/rootSlice";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const toastId = useRef(null);
   const toastPending = () =>
     (toastId.current = toast("Login en cours ......", {
@@ -41,8 +44,10 @@ const Login = () => {
       const response = await login(email, password);
       console.log("response: ", response);
       const user = response.data.data;
+      dispatch(setUser(user));
       localStorage.setItem("token", user.token);
       if (user.email_verified_at) {
+        console.log("profil route");
         navigate("/profil");
       } else {
         toastError();

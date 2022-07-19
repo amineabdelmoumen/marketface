@@ -39,9 +39,9 @@ function App() {
         <Route
           path="/profil"
           element={
-            <PrivateEmpty>
+            <Private>
               <Profil />
-            </PrivateEmpty>
+            </Private>
           }
         />
 

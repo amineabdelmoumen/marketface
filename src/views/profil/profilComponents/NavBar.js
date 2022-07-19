@@ -1,7 +1,58 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setMessages,
+  setRealTimeMessages,
+  setUser,
+} from "../../../store/rootSlice";
+import { checkAuth } from "../../../lib/auth";
+import { getMessages } from "../../../lib/crud";
+import Pusher from "pusher-js";
 export default function NavBar() {
+  const user = useSelector((state) => state.root.user);
+  const messages = useSelector((state) => state.root.messages);
+  const realTimeMessages = useSelector((state) => state.root.realTimeMessages);
   const [toggle, setToggle] = useState(false);
+
+  console.log("message from store", messages);
+  const dispatch = useDispatch();
+  useEffect(async () => {
+    const token = localStorage.getItem("token");
+    const user = await checkAuth(token);
+    dispatch(setUser(user.data));
+
+    Pusher.logToConsole = true;
+    const pusher = new Pusher("3ea2140774b8c64924c3", {
+      appId: process.env.PUSHER_APP_ID,
+
+      cluster: "eu",
+      secret: "964a3f4801ed671c1be1",
+      encrypted: true,
+      useTLS: true,
+    });
+
+    const channel = pusher.subscribe(user.data.channel);
+    console.log("subscribed succesfully");
+    channel.bind("pusher:subscription_succeeded", (membres) => {
+      //setOnlineUsersCount(membres.count);
+      console.log("subscription succeeded .....");
+    });
+    channel.bind("my-event", async (data) => {
+      console.log("event data", data);
+      /*  const token = localStorage.getItem("token");
+      const messages = await getMessages(token);
+      console.log("message from api :", messages);
+      dispatch(setMessages(messages.data.conversations)); */
+      const newMessages = [...realTimeMessages, data.data];
+
+      console.log("message after ", newMessages);
+      dispatch(setRealTimeMessages(newMessages));
+
+      //setChats((prevState) => [...prevState, (message, user.nom)]);
+    });
+  }, []);
+  console.log("realTimeMessages", realTimeMessages);
   return (
     <div className="App">
       <div className={`collapse bg-white ${toggle ? "show" : ""}`}>
