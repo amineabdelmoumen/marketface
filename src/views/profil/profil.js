@@ -368,7 +368,7 @@ function Profil() {
             )}
             {profilSection == 5 ? (
               <div className="row">
-                <div className="col-6 offset-lg-1">
+                <div className="col-8 offset-lg-1">
                   <ChatList />
                 </div>
               </div>

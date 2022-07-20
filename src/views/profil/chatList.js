@@ -80,7 +80,8 @@ export default function ChatList() {
                   </p>
 
                   <p style={{ marginLeft: "14px", fontSize: "16px" }}>
-                    {message.created_at.split(" ")[0]}
+                    {message.created_at.split(/[\sT ]+/)[0]} à
+                    {" " + message.created_at.split(/[\sT ]+/)[1].slice(0, 8)}
                   </p>
                 </div>
               );
