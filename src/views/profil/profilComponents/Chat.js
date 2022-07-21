@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./chatStyles.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { getMessages, sendMessage } from "../../../lib/crud";
@@ -13,14 +13,25 @@ export default function Chat({ conversation }) {
   const realTimeMessages = useSelector((state) => state.root.realTimeMessages);
   const user = useSelector((state) => state.root.user);
   const [dates, setDates] = useState([]);
+  const messagesEndRef = useRef(null);
   const style2 = {
     height: "50px",
     font: "normal normal normal 13px/13px Montserrat",
   };
-  console.log("conversation", conversation);
 
   const dispatch = useDispatch();
   const [message, setMessage] = useState(" ");
+
+  const scrollToBottom = () => {
+    messagesEndRef.current.scrollTo({
+      top: messagesEndRef.current.scrollHeight,
+      behavior: "smooth",
+    });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [realTimeMessages]);
 
   const submit = (e) => {
     e.preventDefault();
@@ -33,12 +44,12 @@ export default function Chat({ conversation }) {
       user_id: user.id,
       channel: conversation.membre.channel,
     };
-    console.log("data to send", data);
+
     setMessage(" ");
+
     dispatch(setRealTimeMessages([...realTimeMessages, data]));
-    sendMessage(data, token).then(() => {
-      console.log("message send");
-    });
+
+    sendMessage(data, token).then(() => {});
   };
 
   /* const showDates = (message) => {
@@ -60,7 +71,11 @@ export default function Chat({ conversation }) {
   return (
     <div>
       <section className="chatbox position-relative">
-        <section className="chat-window " id="scroll" style={{ width: "100%" }}>
+        <section
+          className="chat-window "
+          ref={messagesEndRef}
+          style={{ width: "100%" }}
+        >
           {messages
             .concat(realTimeMessages)
             .filter(
