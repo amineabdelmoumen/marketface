@@ -24,10 +24,12 @@ export default function ChatList() {
   //get received messages
 
   useEffect(() => {
-    const received_messages = messages
-      .concat(realTimeMessages)
-      .filter((message) => message.reciever_id === user.id);
-    setReceivedMessages(received_messages);
+    if (realTimeMessages.length !== 0) {
+      const received_messages = realTimeMessages.filter(
+        (message) => message.reciever_id === user.id
+      );
+      setReceivedMessages(received_messages);
+    }
   }, [realTimeMessages]);
   const startConvesation = (membre_id) => {
     console.log("membre in convesation", membre_id);
@@ -57,36 +59,44 @@ export default function ChatList() {
         {/* <div className="page_number">1/2</div> */}
 
         <div className="form-identite-info d-block mt-3 position-relative">
-          {receivedMessages
-            .slice()
-            .sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at))
-            .filter((message, index) => index === 0)
-            .map((message) => {
-              return (
-                <div
-                  className="conv border"
-                  onClick={() => startConvesation(message.user_id)}
-                >
-                  <p
-                    style={{
-                      marginLeft: "14px",
-                      fontSize: "18px",
-                      color: "#262653",
-                    }}
+          {realTimeMessages.length !== 0 &&
+            realTimeMessages
+              .slice()
+              .sort(
+                (a, b) => Date.parse(b.created_at) - Date.parse(a.created_at)
+              )
+              .filter((message, index) => index === 0)
+              .map((message) => {
+                return (
+                  <div
+                    className="conv border"
+                    onClick={() => startConvesation(message.user_id)}
                   >
-                    {`${getMembre(message.user_id)[0].nom}`}
-                  </p>
-                  <p style={{ marginLeft: "14px", fontSize: "16px" }}>
-                    vous a envoyé un message
-                  </p>
+                    <p
+                      style={{
+                        marginLeft: "14px",
+                        fontSize: "18px",
+                        color: "#262653",
+                      }}
+                    >
+                      {`${getMembre(message.user_id)[0].nom}`}
+                    </p>
+                    <p style={{ marginLeft: "14px", fontSize: "16px" }}>
+                      vous a envoyé un message
+                    </p>
 
-                  <p style={{ marginLeft: "14px", fontSize: "16px" }}>
-                    {message.created_at.split(/[\sT ]+/)[0]} à
-                    {" " + message.created_at.split(/[\sT ]+/)[1].slice(0, 8)}
-                  </p>
-                </div>
-              );
-            })}{" "}
+                    <p style={{ marginLeft: "14px", fontSize: "16px" }}>
+                      {message.created_at.split(/[\sT ]+/)[0]} à
+                      {" " + message.created_at.split(/[\sT ]+/)[1].slice(0, 8)}
+                    </p>
+                  </div>
+                );
+              })}{" "}
+          {realTimeMessages.length === 0 ? (
+            <p className="msg-non">Vous n'avez de messages</p>
+          ) : (
+            ""
+          )}
         </div>
       </form>{" "}
       <div
