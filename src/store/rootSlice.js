@@ -12,6 +12,7 @@ const rootSlice = createSlice({
     members: [],
     messages: [],
     realTimeMessages: [],
+    catalogues: [],
   },
 
   reducers: {
@@ -36,6 +37,9 @@ const rootSlice = createSlice({
     setMembers: (state, action) => {
       state.members = action.payload;
     },
+    setCatalogues: (state, action) => {
+      state.catalogues = action.payload;
+    },
   },
 });
 
@@ -49,5 +53,6 @@ export const {
 
   setRealTimeMessages,
   setMembers,
+  setCatalogues,
 } = rootSlice.actions;
 export const rootReducer = rootSlice.reducer;

@@ -117,8 +117,14 @@ export const sendMessage = async (data, token) => {
 };
 
 export const getMessages = async (token) => {
-  console.log("getMessages");
   return await apiClient.get("/conversations", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+export const getCatalogues = async (token) => {
+  return await apiClient.get("/marketplace", {
     headers: {
       Authorization: `Bearer ${token}`,
     },

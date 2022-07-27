@@ -36,6 +36,7 @@ import TeamList from "./profilComponents/TeamList";
 import CompanyTeam from "./profilComponents/CompanyTeam";
 import { setMembers, setMessages, setUser } from "../../store/rootSlice";
 import ChatList from "./chatList";
+import Marketplace from "./profilComponents/marketplace/Marketplace";
 
 function Profil() {
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ function Profil() {
   const [identitySection, setIdentitySection] = useState(1);
   const [companySection, setCompanySection] = useState(1);
   const [entrepriseSection, setEntrepriseSection] = useState(1);
+  const [CatalogueType, setCatalogueType] = useState(1);
   const [progress, setProgress] = useState(1);
   const [action, setAction] = useState(1);
   const [membre, setMembre] = useState(0);
@@ -141,6 +143,8 @@ function Profil() {
             companySection={companySection}
             entrepriseSection={entrepriseSection}
             setEntrepriseSection={setEntrepriseSection}
+            setCatalogueType={setCatalogueType}
+            CatalogueType={CatalogueType}
           >
             {profilSection == 1 ? (
               <div className="row">
@@ -368,9 +372,17 @@ function Profil() {
             )}
             {profilSection == 5 ? (
               <div className="row">
-                <div className="col-8 offset-lg-1">
-                  <ChatList />
-                </div>
+                <ChatList />
+              </div>
+            ) : (
+              ""
+            )}
+            {profilSection == 7 ? (
+              <div className="row" style={{ marginTop: "12px" }}>
+                <Marketplace
+                  CatalogueType={CatalogueType}
+                  setCatalogueType={setCatalogueType}
+                />
               </div>
             ) : (
               ""

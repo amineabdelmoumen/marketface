@@ -14,6 +14,8 @@ export default function Layout({
   setCompanySection,
   entrepriseSection,
   setEntrepriseSection,
+  setCatalogueType,
+  CatalogueType,
 }) {
   const profil = useSelector((state) => state.profile);
   const dispatch = useDispatch();
@@ -64,6 +66,8 @@ export default function Layout({
             setCompanySection={setCompanySection}
             entrepriseSection={entrepriseSection}
             setEntrepriseSection={setEntrepriseSection}
+            setCatalogueType={setCatalogueType}
+            CatalogueType={CatalogueType}
           />
         </div>
 

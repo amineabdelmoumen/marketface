@@ -10,6 +10,8 @@ export default function SideBar({
   setCompanySection,
   setEntrepriseSection,
   entrepriseSection,
+  setCatalogueType,
+  CatalogueType,
 }) {
   console.log(setSideBarColumns, sideBarColumns);
   const navigate = useNavigate();
@@ -26,6 +28,13 @@ export default function SideBar({
   const setData = (id) => {
     setBgcolor(id);
     setProfilSection(id);
+    setCatalogueType(1);
+  };
+
+  const setMarketplace = (id) => {
+    setBgcolor(id);
+    setProfilSection(id);
+    /*  setCatalogueType(1); */
   };
 
   return (
@@ -192,12 +201,83 @@ export default function SideBar({
           </div>
         </div>
         <div
+          onClick={() => setMarketplace(7)}
+          className="elem1 d-flex align-items-center "
+          style={
+            bgcolor == 7
+              ? { ...style, background: "#36A9E1" }
+              : bgcolor == 3
+              ? { ...style, marginTop: "90px" }
+              : style
+          }
+          /* */
+        >
+          {bgcolor == 7 ? <p className="line-s"></p> : ""}
+          <div className="auc">
+            <img
+              className=""
+              src={bgcolor == 7 ? "/imgs/icon-auc.png" : "/imgs/auction2.png"}
+              alt=""
+            />
+          </div>
+          <div
+            className="d-flex align-items-center"
+            style={{ height: "20px", width: "30px", marginLeft: "16px" }}
+          >
+            <img className="" src="/imgs/cat.png" alt="" />
+          </div>
+          <div style={{ height: "20px" }}>
+            <span
+              className={
+                bgcolor == 7
+                  ? " side-text text-white  d-none d-lg-block "
+                  : "side-text  d-none d-lg-block"
+              }
+            >
+              Marketplace
+            </span>
+            {bgcolor == 7 ? (
+              <div style={{ marginTop: "28px" }}>
+                <p
+                  className={
+                    CatalogueType == 1 ? "if-grn xfg-clicked" : "if-grn "
+                  }
+                  onClick={() => setCatalogueType(1)}
+                >
+                  {" "}
+                  Produit
+                </p>
+                <p
+                  className={
+                    CatalogueType == 2 ? "if-grn xfg-clicked" : "if-grn "
+                  }
+                  onClick={() => setCatalogueType(2)}
+                >
+                  {" "}
+                  Service
+                </p>
+                <p
+                  className={
+                    CatalogueType == 3 ? "if-grn xfg-clicked" : "if-grn "
+                  }
+                  onClick={() => setCatalogueType(3)}
+                >
+                  {" "}
+                  Immobilier
+                </p>
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+        </div>
+        <div
           onClick={() => setData(4)}
           className="elem1 d-flex align-items-center "
           style={
             bgcolor == 4
               ? { ...style, background: "#36A9E1" }
-              : bgcolor == 3
+              : bgcolor == 7
               ? { ...style, marginTop: "90px" }
               : style
           }
@@ -275,12 +355,12 @@ export default function SideBar({
           </div>
         </div>
         <div
-          onClick={() => setBgcolor(7)}
+          onClick={() => setBgcolor(8)}
           className="elem1 d-flex align-items-center "
-          style={bgcolor == 7 ? { ...style, background: "#36A9E1" } : style}
+          style={bgcolor == 8 ? { ...style, background: "#36A9E1" } : style}
           /* */
         >
-          {bgcolor == 7 ? <p className="line-s"></p> : ""}
+          {bgcolor == 8 ? <p className="line-s"></p> : ""}
 
           <div
             className="d-flex align-items-center"
@@ -291,7 +371,7 @@ export default function SideBar({
           <div style={{ height: "20px" }}>
             <span
               className={
-                bgcolor == 7
+                bgcolor == 8
                   ? " side-text text-white  d-none d-lg-block "
                   : "side-text  d-none d-lg-block"
               }
