@@ -93,7 +93,7 @@ export default function ChatList() {
                 );
               })}{" "}
           {realTimeMessages.length === 0 ? (
-            <p className="msg-non">Vous n'avez de messages</p>
+            <p className="msg-non">Vous n'avez pas de messages</p>
           ) : (
             ""
           )}
