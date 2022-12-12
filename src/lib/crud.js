@@ -108,7 +108,6 @@ export const AddMembre = async (data, token) => {
   });
 };
 export const sendMessage = async (data, token) => {
-  console.log("send message called from api lib");
   return await apiClient.post("/messages/send", data, {
     headers: {
       Authorization: `Bearer ${token}`,
